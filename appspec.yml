@@ -5,14 +5,14 @@ files:
     destination: /home/ubuntu/server
 hooks:
   ApplicationStop: 
-    - location: scripts/stop.sh
+    - location: /home/ubuntu/server/scripts/stop.sh
       timeout: 300
       runas: root
   AfterInstall:
-    - location: scripts/initialize.sh
+    - location: /home/ubuntu/server/scripts/initialize.sh
       timeout: 300
       runas: root
   ApplicationStart:
-    - location: scripts/start.sh
+    - location: /home/ubuntu/server/scripts/start.sh
       timeout: 300
       runas: root
