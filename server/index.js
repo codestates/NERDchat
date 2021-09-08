@@ -16,6 +16,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (_, res) => res.send('Hello, world!'));
+app.get('/', (_, res) => res.send('Hello, world'));
 
 app.listen(PORT, () => console.log(`Server is Running ${PORT}`));
