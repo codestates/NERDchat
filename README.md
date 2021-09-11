@@ -1,4 +1,4 @@
-# NERDchat 👓️
+# NERDchat
 
 ## Logo
 <img src="https://user-images.githubusercontent.com/79839230/132945747-d75e1792-a210-4a14-92c6-5c4f67e27eea.gif" width="300" height="200" />
