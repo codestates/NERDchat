@@ -21,7 +21,7 @@ const SignUp = () => {
   const [confirmClicked, setConfirmClicked] = useState(false);
   const [formIsValid, setFormIsValid] = useState(false);
 
-  //인풋값 유효성검사
+  // 인풋값 유효성검사
   useEffect(() => {
     const verifier = setTimeout(() => {
       if (enteredId.length !== 0) {
@@ -56,7 +56,7 @@ const SignUp = () => {
 
   useEffect(() => {
     const verifyForm = setTimeout(() => {
-      if (idIsValid && nicknameIsValid && pwIsValid && pwcIsValid && emailIsValid && emailIsVerified &&enteredId.length!==0 &&enteredNickname.length!==0 && enteredPw.length!==0 && enteredEmail.length!==0 &&enteredPwc.length!==0) setFormIsValid(true);
+      if (idIsValid && nicknameIsValid && pwIsValid && pwcIsValid && emailIsValid && emailIsVerified && enteredId.length !== 0 && enteredNickname.length !== 0 && enteredPw.length !== 0 && enteredEmail.length !== 0 && enteredPwc.length !== 0) setFormIsValid(true);
       else setFormIsValid(false);
     }, 500);
     return () => clearTimeout(verifyForm);
@@ -88,26 +88,25 @@ const SignUp = () => {
     setEnteredEmail(e.target.value);
   };
 
-  
-  //이메일 인증 요청
+  // 이메일 인증 요청
   const sendEmailHandler = async () => {
     const res = await axios.put(`${ENDPOINT}/emailV`, { email: enteredEmail });
     // const res.data.verifyToken
     setVerifyCode(res.data.data.verifyToken);
   };
-  
-  //이메일 인증코드 입력
+
+  // 이메일 인증코드 입력
   const codeHandler = (e) => {
     setEnteredVerifyCode(e.target.value);
   };
-  //이메일 인증코드 확인
+  // 이메일 인증코드 확인
   const emailCodeHandler = (e) => {
     setConfirmClicked(true);
     if (enteredVerifyCode === verifyCode) setEmailIsVerified(true);
     else setEmailIsVerified(false);
     console.log(emailIsVerified);
   };
-  //회원가입 요청
+  // 회원가입 요청
   const signUpHandler = async (event) => {
     event.preventDefault();
     const res = await axios.put(`${ENDPOINT}/signup`, { id: enteredId, password: enteredPw, email: enteredEmail, nickname: enteredNickname });
@@ -142,15 +141,15 @@ const SignUp = () => {
             <input type='text' id='email' onChange={emailHandler} />
             <button type='button' className={emailIsValid ? 'verify__email__btn' : 'verify__email__btn'} disabled={!emailIsValid} onClick={sendEmailHandler}>이메일 인증하기</button>
           </div>
-            {!emailIsValid && <p className='errMsg'>*유효한 이메일 주소를 입력해주세요.</p>}
+          {!emailIsValid && <p className='errMsg'>*유효한 이메일 주소를 입력해주세요.</p>}
         </div>
         <div className='verify__email__input__container'>
           <label htmlFor='vemail'>이메일 인증번호</label>
-          <div className="email__code__container">
-            <input type='text' id='vemail' onChange={codeHandler} className="code__input"/>
+          <div className='email__code__container'>
+            <input type='text' id='vemail' onChange={codeHandler} className='code__input' />
             <button type='button' className='email__code__btn' onClick={emailCodeHandler}>인증하기</button>
           </div>
-          {(!emailIsVerified && enteredVerifyCode.length!== 0 && confirmClicked) && <p className='errMsg'>*인증번호가 일치하기 않습니다.</p>}
+          {(!emailIsVerified && enteredVerifyCode.length !== 0 && confirmClicked) && <p className='errMsg'>*인증번호가 일치하기 않습니다.</p>}
         </div>
         <div>
           <p className='contract'>

@@ -13,48 +13,48 @@ const Login = () => {
   const idInputRef = useRef();
   const pwInputRef = useRef();
   const [err, setErr] = useState();
-  
-  //일반 로그인
+
+  // 일반 로그인
   const LoginHandler = async (e) => {
-    setErr('')
+    setErr('');
     e.preventDefault();
     const enteredId = idInputRef.current.value;
     const enteredPw = pwInputRef.current.value;
     if (enteredId.trim().length < 4 || enteredId.trim().length > 25) {
       setErr('ID should be longer than 6 letters');
-    } else if (enteredPw.trim().length <6) {
+    } else if (enteredPw.trim().length < 6) {
       setErr('PW should be longer than 6 letters');
     }
-    const headers = {id: enteredId, password: enteredPw}
-    const res = await axios.post(`${ENDPOINT}`,{data: null}, {headers: headers, withCredentials: true})
+    const headers = { id: enteredId, password: enteredPw };
+    const res = await axios.post(`${ENDPOINT}`, { data: null }, { headers: headers, withCredentials: true });
     // 받은 유저 정보 저장하기. redux...? or context...?
     // setUserInfo(res.data.data)
     // login 상태 저장
     // setLogin(true);
-    console.log(res.data)
+    console.log(res.data);
   };
 
-  //구글 로그인
-	const googleHandler = () => {
-    console.log(1)
-		// window.location.assign(Google_URL);
-		//인증됐는지 여부를 체크하는게 필요...;
-		// localStorage.setItem('login', true);
-	};
-  //카카오 로그인
+  // 구글 로그인
+  const googleHandler = () => {
+    console.log(1);
+    // window.location.assign(Google_URL);
+    // 인증됐는지 여부를 체크하는게 필요...;
+    // localStorage.setItem('login', true);
+  };
+  // 카카오 로그인
   const kakaoHandler = () => {
-    console.log(1)
-		// window.location.assign(FB_URL);
-		//인증됐는지 여부를 체크하는게 필요...;
-		// localStorage.setItem('login', true);
-	};
-  //페이스북 로그인
+    console.log(1);
+    // window.location.assign(FB_URL);
+    // 인증됐는지 여부를 체크하는게 필요...;
+    // localStorage.setItem('login', true);
+  };
+  // 페이스북 로그인
   const facebookHandler = () => {
-    console.log(1)
-		// window.location.assign(FB_URL);
-		//인증됐는지 여부를 체크하는게 필요...;
-		// localStorage.setItem('login', true);
-	};
+    console.log(1);
+    // window.location.assign(FB_URL);
+    // 인증됐는지 여부를 체크하는게 필요...;
+    // localStorage.setItem('login', true);
+  };
   return (
     <>
       {err && <div className='err__container'><p>{err}</p></div>}
