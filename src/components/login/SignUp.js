@@ -5,7 +5,6 @@ import './SignUp.scss';
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const SignUp = () => {
-  const [start, setStart] = useState(0);
   const [enteredId, setEnteredId] = useState('');
   const [idIsValid, setIdIsValid] = useState(true);
   const [enteredNickname, setEnteredNickname] = useState('');
@@ -17,10 +16,12 @@ const SignUp = () => {
   const [enteredEmail, setEnteredEmail] = useState('');
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [verifyCode, setVerifyCode] = useState('123');
-  const [enteredVerifyCode, setEnteredVerifyCode] = useState('123');
+  const [enteredVerifyCode, setEnteredVerifyCode] = useState('');
   const [emailIsVerified, setEmailIsVerified] = useState(false);
+  const [confirmClicked, setConfirmClicked] = useState(false);
   const [formIsValid, setFormIsValid] = useState(false);
 
+  // 인풋값 유효성검사
   useEffect(() => {
     const verifier = setTimeout(() => {
       if (enteredId.length !== 0) {
@@ -55,7 +56,7 @@ const SignUp = () => {
 
   useEffect(() => {
     const verifyForm = setTimeout(() => {
-      if (idIsValid && nicknameIsValid && pwIsValid && pwcIsValid && emailIsValid && emailIsVerified) setFormIsValid(true);
+      if (idIsValid && nicknameIsValid && pwIsValid && pwcIsValid && emailIsValid && emailIsVerified && enteredId.length !== 0 && enteredNickname.length !== 0 && enteredPw.length !== 0 && enteredEmail.length !== 0 && enteredPwc.length !== 0) setFormIsValid(true);
       else setFormIsValid(false);
     }, 500);
     return () => clearTimeout(verifyForm);
@@ -86,23 +87,30 @@ const SignUp = () => {
   const emailHandler = (e) => {
     setEnteredEmail(e.target.value);
   };
+
+  // 이메일 인증 요청
+  const sendEmailHandler = async () => {
+    const res = await axios.put(`${ENDPOINT}/emailV`, { email: enteredEmail });
+    // const res.data.verifyToken
+    setVerifyCode(res.data.data.verifyToken);
+  };
+
+  // 이메일 인증코드 입력
+  const codeHandler = (e) => {
+    setEnteredVerifyCode(e.target.value);
+  };
+  // 이메일 인증코드 확인
+  const emailCodeHandler = (e) => {
+    setConfirmClicked(true);
+    if (enteredVerifyCode === verifyCode) setEmailIsVerified(true);
+    else setEmailIsVerified(false);
+    console.log(emailIsVerified);
+  };
+  // 회원가입 요청
   const signUpHandler = async (event) => {
     event.preventDefault();
     const res = await axios.put(`${ENDPOINT}/signup`, { id: enteredId, password: enteredPw, email: enteredEmail, nickname: enteredNickname });
     console.log(res);
-  };
-  const sendEmailHandler = async () => {
-    const res = await axios.put(`${ENDPOINT}/emailV`, { email: enteredEmail });
-    // const res.data.verifyToken
-    setVerifyCode(res.data.verifyToken);
-  };
-  const codeHandler = (e) => {
-    setEnteredVerifyCode(e.target.value);
-  };
-  const emailCodeHandler = (e) => {
-    if (enteredVerifyCode === verifyCode) setEmailIsVerified(true);
-    else setEmailIsVerified(false);
-    console.log(emailIsVerified);
   };
   return (
     <>
@@ -131,14 +139,17 @@ const SignUp = () => {
           <label htmlFor='email'>이메일</label>
           <div className='verify__email__container'>
             <input type='text' id='email' onChange={emailHandler} />
-            {!emailIsValid && <p className='errMsg'>*유효한 이메일 주소를 입력해주세요.</p>}
             <button type='button' className={emailIsValid ? 'verify__email__btn' : 'verify__email__btn'} disabled={!emailIsValid} onClick={sendEmailHandler}>이메일 인증하기</button>
           </div>
+          {!emailIsValid && <p className='errMsg'>*유효한 이메일 주소를 입력해주세요.</p>}
         </div>
         <div className='verify__email__input__container'>
           <label htmlFor='vemail'>이메일 인증번호</label>
-          <input type='text' id='vemail' onChange={codeHandler} />
-          <button type='button' className='email__code__btn' onClick={emailCodeHandler}>인증하기</button>
+          <div className='email__code__container'>
+            <input type='text' id='vemail' onChange={codeHandler} className='code__input' />
+            <button type='button' className='email__code__btn' onClick={emailCodeHandler}>인증하기</button>
+          </div>
+          {(!emailIsVerified && enteredVerifyCode.length !== 0 && confirmClicked) && <p className='errMsg'>*인증번호가 일치하기 않습니다.</p>}
         </div>
         <div>
           <p className='contract'>

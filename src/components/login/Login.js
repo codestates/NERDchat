@@ -13,7 +13,6 @@ const Login = () => {
   };
   return (
     <Modal>
-
       <LoginTab isLoginClicked={isLoginClicked} loginTablHandler={loginTablHandler} />
       {isLoginClicked && <LoginBody />}
       {!isLoginClicked && <SignUp />}

@@ -23,7 +23,10 @@ $neonSer: rgb(163, 16, 255);
   gap: 2em;
   font-weight: bold;
   font-size: 12px;
-  div{
+  .id__input__container,
+  .pw__input__container,
+  .nickname__input__container,
+  .pwc__input__container{
     display: flex;
     flex-direction: column;
     gap: 0.5em;
