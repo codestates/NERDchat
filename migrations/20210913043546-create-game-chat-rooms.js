@@ -12,10 +12,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       uuid: {
+        unique: true,
         type: Sequelize.STRING
-      },
-      current: {
-        type: Sequelize.INTEGER
       },
       max: {
         type: Sequelize.INTEGER

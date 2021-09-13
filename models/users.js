@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     valid: DataTypes.BOOLEAN,
     oauth: DataTypes.STRING,
     status: DataTypes.STRING,
-    currentRoom: DataTypes.INTEGER,
+    currentRoom: DataTypes.STRING,
     superuser: DataTypes.BOOLEAN
   }, {
     sequelize,

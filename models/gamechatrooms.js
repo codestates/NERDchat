@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
   GameChatRooms.init({
     roomTitle: DataTypes.STRING,
     uuid: DataTypes.STRING,
-    current: DataTypes.INTEGER,
     max: DataTypes.INTEGER
   }, {
     sequelize,

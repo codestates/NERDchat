@@ -33,7 +33,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       currentRoom: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       superuser: {
         type: Sequelize.BOOLEAN
