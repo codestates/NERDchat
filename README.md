@@ -1,7 +1,7 @@
 # NERDchat
 
 ## Logo
-<img src="https://user-images.githubusercontent.com/79839230/132945747-d75e1792-a210-4a14-92c6-5c4f67e27eea.gif" width="300" height="200" /><img src="https://user-images.githubusercontent.com/79839230/132945813-7729507a-275f-41cc-8635-7927839a2bb9.gif" width="300" height="200" />
+<img src="https://user-images.githubusercontent.com/79839230/132945747-d75e1792-a210-4a14-92c6-5c4f67e27eea.gif" width="300" height="200" />  <img src="https://user-images.githubusercontent.com/79839230/132945813-7729507a-275f-41cc-8635-7927839a2bb9.gif" width="300" height="200" />
 
 ## About
 병민: 야, 나랑 같이 포아너(For honor) 안 할래?
