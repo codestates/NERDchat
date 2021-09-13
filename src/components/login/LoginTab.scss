@@ -1,0 +1,46 @@
+.modal__tab__container{
+    // position: relative;
+            img{
+            position: absolute;
+            width: 50px;
+            // margin-right: 1em;
+        }
+    .tab__header{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+.modal__tab{
+    margin-top: 1em ;
+    display: flex;
+    gap: 1em;
+    margin-bottom: 0.5em;
+    div{
+        font-weight: bold;
+        position: relative;
+    }
+    .modal__tab__options{
+        cursor: pointer;
+        font-size: 13px;
+    }
+    .clicked__tab {
+        cursor: pointer;
+        color: #6b21da;
+        font-size: 13px;
+    }
+    .clicked__tab::after {
+        content: "";
+        position: absolute;
+        /* inset: 0; */
+        width: 100%;
+        top: 22px;
+        left: 0px;
+        border-bottom: #6b21da solid 2px;
+    }
+    
+}
+.modal__tab__split {
+    height: 1px;
+    border-top: 0.1px solid #37373a;
+}

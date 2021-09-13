@@ -1,0 +1,43 @@
+$dark: rgb(23, 23, 23);
+$neonMain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+.errMsg{
+    font-weight: 400;
+    color: rgb(216, 43, 43);
+}
+
+.contract{
+    font-weight: 400;
+    font-size: 12px;
+    text-align: center;
+    opacity: 70%;
+    color: white;
+}
+.signUpBtn, .verify__email__btn, .email__code__btn{
+    cursor: pointer;
+    margin-top: 1em;
+    background-color: $neonSer;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 0.5em;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .signUpBtn:hover, .verify__email__btn:hover, .email__code__btn:hover{
+    background-color: rgb(150, 11, 236);
+  }
+  .signUpBtn:active, .verify__email__btn:active, .email__code__btn:active{
+    transform: scale(0.99);
+  }
+.disabledBtn{
+    cursor: pointer;
+    margin-top: 1em;
+    background-color: grey;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 0.5em;
+    font-size: 12px;
+    font-weight: bold;
+}
