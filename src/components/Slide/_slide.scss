@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap");
+
+@import "_color";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+[type="radio"] {
+  display: none;
+}
+
+body {
+  user-select: none;
+}
+
+.slider-container {
+  height: 40em;
+}
+
+#slider {
+  top: 150px;
+  height: 22vw;
+  position: relative;
+  perspective: 600px;
+  transform-style: preserve-3d;
+
+  label {
+    margin: auto;
+    width: 50%;
+    height: 100%;
+    border-radius: 10px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+  }
+
+  #s1:checked ~ #slide4,
+  #s2:checked ~ #slide5,
+  #s3:checked ~ #slide1,
+  #s4:checked ~ #slide2,
+  #s5:checked ~ #slide3 {
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+    transform: translate3d(-30%, 0, -200px);
+  }
+
+  #s1:checked ~ #slide5,
+  #s2:checked ~ #slide1,
+  #s3:checked ~ #slide2,
+  #s4:checked ~ #slide3,
+  #s5:checked ~ #slide4 {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+    transform: translate3d(-15%, 0, -100px);
+  }
+
+  #s1:checked ~ #slide1,
+  #s2:checked ~ #slide2,
+  #s3:checked ~ #slide3,
+  #s4:checked ~ #slide4,
+  #s5:checked ~ #slide5 {
+    box-shadow: 0 13px 25px 0 rgba(0, 0, 0, 0.3),
+      0 11px 7px 0 rgba(0, 0, 0, 0.17);
+    transform: translate3d(0, 0, 0);
+  }
+
+  #s1:checked ~ #slide2,
+  #s2:checked ~ #slide3,
+  #s3:checked ~ #slide4,
+  #s4:checked ~ #slide5,
+  #s5:checked ~ #slide1 {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+    transform: translate3d(15%, 0, -100px);
+  }
+
+  #s1:checked ~ #slide3,
+  #s2:checked ~ #slide4,
+  #s3:checked ~ #slide5,
+  #s4:checked ~ #slide1,
+  #s5:checked ~ #slide2 {
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+    transform: translate3d(30%, 0, -200px);
+  }
+
+  #slide1 {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: rgb(25, 25, 25);
+    overflow: hidden;
+    border-top: 1px solid rgba(213, 124, 255, 0.2);
+    border-left: 1px solid rgba(213, 124, 255, 0.2);
+    backdrop-filter: blur(5px);
+  }
+  #slide2 {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: rgb(25, 25, 25);
+    overflow: hidden;
+    border-top: 1px solid rgba(213, 124, 255, 0.2);
+    border-left: 1px solid rgba(213, 124, 255, 0.2);
+  }
+  #slide3 {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: rgb(25, 25, 25);
+    overflow: hidden;
+    border-top: 1px solid rgba(213, 124, 255, 0.2);
+    border-left: 1px solid rgba(213, 124, 255, 0.2);
+  }
+  #slide4 {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: rgb(25, 25, 25);
+    overflow: hidden;
+    border-top: 1px solid rgba(213, 124, 255, 0.2);
+    border-left: 1px solid rgba(213, 124, 255, 0.2);
+  }
+  #slide5 {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: rgb(25, 25, 25);
+    overflow: hidden;
+    border-top: 1px solid rgba(213, 124, 255, 0.2);
+    border-left: 1px solid rgba(213, 124, 255, 0.2);
+  }
+}
