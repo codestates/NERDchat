@@ -88,20 +88,14 @@ const SignUp = () => {
     setEnteredEmail(e.target.value);
   };
 
-  //회원가입 요청
-  const signUpHandler = async (event) => {
-    event.preventDefault();
-    const res = await axios.put(`${ENDPOINT}/signup`, { id: enteredId, password: enteredPw, email: enteredEmail, nickname: enteredNickname });
-    console.log(res);
-  };
-
+  
   //이메일 인증 요청
   const sendEmailHandler = async () => {
     const res = await axios.put(`${ENDPOINT}/emailV`, { email: enteredEmail });
     // const res.data.verifyToken
     setVerifyCode(res.data.data.verifyToken);
   };
-
+  
   //이메일 인증코드 입력
   const codeHandler = (e) => {
     setEnteredVerifyCode(e.target.value);
@@ -112,6 +106,12 @@ const SignUp = () => {
     if (enteredVerifyCode === verifyCode) setEmailIsVerified(true);
     else setEmailIsVerified(false);
     console.log(emailIsVerified);
+  };
+  //회원가입 요청
+  const signUpHandler = async (event) => {
+    event.preventDefault();
+    const res = await axios.put(`${ENDPOINT}/signup`, { id: enteredId, password: enteredPw, email: enteredEmail, nickname: enteredNickname });
+    console.log(res);
   };
   return (
     <>

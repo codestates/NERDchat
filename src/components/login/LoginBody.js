@@ -10,7 +10,6 @@ const FACEBOOK_ID = process.env.REACT_APP_FACEBOOK_ID;
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 const Login = () => {
-  
   const idInputRef = useRef();
   const pwInputRef = useRef();
   const [err, setErr] = useState();
@@ -38,7 +37,6 @@ const Login = () => {
   //구글 로그인
 	const googleHandler = () => {
     console.log(1)
-    // history.push("https://naver.com")
 		// window.location.assign(Google_URL);
 		//인증됐는지 여부를 체크하는게 필요...;
 		// localStorage.setItem('login', true);
