@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate (models) {
       // define association here
       models.Users.hasMany(models.GameChatRooms, { foreignKey: 'roomAdmin' });
-      models.Users.belongsTo(models.GameChatRooms, { as: 'currentRoom' });
+      models.Users.belongsTo(models.GameChatRooms, { foreignKey: 'currentRoom' });
       models.Users.hasMany(models.Friends, { foreignKey: 'user1id' });
       models.Users.hasMany(models.Friends, { foreignKey: 'user2id' });
       models.Users.hasMany(models.Favorites, { foreignKey: 'userId' });

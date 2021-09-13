@@ -10,8 +10,8 @@ module.exports = {
      */
     await queryInterface.addConstraint('Users', {
       fields: ['currentRoom'],
-      type: 'unique',
-      name: 'Users_currentRoom',
+      type: 'foreign key',
+      name: 'Users_fk_currentRoom',
       references: {
         table: 'GameChatRooms',
         field: 'uuid'
@@ -28,7 +28,7 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.removeConstraint('Users', 'Users_currentRoom');
+    await queryInterface.removeConstraint('Users', 'Users_fk_currentRoom');
     await queryInterface.removeColumn('Users', 'currentRoom');
   }
 };

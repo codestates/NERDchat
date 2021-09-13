@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.GameChatRooms.belongsTo(models.Users, { foreignKey: 'roomAdmin' });
       models.GameChatRooms.belongsTo(models.GameCategory, { foreignKey: 'gameId' });
-      models.GameChatRooms.hasOne(models.Users, { as: 'currentRoom' });
+      models.GameChatRooms.hasOne(models.Users, { foreignKey: 'currentRoom' });
       models.GameChatRooms.hasMany(models.Messages, { foreignKey: 'roomId' });
     }
   }
