@@ -1,3 +1,4 @@
 module.exports = {
-  socket: require('./socket')
+  socket: require('./socket'),
+  users: require('./users/index')
 };
