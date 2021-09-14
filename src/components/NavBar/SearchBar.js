@@ -1,14 +1,14 @@
-import React from "react";
-import { IoSearchOutline } from "react-icons/io5";
+import React from 'react';
+import { IoSearchOutline } from 'react-icons/io5';
 
-import "./SearchBar.scss";
+import './SearchBar.scss';
 
 const SearchBar = () => {
   return (
-    <div className="flexbox">
-      <div className="search">
+    <div className='flexbox'>
+      <div className='search'>
         <div>
-          <input type="text" placeholder="Search . . ." required />
+          <input type='text' placeholder='Search . . .' required />
         </div>
       </div>
     </div>

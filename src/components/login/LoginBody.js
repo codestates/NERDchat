@@ -25,8 +25,8 @@ const Login = () => {
     } else if (enteredPw.trim().length < 6) {
       setErr('PW should be longer than 6 letters');
     }
-    const headers = { id: enteredId, password: enteredPw, 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'};
-    const res = await axios.post(`${ENDPOINT}/login`, { data: null }, { headers: headers, withCredentials:true});
+    const headers = { id: enteredId, password: enteredPw, 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' };
+    const res = await axios.post(`${ENDPOINT}/login`, { data: null }, { headers: headers, withCredentials: true });
     // 받은 유저 정보 저장하기. redux...? or context...?
     // setUserInfo(res.data.data)
     // login 상태 저장
