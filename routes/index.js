@@ -21,9 +21,4 @@ router.post('/rooms/list/:page', rooms.getList);
 router.get('/rooms/join/:uuid', rooms.joinRoom);
 router.post('/rooms/exit/:uuid', rooms.exitRoom);
 
-/*
-    Room Router
-*/
-router.put('/rooms/create', rooms.create);
-
 module.exports = router;
