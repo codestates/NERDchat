@@ -3,10 +3,10 @@ const { generateAccess, verifyAccess } = require('../../middlewares/token');
 const { comparePassword, generatePassword } = require('../../middlewares/crypto');
 
 module.exports = async (req, res) => {
-  const origin_accessToken = req.cookies.accessToken;
-  if (!origin_accessToken) res.status(401).json({ message: 'token not found' });
+  const originAccessToken = req.headers.authorization.split(' ')[1];
+  if (!originAccessToken) res.status(401).json({ message: 'token not found' });
   else {
-    const accessTokenData = verifyAccess(origin_accessToken);
+    const accessTokenData = verifyAccess(originAccessToken);
     if (!accessTokenData) res.status(400).json({ message: 'token expired' });
     else {
       try {
@@ -14,14 +14,13 @@ module.exports = async (req, res) => {
         const origin = await Users.findOne({
           where: { email: accessTokenData.email, nickname: accessTokenData.nickname }
         });
-        const { id, userId } = origin;
         if (!comparePassword(password, origin.password)) res.status(403).json({ message: 'passwords are different' });
         else {
-          const new_password = generatePassword(password);
+          const newPassword = generatePassword(password);
           await Users.update({
             avatar: avatar || origin.avatar,
             nickname: nickname || origin.nickname,
-            password: password || new_password,
+            password: newPassword || origin.password,
             status: status || origin.status,
             updatedAt: new Date()
           },
@@ -30,19 +29,18 @@ module.exports = async (req, res) => {
               id: origin.id
             }
           });
-          const originEmail = origin.email;
           const accessToken = generateAccess({
-            email: originEmail,
+            email: origin.email,
             nickname: nickname || origin.nickname
           });
           res.status(202).json({
             data: {
               accessToken,
-              id,
+              id: origin.id,
               avatar,
-              userId,
+              userId: origin.userId,
               nickname,
-              originEmail,
+              email: origin.email,
               status
             }
           });
