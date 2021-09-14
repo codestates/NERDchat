@@ -1,7 +1,5 @@
 'use strict';
 
-const { generatePassword } = require('../middlewares/crypto');
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Users', [{
@@ -10,11 +8,11 @@ module.exports = {
       avatar: null,
       email: 'tnvjakzpt@nate.com',
       nickname: 'tnvjakzpt',
-      password: generatePassword('1234'),
+      password: '1234',
       valid: true,
       oauth: null,
       status: null,
-      currentRoom: null,
+      currentRoom: '1',
       superuser: true,
       createdAt: new Date(),
       updatedAt: new Date()
