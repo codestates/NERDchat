@@ -4,6 +4,7 @@ const { generateAccess, generateRefresh } = require('../../middlewares/token');
 
 module.exports = async (req, res) => {
   const { id, password } = req.headers;
+  console.log(id);
   const userData = await Users.findOne({
     where: { userId: id }
   });
