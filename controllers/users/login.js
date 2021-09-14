@@ -11,11 +11,11 @@ module.exports = async (req, res) => {
   else if (!comparePassword(password, userData.password)) res.status(400).json({ isLogin: false });
   else {
     const { id, avatar, userId, nickname, email, oauth, status } = userData;
-    const accessToken = generateAccess({ email, nickname });
-    const refreshToken = generateRefresh({ email, nickname });
+    const accessToken = generateAccess({ id, avatar, userId, nickname, email, oauth, status });
+    const refreshToken = generateRefresh({ id, avatar, userId, nickname, email, oauth, status });
     const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
 
-    res.set({ authorization: accessToken }).cookie('refreshToken', refreshToken, { domain: process.env.NERD_LINK, httpOnly: true, expires: expireDate }).status(200).json({
+    res.set({ authorization: 'Token ' + accessToken }).cookie('refreshToken', refreshToken, { domain: process.env.NERD_LINK, httpOnly: true, expires: expireDate }).status(200).json({
       data: { accessToken, id, avatar, userId, nickname, email, oauth, status },
       isLogin: true
     });
