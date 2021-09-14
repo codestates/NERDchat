@@ -27,6 +27,6 @@ module.exports = async (req, res) => {
           payload
         });
       }
-    } catch (err) { console.log(err) }
+    } catch (err) { console.log(err); }
   }
 };
