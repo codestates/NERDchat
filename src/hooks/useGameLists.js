@@ -17,7 +17,6 @@ const useGameLists = (pageNum) => {
     const getGameLists = async () => {
         // let cancel
         // , {cancelToken: new axios.CancelToken(c => cancel = c)}
-
         //test용
         let accesToken = 1 || undefined;
         const header = {authorization: accesToken}
