@@ -24,8 +24,8 @@ app.use(
     origin: true,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-    allowedHeaders: true,
-    exposedHeaders: true
+    allowedHeaders: ['id', 'password'],
+    exposedHeaders: '*'
   })
 );
 app.use(cookieParser());

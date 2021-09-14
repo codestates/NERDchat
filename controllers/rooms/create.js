@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
         };
         await GameChatRooms.create(payload);
         res.status(200).json({
-          payload
+          data: payload
         });
       }
     } catch (err) { console.log(err); }

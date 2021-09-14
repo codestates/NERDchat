@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
   try {
     const listData = await GameChatRooms.findAll({ where: { gameId }, offset, limit: 10 });
     if (!listData) res.status(404).json({ message: 'rooms not found' });
-    else res.status(302).json({ id: listData.id, roomTitle: listData.roomTitle, uuid: listData.uuid, max: listData.max });
+    else res.status(302).json({ data: { id: listData.id, roomTitle: listData.roomTitle, uuid: listData.uuid, max: listData.max } });
   } catch (err) {
     console.log(err);
   }
