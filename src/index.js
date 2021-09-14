@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { Provider } from 'react-redux';
-import Store from './redux/store/index';
+import { ContextProvider } from './context/ContextProvider';
 
 ReactDOM.render(
-  <Provider store={Store}>
+  <ContextProvider>
+    {/* <BrowserRouter> */}
     <App />
-  </Provider>,
-  document.getElementById('root')
-);
+    {/* </BrowserRouter> */}
+  </ContextProvider>,
+  document.getElementById('root'));
