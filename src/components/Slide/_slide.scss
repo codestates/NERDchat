@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap");
 @import "_color";
 
 * {
@@ -21,8 +20,8 @@ body {
 }
 
 #slider {
-  top: 150px;
-  height: 22vw;
+  top: 30px;
+  height: 23vw;
   position: relative;
   perspective: 600px;
   transform-style: preserve-3d;
@@ -31,7 +30,6 @@ body {
     margin: auto;
     width: 50%;
     height: 100%;
-    border-radius: 10px;
     position: absolute;
     left: 0;
     right: 0;
@@ -85,40 +83,81 @@ body {
     transform: translate3d(30%, 0, -200px);
   }
 
+  .card {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+
+    .card-text {
+      color: rgba(255, 255, 255, 0.865);
+      position: absolute;
+      width: 500px;
+      top: 50%;
+      left: 70%;
+      transform: translate(-50%, -50%);
+      font-family: "Rajdhani", sans-serif;
+      font-weight: lighter;
+      font-size: 25px;
+      letter-spacing: 1px;
+    }
+
+    .card-text h3 {
+      font-weight: normal;
+    }
+
+    .card-text h4 {
+      font-weight: lighter;
+    }
+
+    .iconsize {
+      cursor: pointer;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .card::before {
+    position: absolute;
+    content: "";
+    width: 60rem;
+    height: 90rem;
+    background: rgba(0, 0, 0, 0.68);
+    left: 5%;
+    top: -80px;
+    transform: rotate(25deg);
+    transform-origin: center top 10;
+  }
+
   #slide1 {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: rgb(25, 25, 25);
+    background-color: rgb(30, 30, 30, 0.6);
     overflow: hidden;
-    border-top: 1px solid rgba(213, 124, 255, 0.2);
-    border-left: 1px solid rgba(213, 124, 255, 0.2);
     backdrop-filter: blur(5px);
   }
   #slide2 {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: rgb(25, 25, 25);
+    background-color: rgb(30, 30, 30, 0.6);
     overflow: hidden;
-    border-top: 1px solid rgba(213, 124, 255, 0.2);
-    border-left: 1px solid rgba(213, 124, 255, 0.2);
   }
   #slide3 {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: rgb(25, 25, 25);
+    background-color: rgb(30, 30, 30, 0.6);
     overflow: hidden;
-    border-top: 1px solid rgba(213, 124, 255, 0.2);
-    border-left: 1px solid rgba(213, 124, 255, 0.2);
   }
   #slide4 {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: rgb(25, 25, 25);
+    background-color: rgb(30, 30, 30, 0.6);
     overflow: hidden;
-    border-top: 1px solid rgba(213, 124, 255, 0.2);
-    border-left: 1px solid rgba(213, 124, 255, 0.2);
   }
   #slide5 {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: rgb(25, 25, 25);
+    background-color: rgb(30, 30, 30, 0.6);
     overflow: hidden;
-    border-top: 1px solid rgba(213, 124, 255, 0.2);
-    border-left: 1px solid rgba(213, 124, 255, 0.2);
   }
 }
