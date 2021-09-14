@@ -13,6 +13,7 @@ router.get('/logout', users.logout);
 router.get('/profile/:nickname', users.profile);
 router.patch('/fixprofile', users.fixProfile);
 router.delete('/withdraw', users.withdraw);
+router.post('/emailV', users.emailV);
 /*
     Room Router
 */
