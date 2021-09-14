@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { users } = require('../controllers/index');
-const { rooms } = require('../controllers/index');
-const { category } = require('../controllers/index');
+const { users, rooms, category, favorites, friends } = require('../controllers/index');
 
 /*
     User Router
@@ -27,5 +25,14 @@ router.post('/rooms/exit/:uuid', rooms.exitRoom);
 */
 router.get('/category/lists/:page', category.getCategoryList);
 router.get('/category/search/:name', category.categorySearch);
+/*
+    Favorite Router
+*/
+router.get('/favorites/lists', favorites.favLists);
+router.get('/favorites/request/:gameId', favorites.favRequest);
+/*
+    Friends Router
+*/
+router.get('/friends/lists', friends.friendsList);
 
 module.exports = router;
