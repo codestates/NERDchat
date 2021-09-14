@@ -1,16 +1,20 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { AiOutlineBars, AiOutlineSearch, AiOutlineEnter } from 'react-icons/ai';
 import { ReactComponent as Glasses } from '../../images/glasses.svg';
 
 import './_NavBar.scss';
+=======
+import React from "react";
+import NavItem from "./NavItem";
+// import { ReactComponent as Glasses } from "../../images/glasses.svg";
+
+import "./NavBar.scss";
+>>>>>>> 696a80db2f8c46a0e63f6096e3ae7003cdb0a913
 
 const NavBar = () => {
-  // const [checked, setChecked] = useState(false);
-
-  // const clickHandler = () => {
-  //   setChecked((prev) => !prev);
-  // };
   return (
+<<<<<<< HEAD
     <div className='nav_wrapper'>
       <nav>
         <input type='checkbox' id='show-search' />
@@ -67,6 +71,15 @@ const NavBar = () => {
         </form>
       </nav>
     </div>
+=======
+    <nav className="navbar">
+      <ul className="navbar-nav">
+        {/* <Glasses width="100" height="100" className="navbar-logo" /> */}
+        <h1 className="navbar-logo">NERDchat</h1>
+        <NavItem />
+      </ul>
+    </nav>
+>>>>>>> 696a80db2f8c46a0e63f6096e3ae7003cdb0a913
   );
 };
 
