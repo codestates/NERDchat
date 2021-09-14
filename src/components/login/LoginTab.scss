@@ -1,3 +1,6 @@
+$dark: rgb(23, 23, 23);
+$neonNain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
 .modal__tab__container{
     // position: relative;
             img{
@@ -9,6 +12,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        span{
+            color: $neonSer;
+            margin-right: 2px;
+        }
     }
 }
 .modal__tab{
@@ -26,7 +33,7 @@
     }
     .clicked__tab {
         cursor: pointer;
-        color: #6b21da;
+        color: $neonSer;
         font-size: 13px;
     }
     .clicked__tab::after {
@@ -36,7 +43,7 @@
         width: 100%;
         top: 22px;
         left: 0px;
-        border-bottom: #6b21da solid 2px;
+        border-bottom: $neonSer solid 2px;
     }
     
 }

@@ -5,58 +5,61 @@ import './SignUp.scss';
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const SignUp = () => {
-  const [enteredId, setEnteredId] = useState('');
-  const [idIsValid, setIdIsValid] = useState(true);
-  const [enteredNickname, setEnteredNickname] = useState('');
-  const [nicknameIsValid, setNicknameIsValid] = useState(true);
-  const [enteredPw, setEnteredPw] = useState('');
-  const [pwIsValid, setPwIsValid] = useState(true);
-  const [enteredPwc, setEnteredPwc] = useState('');
-  const [pwcIsValid, setPwcIsValid] = useState(true);
-  const [enteredEmail, setEnteredEmail] = useState('');
-  const [emailIsValid, setEmailIsValid] = useState(true);
-  const [verifyCode, setVerifyCode] = useState('123');
-  const [enteredVerifyCode, setEnteredVerifyCode] = useState('');
-  const [emailIsVerified, setEmailIsVerified] = useState(false);
-  const [confirmClicked, setConfirmClicked] = useState(false);
-  const [formIsValid, setFormIsValid] = useState(false);
+  const [enteredInfo, setEnteredInfo] = useState({
+    id:'', 
+    idIsValid:true, 
+    nickname:'', 
+    nicknameIsValid:true, 
+    pw:'', 
+    pwIsValid:true, 
+    pwc:'',
+    pwcIsValid:true,
+    email:'', 
+    emailIsValid:true, 
+    verifyCode: '',
+  })
+    const [AVerifyCode, setAVerifyCode] = useState("123");
+    const [emailIsVerified, setEmailIsVerified] = useState(false);
+    const [confirmClicked, setConfirmClicked] = useState(false);
+    const [formIsValid, setFormIsValid] = useState(false);
 
   // 인풋값 유효성검사
+  const {id, idIsValid, nickname, nicknameIsValid, pw, pwIsValid, pwc, pwcIsValid, email, emailIsValid, verifyCode} = enteredInfo
   useEffect(() => {
     const verifier = setTimeout(() => {
-      if (enteredId.length !== 0) {
-        if (enteredId.trim().length >= 4 && enteredId.trim().length <= 25) {
-          setIdIsValid(true);
-        } else { setIdIsValid(false); }
+      if (id.length !== 0) {
+        if (id.trim().length >= 4 && id.trim().length <= 25) {
+          setEnteredInfo((prev) => {return {...prev, idIsValid:true}});
+        } else { setEnteredInfo((prev) => {return {...prev, idIsValid:false}}); }
       }
 
-      if (enteredNickname.length !== 0) {
-        if (enteredNickname.trim().length >= 4 && enteredNickname.trim().length <= 25) {
-          setNicknameIsValid(true);
-        } else setNicknameIsValid(false);
+      if (nickname.length !== 0) {
+        if (nickname.trim().length >= 4 && nickname.trim().length <= 25) {
+          setEnteredInfo((prev) => {return {...prev, nicknameIsValid:true}});
+        } else setEnteredInfo((prev) => {return {...prev, nicknameIsValid:false}});
       }
-      if (enteredPw.length !== 0) {
-        validatePasswordHandler(enteredPw);
+      if (pw.length !== 0) {
+        validatePasswordHandler(pw);
       }
-      if (enteredPwc.length !== 0) {
-        if (enteredPwc === enteredPw) {
-          setPwcIsValid(true);
-        } else setPwcIsValid(false);
+      if (pwc.length !== 0) {
+        if (pwc === pw) {
+          setEnteredInfo((prev) => {return {...prev, pwcIsValid:true}});
+        } else setEnteredInfo((prev) => {return {...prev, pwcIsValid:false}});
       }
 
-      if (enteredEmail.length !== 0) {
-        validateEmailHandler(enteredEmail);
+      if (email.length !== 0) {
+        validateEmailHandler(email);
       }
     }, 700);
 
     return () => {
       clearTimeout(verifier);
     };
-  }, [enteredId, enteredNickname, enteredPw, enteredEmail, enteredPwc]);
+  }, [id, nickname, pw, email, pwc]);
 
   useEffect(() => {
     const verifyForm = setTimeout(() => {
-      if (idIsValid && nicknameIsValid && pwIsValid && pwcIsValid && emailIsValid && emailIsVerified && enteredId.length !== 0 && enteredNickname.length !== 0 && enteredPw.length !== 0 && enteredEmail.length !== 0 && enteredPwc.length !== 0) setFormIsValid(true);
+      if (idIsValid && nicknameIsValid && pwIsValid && pwcIsValid && emailIsValid && emailIsVerified && id.length !== 0 && nickname.length !== 0 && pw.length !== 0 && email.length !== 0 && pwc.length !== 0) setFormIsValid(true);
       else setFormIsValid(false);
     }, 500);
     return () => clearTimeout(verifyForm);
@@ -64,54 +67,55 @@ const SignUp = () => {
 
   const validatePasswordHandler = pw => {
     const regPw = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
-    if (!regPw.test(pw)) setPwIsValid(false);
-    else setPwIsValid(true);
+    if (!regPw.test(pw)) setEnteredInfo((prev) => {return {...prev, pwIsValid:false}});
+    else setEnteredInfo((prev) => {return {...prev, pwIsValid:true}});
   };
   const validateEmailHandler = em => {
     const regEmail = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-    if (!regEmail.test(em)) setEmailIsValid(false);
-    else setEmailIsValid(true);
+    if (!regEmail.test(em)) setEnteredInfo((prev) => {return {...prev, emailIsValid:false}});
+    else setEnteredInfo((prev) => {return {...prev, emailIsValid:true}});
   };
   const idHandler = (e) => {
-    setEnteredId(e.target.value);
+    setEnteredInfo((prev) => {return {...prev, id:e.target.value}});
   };
   const nicknameHandler = (e) => {
-    setEnteredNickname(e.target.value);
+    setEnteredInfo((prev) => {return {...prev, nickname:e.target.value}});
   };
   const pwHandler = (e) => {
-    setEnteredPw(e.target.value);
+    setEnteredInfo((prev) => {return {...prev, pw:e.target.value}});
   };
   const pwcHandler = (e) => {
-    setEnteredPwc(e.target.value);
+    setEnteredInfo((prev) => {return {...prev, pwc:e.target.value}});
   };
   const emailHandler = (e) => {
-    setEnteredEmail(e.target.value);
+    setEnteredInfo((prev) => {return {...prev, email:e.target.value}});
   };
 
   // 이메일 인증 요청
   const sendEmailHandler = async () => {
-    const res = await axios.put(`${ENDPOINT}/emailV`, { email: enteredEmail });
+    const res = await axios.put(`${ENDPOINT}/emailV`, { email });
     // const res.data.verifyToken
-    setVerifyCode(res.data.data.verifyToken);
+    setAVerifyCode(res.data.data.verifyToken);
   };
 
   // 이메일 인증코드 입력
   const codeHandler = (e) => {
-    setEnteredVerifyCode(e.target.value);
+    setEnteredInfo((prev) => {return {...prev, verifyCode:e.target.value}});
   };
   // 이메일 인증코드 확인
   const emailCodeHandler = (e) => {
     setConfirmClicked(true);
-    if (enteredVerifyCode === verifyCode) setEmailIsVerified(true);
-    else setEmailIsVerified(false);
-    console.log(emailIsVerified);
+    if (verifyCode === AVerifyCode) setEmailIsVerified(true);
+    else setEmailIsVerified(false)
+    // console.log(emailIsVerified);
   };
   // 회원가입 요청
   const signUpHandler = async (event) => {
     event.preventDefault();
-    const res = await axios.put(`${ENDPOINT}/signup`, { id: enteredId, password: enteredPw, email: enteredEmail, nickname: enteredNickname });
+    const res = await axios.put(`${ENDPOINT}/signup`, { id, pw, email, nickname});
     console.log(res);
   };
+
   return (
     <>
       <form className='login__input__container' onSubmit={signUpHandler}>
@@ -149,7 +153,7 @@ const SignUp = () => {
             <input type='text' id='vemail' onChange={codeHandler} className='code__input' />
             <button type='button' className='email__code__btn' onClick={emailCodeHandler}>인증하기</button>
           </div>
-          {(!emailIsVerified && enteredVerifyCode.length !== 0 && confirmClicked) && <p className='errMsg'>*인증번호가 일치하기 않습니다.</p>}
+          {(!emailIsVerified && verifyCode.length !== 0 && confirmClicked) && <p className='errMsg'>*인증번호가 일치하기 않습니다.</p>}
         </div>
         <div>
           <p className='contract'>

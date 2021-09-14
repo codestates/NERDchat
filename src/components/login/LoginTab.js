@@ -6,8 +6,8 @@ const LoginTab = ({ isLoginClicked, loginTablHandler }) => {
     <>
       <div className='modal__tab__container'>
         <div className='tab__header'>
-          {isLoginClicked && <h3>NerdChat에 로그인</h3>}
-          {!isLoginClicked && <h3>NerdChat에 가입하세요</h3>}
+          {isLoginClicked && <h3><span>NerdChat</span>에 로그인</h3>}
+          {!isLoginClicked && <h3><span>NerdChat</span>에 가입하세요</h3>}
         </div>
         <div className='modal__tab'>
           <div
