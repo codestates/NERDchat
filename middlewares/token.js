@@ -9,7 +9,7 @@ module.exports = {
       return jwt.verify(accessToken, process.env.ACCESS_SECRET);
     } catch (err) {
       console.log(err);
-      return null;
+      return undefined;
     }
   },
   verifyRefresh: (refreshToken) => {
@@ -17,7 +17,7 @@ module.exports = {
       return jwt.verify(refreshToken, process.env.REFRESH_SECRET);
     } catch (err) {
       console.log(err);
-      return null;
+      return undefined;
     }
   }
 

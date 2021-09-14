@@ -4,7 +4,6 @@ const http = require('http');
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const app = express();
-const jwt = require('jsonwebtoken');
 const httpServer = http.createServer(app);
 const io = require('socket.io')(httpServer, {
   cors: {
@@ -37,7 +36,6 @@ app.get('/header', (req, res) => {
   console.log(req.headers);
   res.json(req.headers);
 });
-
 app.use('/', routes);
 
 io.on('connection', controller.socket);
