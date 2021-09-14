@@ -2,11 +2,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap");
 
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  text-decoration: none;
 }
 
 body {
   background: rgb(23, 23, 23);
   user-select: none;
 }
+
+button {
+  font-family: "Dosis", sans-serif;
+}
+

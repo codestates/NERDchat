@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap");
-
 @import "_color";
 
 %align-center {
@@ -8,358 +7,175 @@
   align-items: center;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  text-decoration: none;
-}
-
-.nav {
+.nav_wrapper {
   background: $dark;
   position: fixed;
   width: 100%;
-
-  &_bar {
-    position: relative;
-    display: flex;
-    max-width: calc(100% - 400px);
-    margin: 0 auto;
-    height: 70;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  &_container {
-    color: $neonNain;
-    font-family: "Dosis", sans-serif;
-    display: flex;
-    @extend %align-center;
-  }
-
-  &_logo {
-    display: flex;
-    flex-direction: row;
-  }
-
-  &_logo a {
-    cursor: pointer;
-    stroke: $neonNain;
-    stroke-width: 3;
-    stroke-dasharray: 200;
-    stroke-dashoffset: 0;
-    animation: flicker 2s linear infinite;
-    filter: drop-shadow(1px 1px 2px $neonSer);
-    fill: transparent;
-    @extend %align-center;
-  }
-
-  //   &_logo span {
-  //     font-family: "Monoton", cursive;
-  //     filter: drop-shadow(0 0 2px $neonSer);
-  //     animation: flicker 2s linear infinite;
-  //     font-size: 20px;
-  //     margin: auto 10px;
-  //   }
-
-  &_links {
-    margin-left: 40px;
-    display: flex;
-    list-style: none;
-  }
-
-  &_links li a {
-    color: $neonNain;
-    opacity: 0.3;
-    font-family: "Dosis", sans-serif;
-    font-size: 20px;
-    font-weight: 100;
-    // filter: drop-shadow(0 0 1px $neonSer);
-    margin: 0 10px;
-    transition: all 0.2s ease-in-out;
-  }
-
-  &_links li:hover a {
-    opacity: 1;
-    filter: drop-shadow(1px 1px 2px $neonSer);
-  }
-
-  &_search,
-  &_menu {
-    opacity: 0.3;
-    color: $neonNain;
-    cursor: pointer;
-    line-height: 70px;
-    padding-top: 10px;
-    width: 70px;
-    text-align: center;
-    transition: all 0.4s ease;
-  }
-
-  &_menu:hover {
-    opacity: 1;
-    filter: drop-shadow(0 0 1px $neonSer);
-  }
-  &_search:hover {
-    opacity: 1;
-    filter: drop-shadow(0 0 1px $neonSer);
-  }
-
-  &_menu {
-    display: none;
-  }
-
-  &_searchbox {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    max-width: calc(100% - 50px);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3 ease;
-
-    input {
-      width: 100%;
-      height: 100%;
-      border: none;
-      outline: none;
-      font-size: 17px;
-      color: $neonNain;
-      background: $dark;
-      font-family: "Dosis", sans-serif;
-      text-transform: uppercase;
-    }
-
-    input::-webkit-input-placeholder {
-      color: $neonNain;
-      opacity: 0.5;
-    }
-  }
-
-  input[type="checkbox"] {
-    display: none;
-  }
-
-  &_enter {
-    color: $neonNain;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    line-height: 70px;
-    padding-top: 10px;
-    width: 70px;
-    border: none;
-    background-color: $dark;
-    outline: none;
-    cursor: pointer;
-  }
-
-  &_i_enter {
-    opacity: 0.3;
-    transition: all 0.2s ease-in-out;
-  }
-
-  &_i_enter:hover {
-    opacity: 1;
-    filter: drop-shadow(0 0 1px $neonSer);
-  }
-
-  @media screen and (max-width: 1250px) {
-    &_bar {
-      max-width: 100%;
-      padding: 0 20px;
-    }
-
-    &_container {
-      margin-left: 30px;
-    }
-
-    &_links {
-      margin-left: 30px;
-    }
-
-    &_links li a {
-      margin: 0 5px;
-    }
-
-    &_searchbox {
-      max-width: calc(100% - 100px);
-    }
-
-    &_searchbox input {
-      padding: 0 100px 0 30px;
-    }
-  }
-
-  @media screen and (max-width: 900px) {
-    &_menu {
-      display: block;
-      padding: 10px 0 0;
-    }
-
-    &_links {
-      display: block;
-      position: fixed;
-      background: $dark;
-      height: 100%;
-      width: 100%;
-      top: 90px;
-      left: -100%;
-      margin-left: 0;
-      max-width: 150px;
-    }
-
-    &_links li {
-      margin: 15px 40px;
-    }
-
-    &_links li a {
-      line-height: 40px;
-      display: block;
-    }
-  }
 }
 
-#nav_showsearch {
-  transition: all 0.3s ease;
+.nav_wrapper nav {
+  @extend %align-center;
+  position: relative;
+  max-width: calc(100% - 500px);
+  margin: 20px auto;
+  height: 70px;
+  justify-content: space-between;
 }
 
-.nav_searchbox {
-  transition: all 0.3s ease;
+nav .nav_content {
+  @extend %align-center;
 }
 
-#nav_showsearch:checked ~ .nav_searchbox {
+nav .nav_content .nav_links {
+  margin-left: 10px;
+  display: flex;
+}
+
+.nav_content .nav_logo a {
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 0;
+  cursor: pointer;
+  fill: transparent;
+}
+
+.nav_content .nav_links li {
+  list-style: none;
+}
+
+.nav_content .nav_links li a {
+  font-family: "Dosis", sans-serif;
+  font-size: 18px;
+  font-weight: 100;
+  color: #fff;
+  margin: 0 10px;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav_content .nav_links li:hover a {
+  border-bottom: 1px solid red;
+}
+
+.nav_wrapper .nav_searchIcon,
+.nav_wrapper .nav_menuIcon {
+  color: #fff;
+  cursor: pointer;
+  width: 70px;
+  text-align: center;
+}
+
+.nav_wrapper .nav_menuIcon {
+  display: none;
+}
+
+.nav_wrapper .nav_searchBox {
+  position: absolute;
+  height: 100%;
+  max-width: calc(100% - 50px);
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav_wrapper #show-search:checked ~ .nav_searchBox {
   opacity: 1;
   pointer-events: auto;
 }
 
-#nav_showmenu:checked ~ .nav_menu {
-  left: 0%;
+.nav_searchBox input {
+  width: 95%;
+  height: 100%;
+  border: none;
+  outline: none;
+  font-size: 17px;
+  font-family: "Dosis", sans-serif;
+  background: $dark;
+  color: #fff;
+  text-transform: uppercase;
 }
 
-@keyframes flicker {
-  from {
-    opacity: 1;
+.nav_searchBox .nav_goIcon {
+  color: #fff;
+  position: absolute;
+  right: 100px;
+  top: 50%;
+  transform: translateY(-50%);
+  line-height: 70px;
+  padding-top: 10px;
+  width: 10px;
+  border: none;
+  background-color: $dark;
+  outline: none;
+  cursor: pointer;
+}
+
+.nav_wrapper input[type="checkbox"] {
+  display: none;
+}
+
+/* drop down*/
+.nav_content .nav_links ul {
+  position: absolute;
+  top: 80px;
+  z-index: -1;
+}
+
+.nav_content .nav_links ul li a {
+  display: block;
+  width: 100%;
+  line-height: 30px;
+  border-radius: 0 !important;
+}
+
+@media screen and (max-width: 1250px) {
+  .nav_wrapper nav {
+    max-width: 100%;
+    padding: 0 30px;
   }
 
-  4% {
-    opacity: 0.9;
+  nav .nav_content .nav_links {
+    margin-left: 5px;
   }
 
-  6% {
-    opacity: 0.85;
+  .nav_wrapper .nav_searchBox {
+    max-width: calc(100% - 100px);
   }
 
-  8% {
-    opacity: 0.95;
+  .nav_wrapper .nav_searchBox input {
+    padding: 0 100px 0 30px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .nav_wrapper .nav_menuIcon {
+    display: block;
+  }
+  nav .nav_content .nav_links {
+    display: block;
+    position: fixed;
+    background: $dark;
+    height: 100%;
+    width: 100%;
+    top: 200px;
+    left: -100%;
+    margin-left: 0;
+    max-width: 350px;
+    overflow-y: auto;
+    transition: all 0.3s ease-in-out;
   }
 
-  10% {
-    opacity: 0.9;
+  nav #show-menu:checked ~ .nav_content .nav_links {
+    left: 0%;
   }
 
-  11% {
-    opacity: 0.922;
+  .nav_content .nav_links li {
+    margin: 10px 40px;
   }
 
-  12% {
-    opacity: 0.7;
-  }
-
-  14% {
-    opacity: 0.1;
-  }
-
-  16% {
-    opacity: 0.98;
-  }
-
-  17% {
-    opacity: 0.9;
-  }
-
-  19% {
-    opacity: 0.93;
-  }
-
-  20% {
-    opacity: 0.99;
-  }
-
-  24% {
-    opacity: 1;
-  }
-
-  26% {
-    opacity: 0.94;
-  }
-
-  28% {
-    opacity: 0.98;
-  }
-
-  37% {
-    opacity: 0.93;
-  }
-
-  38% {
-    opacity: 0.2;
-  }
-
-  39% {
-    opacity: 0.96;
-  }
-
-  42% {
-    opacity: 1;
-  }
-
-  44% {
-    opacity: 0.97;
-  }
-
-  46% {
-    opacity: 0.94;
-  }
-
-  56% {
-    opacity: 0.9;
-  }
-
-  58% {
-    opacity: 0.9;
-  }
-
-  60% {
-    opacity: 0.99;
-  }
-
-  68% {
-    opacity: 1;
-  }
-
-  70% {
-    opacity: 0.9;
-  }
-
-  72% {
-    opacity: 0.95;
-  }
-
-  93% {
-    opacity: 0.93;
-  }
-
-  95% {
-    opacity: 0.95;
-  }
-
-  97% {
-    opacity: 0.93;
-  }
-
-  to {
-    opacity: 1;
+  .nav_content .nav_links li a {
+    line-height: 40px;
   }
 }
