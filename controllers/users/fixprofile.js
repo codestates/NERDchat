@@ -1,6 +1,7 @@
 const { Users } = require('../../models');
 const { generateAccess, verifyAccess } = require('../../middlewares/token');
 const { comparePassword, generatePassword } = require('../../middlewares/crypto');
+// const { uploadImage } = require('../../middlewares/multer');
 
 module.exports = async (req, res) => {
   const originAccessToken = req.headers.authorization.split(' ')[1];
@@ -8,14 +9,13 @@ module.exports = async (req, res) => {
   else {
     const accessTokenData = verifyAccess(originAccessToken);
     if (!accessTokenData) res.status(400).json({ message: 'token expired' });
-    else {
+    else{
       try {
         const { avatar, nickname, password, status } = req.body;
         const origin = await Users.findOne({
           where: { email: accessTokenData.email, nickname: accessTokenData.nickname }
         });
-        if (!comparePassword(password, origin.password)) res.status(403).json({ message: 'passwords are different' });
-        else {
+        // if (!comparePassword(password, origin.password)) res.status(403).json({ message: 'passwords are different' });
           const newPassword = generatePassword(password);
           await Users.update({
             avatar: avatar || origin.avatar,
@@ -24,11 +24,12 @@ module.exports = async (req, res) => {
             status: status || origin.status,
             updatedAt: new Date()
           },
-          {
-            where: {
-              id: origin.id
-            }
-          });
+            {
+              where: {
+                id: origin.id
+              }
+            });
+          // uploadImage(avatar);
           const accessToken = generateAccess({
             email: origin.email,
             nickname: nickname || origin.nickname
@@ -44,7 +45,6 @@ module.exports = async (req, res) => {
               status
             }
           });
-        }
       } catch (err) {
         console.log(err);
       }
