@@ -16,7 +16,7 @@ const Slide = () => {
         <label for='s1' id='slide1'>
           <div className='col-md-4 col-sm-6'>
             <div className='card'>
-              <img src={require('../../images/dummy5.jpg').default} />
+              <img src={require('../../images/dummy5.jpeg').default} />
               <div className='card-text'>
                 <h1>DEAD BY DAYLIGHT</h1>
                 <h3>Survival game</h3>
@@ -42,7 +42,7 @@ const Slide = () => {
         <label for='s3' id='slide3'>
           <div className='col-md-4 col-sm-6'>
             <div className='card'>
-              <img src={require('../../images/1133687.jpeg').default} />
+              <img src={require('../../images/dummy3.jpeg').default} />
               <div className='card-text'>
                 <h1>Battle ground</h1>
                 <h3>Survival game</h3>
