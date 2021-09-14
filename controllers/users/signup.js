@@ -9,13 +9,13 @@ module.exports = async (req, res) => {
   if (userInfo) res.status(400).json({ isSignup: false });
   else {
     try {
-      const newPassword = generatePassword(password);
+      const new_password = generatePassword(password);
       await Users.create({
         userId: id,
         avatar: null,
         email,
         nickname,
-        password: newPassword,
+        password: new_password,
         valid: false, // valid가 뭐하는 거더라?
         oauth: null,
         satatus: null,

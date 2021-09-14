@@ -1,7 +1,7 @@
 const { verifyAccess } = require('../../middlewares/token');
 
 module.exports = (req, res) => {
-  const accessToken = req.headers.authorization.split(' ')[1];
+  const accessToken = req.cookies.accessToken;
   if (!accessToken) res.status(401).json({ isLogout: false });
 
   const accesTokenData = verifyAccess(accessToken);

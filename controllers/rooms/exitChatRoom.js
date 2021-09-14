@@ -9,15 +9,17 @@ module.exports = async (req, res) => {
   if (!token) res.status(401).json({ message: 'token not found' });
   else {
     const userData = verifyAccess(token);
+    console.log(userData);
     if (!userData) res.status(400).json({ message: 'token expired' });
     else {
       try {
-        const chatRoomData = await GameChatRooms.findOne({ where: { uuid } });
-        if (!chatRoomData || !io.sockets.adapter.rooms[uuid]) res.status(404).json({ message: 'room not found' });
-        if (io.sockets.adapter.rooms[uuid].length <= chatRoomData.max) res.status(403).json({ message: 'full' });
+        const usersRoomId = await Users.findOne({ where: { id: userData.id } });
+        if (uuid !== usersRoomId.currentRoom) res.status(500).json({ message: 'different uuid' });
         else {
-          await Users.update({ currentRoom: uuid }, { where: { id: userData.id } });
-          res.status(200).json({ data: { userId: userData.id, roomId: chatRoomData.id, createdAt: chatRoomData.createdAt } });
+          await Users.update({
+            currentRoom: null
+          }, { where: { id: userData.id } });
+          res.status(200).json({ message: 'exit' });
         }
       } catch (err) {
         console.log(err);
