@@ -1,0 +1,43 @@
+import React from "react";
+import { ReactComponent as Main } from "../../images/SVG/streamline-icon-gifting-online-gifting@250x250.svg";
+
+import "./Hero.scss";
+
+const Hero = () => {
+  return (
+    <div className="container">
+      <div className="perspective-text">
+        <div className="perspective-line">
+          <p></p>
+          <p>welcome</p>
+        </div>
+        <div className="perspective-line">
+          <p>welcome</p>
+          <p>NERD GAMER</p>
+        </div>
+        <div className="perspective-line">
+          <p>NERD GAMER</p>
+          <p>We're</p>
+        </div>
+        <div className="perspective-line">
+          <p>We're</p>
+          <p>nerchat</p>
+        </div>
+        <div className="perspective-line">
+          <p>nerchat</p>
+          <p></p>
+        </div>
+      </div>
+      <div className="subtitle">
+        <h1 className="subtitle-header">
+          Whether your game is popular or not, <br /> you can easily find your
+          game mate.
+        </h1>
+      </div>
+      <div className="logoimage">
+        <Main width="680" height="680" />
+      </div>
+    </div>
+  );
+};
+export default Hero;

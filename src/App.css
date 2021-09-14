@@ -12,3 +12,7 @@ body {
   background: rgb(23, 23, 23);
   user-select: none;
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}

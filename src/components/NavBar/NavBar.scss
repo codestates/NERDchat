@@ -4,15 +4,15 @@
 @import "_color";
 
 .navbar {
-  margin-top: 20px;
+  margin-top: 80px;
   height: 100px;
   background: $dark;
-  padding: 0 20rem;
+  padding: 0 5rem;
 
   &-nav {
     max-width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 
   //   &-logo {
@@ -33,9 +33,17 @@
 
   &-logo {
     font-family: "Monoton", cursive;
-    color: $neonNain;
     font-size: 3rem;
     font-weight: lighter;
+    color: rgb(172, 172, 172);
+    transition: all 0.4s ease-in-out;
+    // color: $neonNain;
+    // animation: flicker 2s linear infinite;
+    // text-shadow: 0 0 3px rgb(163, 16, 255);
+    // filter: drop-shadow(2px 2px 2px rgb(163, 16, 255));
+  }
+  &-logo:hover {
+    color: $neonNain;
     animation: flicker 2s linear infinite;
     text-shadow: 0 0 3px rgb(163, 16, 255);
     filter: drop-shadow(2px 2px 2px rgb(163, 16, 255));
