@@ -1,0 +1,16 @@
+.big__container {
+    margin: 5em;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.game__list__card__container{
+    display: grid;
+    grid-template-columns: 400px 400px;
+    grid-template-rows: auto;
+    // grid-template-rows: repeat(auto-fit, 200px);
+    gap: 1em;
+    height: 100vh;
+}
