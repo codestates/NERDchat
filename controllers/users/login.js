@@ -13,7 +13,6 @@ module.exports = async (req, res) => {
     const { id, avatar, userId, nickname, email, oauth, status } = userData;
     const accessToken = generateAccess({ email, nickname });
     const refreshToken = generateRefresh({ email, nickname });
-
     const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
 
     res.set({ authorization: accessToken }).cookie('refreshToken', refreshToken, { domain: process.env.NERD_LINK, httpOnly: true, expires: expireDate }).status(200).json({
