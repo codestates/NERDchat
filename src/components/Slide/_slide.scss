@@ -105,13 +105,13 @@ body {
 
   .card::before {
     content: "";
-    opacity: 0.8;
+    opacity: 0.7;
     position: absolute;
     top: 0px;
     left: 0px;
     right: 0px;
     bottom: 0px;
-    background-color: rgba(0, 0, 0, 0.877);
+    background-color: rgba(0, 0, 0, 0.851);
   }
 
   img {

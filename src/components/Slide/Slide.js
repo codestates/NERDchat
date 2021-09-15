@@ -19,8 +19,8 @@ const Slide = () => {
               <img src={require("../../images/dummy5.jpeg").default} />
               <div className="card-text">
                 <h1 data-text="Overwatch">Overwatch</h1>
-                <h3>Survival game</h3>
-                <h4>1,400 viewers are watching now.</h4>
+                <h3>Shooting game</h3>
+                <h4>4,300 viewers are watching now.</h4>
               </div>
             </div>
           </div>
@@ -31,7 +31,7 @@ const Slide = () => {
               <img src={require("../../images/dummy2.jpeg").default} />
               <div className="card-text">
                 <h1 data-text="League of Legends">League of Legends</h1>
-                <h3>Survival game</h3>
+                <h3>Fighting game</h3>
                 <h4>1,400 viewers are watching now.</h4>
               </div>
             </div>
@@ -43,7 +43,7 @@ const Slide = () => {
               <img src={require("../../images/dummy3.jpeg").default} />
               <div className="card-text">
                 <h1 data-text="Battle ground">Battle ground</h1>
-                <h3>Survival game</h3>
+                <h3>Shooting game</h3>
                 <h4>1,400 viewers are watching now.</h4>
               </div>
             </div>
@@ -55,7 +55,7 @@ const Slide = () => {
               <img src={require("../../images/dummy4.jpeg").default} />
               <div className="card-text">
                 <h1 data-text="Diablo">Diablo</h1>
-                <h3>Survival game</h3>
+                <h3>Role-playing game</h3>
                 <h4>1,400 viewers are watching now.</h4>
               </div>
             </div>
