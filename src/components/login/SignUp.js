@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import './SignUp.scss';
-
+import {Context} from '../../context/ContextProvider'
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const SignUp = () => {
+  const{loginmodalHandler} = useContext(Context)
   const [enteredInfo, setEnteredInfo] = useState({
     id: '',
     idIsValid: true,
@@ -112,8 +113,10 @@ const SignUp = () => {
   // 회원가입 요청
   const signUpHandler = async (event) => {
     event.preventDefault();
-    const res = await axios.put(`${ENDPOINT}/signup`, { id, pw, email, nickname });
-    console.log(res);
+    const headers = {'Content-Type': 'application/json'};
+    const res = await axios.put(`${ENDPOINT}/signup`, { id, password: pw, email, nickname }, { headers: headers, withCredentials: true });
+    console.log(res.data);
+    loginmodalHandler()
   };
 
   return (
