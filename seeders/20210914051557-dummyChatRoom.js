@@ -21,7 +21,14 @@ module.exports = {
       max: 2,
       createdAt: new Date(),
       updatedAt: new Date()
-    }]);
+    },
+  { roomAdmin: null,
+    roomTitle: 'rr',
+    uuid: v4(),
+    gameId: 1,
+    max: 2,
+    createdAt: new Date(),
+    updatedAt: new Date() }]);
   },
 
   down: async (queryInterface, Sequelize) => {
