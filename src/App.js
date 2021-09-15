@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage/Homepage";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ServerPage from "./pages/serverpage/ServerPage";
 import Login from "./components/login/Login";
+import ServerRoom from './pages/ServerRoomPage/ServerRoom'
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
         </Route>
         <Route path="/servers">
           <ServerPage />
+        </Route>
+        <Route path="/game/:gameId">
+          <ServerRoom />
         </Route>
       </Switch>
     </BrowserRouter>
