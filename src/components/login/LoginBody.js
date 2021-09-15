@@ -1,8 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import axios from 'axios';
 import { FcGoogle } from 'react-icons/fc';
 import { AiFillFacebook } from 'react-icons/ai';
 import kakao from './kakao.png';
+import {Context} from '../../context/ContextProvider'
 import './LoginBody.scss';
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
@@ -10,6 +11,7 @@ const FACEBOOK_ID = process.env.REACT_APP_FACEBOOK_ID;
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 const Login = () => {
+  const {getUserInfo, isLoginHandler, loginmodalHandler} = useContext(Context);
   const idInputRef = useRef();
   const pwInputRef = useRef();
   const [err, setErr] = useState();
@@ -27,11 +29,14 @@ const Login = () => {
     }
     const headers = { id: enteredId, password: enteredPw, 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' };
     const res = await axios.post(`${ENDPOINT}/login`, { data: null }, { headers: headers, withCredentials: true });
-    // 받은 유저 정보 저장하기. redux...? or context...?
-    // setUserInfo(res.data.data)
+    // const token = res.headers.authorization
+    // localStorage.setItem('ACT', token.split(' ')[1]);
+    // console.log(token.split(' ')[1]);
+    // 받은 유저 정보 저장하기. 
+    getUserInfo(res.data.data)
     // login 상태 저장
-    // setLogin(true);
-    console.log(res.data);
+    isLoginHandler(true);
+    loginmodalHandler()
   };
 
   // 구글 로그인

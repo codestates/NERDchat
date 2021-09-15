@@ -18,10 +18,9 @@ const useGameLists = (pageNum) => {
     // let cancel
     // , {cancelToken: new axios.CancelToken(c => cancel = c)}
     // test용
-    const accesToken = 1 || undefined;
-    const header = { authorization: accesToken };
-    const res = await axios.get(`${ENDPOINT}/category/lists/${pageNum}`, { headers: header, withCredentials: true });
-    console.log(res.data.data);
+    const header = {'Content-Type': 'application/json'};
+    const res = await axios.get(`${ENDPOINT}/category/lists/${pageNum}`, {headers:header, withCredentials: true });
+    // console.log(res.data);
     setGameLists((prev) => [...prev, ...res.data.data]);
     // setGameLists((prev) => {return [...new Set([...prev, res.data.data])]});
     setHasMore(res.data.data.length > 0);
