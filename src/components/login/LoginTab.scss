@@ -13,11 +13,20 @@ $neonSer: rgb(163, 16, 255);
         justify-content: center;
         align-items: center;
         span{
-            color: $neonSer;
+            color: white;
             margin-right: 2px;
+            position: relative;
+            text-shadow: -3px 0.7px rgba(119, 0, 255, 0.536);
         }
+
+        // span::after {
+        //     content: '';
+        //     left: -1px;
+        //     text-shadow: -2px 0 rgba(255, 0, 242, 0.618);
+        // }
     }
 }
+
 .modal__tab{
     margin-top: 1em ;
     display: flex;

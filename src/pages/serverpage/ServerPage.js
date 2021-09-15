@@ -1,11 +1,11 @@
 import React, { useState, useRef, useCallback } from 'react';
-import useGameLists from '../../hooks/useGameLists';
+import useLists from '../../hooks/useLists';
 import ServerPageCard from '../../components/serverPage/ServerPageCard';
 import './ServerPage.scss';
 
 const ServerPage = () => {
   const [pageNum, setPageNum] = useState(1);
-  const { gameLists, hasMore, loading} = useGameLists(pageNum);
+  const { lists, hasMore, loading} = useLists(pageNum, "get", "/category/lists/");
 
   //Infinite Scroll
   //일반적인 useRef는 state가 아니기 때문에 컴포넌트가 변화할때마다 다시 렌더되지 못한다. 하지만, useCallback을 ref로 주게 되면,
@@ -32,15 +32,15 @@ const ServerPage = () => {
 
   // forTest
   // let lastElementRef;
-  // const gameLists = [{ id: 1, category: 'diablo', image: 1, fav: 1 }, { id: 2, category: 'lol', image: 2, fav: 0 }, { id: 3, category: 'hothot3', image: 3, fav: 0 }, { id: 4, category: 'coolcool', image: 4, fav: 0 }, { id: 5, category: 'diablo', image: 1, fav: 0 }, { id: 6, category: 'lol', image: 2, fav: 1 }, { id: 7, category: 'hothot3', image: 3, fav: 0 }, { id: 8, category: 'coolcool', image: 4, fav: 1 }, { id: 9, category: 'diablo', image: 1, fav: 0 }, { id: 10, category: 'lol', image: 2, fav: 0 }, { id: 11, category: 'hothot3', image: 3, fav: 0 }, { id: 12, category: 'coolcool', image: 4, fav: 0 }, { id: 13, category: 'diablo', image: 1, fav: 0 }, { id: 14, category: 'lol', image: 2, fav: 1 }, { id: 15, category: 'hothot3', image: 3, fav: 0 }, { id: 16, category: 'coolcool', image: 4, fav: 0 }];
+  // const Lists = [{ id: 1, category: 'diablo', image: 1, fav: 1 }, { id: 2, category: 'lol', image: 2, fav: 0 }, { id: 3, category: 'hothot3', image: 3, fav: 0 }, { id: 4, category: 'coolcool', image: 4, fav: 0 }, { id: 5, category: 'diablo', image: 1, fav: 0 }, { id: 6, category: 'lol', image: 2, fav: 1 }, { id: 7, category: 'hothot3', image: 3, fav: 0 }, { id: 8, category: 'coolcool', image: 4, fav: 1 }, { id: 9, category: 'diablo', image: 1, fav: 0 }, { id: 10, category: 'lol', image: 2, fav: 0 }, { id: 11, category: 'hothot3', image: 3, fav: 0 }, { id: 12, category: 'coolcool', image: 4, fav: 0 }, { id: 13, category: 'diablo', image: 1, fav: 0 }, { id: 14, category: 'lol', image: 2, fav: 1 }, { id: 15, category: 'hothot3', image: 3, fav: 0 }, { id: 16, category: 'coolcool', image: 4, fav: 0 }];
   // const loading = false;
 
   return (
     <div className='big__container'>
       <div className='game__list__card__container'>
-        {gameLists.map((list, idx) => {
+        {lists.map((list, idx) => {
           // 해당 요소가 마지막 요소라면, ref붙여주기
-          if (gameLists.length === idx + 1) {
+          if (lists.length === idx + 1) {
             return (<div ref={lastElementRef} ><ServerPageCard key={list.id} id={list.id} category={list.category} img={list.image} like={list.fav} /></div>);
           } else {
             return (<div><ServerPageCard key={list.id} id={list.id} category={list.category} img={list.image} like={list.fav} /></div>);

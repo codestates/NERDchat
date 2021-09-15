@@ -14,8 +14,6 @@ const ServerPageCard = ({ category, img, id, like }) => {
   const addBookmarkHandler = async (e) => {
     e.preventDefault();
     // test용
-    // setClicked((prev) => !prev);
-    // console.log(id);
     const accessToken = localStorage.getItem('ACT')
     // test용 끝
     const header = { authorization: `Bearer ${accessToken}` }
@@ -24,6 +22,7 @@ const ServerPageCard = ({ category, img, id, like }) => {
     if (res.data.data) setClicked((prev) => !prev);
   };
   useEffect(() => {
+    console.log('test', like)
     if (like) setClicked(true);
     else setClicked(false);
   }, []);
@@ -31,7 +30,7 @@ const ServerPageCard = ({ category, img, id, like }) => {
     <Link
       className='grid__items'
       style={{ textDecoration: 'none' }}
-      to='/'
+      to={`/game/${id}`}
     >
       <div
         className='game__list__card'
