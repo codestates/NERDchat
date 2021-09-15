@@ -8,6 +8,7 @@ import './ServerPageCard.scss';
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const ServerPageCard = ({ category, img, id, like }) => {
+  
   const [clicked, setClicked] = useState(false);
 
   const addBookmarkHandler = async (e) => {
@@ -15,10 +16,10 @@ const ServerPageCard = ({ category, img, id, like }) => {
     // test용
     // setClicked((prev) => !prev);
     // console.log(id);
-    const accesToken = 11;
+    const accessToken = localStorage.getItem('ACT')
     // test용 끝
-    const header = { authorization: accesToken };
-    const res = await axios.get(`${ENDPOINT}/favorites/request/${id}`, { headers: header, withCredentials: true });
+    const header = { authorization: `Bearer ${accessToken}` }
+    const res = await axios.get(`${ENDPOINT}/favorites/request/${id}`, {headers: header, withCredentials: true });
     console.log(res.data.data);
     if (res.data.data) setClicked((prev) => !prev);
   };
@@ -35,7 +36,7 @@ const ServerPageCard = ({ category, img, id, like }) => {
       <div
         className='game__list__card'
         style={{
-          backgroundImage: `url(/games/${img}.jpeg)`,
+          backgroundImage: `url(${img})`,
           // width: "100px",
           height: '250px',
           backgroundPosition: 'center',
