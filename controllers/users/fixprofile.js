@@ -9,42 +9,42 @@ module.exports = async (req, res) => {
   else {
     const accessTokenData = verifyAccess(originAccessToken);
     if (!accessTokenData) res.status(400).json({ message: 'token expired' });
-    else{
+    else {
       try {
         const { avatar, nickname, password, status } = req.body;
         const origin = await Users.findOne({
           where: { email: accessTokenData.email, nickname: accessTokenData.nickname }
         });
         // if (!comparePassword(password, origin.password)) res.status(403).json({ message: 'passwords are different' });
-          const newPassword = generatePassword(password);
-          await Users.update({
-            avatar: avatar || origin.avatar,
-            nickname: nickname || origin.nickname,
-            password: newPassword || origin.password,
-            status: status || origin.status,
-            updatedAt: new Date()
-          },
-            {
-              where: {
-                id: origin.id
-              }
-            });
-          // uploadImage(avatar);
-          const accessToken = generateAccess({
+        const newPassword = generatePassword(password);
+        await Users.update({
+          avatar: avatar || origin.avatar,
+          nickname: nickname || origin.nickname,
+          password: newPassword || origin.password,
+          status: status || origin.status,
+          updatedAt: new Date()
+        },
+        {
+          where: {
+            id: origin.id
+          }
+        });
+        // uploadImage(avatar);
+        const accessToken = generateAccess({
+          email: origin.email,
+          nickname: nickname || origin.nickname
+        });
+        res.status(202).json({
+          data: {
+            accessToken,
+            id: origin.id,
+            avatar,
+            userId: origin.userId,
+            nickname,
             email: origin.email,
-            nickname: nickname || origin.nickname
-          });
-          res.status(202).json({
-            data: {
-              accessToken,
-              id: origin.id,
-              avatar,
-              userId: origin.userId,
-              nickname,
-              email: origin.email,
-              status
-            }
-          });
+            status
+          }
+        });
       } catch (err) {
         console.log(err);
       }

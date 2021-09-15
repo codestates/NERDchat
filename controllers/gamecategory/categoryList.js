@@ -1,16 +1,22 @@
 const { GameCategory, Favorites } = require('../../models');
-const { verifyAccess } = require('../../middlewares/token');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 module.exports = async (req, res) => {
   const page = req.params.page || 1;
   const offset = 5 * (page - 1);
-  const userData = req.headers.authorization ? verifyAccess(req.headers.authorization.split(' ')[1]) : null;
+  const userData = req.cookies.accessToken
+    ? jwt.verify(req.cookies.accessToken, process.env.ACCESS_SECRET)
+    : null;
   try {
     let userFavCategoryList;
     const usersFavList = [];
     const favCategoryList = await GameCategory.findAll({ offset, limit: 5 });
     if (userData) {
-      userFavCategoryList = await Favorites.findAll({ where: { userId: userData.id }, attributes: ['gameId'] });
+      userFavCategoryList = await Favorites.findAll({
+        where: { userId: userData.id },
+        attributes: ['gameId']
+      });
       userFavCategoryList.forEach((el) => usersFavList.push(el.gameId));
     }
     if (favCategoryList) {
@@ -26,7 +32,7 @@ module.exports = async (req, res) => {
         } else append.fav = false;
         payload.push(append);
       });
-      res.status(302).json({ data: payload });
+      res.status(200).json({ data: payload });
     } else res.status(404).json({ message: 'no data' });
   } catch (err) {
     console.log(err);

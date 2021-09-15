@@ -16,10 +16,12 @@ module.exports = async (req, res) => {
     const refreshToken = generateRefresh({ id, avatar, userId, nickname, email, oauth, status });
     const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
 
-    res.set({ authorization: 'Token ' + accessToken }).cookie('refreshToken', refreshToken, { domain: process.env.NERD_LINK, httpOnly: true, expires: expireDate }).status(200).json({
-      data: { accessToken, id, avatar, userId, nickname, email, oauth, status },
-      isLogin: true
-    });
+    res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
+      .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
+      .status(200).json({
+        data: { accessToken, id, avatar, userId, nickname, email, oauth, status },
+        isLogin: true
+      });
   }
 
   // Search User Data
