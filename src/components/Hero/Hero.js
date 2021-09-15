@@ -1,5 +1,6 @@
 import React from "react";
 import HeroSecond from "./HeroSecond";
+import HeroThird from "./HeroThird";
 import { ReactComponent as Main } from "../../images/SVG/streamline-icon-gifting-online-gifting@250x250.svg";
 import "./Hero.scss";
 
@@ -41,6 +42,9 @@ const Hero = () => {
       </div>
       <div>
         <HeroSecond />
+      </div>
+      <div>
+        <HeroThird />
       </div>
     </>
   );

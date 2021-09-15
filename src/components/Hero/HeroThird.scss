@@ -1,0 +1,59 @@
+.third-container {
+  height: 80vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: -140px;
+}
+
+.third-image {
+  margin-right: 190px;
+}
+
+.thirdtitle {
+  margin-top: 210px;
+  margin-left: 205px;
+}
+
+.thirdtitle h1 {
+  font-family: "Monoton", cursive;
+  font-size: 7rem;
+  letter-spacing: 2px;
+  font-weight: lighter;
+  color: rgb(172, 172, 172);
+  text-align: right;
+  margin-top: -40px;
+  animation: moving 0.5s ease-in-out infinite alternate;
+  transition: all 0.2s ease-in-out;
+}
+
+.thirdtitle h2 {
+  font-family: "Monoton", cursive;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  font-weight: lighter;
+  color: rgb(172, 172, 172);
+  text-align: right;
+}
+
+.thirdsubtitle {
+  width: 400px;
+  text-align: justify;
+  margin-left: 270px;
+}
+
+.thirdsubtitle span {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  color: rgb(216, 216, 216);
+  font-size: 24px;
+}
+
+@keyframes moving {
+  0% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(-0px);
+  }
+}
