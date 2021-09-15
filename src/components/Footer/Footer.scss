@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap");
+@import "_color";
+
+.mainfooter {
+  height: 20vh;
+
+  .footerlogo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    cursor: pointer;
+    stroke: rgb(172, 172, 172);
+    stroke-width: 8;
+    stroke-dasharray: 200;
+    stroke-dashoffset: 0;
+    // animation: flicker 2s linear infinite;
+    // filter: drop-shadow(2px 2px 2px $neonSer);
+    fill: transparent;
+    transition: all 0.2s ease-in-out;
+
+    :hover {
+      stroke: $neonNain;
+      animation: flicker 2s linear infinite;
+      filter: drop-shadow(2px 2px 2px $neonSer);
+    }
+  }
+}
