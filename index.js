@@ -4,6 +4,8 @@ const http = require('http');
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const app = express();
+const multer = require('multer')
+const upload = multer()
 const jwt = require('jsonwebtoken');
 const httpServer = http.createServer(app);
 const io = require('socket.io')(httpServer, {
@@ -27,11 +29,12 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(upload.array())
+app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => res.send('Hello, world!!!!!!'));
 app.get('/header', (req, res) => {
-  console.log(req.headers);
+  console.log(req.body);
   res.json(req.headers);
 });
 
