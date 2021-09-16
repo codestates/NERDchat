@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { uploadImage } = require('../middlewares/multer');
-const { users, rooms, category, favorites, friends } = require('../controllers/index');
+const { users, rooms, category, favorites, friends, admin } = require('../controllers/index');
+const oauth = require('../controllers/oauth');
 
 /*
     User Router
@@ -36,5 +37,17 @@ router.get('/favorites/request/:gameId', favorites.favRequest);
 */
 router.get('/friends/lists', friends.friendsList);
 router.get('/friends/send/:nickname', friends.friendsRequest)
+/*
+    Admin Router
+*/
+router.post('/admin/gamecategory', admin.addgamecategory);
+router.delete('/admin/delete/room/:uuid', admin.deleteroom);
+router.delete('/admin/delete/user/:id', admin.deleteuser);
+/*
+    OAuth Router
+*/
+router.get('/oauth/facebook', oauth.facebook);
+router.get('/oauth/google', oauth.google);
+router.get('/oauth/kakao', oauth.kakao);
 
 module.exports = router;

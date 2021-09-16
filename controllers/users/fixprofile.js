@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
       var newPassword = generatePassword(password);
     }
     await Users.update({
-      avatar: avatar || origin.avatar,
+      avatar: avatar.location || origin.avatar,
       nickname: nickname || origin.nickname,
       password: newPassword || origin.password,
       status: status || origin.status,
