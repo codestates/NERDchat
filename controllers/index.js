@@ -4,5 +4,7 @@ module.exports = {
   rooms: require('./rooms/index'),
   category: require('./gamecategory/index'),
   favorites: require('./favorites/index'),
-  friends: require('./friends/index')
+  friends: require('./friends/index'),
+  admin: require('./admin/index'),
+  oauth: require('./oauth.index')
 };
