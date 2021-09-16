@@ -48,6 +48,14 @@ span {
 .text-ani .first {
   position: relative;
   animation: bounce 0.5s ease-in-out infinite alternate;
+
+  &:hover {
+    filter: drop-shadow(0 0 1px $neonSer);
+    color: $neonNain;
+    transition: all 0.2s ease-in-out;
+    animation: flicker 2s linear infinite;
+    text-shadow: 0 0 3px rgb(163, 16, 255);
+  }
 }
 
 .text-ani span:nth-child(2) {
@@ -92,9 +100,24 @@ span {
 .second-new {
   margin-top: -40px;
   font-weight: lighter;
+
+  &:hover {
+    filter: drop-shadow(0 0 1px $neonSer);
+    color: $neonNain;
+    transition: all 0.2s ease-in-out;
+    animation: flicker 2s linear infinite;
+    text-shadow: 0 0 3px rgb(163, 16, 255);
+  }
 }
 
 .second-fri {
   margin-top: -40px;
   font-weight: lighter;
+  &:hover {
+    filter: drop-shadow(0 0 1px $neonSer);
+    color: $neonNain;
+    transition: all 0.2s ease-in-out;
+    animation: flicker 2s linear infinite;
+    text-shadow: 0 0 3px rgb(163, 16, 255);
+  }
 }
