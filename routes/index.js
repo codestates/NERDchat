@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { uploadImage } = require('../middlewares/multer');
 const { users, rooms, category, favorites, friends } = require('../controllers/index');
 
 /*
@@ -9,7 +10,7 @@ router.post('/login', users.login);
 router.put('/signup', users.signup);
 router.get('/logout', users.logout);
 router.get('/profile/:nickname', users.profile);
-router.patch('/fixprofile', users.fixProfile);
+router.patch('/fixprofile', uploadImage, users.fixProfile);
 router.delete('/withdraw', users.withdraw);
 router.post('/emailV', users.emailV);
 
