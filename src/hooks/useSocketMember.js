@@ -3,17 +3,21 @@ import { io } from "socket.io-client";
 
 const useSocketMember = (uuid) => {
     const[numberOfMember, setNumberOfMember] = useState(0);
-    const socket = io('http://localhost:8080', () => {
-        io.sockets.adapter.rooms[`${uuid}`]
-    });
+    const roomId;
+    const socket = io('http://localhost:8080');
+    const getUsers = (roomId) => {
+        socket.emit('getUsers', roomId);
+    }
     useEffect(() => {
+        getUsers(roomId);
+        socket.on('getUsers', (data)=> {
+            setNumberOfMember(data)
+        })
 
+        return ()=> socket.disconnect();
     }, [])
-    return (
-        <div>
-            
-        </div>
-    )
+    
+    return 
 }
 
 export default useSocketMember
