@@ -13,7 +13,7 @@ router.get('/logout', users.logout);
 router.get('/profile/:nickname', users.profile);
 router.patch('/fixprofile', uploadImage, users.fixProfile);
 router.delete('/withdraw', users.withdraw);
-router.post('/emailV', users.emailV);
+router.post('/emailVerify', users.emailVerify);
 
 /*
     Room Router
@@ -36,6 +36,7 @@ router.get('/favorites/request/:gameId', favorites.favRequest);
     Friends Router
 */
 router.get('/friends/lists', friends.friendsList);
+router.get('/friends/send/:nickname', friends.friendsRequest)
 /*
     Admin Router
 */
