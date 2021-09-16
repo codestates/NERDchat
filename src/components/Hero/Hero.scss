@@ -4,7 +4,7 @@
 @import "_color";
 
 .container {
-  margin-top: 100px;
+  margin-top: 110px;
   text-align: center;
   width: 100%;
   height: 100vh;
@@ -90,6 +90,11 @@ p {
 
 .perspective-line:hover p {
   transform: translate(0, -50px);
+  filter: drop-shadow(0 0 1px $neonSer);
+  color: $neonNain;
+  transition: all 0.2s ease-in-out;
+  animation: flicker 2s linear infinite;
+  text-shadow: 0 0 3px rgb(163, 16, 255);
 }
 p {
   transition: all 0.4s ease-in-out;
