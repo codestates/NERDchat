@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
     updatedAt: new Date()
   };
   await GameChatRooms.create(payload);
-  res.status(200).json({
+  res.status(201).json({
     data: payload
   });
 };

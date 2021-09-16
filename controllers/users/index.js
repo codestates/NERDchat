@@ -5,5 +5,5 @@ module.exports = {
   logout: require('./logout'),
   profile: require('./profile'),
   fixProfile: require('./fixprofile'),
-  emailV: require('./emailV')
+  emailVerify: require('./emailVerify')
 };
