@@ -15,9 +15,6 @@ const useLists = (pageNum, method, api, data) => {
   // 좋아하는 리스트를 받아오고...
   // 그 리스트와 data의 id가 일치한다면, favorites: 1로 체크, if not 0;
   const getLists = async () => {
-    // let cancel
-    // , {cancelToken: new axios.CancelToken(c => cancel = c)}
-    // test용
     const header = {'Content-Type': 'application/json'};
     const res = await axios({
       url: `${api}${pageNum}`,
@@ -29,7 +26,7 @@ const useLists = (pageNum, method, api, data) => {
     });
     console.log(res.data);
     setLists((prev) => [...prev, ...res.data.data]);
-    // setGameLists((prev) => {return [...new Set([...prev, res.data.data])]});
+    // setLists((prev) => {return [...new Set([...prev, ...res.data.data])]});
     setHasMore(res.data.data.length > 0);
   };
   return { lists, hasMore, loading };
