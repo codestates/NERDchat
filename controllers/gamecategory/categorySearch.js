@@ -11,6 +11,6 @@ module.exports = async (req, res) => {
       }
     }
   });
-  if (data) res.status(302).json(data);
+  if (data) res.status(200).json(data);
   else res.status(404).json({ message: 'no data' });
 };

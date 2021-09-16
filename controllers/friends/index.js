@@ -1,3 +1,4 @@
 module.exports = {
-  friendsList: require('./friendsList')
+  friendsList: require('./friendsList'),
+  friendsRequest: require('./friendsReq')
 };
