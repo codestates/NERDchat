@@ -1,0 +1,113 @@
+$dark: rgb(23, 23, 23);
+$neonNain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+$neonPink: rgba(255, 0, 242, 0.618);
+.room__card__container{
+    cursor: pointer;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    border: 1px solid rgba(121, 121, 121, 0.1);
+    // position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    // border-top: 1px solid rgba(255, 255, 255, 0.5);
+    // border-left: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 20px 20px 50x rgba(0, 0, 0, 0.5);
+    // backdrop-filter: blur(5px);
+    transition: box-shadow 1.2s;
+    color: white;
+
+}
+.room__card__container:hover{
+    // background: rgba(153, 0, 255, 0.6);
+    box-shadow: 0px 120px 0 0 $neonSer inset, 0 -120px 0 0 $neonSer inset;
+    // opacity: 0.7;
+    // border: 1px solid $neonSer;
+    // box-shadow:0 0 10px $neonSer;
+    // border-bottom: 1px solid $neonSer;
+}
+@mixin glitchCopy { 
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.room__title{
+    // position: absolute;
+    // left: 2em;
+    width: 100%;
+    flex: 1 1 70%;
+    // border: 1px solid pink;
+    text-align: center;
+
+    span{
+        font-size: 17px;
+        animation: glitch-skew 5s infinite ease-in-out;
+    }
+
+    span:hover::before{
+        z-index: 999;
+        @include glitchCopy;
+        // left: 5px;
+        text-shadow: -2px 0 #ff00c1;
+        clip: rect(0, 0, 0, 0);
+        animation: glitch-anim 5s infinite linear alternate-reverse;
+    }
+    span:hover::after {
+        @include glitchCopy;
+        left: -2px;
+        text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+        clip: rect(0, 0, 0, 0);
+        animation: glitch-anim2 1s infinite linear alternate-reverse;
+    }
+    
+}
+.room__capacity{
+    // position: absolute;
+    // right: 2em;
+    flex: 1 1 30%;
+    // border: 1px solid pink;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+
+
+
+@keyframes glitch-anim {
+    $steps: 20;
+    @for $i from 0 through $steps {
+      #{percentage($i*(1/$steps))} {
+          // 화면의 일부만 보여주는 효과 clip, (top, right, bottom, left)
+        clip: rect(random(70)+px, 700px, random(100)+px, 0);
+              transform: skew((random(100) / 100) + deg);
+      }
+    }
+  }
+  
+  // Same deal, just duplicated for ultra randomness.
+  @keyframes glitch-anim2 {
+    $steps: 20;
+    @for $i from 0 through $steps {
+      #{percentage($i*(1/$steps))} {
+        clip: rect(random(70)+px, 9999px, random(100)+px, 0);
+              transform: skew((random(100) / 100) + deg);
+      }
+    }
+  }
+  
+  // only skews. Use for main text.
+  @keyframes glitch-skew {
+    $steps: 10;
+    @for $i from 0 through $steps {
+      #{percentage($i*(1/$steps))} {
+        transform: skew((random(10) - 5) + deg);
+      }
+    }
+  }

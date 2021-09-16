@@ -1,11 +1,26 @@
-.roomLists__container{
+.server__room__container{
     height: 100vh;
     display: flex;
-    width: 500px;
-    flex-direction: column;
     justify-content: center;
-    gap: 0.3em;
-    align-items: center;
-    color: white;
-    // border: 1px solid olivedrab;
+}
+.room__content{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 500px;
+}
+.server__room__header__container{
+    height: 75px;
+    width: 100%;
+    background: white;
+    text-align: center;
+}
+.roomLists__container{
+    height: 555px;
+    width: 100%;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    gap: 5px;
 }
