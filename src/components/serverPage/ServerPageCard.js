@@ -29,7 +29,7 @@ const ServerPageCard = ({ category, img, id, like }) => {
     <Link
       className='grid__items'
       style={{ textDecoration: 'none' }}
-      to={`/game/${id}`}
+      to={`/${id}`}
     >
       <div
         className='game__list__card'

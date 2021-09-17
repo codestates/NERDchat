@@ -6,14 +6,16 @@ import { Context } from '../../context/ContextProvider';
 
 const Modal = ({ children }) => {
   const modalRef = useRef();
-  const { isLogin, loginModalOpen, loginmodalHandler } = useContext(Context);
+  const { loginModalOpen, loginmodalHandler, createRoomOpen, createRoomModalHandler } = useContext(Context);
   const backgroundCloseHandler = (e) => {
     if (modalRef.current === e.target) {
-      loginmodalHandler();
+      if (loginModalOpen) loginmodalHandler();
+      else if (createRoomOpen) createRoomModalHandler();
     }
   };
   const closeButtonHandler = (event) => {
-    loginmodalHandler();
+    if (loginModalOpen) loginmodalHandler();
+    else if (createRoomOpen) createRoomModalHandler();
   };
   return (
     <div className='modal__background' ref={modalRef} onClick={backgroundCloseHandler}>
