@@ -1,6 +1,5 @@
 const { Users } = require('../../models');
 const axios = require('axios');
-const { generateAccess, generateRefresh } = require('../../middlewares/token');
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -38,21 +37,24 @@ module.exports = async (req, res) => {
             created_at: new Date(),
             updated_at: new Date()
           };
-          await Users.create({
-            avatar: userData.picture,
-            userId: userData.sub,
-            nickname: userData.sub,
-            email: userData.email,
-            valid: false,
-            oauth: 'Google',
-            status: null,
-            currentRoom: null,
-            created_at: new Date(),
-            updated_at: new Date()
-          });
+          await Users.create({ payload });
+          res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
+            .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
+            .status(200).json({
+              data: {
+                accessToken,
+                id,
+                avatar: payload.avatar,
+                userId: payload.userId,
+                nickname: payload.nickname,
+                email: payload.email,
+                oauth: payload.oauth,
+                status: payload.status
+              }
+            });
         }
       });
   } catch (err) {
-
+    console.log(err);
   }
 };
