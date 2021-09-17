@@ -19,7 +19,6 @@ module.exports = async (req, res) => {
       ]
     }
   });
-  console.log(isFriend);
   if (isFriend) res.status(400).json({ message: 'exist' });
   else {
     const payload = {

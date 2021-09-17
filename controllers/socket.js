@@ -1,19 +1,47 @@
+const { Users, GameChatRooms, Messages } = require('../models');
+
 module.exports = (socket) => {
-  socket.on('joinRoom', async (uuid, userData, msgData) => {
-    const { id, userId, avatar, nickname } = userData;
-    socket.join(uuid);
-    // search User and Update User ` currentRoom ` Column
-    socket.to(uuid).emit('welcomeRoom', userData, msgData);
-  });
-  socket.on('voiceChat', (uuid, userData, peerId) => {
-    socket.broadcast.to(uuid).emit('userConnect', peerId);
-    socket.on('disconnect', () => {
+  const ns = socket.nsp;
+  ns.on('connection', (nsSocket) => {
+    nsSocket.on('joinRoom', async (roomUid, voiceChatUid, userData, msgData) => {
       // search User and Update User ` currentRoom ` Column
-      socket.broadcast.to(uuid).emit('userDisconnect', peerId);
+      try {
+        const { id, userId, avatar, nickname } = userData;
+        await Users.update({
+          currentRoom: roomUid
+        }, {
+          where: { id, userId }
+        });
+        nsSocket.join([roomUid, voiceChatUid]);
+        nsSocket.to(roomUid).emit('welcomeRoom', userData, msgData);
+      } catch (err) {
+        console.log(err);
+        return null;
+      }
     });
-  });
-  socket.on('chatMessage', (uuid, userData, msgData) => {
-    // add Message Data => ` Message ` Table
-    socket.to(uuid).emit('chatMessage', userData, msgData);
+
+    nsSocket.on('roomMessage', async (roomUid, roomId, userData, msgData) => {
+      try {
+        const { id, userId, avatar, nickname } = userData;
+        await Messages.create({
+          userId: id,
+          roomId,
+          message: msgData,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        });
+        nsSocket.to(roomUid).emit('roomMessage', userData, msgData);
+      } catch (err) {
+        console.log(err);
+        return null;
+      }
+    });
+    nsSocket.on('voiceChat', (voiceChatUid, userData, peerId) => {
+      const { id, userId } = userData;
+      nsSocket.broadcat.to(voiceChatUid).emit('userConnect', peerId);
+      nsSocket.on('disconnect', () => {
+        nsSocket.broadcast.to(voiceChatUid).emit('userDisconnect', peerId);
+      });
+    });
   });
 };
