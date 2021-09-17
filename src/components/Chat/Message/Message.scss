@@ -1,0 +1,63 @@
+.messageBox {
+  font-family: "Poppins", sans-serif;
+  display: inline-block;
+  max-width: 80%;
+  background-color: transparent !important;
+}
+
+.messageText {
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+  letter-spacing: 0;
+  float: left;
+  font-size: 1.1em;
+  word-wrap: break-word;
+  margin: 5px 0;
+  padding: 2px;
+  border-bottom: 1px solid rgb(184, 126, 255);
+}
+
+.messageText img {
+  vertical-align: middle;
+}
+
+.messageContainer {
+  display: flex;
+  color: transparent;
+  justify-content: flex-end;
+  padding: 0 3%;
+  margin-top: 3px;
+}
+
+.sentText {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.434);
+  letter-spacing: 0.3px;
+}
+
+.pl-10 {
+  padding: 0 5px 0 0;
+}
+
+.pr-10 {
+  padding: 0 0 0 5px;
+}
+
+.justifyStart {
+  justify-content: flex-start;
+}
+
+.justifyEnd {
+  justify-content: flex-end;
+}
+
+.colorWhite {
+  color: white;
+}
+
+.colorDark {
+  color: #fff;
+}

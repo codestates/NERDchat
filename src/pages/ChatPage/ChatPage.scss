@@ -4,11 +4,8 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  border: 1px solid white;
 
   .chatpage-nav {
-    border: 1px solid aqua;
-    background-color: #fff;
     width: 100%;
     height: 150px;
   }
@@ -16,30 +13,48 @@
   .chatpage-main {
     display: flex;
     flex-direction: row;
-    border: 1px solid red;
     height: 100%;
+    padding: 10px 10rem 40px;
 
+    .chatpage-main-container {
+      display: flex;
+      flex-direction: column;
+      // background-color: #fff;
+      width: 70%;
+    }
+
+    .chatpage-main-header {
+      flex: 0.1;
+      // border: 1px solid blueviolet;
+      margin-bottom: 10px;
+      box-shadow: -2px 2px 15px black;
+    }
     .chatpage-main-content {
       display: flex;
       flex-direction: row;
       flex: 1;
     }
     .chatpage-chat {
-      border: 1px solid blueviolet;
-      background-color: #fff;
+      // border: 1px solid blueviolet;
+      // background-color: #fff;
       flex: 1;
+      height: 100%;
+      margin-right: 10px;
+      box-shadow: -3px 3px 15px black;
     }
 
     .chatpage-vioce {
-      border: 1px solid blueviolet;
-      background-color: #fff;
+      // border: 1px solid blueviolet;
+      // background-color: #fff;
       flex: 1;
+      height: 100%;
+      box-shadow: 0 3px 15px black;
     }
 
     .chatpage-sidebar {
-      border: 1px solid blueviolet;
-      background-color: #fff;
-      flex: 0.3;
+      flex: 1;
+      margin-left: 10px;
+      box-shadow: 3px 3px 15px black;
     }
   }
 }

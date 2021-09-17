@@ -1,9 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
+import FriendList from '../../components/SideTap/FriendList/FriendList';
+import Messenger from '../../components/SideTap/Messenger/Messenger';
+import OnlineUser from '../../components/SideTap/OnlineUser/OnlineUser';
 
 import './SideBar.scss';
 
 const SideBar = () => {
-  return <div>ㅅㅏ이드 바..</div>;
+  const [toggleState, setToggleState] = useState(1);
+
+  const toggleTab = (index) => {
+    setToggleState(index);
+  };
+  return (
+    <div className='sidebar-container'>
+      <div className='bloc-tabs'>
+        <button
+          className={toggleState === 1 ? 'tabs active-tabs' : 'tabs'}
+          onClick={() => toggleTab(1)}
+        >
+          FRIEND
+        </button>
+        <button
+          className={toggleState === 2 ? 'tabs active-tabs' : 'tabs'}
+          onClick={() => toggleTab(2)}
+        >
+          ONLINE
+        </button>
+        <button
+          className={toggleState === 3 ? 'tabs active-tabs' : 'tabs'}
+          onClick={() => toggleTab(3)}
+        >
+          MESSAGE
+        </button>
+      </div>
+
+      <div className='content-tabs'>
+        <div
+          className={toggleState === 1 ? 'content  active-content' : 'content'}
+        >
+          <FriendList />
+        </div>
+
+        <div
+          className={toggleState === 2 ? 'content  active-content' : 'content'}
+        >
+          <OnlineUser />
+        </div>
+
+        <div
+          className={toggleState === 3 ? 'content  active-content' : 'content'}
+        >
+          <Messenger />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default SideBar;
