@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
         nickname,
         password: newPassword,
         valid: false, // valid가 뭐하는 거더라?
-        oauth: null,
+        oauth: 'none',
         satatus: null,
         currentRoom: null,
         created_at: new Date(),

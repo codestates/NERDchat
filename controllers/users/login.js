@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
   const { id, password } = req.headers;
   console.log(id);
   const userData = await Users.findOne({
-    where: { userId: id }
+    where: { userId: id, oauth: 'none' }
   });
   if (!userData) res.status(404).json({ isLogin: false, message: 'user not found' });
   else if (!comparePassword(password, userData.password)) res.status(400).json({ isLogin: false });
