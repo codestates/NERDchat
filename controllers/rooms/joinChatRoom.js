@@ -11,8 +11,8 @@ module.exports = async (req, res) => {
   }
   try {
     const chatRoomData = await GameChatRooms.findOne({ where: { uuid } });
-    if (!chatRoomData || !io.sockets.adapter.rooms[uuid]) res.status(404).json({ message: 'room not found' });
-    if (io.sockets.adapter.rooms[uuid].length <= chatRoomData.max) res.status(403).json({ message: 'full' });
+    if (!chatRoomData || !io.sockets.adapter.rooms.get(uuid)) res.status(404).json({ message: 'room not found' });
+    if (io.sockets.adapter.rooms.get(uuid).length <= chatRoomData.max) res.status(403).json({ message: 'full' });
     else {
       await Users.update({ currentRoom: uuid }, { where: { id: userData.id } });
       res.status(200).json({ data: { userId: userData.id, roomId: chatRoomData.id, createdAt: chatRoomData.createdAt } });

@@ -37,6 +37,6 @@ app.get('/header', (req, res) => {
 
 app.use('/', routes);
 
-io.on('connection', controller.socket);
+io.of(/^\/\d+$/).on('connection', controller.socket);
 
 app.listen(PORT, () => console.log(`Server is Running ${PORT}`));
