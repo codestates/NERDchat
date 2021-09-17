@@ -1,0 +1,27 @@
+.room__setting__container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2em;
+
+    .room__title__container{
+        display: flex;
+        flex-direction: column;
+        // gap: 0.5em;  
+        label{
+            margin-top: 1em;
+            text-align: left;
+        }
+    }
+    .max__container{
+        
+    }
+    .create__container{
+        display: flex;
+        justify-content: center;
+        button{
+            padding: 0.5em 1em;
+            width: 100px;
+        }
+    }
+}

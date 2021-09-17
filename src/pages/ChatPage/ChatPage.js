@@ -6,6 +6,7 @@ import Chat from '../../components/Chat/Chat';
 import './ChatPage.scss';
 
 const ChatPage = () => {
+  console.log('asdfasdf');
   return (
     <div className='chatpage-container'>
       <div className='chatpage-nav'>

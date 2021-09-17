@@ -1,15 +1,30 @@
-@mixin glitchCopy { 
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
+$dark: rgb(23, 23, 23);
+$neonNain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+
 .server__room__header__container{
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
-
+    position: relative;
 }
 
+.back__icons{
+    position: absolute;
+    left: 0;
+    cursor: pointer;
+    display: flex;
+    color: white;
+    &:hover{
+        color: $neonSer;
+    }
+}
+
+.create__room{
+    border: none;
+    background: $neonSer;
+    cursor: pointer;
+    padding: 0.5em 1em;
+    color: white;
+    border-radius: 0.3em;
+}

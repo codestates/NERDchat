@@ -1,0 +1,36 @@
+$dark: rgb(23, 23, 23);
+$neonNain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+.server__search__container{
+    display: flex;
+    // align-items: center;
+    justify-content:flex-end;
+    .search__container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        input{
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid white;
+            color: white;
+        }
+        input:focus{
+            outline: none;
+        }
+    }
+
+    button{
+        cursor: pointer;
+        display: inline-flex;
+        background: transparent;
+        border: none;
+    }
+    .server__search__icon{
+        color: $neonSer; 
+        width: 20px;   
+        height: 20px;
+        // background: white;
+    }
+}

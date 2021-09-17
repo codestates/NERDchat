@@ -2,6 +2,14 @@ $dark: rgb(23, 23, 23);
 $neonNain: rgb(184, 126, 255);
 $neonSer: rgb(163, 16, 255);
 $neonPink: rgba(255, 0, 242, 0.618);
+@mixin glitchCopy { 
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 .room__card__container{
     cursor: pointer;
     width: 100%;
@@ -18,54 +26,37 @@ $neonPink: rgba(255, 0, 242, 0.618);
     // backdrop-filter: blur(5px);
     transition: box-shadow 1.2s;
     color: white;
-
-}
-.room__card__container:hover{
-    // background: rgba(153, 0, 255, 0.6);
-    box-shadow: 0px 120px 0 0 $neonSer inset, 0 -120px 0 0 $neonSer inset;
-    // opacity: 0.7;
-    // border: 1px solid $neonSer;
-    // box-shadow:0 0 10px $neonSer;
-    // border-bottom: 1px solid $neonSer;
-}
-@mixin glitchCopy { 
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-.room__title{
-    // position: absolute;
-    // left: 2em;
-    width: 100%;
-    flex: 1 1 70%;
-    // border: 1px solid pink;
-    text-align: center;
-
-    span{
-        font-size: 17px;
-        animation: glitch-skew 5s infinite ease-in-out;
+    &:hover{
+        box-shadow: 0px 120px 0 0 $neonSer inset, 0 -120px 0 0 $neonSer inset;
     }
 
-    span:hover::before{
-        z-index: 999;
+    &:hover .room__title{
+        animation: glitch-skew 1s infinite linear alternate-reverse;
+    }
+    &:hover .room__title::before{
         @include glitchCopy;
-        // left: 5px;
-        text-shadow: -2px 0 #ff00c1;
+        left: -2px;
+        text-shadow: 1px 0 #6d01fb, 2px 0 #eb06d8;
         clip: rect(0, 0, 0, 0);
         animation: glitch-anim 5s infinite linear alternate-reverse;
     }
-    span:hover::after {
+    &:hover .room__title::after {
         @include glitchCopy;
-        left: -2px;
-        text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+        left: 2px;
+        text-shadow: 1px 0 #63c3ea, 2px 0 #2b30d1;
         clip: rect(0, 0, 0, 0);
         animation: glitch-anim2 1s infinite linear alternate-reverse;
     }
-    
+
 }
+
+
+.room__title__container{
+    width: 100%;
+    flex: 1 1 70%;
+    text-align: center;
+}
+
 .room__capacity{
     // position: absolute;
     // right: 2em;
@@ -81,25 +72,118 @@ $neonPink: rgba(255, 0, 242, 0.618);
 
 
 @keyframes glitch-anim {
-    $steps: 20;
-    @for $i from 0 through $steps {
-      #{percentage($i*(1/$steps))} {
-          // 화면의 일부만 보여주는 효과 clip, (top, right, bottom, left)
-        clip: rect(random(70)+px, 700px, random(100)+px, 0);
-              transform: skew((random(100) / 100) + deg);
+    0% {
+        clip: rect(25px, 400px, 4px, 0);
       }
-    }
-  }
+      5.88235% {
+        clip: rect(22px, 400px, 12px, 0);
+      }
+      11.76471% {
+        clip: rect(44px, 400px, 20px, 0);
+      }
+      17.64706% {
+        clip: rect(7px, 400px, 29px, 0);
+      }
+      23.52941% {
+        clip: rect(13px, 400px, 18px, 0);
+      }
+      29.41176% {
+        clip: rect(21px, 400px, 31px, 0);
+      }
+      35.29412% {
+        clip: rect(17px, 400px, 20px, 0);
+      }
+      41.17647% {
+        clip: rect(41px, 400px, 7px, 0);
+      }
+      47.05882% {
+        clip: rect(43px, 400px, 2px, 0);
+      }
+      52.94118% {
+        clip: rect(44px, 400px, 12px, 0);
+      }
+      58.82353% {
+        clip: rect(44px, 400px, 22px, 0);
+      }
+      64.70588% {
+        clip: rect(10px, 400px, 17px, 0);
+      }
+      70.58824% {
+        clip: rect(31px, 400px, 13px, 0);
+      }
+      76.47059% {
+        clip: rect(40px, 400px, 22px, 0);
+      }
+      82.35294% {
+        clip: rect(16px, 400px, 30px, 0);
+      }
+      88.23529% {
+        clip: rect(33px, 400px, 34px, 0);
+      }
+      94.11765% {
+        clip: rect(9px, 400px, 40px, 0);
+      }
+      to {
+        clip: rect(45px, 400px, 21px, 0);
+      }
+}
   
   // Same deal, just duplicated for ultra randomness.
   @keyframes glitch-anim2 {
-    $steps: 20;
-    @for $i from 0 through $steps {
-      #{percentage($i*(1/$steps))} {
-        clip: rect(random(70)+px, 9999px, random(100)+px, 0);
-              transform: skew((random(100) / 100) + deg);
+    0% {
+        clip: rect(8px, 400px, 50px, 0);
       }
-    }
+      5.88235% {
+        clip: rect(40px, 400px, 41px, 0);
+      }
+      11.76471% {
+        clip: rect(33px, 400px, 16px, 0);
+      }
+      17.64706% {
+        clip: rect(41px, 400px, 9px, 0);
+      }
+      23.52941% {
+        clip: rect(14px, 400px, 30px, 0);
+      }
+      29.41176% {
+        clip: rect(22px, 400px, 33px, 0);
+      }
+      35.29412% {
+        clip: rect(37px, 400px, 48px, 0);
+      }
+      41.17647% {
+        clip: rect(25px, 400px, 37px, 0);
+      }
+      47.05882% {
+        clip: rect(1px, 400px, 18px, 0);
+      }
+      52.94118% {
+        clip: rect(19px, 400px, 27px, 0);
+      }
+      58.82353% {
+        clip: rect(33px, 400px, 29px, 0);
+      }
+      64.70588% {
+        clip: rect(2px, 400px, 38px, 0);
+      }
+      70.58824% {
+        clip: rect(18px, 400px, 41px, 0);
+      }
+      76.47059% {
+        clip: rect(19px, 400px, 45px, 0);
+      }
+      82.35294% {
+        clip: rect(44px, 400px, 32px, 0);
+      }
+      88.23529% {
+        clip: rect(13px, 400px, 43px, 0);
+      }
+      94.11765% {
+        clip: rect(4px, 400px, 6px, 0);
+      }
+      to {
+        clip: rect(30px, 400px, 25px, 0);
+      }
   }
   
   // only skews. Use for main text.

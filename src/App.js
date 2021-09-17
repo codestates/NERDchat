@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import ChatPage from './pages/ChatPage/ChatPage';
 import ServerPage from './pages/serverpage/ServerPage';
 import Login from './components/login/Login';
-import ServerRoom from './pages/ServerRoomPage/ServerRoom';
+import ServerRoomPage from './pages/ServerRoomPage/ServerRoomPage';
 
 function App () {
   return (
@@ -16,10 +16,10 @@ function App () {
         <Route path='/servers'>
           <ServerPage />
         </Route>
-        <Route path='/game/:gameId'>
-          <ServerRoom />
+        <Route exact path='/:gameId'>
+          <ServerRoomPage />
         </Route>
-        <Route path='/chat'>
+        <Route path='/:gameId/:path'>
           <ChatPage />
         </Route>
       </Switch>

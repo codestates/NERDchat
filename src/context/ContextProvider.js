@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useReducer } from 'react';
+import { Cookies } from 'react-cookie';
 
 const Context = React.createContext({});
 
@@ -24,16 +25,7 @@ const ContextProvider = ({ children }) => {
   // loginmodal state
   const [isLogin, setIsLogin] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
-  // const [userInfo, setUserInfo] = useState({
-  //   accessToken: '',
-  //   id: '',
-  //   avatar: '',
-  //   userId: '',
-  //   nickname: '',
-  //   email: '',
-  //   oauth: '',  //OAuth종류
-  //   status: ''  //상태메시지
-  // });
+
   const isLoginHandler = (b) => {
     // logout은 false값 받아오기
     setIsLogin(b);
@@ -46,7 +38,14 @@ const ContextProvider = ({ children }) => {
     // console.log('after dispatch',userInfo)
     // setUserInfo(info)
   };
-  console.log('outSide of the fc', userInfo, isLogin);
+  // const url = new URL(window.location);
+  // const authorizationCode = document
+  // createRoom handler
+  const [createRoomOpen, setCreateRoomOpen] = useState(false);
+  const createRoomModalHandler = () => {
+    setCreateRoomOpen((prev) => !prev);
+  };
+
   useEffect(() => {
     if (userInfo.accessToken) setIsLogin(true);
   }, [userInfo]);
@@ -62,7 +61,9 @@ const ContextProvider = ({ children }) => {
 			  loginModalOpen,
 			  loginmodalHandler,
         getUserInfo,
-        isLoginHandler
+        isLoginHandler,
+        createRoomOpen,
+        createRoomModalHandler
       }}
     >
       {children}
