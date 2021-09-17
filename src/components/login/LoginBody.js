@@ -3,7 +3,7 @@ import axios from 'axios';
 import { FcGoogle } from 'react-icons/fc';
 import { AiFillFacebook } from 'react-icons/ai';
 import kakao from './kakao.png';
-import {Context} from '../../context/ContextProvider'
+import { Context } from '../../context/ContextProvider';
 import './LoginBody.scss';
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
@@ -11,7 +11,7 @@ const FACEBOOK_ID = process.env.REACT_APP_FACEBOOK_ID;
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 const Login = () => {
-  const {getUserInfo, isLoginHandler, loginmodalHandler} = useContext(Context);
+  const { getUserInfo, isLoginHandler, loginmodalHandler } = useContext(Context);
   const idInputRef = useRef();
   const pwInputRef = useRef();
   const [err, setErr] = useState();
@@ -32,11 +32,11 @@ const Login = () => {
     // const token = res.headers.authorization
     // localStorage.setItem('ACT', token.split(' ')[1]);
     // console.log(token.split(' ')[1]);
-    // 받은 유저 정보 저장하기. 
-    getUserInfo(res.data.data)
+    // 받은 유저 정보 저장하기.
+    getUserInfo(res.data.data);
     // login 상태 저장
     isLoginHandler(true);
-    loginmodalHandler()
+    loginmodalHandler();
   };
 
   // 구글 로그인

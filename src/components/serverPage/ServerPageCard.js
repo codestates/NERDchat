@@ -8,21 +8,20 @@ import './ServerPageCard.scss';
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const ServerPageCard = ({ category, img, id, like }) => {
-  
   const [clicked, setClicked] = useState(false);
 
   const addBookmarkHandler = async (e) => {
     e.preventDefault();
     // test용
-    const accessToken = localStorage.getItem('ACT')
+    const accessToken = localStorage.getItem('ACT');
     // test용 끝
-    const header = { authorization: `Bearer ${accessToken}` }
-    const res = await axios.get(`${ENDPOINT}/favorites/request/${id}`, {headers: header, withCredentials: true });
+    const header = { authorization: `Bearer ${accessToken}` };
+    const res = await axios.get(`${ENDPOINT}/favorites/request/${id}`, { headers: header, withCredentials: true });
     console.log(res.data.data);
     if (res.data.data) setClicked((prev) => !prev);
   };
   useEffect(() => {
-    console.log('test', like)
+    console.log('test', like);
     if (like) setClicked(true);
     else setClicked(false);
   }, []);
@@ -30,7 +29,7 @@ const ServerPageCard = ({ category, img, id, like }) => {
     <Link
       className='grid__items'
       style={{ textDecoration: 'none' }}
-      to={`/game/${id}`}
+      to={`/${id}`}
     >
       <div
         className='game__list__card'

@@ -1,3 +1,3 @@
-import React from "react";
+import React from 'react';
 
-import "./MyPage.scss";
+import './MyPage.scss';

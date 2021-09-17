@@ -1,18 +1,17 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import './ServerRoomCard.scss';
-import {BsFillMicFill} from 'react-icons/bs'
+import { BsFillMicFill } from 'react-icons/bs';
 
-const ServerRoomCard = ({id, roomTitle, uuid, max, loading}) => {
+const ServerRoomCard = ({ id, roomTitle, uuid, max, loading }) => {
+  useEffect(() => {
 
-    useEffect(() => {
+  }, []);
+  return (
+    <div className='room__card__container'>
+      <div className='room__title__container'><h4 className='room__title' data-text={roomTitle}>{roomTitle}</h4></div>
+      <div className='room__capacity'>현재인원/{max} <BsFillMicFill /></div>
+    </div>
+  );
+};
 
-    }, [])
-    return (
-        <div className="room__card__container">
-            <div className="room__title" text-attr={roomTitle}><span>{roomTitle}</span></div>
-            <div className="room__capacity">현재인원/{max} <BsFillMicFill/></div>
-        </div>
-    )
-}
-
-export default ServerRoomCard
+export default ServerRoomCard;

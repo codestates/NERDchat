@@ -15,14 +15,14 @@ const useLists = (pageNum, method, api, data) => {
   // 좋아하는 리스트를 받아오고...
   // 그 리스트와 data의 id가 일치한다면, favorites: 1로 체크, if not 0;
   const getLists = async () => {
-    const header = {'Content-Type': 'application/json'};
+    const header = { 'Content-Type': 'application/json' };
     const res = await axios({
       url: `${api}${pageNum}`,
       method: `${method}`,
       baseURL: `${ENDPOINT}`,
-      headers:header,
+      headers: header,
       withCredentials: true,
-      data: data,
+      data: data
     });
     console.log(res.data);
     setLists((prev) => [...prev, ...res.data.data]);
