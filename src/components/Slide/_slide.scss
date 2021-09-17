@@ -146,12 +146,12 @@
   }
 
   .glitch::before {
-    animation: glitch-2 0.8s 500 linear alternate-reverse;
+    animation: glitch-2 1.5s 500 linear alternate-reverse;
     left: -2px;
     text-shadow: 1px 0 #6d01fb, 2px 0 #eb06d8;
   }
   .glitch::after {
-    animation: glitch-1 1s 500 linear alternate-reverse;
+    animation: glitch-1 1.5s 500 linear alternate-reverse;
     left: 2px;
     text-shadow: 1px 0 #63c3ea, 2px 0 #2b30d1;
   }

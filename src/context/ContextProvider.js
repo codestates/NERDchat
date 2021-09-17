@@ -9,18 +9,18 @@ const userInfoDefault = {
   userId: '',
   nickname: '',
   email: '',
-  oauth: '',  //OAuth종류
-  status: ''  //상태메시지
-}
+  oauth: '', // OAuth종류
+  status: '' // 상태메시지
+};
 
 const userReducer = (state, action) => {
-  if(action.type ==="GET"){
+  if (action.type === 'GET') {
     return action.item;
   }
-}
+};
 
 const ContextProvider = ({ children }) => {
-  const [userInfo, dispatchUserInfo] = useReducer(userReducer, userInfoDefault)
+  const [userInfo, dispatchUserInfo] = useReducer(userReducer, userInfoDefault);
   // loginmodal state
   const [isLogin, setIsLogin] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
@@ -35,21 +35,21 @@ const ContextProvider = ({ children }) => {
   //   status: ''  //상태메시지
   // });
   const isLoginHandler = (b) => {
-    //logout은 false값 받아오기
+    // logout은 false값 받아오기
     setIsLogin(b);
-  }
+  };
   const loginmodalHandler = () => {
     setLoginModalOpen((prev) => !prev);
   };
   const getUserInfo = (info) => {
-    dispatchUserInfo({type:"GET", item:info})
+    dispatchUserInfo({ type: 'GET', item: info });
     // console.log('after dispatch',userInfo)
     // setUserInfo(info)
-  }
+  };
   console.log('outSide of the fc', userInfo, isLogin);
   useEffect(() => {
-    if(userInfo.accessToken) setIsLogin(true)
-  }, [userInfo])
+    if (userInfo.accessToken) setIsLogin(true);
+  }, [userInfo]);
   // bookmark
   // friend lists
   // server game lists
@@ -62,7 +62,7 @@ const ContextProvider = ({ children }) => {
 			  loginModalOpen,
 			  loginmodalHandler,
         getUserInfo,
-        isLoginHandler,
+        isLoginHandler
       }}
     >
       {children}
