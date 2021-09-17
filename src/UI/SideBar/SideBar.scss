@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap");
+@import "_color";
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto 0;
+  word-break: break-all;
+  border: 1px solid rgba(0, 0, 0, 0.274);
+}
+
+.bloc-tabs {
+  display: flex;
+}
+.tabs {
+  padding: 15px;
+  text-align: center;
+  width: 50%;
+  cursor: pointer;
+  background-color: $dark;
+  color: rgb(172, 172, 172);
+  //   border-bottom: 1px solid rgba(159, 159, 159, 0.274);
+  box-sizing: content-box;
+  position: relative;
+  outline: none;
+  transition: all 0.4s ease-in-out;
+}
+// .tabs:not(:last-child) {
+//   border-right: 1px solid rgba(159, 159, 159, 0.274);
+// }
+
+.active-tabs {
+  //   border-bottom: 1px solid transparent;
+  color: $neonNain;
+  text-shadow: 0 0 3px rgb(163, 16, 255);
+}
+
+.active-tabs::before {
+  content: "";
+  display: block;
+  position: absolute;
+  //   color: $neonNain;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% + 2px);
+  height: 5px;
+  //   background: $neonNain;
+}
+
+button {
+  border: none;
+}
+.content-tabs {
+  flex-grow: 1;
+}
+.content {
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.active-content {
+  display: block;
+}
