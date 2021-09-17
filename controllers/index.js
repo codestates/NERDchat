@@ -6,5 +6,5 @@ module.exports = {
   favorites: require('./favorites/index'),
   friends: require('./friends/index'),
   admin: require('./admin/index'),
-  oauth: require('./oauth.index')
+  oauth: require('./oauth/index')
 };

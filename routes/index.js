@@ -36,7 +36,7 @@ router.get('/favorites/request/:gameId', favorites.favRequest);
     Friends Router
 */
 router.get('/friends/lists', friends.friendsList);
-router.get('/friends/send/:nickname', friends.friendsRequest)
+router.get('/friends/send/:nickname', friends.friendsRequest);
 /*
     Admin Router
 */
