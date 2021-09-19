@@ -1,7 +1,6 @@
 import './ServerRoomPage.scss';
 import ServerRoom from '../../components/ServerRoom/ServerRoom';
 const ServerRoomPage = () => {
-
   return (
 
     <div className='server__room__container'>

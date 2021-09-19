@@ -5,7 +5,7 @@ import ServerRoomCard from '../ServerRoomCard/ServerRoomCard';
 import useLists from '../../../hooks/useLists';
 
 const ServerRoomBody = ({ searchedLists, searched }) => {
-  const {gameId} = useParams();
+  const { gameId } = useParams();
   const [pageNum, setPageNum] = useState(1);
   const { lists, hasMore, loading } = useLists(pageNum, 'post', '/rooms/list/', { gameId });
   const observer = useRef();

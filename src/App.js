@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import ChatPage from './pages/ChatPage/ChatPage';
 import ServerPage from './pages/serverpage/ServerPage';
 import ServerRoomPage from './pages/ServerRoomPage/ServerRoomPage';
-import Mypage from './pages/MyPage/MyPage'
+import Mypage from './pages/MyPage/MyPage';
 
 function App () {
   return (
