@@ -1,17 +1,17 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import loading from '../../images/dummy/loading.jpeg';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import loading from "../../images/dummy/loading.jpeg";
 
-import './_slide.scss';
+import "./_slide.scss";
 
 const Slide = () => {
   const [gameList, setGameList] = useState({ items: [] });
-  const [gameName1, setGameName1] = useState('');
-  const [gameName2, setGameName2] = useState('');
-  const [gameName3, setGameName3] = useState('');
-  const [gameName4, setGameName4] = useState('');
-  const [gameName5, setGameName5] = useState('');
+  const [gameName1, setGameName1] = useState("");
+  const [gameName2, setGameName2] = useState("");
+  const [gameName3, setGameName3] = useState("");
+  const [gameName4, setGameName4] = useState("");
+  const [gameName5, setGameName5] = useState("");
   const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
   useEffect(() => {
@@ -27,19 +27,19 @@ const Slide = () => {
   }, []);
   console.log(loading);
   return (
-    <div className='slider-container'>
-      <section id='slider'>
-        <input type='radio' name='slider' id='s1' />
-        <input type='radio' name='slider' id='s2' />
-        <input type='radio' name='slider' id='s3' />
-        <input type='radio' name='slider' id='s4' />
-        <input type='radio' name='slider' id='s5' />
-        <label for='s1' id='slide1'>
-          <div className='col-md-4 col-sm-6'>
-            <div className='card'>
+    <div className="slider-container">
+      <section id="slider">
+        <input type="radio" name="slider" id="s1" />
+        <input type="radio" name="slider" id="s2" />
+        <input type="radio" name="slider" id="s3" />
+        <input type="radio" name="slider" id="s4" />
+        <input type="radio" name="slider" id="s5" />
+        <label for="s1" id="slide1">
+          <div className="col-md-4 col-sm-6">
+            <div className="card">
               <img src={gameList[0]?.image} />
-              <div className='card-text'>
-                <div className='glitch' data-text={gameName1}>
+              <div className="card-text">
+                <div className="glitch" data-text={gameName1}>
                   {gameName1}
                 </div>
                 <h3>Shooting game</h3>
@@ -48,12 +48,12 @@ const Slide = () => {
             </div>
           </div>
         </label>
-        <label for='s2' id='slide2'>
-          <div className='col-md-4 col-sm-6'>
-            <div className='card'>
+        <label for="s2" id="slide2">
+          <div className="col-md-4 col-sm-6">
+            <div className="card">
               <img src={gameList[1]?.image} />
-              <div className='card-text'>
-                <div className='glitch' data-text={gameName2}>
+              <div className="card-text">
+                <div className="glitch" data-text={gameName2}>
                   {gameName2}
                 </div>
                 <h3>Fighting game</h3>
@@ -62,12 +62,12 @@ const Slide = () => {
             </div>
           </div>
         </label>
-        <label for='s3' id='slide3'>
-          <div className='col-md-4 col-sm-6'>
-            <div className='card'>
+        <label for="s3" id="slide3">
+          <div className="col-md-4 col-sm-6">
+            <div className="card">
               <img src={gameList[2]?.image} />
-              <div className='card-text'>
-                <div className='glitch' data-text={gameName3}>
+              <div className="card-text">
+                <div className="glitch" data-text={gameName3}>
                   {gameName3}
                 </div>
                 <h3>Shooting game</h3>
@@ -76,12 +76,12 @@ const Slide = () => {
             </div>
           </div>
         </label>
-        <label for='s4' id='slide4'>
-          <div className='col-md-4 col-sm-6'>
-            <div className='card'>
+        <label for="s4" id="slide4">
+          <div className="col-md-4 col-sm-6">
+            <div className="card">
               <img src={gameList[3]?.image} />
-              <div className='card-text'>
-                <div className='glitch' data-text={gameName4}>
+              <div className="card-text">
+                <div className="glitch" data-text={gameName4}>
                   {gameName4}
                 </div>
                 <h3>Role-playing game</h3>
@@ -90,12 +90,12 @@ const Slide = () => {
             </div>
           </div>
         </label>
-        <label for='s5' id='slide5'>
-          <div className='col-md-4 col-sm-6'>
-            <div className='card'>
+        <label for="s5" id="slide5">
+          <div className="col-md-4 col-sm-6">
+            <div className="card">
               <img src={gameList[2]?.image} />
-              <div className='card-text'>
-                <div className='glitch' data-text={gameName5}>
+              <div className="card-text">
+                <div className="glitch" data-text={gameName5}>
                   {gameName5}
                 </div>
                 <h3>Survival game</h3>
