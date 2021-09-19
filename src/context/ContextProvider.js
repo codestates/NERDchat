@@ -21,6 +21,7 @@ const userReducer = (state, action) => {
 };
 
 const ContextProvider = ({ children }) => {
+  const cookies = new Cookies();
   const [userInfo, dispatchUserInfo] = useReducer(userReducer, userInfoDefault);
   // loginmodal state
   const [isLogin, setIsLogin] = useState(false);
@@ -34,13 +35,15 @@ const ContextProvider = ({ children }) => {
     setLoginModalOpen((prev) => !prev);
   };
   const getUserInfo = (info) => {
+    let cookieUserInfo = info;
+    const { id, avatar, userId, nickname, email, oauth, status } = cookieUserInfo;
+    cookieUserInfo = { id, avatar, userId, nickname, email, oauth, status };
+    cookies.set('userInfo', cookieUserInfo);
     dispatchUserInfo({ type: 'GET', item: info });
     // console.log('after dispatch',userInfo)
     // setUserInfo(info)
   };
-  // const url = new URL(window.location);
-  // const authorizationCode = document
-  // createRoom handler
+
   const [createRoomOpen, setCreateRoomOpen] = useState(false);
   const createRoomModalHandler = () => {
     setCreateRoomOpen((prev) => !prev);

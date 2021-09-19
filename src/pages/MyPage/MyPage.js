@@ -45,8 +45,12 @@ function MyPage () {
                     autocomplete='off'
                     placeholder=' '
                   />
+<<<<<<< HEAD
+                  <label for='email' className='form__label'>
+=======
                   <label htmlFor='email' className='form__label'>
                     {/* { userInfo.email} */}
+>>>>>>> 9cbb7c5f39823a023362143013a0d0040dcfd816
                     Email
                   </label>
                 </div>
@@ -58,7 +62,11 @@ function MyPage () {
                     autocomplete='off'
                     placeholder=' '
                   />
+<<<<<<< HEAD
+                  <label for='password' className='form__label'>
+=======
                   <label htmlFor='password' className='form__label'>
+>>>>>>> 9cbb7c5f39823a023362143013a0d0040dcfd816
                     password
                   </label>
                 </div>
@@ -70,7 +78,11 @@ function MyPage () {
                     autocomplete='off'
                     placeholder=' '
                   />
+<<<<<<< HEAD
+                  <label for='passwordConfrim' className='form__label'>
+=======
                   <label htmlFor='passwordConfrim' className='form__label'>
+>>>>>>> 9cbb7c5f39823a023362143013a0d0040dcfd816
                     Confrim Password
                   </label>
                 </div>
