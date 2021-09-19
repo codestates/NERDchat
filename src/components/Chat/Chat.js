@@ -39,8 +39,12 @@ function Chat () {
   return (
     <div className='chat-container'>
       <Message />
-      {messages.map(message => {
-        return (<span className={message.mine ? 'mine' : 'others'}>{message.body}</span>);
+      {messages.map((message) => {
+        return (
+          <span className={message.mine ? 'mine' : 'others'}>
+            {message.body}
+          </span>
+        );
       })}
       <form onSubmit={sendHandler}>
         <input type='text' onChange={msgInputHandler} value={newMsg} />

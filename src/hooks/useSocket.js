@@ -14,12 +14,17 @@ const useSocket = (serverName, roomId, userInfo) => {
     socket.current = io(`http://localhost:8080/${serverName}`, {
       query: { serverName, roomId }
     });
-    socket.current.on('welcomeRoom', (userData, msgData) => console.log(userData, msgData));
+    socket.current.on('welcomeRoom', (userData, msgData) =>
+      console.log(userData, msgData)
+    );
     // 서버쪽에서 객체형태로 메시지를 넘겨줄때는 아래처럼 하나의 인자로 받을 수 있지만,
     // 만약 객체로 묶지 않고 여러개의 인자로 넘겨줄때는 위처럼 2개의 인자로 나누어 받아야 한다.
     socket.current.on('roomMessage', (data) => {
       // console.log(data);
-      const incomingMsg = { body: data.msgData, mine: data.userData.userId === userInfo.userId };
+      const incomingMsg = {
+        body: data.msgData,
+        mine: data.userData.userId === userInfo.userId
+      };
       console.log(incomingMsg);
       setMessages((prev) => [...prev, incomingMsg]);
     });

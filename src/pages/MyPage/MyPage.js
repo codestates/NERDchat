@@ -6,7 +6,7 @@ import './MyPage.scss';
 
 function MyPage () {
   const { userInfo } = useContext(Context);
-  console.log(userInfo.nickname, userInfo.status);
+  console.log(userInfo.nickname, userInfo.status, userInfo.email);
   return (
     <div className='mypage-container'>
       <div className='mypage-nav'>
@@ -24,8 +24,12 @@ function MyPage () {
                   />
                 </div>
                 <div className='mypage-welcom'>WELCOM,</div>
-                <div className='mypage-nickname'>HORANG</div>
+                <div className='mypage-nickname'>
+                  {/* {userInfo.nickname} */}
+                  HORANG
+                </div>
                 <div className='mypage-status'>
+                  {/* {userInfo.status}  */}
                   After the project, the game will be over.
                 </div>
               </div>
@@ -41,7 +45,12 @@ function MyPage () {
                     autocomplete='off'
                     placeholder=' '
                   />
+<<<<<<< HEAD
                   <label for='email' className='form__label'>
+=======
+                  <label htmlFor='email' className='form__label'>
+                    {/* { userInfo.email} */}
+>>>>>>> 9cbb7c5f39823a023362143013a0d0040dcfd816
                     Email
                   </label>
                 </div>
@@ -53,7 +62,11 @@ function MyPage () {
                     autocomplete='off'
                     placeholder=' '
                   />
+<<<<<<< HEAD
                   <label for='password' className='form__label'>
+=======
+                  <label htmlFor='password' className='form__label'>
+>>>>>>> 9cbb7c5f39823a023362143013a0d0040dcfd816
                     password
                   </label>
                 </div>
@@ -65,10 +78,17 @@ function MyPage () {
                     autocomplete='off'
                     placeholder=' '
                   />
+<<<<<<< HEAD
                   <label for='passwordConfrim' className='form__label'>
+=======
+                  <label htmlFor='passwordConfrim' className='form__label'>
+>>>>>>> 9cbb7c5f39823a023362143013a0d0040dcfd816
                     Confrim Password
                   </label>
                 </div>
+                <button type='submit' className='mypage-button'>
+                  Edit
+                </button>
               </div>
             </div>
           </div>
