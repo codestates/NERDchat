@@ -1,24 +1,27 @@
-import React, { useState, useEffect, useReducer } from 'react';
-import { Cookies } from 'react-cookie';
+import React, { useState, useEffect, useReducer } from "react";
+import { Cookies } from "react-cookie";
+import axios from "axios";
 
 const Context = React.createContext({});
 
 const userInfoDefault = {
-  accessToken: '',
-  id: '',
-  avatar: '',
-  userId: '',
-  nickname: '',
-  email: '',
-  oauth: '', // OAuth종류
-  status: '' // 상태메시지
+  accessToken: "",
+  id: "",
+  avatar: "",
+  userId: "",
+  nickname: "",
+  email: "",
+  oauth: "", // OAuth종류
+  status: "", // 상태메시지
 };
 
 const userReducer = (state, action) => {
-  if (action.type === 'GET') {
+  if (action.type === "GET") {
     return action.item;
   }
 };
+
+const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const ContextProvider = ({ children }) => {
   const cookies = new Cookies();
@@ -36,14 +39,22 @@ const ContextProvider = ({ children }) => {
   };
   const getUserInfo = (info) => {
     let cookieUserInfo = info;
-    const { id, avatar, userId, nickname, email, oauth, status } = cookieUserInfo;
+    const { id, avatar, userId, nickname, email, oauth, status } =
+      cookieUserInfo;
     cookieUserInfo = { id, avatar, userId, nickname, email, oauth, status };
-    cookies.set('userInfo', cookieUserInfo);
-    dispatchUserInfo({ type: 'GET', item: info });
+    cookies.set("userInfo", cookieUserInfo);
+    dispatchUserInfo({ type: "GET", item: info });
     // console.log('after dispatch',userInfo)
     // setUserInfo(info)
   };
-
+  //logout
+  const logoutHandler = async () => {
+    const res = axios.get(`${ENDPOINT}/logout`, { withCredentials: true });
+    console.log(res.isLogout);
+    if (res.isLogout) {
+      cookies.remove("userInfo");
+    }
+  };
   const [createRoomOpen, setCreateRoomOpen] = useState(false);
   const createRoomModalHandler = () => {
     setCreateRoomOpen((prev) => !prev);
@@ -67,7 +78,7 @@ const ContextProvider = ({ children }) => {
         isLoginHandler,
         createRoomOpen,
         createRoomModalHandler,
-        userInfo
+        userInfo,
       }}
     >
       {children}
