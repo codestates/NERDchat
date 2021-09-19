@@ -5,7 +5,7 @@ import ServerRoomCard from '../ServerRoomCard/ServerRoomCard';
 import useLists from '../../../hooks/useLists';
 
 const ServerRoomBody = ({ searchedLists, searched }) => {
-  const { gameId } = useParams();
+  const {gameId} = useParams();
   const [pageNum, setPageNum] = useState(1);
   const { lists, hasMore, loading } = useLists(pageNum, 'post', '/rooms/list/', { gameId });
   const observer = useRef();
@@ -27,13 +27,13 @@ const ServerRoomBody = ({ searchedLists, searched }) => {
     if (lists.length === idx + 1) {
       return (
         <div key={list.id} ref={lastElementRef}>
-          {loading ? 'loading' : <ServerRoomCard id={list.id} roomTitle={list.roomTitle} uuid={list.uuid} max={list.max} loading={loading} />}
+          {loading ? 'loading' : <ServerRoomCard gameId={gameId} id={list.id} roomTitle={list.roomTitle} uuid={list.uuid} max={list.max} loading={loading} />}
         </div>
       );
     } else {
       return (
         <div key={list.id}>
-          {loading ? 'loading' : <ServerRoomCard id={list.id} roomTitle={list.roomTitle} uuid={list.uuid} max={list.max} loading={loading} />}
+          {loading ? 'loading' : <ServerRoomCard gameId={gameId} id={list.id} roomTitle={list.roomTitle} uuid={list.uuid} max={list.max} loading={loading} />}
         </div>
       );
     }
@@ -41,7 +41,7 @@ const ServerRoomBody = ({ searchedLists, searched }) => {
   const filteredLists = searchedLists.map((list, idx) => {
     return (
       <div key={list.id}>
-        <ServerRoomCard id={list.id} roomTitle={list.roomTitle} uuid={list.uuid} max={list.max} />
+        <ServerRoomCard gameId={gameId} id={list.id} roomTitle={list.roomTitle} uuid={list.uuid} max={list.max} />
       </div>
     );
   });

@@ -1,0 +1,233 @@
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap");
+@import "_color";
+
+.mypage-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+
+  .mypage-nav {
+    width: 100%;
+    height: 150px;
+  }
+
+  .mypage-main {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    padding: 10px 10rem 40px;
+
+    .mypage-main-container {
+      display: flex;
+      flex-direction: column;
+      // background-color: #fff;
+      width: 70%;
+    }
+
+    .mypage-main-content {
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+    }
+    .mypage-chat {
+      display: flex;
+      flex: 1;
+      height: 100%;
+      margin-right: 10px;
+      box-shadow: -3px 3px 15px black;
+      padding: 100px;
+
+      .mypage-card {
+        // border: 1px solid blueviolet;
+        margin: 10px;
+        flex: 0.4;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+
+        .mypage-photo {
+          margin-top: 20px;
+          align-items: center;
+        }
+
+        .mypage-photo img {
+          width: 210px;
+          height: 210px;
+          border-radius: 50%;
+          margin: 20px;
+        }
+
+        .mypage-welcom {
+          font-family: "Monoton", cursive;
+          //   animation: flicker 4s linear infinite;
+          font-weight: 100;
+          color: $neonNain;
+          font-size: 10px;
+          margin-top: 20px;
+          color: rgb(172, 172, 172);
+        }
+
+        .mypage-nickname {
+          font-family: "Monoton", cursive;
+          animation: flicker 4s linear infinite;
+          font-weight: 100;
+          color: $neonNain;
+          font-size: 20px;
+          margin-bottom: 10px;
+        }
+
+        .mypage-status {
+          margin-top: 20px;
+          font-family: "Poppins", sans-serif;
+          font-weight: 100;
+          color: rgb(172, 172, 172);
+          box-shadow: 0px 1px 5px black;
+          text-align: justify;
+          margin: 10px 40px;
+          padding: 20px;
+          height: 20%;
+          transition: all 0.4s ease-in-out;
+        }
+
+        .mypage-status:hover {
+          transform: scale(1.05);
+        }
+      }
+
+      .mypage-info {
+        // border: 1px solid blueviolet;
+        margin: 10px;
+        flex: 0.6;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .mypage-infomation {
+          margin-bottom: 30px;
+          padding: 0 10px;
+          box-shadow: 0px 1px 5px black;
+        }
+        .mypage-infomation h2 {
+          font-family: "Monoton", cursive;
+          color: rgb(172, 172, 172);
+          font-weight: lighter;
+        }
+
+        // .mypage__form {
+        //   position: relative;
+
+        //   .mypage__input {
+        //     top: 0;
+        //     left: 0;
+        //     position: absolute;
+        //     border: 1px solid rgb(172, 172, 172);
+        //     border-radius: 10px;
+        //     font-family: "Poppins", sans-serif;
+        //     font-size: inherit;
+        //     color: rgb(172, 172, 172);
+        //     outline: none;
+        //     width: 70%;
+        //     padding: 0.5rem 1rem;
+        //     background: none;
+
+        //     &:hover {
+        //       border-color: $neonNain;
+        //     }
+        //     &:focus {
+        //       border-color: $neonSer;
+        //     }
+        //   }
+        //   .mypage__lable {
+        //     position: absolute;
+        //     left: 1rem;
+        //     top: 0.8rem;
+        //     color: white;
+        //     cursor: text;
+        //     padding: 0 4px;
+        //     transition: top 200ms ease-in, left 200ms ease-in,
+        //       font-size 200ms ease-in;
+        //     background-color: $dark;
+        //   }
+
+        //   .mypage__input:focus ~ .mypage__lable,
+        //   .mypage__input:not(:placeholder-shown).mypage__input:not(:focus)
+        //     ~ .mypage__lable {
+        //     top: -0.5rem;
+        //     font-size: 0.8rem;
+        //     left: 0.8rem;
+        //   }
+        // }
+        .form {
+          position: relative;
+          width: 20rem;
+          height: 3rem;
+          margin: 20px 0;
+
+          &__input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 1px solid rgb(172, 172, 172);
+            border-radius: 50px;
+            font-family: "Poppins", sans-serif;
+            font-size: inherit;
+            color: rgb(172, 172, 172);
+            outline: none;
+            padding: 1.25rem;
+            background: none;
+            transition: all 0.2s ease-in;
+
+            &:hover {
+              border-color: $neonNain;
+              box-shadow: 0 0 5px rgb(163, 16, 255);
+            }
+
+            /* Change border when input focus*/
+
+            &:focus {
+              border-color: $neonNain;
+              box-shadow: 0 0 5px rgb(163, 16, 255);
+            }
+          }
+
+          &__label {
+            position: absolute;
+            left: 1rem;
+            top: 0.6rem;
+            padding: 0 0.1rem;
+            color: rgb(172, 172, 172);
+            cursor: text;
+            font-family: "Poppins", sans-serif;
+            font-weight: 200;
+            transition: top 200ms ease-in, left 200ms ease-in,
+              font-size 200ms ease-in;
+            background-color: $dark;
+          }
+        }
+
+        .form__input:focus ~ .form__label,
+        .form__input:not(:placeholder-shown).form__input:not(:focus)
+          ~ .form__label {
+          top: -0.5rem;
+          font-size: 0.8rem;
+          left: 0.9rem;
+          color: $neonNain;
+          text-shadow: 0 0 5px rgb(163, 16, 255);
+        }
+      }
+    }
+
+    .mypage-sidebar {
+      flex: 1;
+      margin-left: 10px;
+      box-shadow: 3px 3px 15px black;
+    }
+  }
+}
