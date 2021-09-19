@@ -4,6 +4,7 @@ import axios from 'axios';
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const useLists = (pageNum, method, api, data) => {
+  // console.log(data)
   const [loading, setLoading] = useState(true);
   const [lists, setLists] = useState([]);
   const [hasMore, setHasMore] = useState(false);
