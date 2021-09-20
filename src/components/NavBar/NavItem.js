@@ -43,7 +43,7 @@ const NavItem = () => {
         <a className="icon-button" onClick={loginmodalHandler}>
           <IoFingerPrintOutline size={30} />
         </a>
-        <a href="/" className="icon-button">
+        <a href="/mypage" className="icon-button">
           <IoConstructOutline size={30} />
         </a>
       </li>

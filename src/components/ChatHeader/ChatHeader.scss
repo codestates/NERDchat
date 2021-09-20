@@ -1,0 +1,39 @@
+.chatheader__container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+
+  .iconback {
+    color: rgb(172, 172, 172);
+  }
+
+  .chatheader__icon {
+    margin: 0 20px;
+    color: rgb(172, 172, 172);
+  }
+  .chatheader__title {
+    margin-right: 20px;
+    color: rgb(172, 172, 172);
+  }
+
+  .chatheader__title span {
+    font-weight: 100;
+    font-size: 30px;
+  }
+  .chatheader__mic {
+    flex: 1;
+    color: rgb(172, 172, 172);
+  }
+
+  .chatheader__nember {
+    margin-right: 30px;
+    color: rgb(172, 172, 172);
+  }
+  .chatheader__nember span {
+    font-size: 20px;
+  }
+}
