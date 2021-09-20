@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+
+@import "_color";
+
+.friendlist__body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  .friendlist__body__nav {
+    position: absolute;
+    top: 80px;
+
+    .friendlist__wrapper {
+      position: absolute;
+      top: 50px;
+      display: flex;
+      width: 400px;
+      background: rgba(0, 0, 0, 0.229);
+      border-radius: 5px;
+
+      ul li a {
+        text-decoration: none;
+        color: rgb(172, 172, 172);
+        list-style: none;
+        display: flex;
+        font-size: 18px;
+        font-weight: 100;
+        padding: 0 10px;
+        align-items: center;
+        border-radius: 8px;
+      }
+    }
+    .friendlist__menu {
+      list-style: none;
+      width: 400px;
+      padding: 10px;
+
+      .friendlist__li {
+        line-height: 55px;
+        transition: all 0.5s ease-in-out;
+      }
+
+      .friendlist__li:hover {
+        background: $neonSer;
+        border-radius: 5px;
+      }
+    }
+
+    .friendlist__name {
+      width: 400px;
+      padding: 0 10px;
+      color: rgb(172, 172, 172);
+      border-radius: 5px;
+      line-height: 50px;
+      font-size: 20px;
+      font-family: "Poppins", sans-serif;
+      font-weight: 100;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .name-icon {
+      margin-left: 250px;
+      cursor: pointer;
+    }
+  }
+  .friendlist__icon {
+    height: 40px;
+    width: 40px;
+    margin-right: 13px;
+    background: #0e0e0eec;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 50%;
+  }
+}
