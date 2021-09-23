@@ -8,7 +8,7 @@ import RoomSetting from "../../RoomSetting/RoomSetting";
 import useSocket from "../../../hooks/useSocket";
 
 const ServerRoomHeader = ({ gameId }) => {
-  const { headCount } = useSocket(gameId, "", "");
+  const { nsheadCount } = useSocket(gameId, "", "");
   const { createRoomOpen, createRoomModalHandler } = useContext(Context);
 
   const creatRoomHandler = () => {
@@ -21,11 +21,10 @@ const ServerRoomHeader = ({ gameId }) => {
       <div className="server__room__header__container">
         <Link to="/servers" className="back__icons">
           <IoIosArrowBack size={30} />
-          <IoIosArrowBack size={30} />
           <h2 data-text="NERDchat">NERDchat</h2>
         </Link>
         <div className="headCount__container">
-          {`현재 접속자 수: ${headCount}`}
+          {`현재 접속자 수: ${nsheadCount}`}
         </div>
         {/* <ServerSearch /> */}
         <button className="create__room" onClick={creatRoomHandler}>

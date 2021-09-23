@@ -1,26 +1,30 @@
-.server__room__container{
-    height: 100vh;
-    display: flex;
-    justify-content: center;
+.server__room__container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
-.room__content{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 500px;
+.room__content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 650px;
+  margin-top: 5em;
 }
-.server__room__header__container{
-    height: 75px;
-    width: 100%;
-    background: transparent;
-    text-align: center;
+.server__room__header__container {
+  height: 75px;
+  width: 100%;
+  background: transparent;
+  text-align: center;
 }
-.roomLists__container{
-    height: 555px;
-    width: 100%;
-    margin-top: 5px;
-    display: flex;
-    flex-direction: column;
-    overflow: scroll;
-    gap: 5px;
+.roomLists__container {
+  height: 555px;
+  width: 100%;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  gap: 5px;
 }

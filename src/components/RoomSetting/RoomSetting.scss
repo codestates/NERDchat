@@ -1,27 +1,50 @@
-.room__setting__container{
+$dark: rgb(23, 23, 23);
+$neonNain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+.room__setting__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2em;
+  margin-top: 1em;
+
+  .room__title__container {
     display: flex;
     flex-direction: column;
+    gap: 0.5em;
+    input {
+      height: 25px;
+    }
+    label {
+      margin-top: 1em;
+      text-align: left;
+    }
+  }
+  .max__container {
+    .headcount__input__container {
+      display: flex;
+      gap: 1em;
+      input {
+        width: 75%;
+      }
+    }
+  }
+  .create__container {
+    display: flex;
     justify-content: center;
-    gap: 2em;
 
-    .room__title__container{
-        display: flex;
-        flex-direction: column;
-        // gap: 0.5em;  
-        label{
-            margin-top: 1em;
-            text-align: left;
-        }
+    button {
+      background: $neonSer;
+      color: white;
+      cursor: pointer;
+      padding: 0.5em 1em;
+      width: 100px;
+      &:hover {
+        background: rgb(172, 45, 252);
+      }
+      &:active {
+        transform: scale(0.98);
+      }
     }
-    .max__container{
-        
-    }
-    .create__container{
-        display: flex;
-        justify-content: center;
-        button{
-            padding: 0.5em 1em;
-            width: 100px;
-        }
-    }
+  }
 }

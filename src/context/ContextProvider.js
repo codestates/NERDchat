@@ -26,13 +26,17 @@ const ContextProvider = ({ children }) => {
   // loginmodal state
   const [isLogin, setIsLogin] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false);
 
-  const isLoginHandler = (b) => {
+  const isLoginHandler = () => {
     // logout은 false값 받아오기
-    setIsLogin(b);
+    localStorage.setItem("nerd-logged-in", true);
   };
   const loginmodalHandler = () => {
     setLoginModalOpen((prev) => !prev);
+  };
+  const logoutModalHandler = () => {
+    setLogoutModalOpen((prev) => !prev);
   };
   const getUserInfo = (info) => {
     let cookieUserInfo = info;
@@ -50,9 +54,7 @@ const ContextProvider = ({ children }) => {
     setCreateRoomOpen((prev) => !prev);
   };
 
-  useEffect(() => {
-    if (userInfo.accessToken) setIsLogin(true);
-  }, [userInfo]);
+  useEffect(() => {}, []);
   // bookmark
   // friend lists
   // server game lists
@@ -61,7 +63,7 @@ const ContextProvider = ({ children }) => {
   return (
     <Context.Provider
       value={{
-        isLogin,
+        // isLogin,
         loginModalOpen,
         loginmodalHandler,
         getUserInfo,
@@ -69,6 +71,8 @@ const ContextProvider = ({ children }) => {
         createRoomOpen,
         createRoomModalHandler,
         userInfo,
+        logoutModalOpen,
+        logoutModalHandler,
       }}
     >
       {children}
