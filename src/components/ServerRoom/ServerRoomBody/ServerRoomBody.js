@@ -1,16 +1,16 @@
-import { useState, useRef, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
-import './ServerRoomBody.scss';
-import ServerRoomCard from '../ServerRoomCard/ServerRoomCard';
-import useLists from '../../../hooks/useLists';
+import { useState, useRef, useCallback } from "react";
+import { useParams } from "react-router-dom";
+import "./ServerRoomBody.scss";
+import ServerRoomCard from "../ServerRoomCard/ServerRoomCard";
+import useLists from "../../../hooks/useLists";
 
 const ServerRoomBody = ({ searchedLists, searched }) => {
   const { gameId } = useParams();
   const [pageNum, setPageNum] = useState(1);
   const { lists, hasMore, loading } = useLists(
     pageNum,
-    'post',
-    '/rooms/list/',
+    "post",
+    "/rooms/list/",
     { gameId }
   );
   const observer = useRef();
@@ -35,39 +35,35 @@ const ServerRoomBody = ({ searchedLists, searched }) => {
     if (lists.length === idx + 1) {
       return (
         <div key={list.id} ref={lastElementRef}>
-          {loading
-            ? (
-                'loading'
-              )
-            : (
-              <ServerRoomCard
-                gameId={gameId}
-                id={list.id}
-                roomTitle={list.roomTitle}
-                uuid={list.uuid}
-                max={list.max}
-                loading={loading}
-              />
-              )}
+          {loading ? (
+            "loading"
+          ) : (
+            <ServerRoomCard
+              gameId={gameId}
+              id={list.id}
+              roomTitle={list.roomTitle}
+              uuid={list.uuid}
+              max={list.max}
+              loading={loading}
+            />
+          )}
         </div>
       );
     } else {
       return (
         <div key={list.id}>
-          {loading
-            ? (
-                'loading'
-              )
-            : (
-              <ServerRoomCard
-                gameId={gameId}
-                id={list.id}
-                roomTitle={list.roomTitle}
-                uuid={list.uuid}
-                max={list.max}
-                loading={loading}
-              />
-              )}
+          {loading ? (
+            "loading"
+          ) : (
+            <ServerRoomCard
+              gameId={gameId}
+              id={list.id}
+              roomTitle={list.roomTitle}
+              uuid={list.uuid}
+              max={list.max}
+              loading={loading}
+            />
+          )}
         </div>
       );
     }
@@ -87,8 +83,8 @@ const ServerRoomBody = ({ searchedLists, searched }) => {
   });
 
   return (
-    <div className='room__big__container'>
-      <div className='roomLists__container'>
+    <div className="room__big__container">
+      <div className="roomLists__container">
         {searched ? filteredLists : totalLists}
       </div>
     </div>

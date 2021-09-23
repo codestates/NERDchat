@@ -7,11 +7,17 @@ import { useHistory } from "react-router-dom";
 import { Context } from "../../context/ContextProvider";
 import "./LoginBody.scss";
 
+//엔드포인트 real로 변경 필요
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 const FACEBOOK_ID = process.env.REACT_APP_FACEBOOK_ID;
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+const KAKAO_REST_API_KEY = process.env.REACT_APP_KAKAO_CLIENT_KEY;
 
 const Login = () => {
+  // console.log(ENDPOINT);
+  // console.log(GOOGLE_CLIENT_ID);
+  // console.log(FACEBOOK_ID);
+  // console.log(KAKAO_REST_API_KEY);
   const history = useHistory();
   const { getUserInfo, isLoginHandler, loginmodalHandler } =
     useContext(Context);
@@ -46,29 +52,31 @@ const Login = () => {
     // 받은 유저 정보 저장하기.
     getUserInfo(res.data.data);
     // login 상태 저장
-    isLoginHandler(true);
+    isLoginHandler();
     loginmodalHandler();
     history.push("/servers");
   };
 
   // 구글 로그인
   const googleHandler = () => {
-    console.log(1);
-    // window.location.assign(Google_URL);
-    // 인증됐는지 여부를 체크하는게 필요...;
-    // localStorage.setItem('login', true);
+    window.location.assign(
+      `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&response_type=code&scope=openid email&redirect_uri=${ENDPOINT}/oauth/google`
+    );
   };
   // 카카오 로그인
   const kakaoHandler = () => {
-    console.log(1);
+    window.location.assign(
+      `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${ENDPOINT}/oauth/kakao&response_type=code`
+    );
     // window.location.assign(FB_URL);
     // 인증됐는지 여부를 체크하는게 필요...;
     // localStorage.setItem('login', true);
   };
   // 페이스북 로그인
   const facebookHandler = () => {
-    console.log(1);
-    // window.location.assign(FB_URL);
+    window.location.assign(
+      `https://www.facebook.com/v12.0/dialog/oauth?client_id=${FACEBOOK_ID}&redirect_uri=${ENDPOINT}/oauth/facebook&scope=email,public_profile`
+    );
     // 인증됐는지 여부를 체크하는게 필요...;
     // localStorage.setItem('login', true);
   };

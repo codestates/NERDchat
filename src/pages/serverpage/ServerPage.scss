@@ -1,17 +1,24 @@
-.big__container {
-    margin: 5em;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-.game__list__card__container{
-    display: grid;
-    grid-template-columns: 400px 400px;
-    grid-template-rows: auto;
-    // grid-template-rows: repeat(auto-fit, 200px);
-    gap: 1em;
-    height: 100vh;
+.server__list__container {
+  display: flex;
+  flex-direction: column;
 }
-
+.big__container {
+  margin: 5em;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.big__container::-webkit-scrollbar {
+  display: none;
+}
+.game__list__card__container {
+  display: grid;
+  grid-template-columns: 400px 400px;
+  grid-template-rows: auto;
+  gap: 1em;
+  height: 500px;
+}

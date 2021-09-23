@@ -14,6 +14,7 @@ const RoomSetting = () => {
   const [serverId, setServerId] = useState(gameId);
   const [headCount, setHeadCount] = useState(0);
   const [title, setTitle] = useState("");
+  const [err, setErr] = useState("");
 
   const titleHandler = (e) => {
     setTitle(e.target.value);
@@ -23,21 +24,31 @@ const RoomSetting = () => {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
+    // if (title.trim().length <= 2) {
+    //   setErr("Room Title should be longer than 2 letters");
+    //   console.log(222212, title, err);
+    // } else if (headCount < 2) {
+    //   setErr("Room Title should be longer than 2 letters");
+    // }
+    // if (err.length > 0) return alert("do it again");
     console.log(serverId, title, headCount);
+
     const chatId = 1;
+    if (title.trim().length > 2 && headCount >= 2) {
+      const res = await axios.put(
+        `${ENDPOINT}/rooms/create`,
+        { serverId, title, headCount },
+        { withCredentials: true }
+      );
+      const { roomTitle, uuid, gameId, current, max, createdAt } =
+        res.data.data;
+      console.log("This is created", res.data.data);
 
-    const res = await axios.put(
-      `${ENDPOINT}/rooms/create`,
-      { serverId, title, headCount },
-      { withCredentials: true }
-    );
-    const { roomTitle, uuid, gameId, current, max, createdAt } = res.data.data;
-    console.log("This is created", res.data.data);
-
-    createRoomModalHandler();
-    // chatroom안으로 리 다이렉트 시키기.
-    // chatId 달라고 하기.
-    history.push(`/gameId=${gameId}/roomId=${uuid}/chatId=${chatId}`);
+      createRoomModalHandler();
+      // chatroom안으로 리 다이렉트 시키기.
+      // chatId 달라고 하기.
+      history.push(`/gameId=${gameId}/roomId=${uuid}/chatId=${chatId}`);
+    }
   };
 
   return (
@@ -57,22 +68,24 @@ const RoomSetting = () => {
 
           <div className="max__container">
             <div>
-              <label htmlFor="members">Max</label>
+              <label htmlFor="members">Max HeadCount</label>
             </div>
-            <input
-              value={headCount}
-              step="1"
-              id="members"
-              type="range"
-              min="0"
-              max="6"
-              placeholder="put room title"
-              onChange={handleMembers}
-            />
-            <p>{headCount}</p>
+            <div className="headcount__input__container">
+              <input
+                value={headCount}
+                step="1"
+                id="members"
+                type="range"
+                min="0"
+                max="6"
+                placeholder="put room title"
+                onChange={handleMembers}
+              />
+              <p>{headCount} 명</p>
+            </div>
           </div>
           <div className="create__container">
-            <button type="submit">create</button>
+            <button type="submit">Create!</button>
           </div>
         </form>
       </Modal>
