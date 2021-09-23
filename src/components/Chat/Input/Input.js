@@ -1,25 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+import { IoPaperPlaneOutline } from "react-icons/io5";
 
 import "./Input.scss";
 
-function Input({ message, setMessage, sendMessage }) {
+function Input({ msgInputHandler, newMsg, sendHandler }) {
   return (
     <form className="input_form">
       <input
         className="input_input"
         type="text"
         placeholder="Type a message.."
-        value={message}
-        // onChange={(event) => setMessage(event.target.value)}
-        // onKeyPress={(event) =>
-        //   event.key === "Enter" ? sendMessage(event) : null
-        // }
+        value={newMsg}
+        onChange={msgInputHandler}
+        onKeyPress={(event) =>
+          event.key === "Enter" ? sendHandler(event) : null
+        }
       />
-      <button
-        className="input_sendButton"
-        // onClick={(event) => sendMessage(event)}
-      >
-        Send
+      <button className="input_sendButton" onClick={sendHandler}>
+        <IoPaperPlaneOutline size={25} />
       </button>
     </form>
   );
