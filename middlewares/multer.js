@@ -7,9 +7,9 @@ require('dotenv').config();
 module.exports = {
   uploadImage: (req, res, next) => {
     const s3 = new aws.S3({
-      accessKeyId: process.env.AWSAccessKeyId,
-      secretAccessKey: process.env.AWSSecretKey,
-      region: process.env.AWSRegion
+      accessKeyId: process.env.accessKeyId,
+      secretAccessKey: process.env.secretKey,
+      region: process.env.region
     });
     const upload = multer({
       storage: multerS3({
