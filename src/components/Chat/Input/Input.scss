@@ -1,6 +1,7 @@
 .input_form {
   display: flex;
-  border-top: 1px solid rgb(169, 169, 169);
+  border-top: 1px solid rgba(169, 169, 169, 0.358);
+  margin: 0 10px;
 }
 
 .input_input {
@@ -8,7 +9,7 @@
   font-family: "Poppins", sans-serif;
   background-color: transparent;
   padding: 5%;
-  width: 80%;
+  width: 100%;
   color: white;
   font-size: 1em;
   font-weight: 100;

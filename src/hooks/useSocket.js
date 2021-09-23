@@ -1,23 +1,43 @@
 import { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
 // import Peer from "peerjs";
+const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const useSocket = (serverName, roomId, userInfo) => {
   const socket = useRef();
-
+  const [messages, setMessages] = useState([]);
+  const [NsHeadCount, setNsHeadCount] = useState(0);
+  const [roomHeadCount, setRoomHeadCount] = useState(0);
   useEffect(() => {
-    socket.current = io(`http://localhost:8080/${serverName}`, {
+    socket.current = io(`${ENDPOINT}/${serverName}`, {
       query: { serverName, roomId },
     });
 
     socket.current.on("welcomeRoom", (userData, msgData) =>
       console.log(userData, msgData)
     );
+    socket.current.on("roomMessage", (userData, msgData) => {
+      console.log(userData);
+      const incomingMsg = {
+        body: msgData,
+        user: userData.userId,
+        mine: userData.userId === userInfo.userId,
+      };
+      setMessages((prevM) => [...prevM, incomingMsg]);
+    });
 
     // navigator.mediaDevices
     //   .getUserMedia(audioOnlyConfig)
     //   .then((stream) => console.log(stream));
 
+    //현재 nameSpace 접속자 인원 받아오기
+    socket.current.on("currentNSLength", (data) => {
+      setNsHeadCount(data);
+    });
+    //현재 룸 접속자 인원 받아오기(수정필요)
+    socket.current.on("currentRoomLength", (data) => {
+      setRoomHeadCount(data);
+    });
     return () => {
       socket.current.close();
       socket.current.disconnect();
@@ -32,12 +52,7 @@ const useSocket = (serverName, roomId, userInfo) => {
     socket.current.emit("roomMessage", roomId, chatId, userInfo, newMsg);
   };
 
-  const getMessage = () => {
-    socket.current.on("roomMessage", (data) => {
-      console.log(data);
-    });
-  };
-  return { joinRoom, sendMessage, getMessage };
+  return { joinRoom, sendMessage, messages };
 };
 
 export default useSocket;
