@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
+// import Peer from "peerjs";
 
 const useSocket = (serverName, roomId, userInfo) => {
   const socket = useRef();
@@ -12,6 +13,10 @@ const useSocket = (serverName, roomId, userInfo) => {
     socket.current.on("welcomeRoom", (userData, msgData) =>
       console.log(userData, msgData)
     );
+
+    // navigator.mediaDevices
+    //   .getUserMedia(audioOnlyConfig)
+    //   .then((stream) => console.log(stream));
 
     return () => {
       socket.current.close();

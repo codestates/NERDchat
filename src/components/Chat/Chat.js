@@ -8,6 +8,7 @@ import { Cookies } from "react-cookie";
 
 function Chat() {
   const cookies = new Cookies();
+
   let userInfo = cookies.get("userInfo");
 
   const [newMsg, setNewMsg] = useState("");
@@ -37,6 +38,10 @@ function Chat() {
     sendMessage(roomId, chatId, userInfo, newMsg);
     e.preventDefault();
   };
+
+  // const onKeyPress = (event) => {
+  //   if (event.key === "Enter") sendHandler();
+  // };
 
   return (
     <div className="chat-container">
