@@ -42,4 +42,7 @@ module.exports = (socket) => {
       ns.broadcast.to(voiceChatUid).emit('userDisconnect', peerId);
     });
   });
+  socket.on('currentNSLength', () => {
+    ns.emit('currentNSLength', ns.adapter.sids.size);
+  });
 };

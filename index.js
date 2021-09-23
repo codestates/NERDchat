@@ -31,10 +31,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => res.send('Hello, world!!!!!!'));
-app.get('/header', (req, res) => {
-  console.log(req.body);
-  res.json(req.headers);
-});
 
 app.use('/', routes);
 
