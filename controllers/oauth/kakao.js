@@ -12,26 +12,27 @@ module.exports = async (req, res) => {
       params: {
         grant_type: 'authorization_code',
         client_id: process.env.KAKAO_REST_API_KEY,
-        redirect_uri: 'http://localhost:8080/oauth/kakao',
+        redirect_uri: `${process.env.ENDPOINT}/oauth/kakao`,
         code
       }
     });
     const accessToken = data.data.access_token;
     const refreshToken = data.data.refresh_token;
-    console.log(data.data.access_token);
+    // console.log(data.data.access_token);
     const userData = await axios({
       url: 'https://kapi.kakao.com/v2/user/me',
       method: 'get',
       params: { access_token: accessToken }
     });
-    const userInfo = Users.findOne({ where: { email: userData.data.kakao_account.email } });
+    // console.log(userData.data.id);
+    const userInfo = Users.findOne({ where: { userId: userData.data.id } });
     if (!userInfo) {
       const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
       const payload = {
         avatar: userData.data.properties.profile_image,
-        userId: userData.data.properties.nickname,
-        nickname: userData.data.properties.nickname,
-        email: userData.data.kakao_account.email,
+        userId: userData.data.id,
+        nickname: userData.data.id,
+        email: userData.data.kakao_account.email || null,
         valid: false,
         oauth: 'Kakao',
         status: null,
@@ -42,6 +43,9 @@ module.exports = async (req, res) => {
       await Users.create({ payload });
       res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
         .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
+        .cookie('oauth', 'kakao', { httpOnly: true, sameSite: 'none', secure: true }).redirect(
+          process.env.ENDPOINT + '/servers'
+        )
         .status(200).json({
           data: {
             accessToken,

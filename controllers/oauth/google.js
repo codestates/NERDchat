@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
         client_id: process.env.GOOGLE_CLIENT_ID,
         client_secret: process.env.GOOGLE_CLIENT_SECRET,
         code: req.query.code,
-        redirect_uri: 'http://localhost:8080/oauth/google',
+        redirect_uri: `${process.env.ENDPOINT}/oauth/google`,
         grant_type: 'authorization_code'
       }
     });
@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
           scope: 'https://www.googleapis.com/auth/userinfo.email'
         }
       });
-      const userInfo = await Users.findOne({ where: { email: userData.data.sub } });
+      const userInfo = await Users.findOne({ where: { userId: userData.data.sub } });
       if (!userInfo) {
         const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
         const payload = {
@@ -47,6 +47,9 @@ module.exports = async (req, res) => {
         await Users.create({ payload });
         res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
           .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
+          .cookie('oauth', 'google', { httpOnly: true, sameSite: 'none', secure: true }).redirect(
+            process.env.ENDPOINT + '/servers'
+          )
           .status(200).json({
             data: {
               accessToken,

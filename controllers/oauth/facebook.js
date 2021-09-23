@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
       method: 'get',
       params: {
         client_id: process.env.FACEBOOK_CLIENT_ID,
-        redirect_uri: 'http://localhost:8080/oauth/facebook',
+        redirect_uri: `${process.env.ENDPOINT}/oauth/facebook`,
         client_secret: process.env.FACEBOOK_CLIENT_SECRET,
         code
       }
@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
       }
     });
     console.log(userData.data);
-    const userInfo = Users.findOne({ where: { email: userData.data.email } });
+    const userInfo = Users.findOne({ where: { userid: userData.data.id } });
     if (!userInfo) {
       const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
       const payload = {
@@ -44,6 +44,9 @@ module.exports = async (req, res) => {
       };
       await Users.create({ payload });
       res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
+        .cookie('oauth', 'facebook', { httpOnly: true, sameSite: 'none', secure: true }).redirect(
+          process.env.ENDPOINT + '/servers'
+        )
         .status(200).json({
           data: {
             accessToken,
