@@ -1,54 +1,56 @@
-import React, { useState, useEffect, useContext } from 'react';
-import io from 'socket.io-client';
-import Message from './Message/Message';
-import './Chat.scss';
-import { useParams } from 'react-router-dom';
-import useSocket from '../../hooks/useSocket';
-import { Context } from '../../context/ContextProvider';
-import Peer from 'peerjs';
-import { Cookies } from 'react-cookie';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-function Chat () {
+import "./Chat.scss";
+
+import useSocket from "../../hooks/useSocket";
+import { Cookies } from "react-cookie";
+
+function Chat() {
   const cookies = new Cookies();
-  let userInfo = cookies.get('userInfo');
-  const [newMsg, setNewMsg] = useState('');
-  const myPeer = new Peer();
+
+  let userInfo = cookies.get("userInfo");
+
+  const [newMsg, setNewMsg] = useState("");
+  const [messages, setMessages] = useState([]);
   const { gameId, roomId, chatId } = useParams();
-  const ctx = useContext(Context);
+
   const { id, userId, avatar, nickname } = userInfo;
+
   userInfo = { id, userId, avatar, nickname };
-  // console.log('This is from Chat', userInfo);
-  const { joinRoom, messages, sendMessage } = useSocket(
+
+  const { joinRoom, sendMessage, getMessage } = useSocket(
     gameId,
     roomId,
     userInfo
   );
+
   useEffect(() => {
     joinRoom();
-    // getMessage();
+    getMessage();
   }, []);
+
   const msgInputHandler = (e) => {
     setNewMsg(e.target.value);
+    e.preventDefault();
   };
   const sendHandler = (e) => {
-    e.preventDefault();
-    console.log('clicked');
     sendMessage(roomId, chatId, userInfo, newMsg);
+    e.preventDefault();
   };
 
+  // const onKeyPress = (event) => {
+  //   if (event.key === "Enter") sendHandler();
+  // };
+
   return (
-    <div className='chat-container'>
-      <Message />
-      {messages.map((message) => {
-        return (
-          <span className={message.mine ? 'mine' : 'others'}>
-            {message.body}
-          </span>
-        );
-      })}
-      <form onSubmit={sendHandler}>
-        <input type='text' onChange={msgInputHandler} value={newMsg} />
-        <button type='submit'>send!</button>
+    <div className="chat-container">
+      <div></div>
+      <form>
+        <input type="text" onChange={msgInputHandler} value={newMsg} />
+        <button type="submit" onClick={sendHandler}>
+          send!
+        </button>
       </form>
     </div>
   );

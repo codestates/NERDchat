@@ -37,13 +37,15 @@ const ContextProvider = ({ children }) => {
   const loginmodalHandler = () => {
     setLoginModalOpen((prev) => !prev);
   };
+
+  //유저정보 쿠키에 저장하기.
   const getUserInfo = (info) => {
     let cookieUserInfo = info;
     const { id, avatar, userId, nickname, email, oauth, status } =
       cookieUserInfo;
     cookieUserInfo = { id, avatar, userId, nickname, email, oauth, status };
     cookies.set("userInfo", cookieUserInfo);
-    dispatchUserInfo({ type: "GET", item: info });
+    // dispatchUserInfo({ type: "GET", item: info });
     // console.log('after dispatch',userInfo)
     // setUserInfo(info)
   };
@@ -61,8 +63,14 @@ const ContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (userInfo.accessToken) setIsLogin(true);
-  }, [userInfo]);
+    // const act = cookies.get("userInfo").accessToken;
+    // //여기서 서버에 통신을 보내서 유효한 값인지 확인하는것이 필요.
+    // if (act) {
+    //   setIsLogin(true);
+    // } else {
+    //   setIsLogin(false);
+    // }
+  }, []);
   // bookmark
   // friend lists
   // server game lists
@@ -79,6 +87,7 @@ const ContextProvider = ({ children }) => {
         createRoomOpen,
         createRoomModalHandler,
         userInfo,
+        logoutHandler,
       }}
     >
       {children}
