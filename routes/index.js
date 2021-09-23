@@ -38,6 +38,9 @@ router.get('/favorites/request/:gameId', favorites.favRequest);
 */
 router.get('/friends/lists', friends.friendsList);
 router.get('/friends/send/:nickname', friends.friendsRequest);
+router.post('/friends/accept/:nickname', friends.accept);
+router.get('/friends/requests', friends.requestList);
+router.delete('/friends/delete/:nickname', friends.delete);
 /*
     Admin Router
 */
