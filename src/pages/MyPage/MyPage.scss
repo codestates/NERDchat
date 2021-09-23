@@ -42,55 +42,135 @@
 
       .mypage-card {
         // border: 1px solid blueviolet;
-        margin: 10px;
-        flex: 0.4;
+        margin: 30px;
+        flex: 0.5;
         display: flex;
         flex-direction: column;
         width: 100%;
         text-align: center;
 
         .mypage-photo {
-          margin-top: 50px;
+          margin-top: 70px;
           align-items: center;
         }
 
-        .mypage-photo img {
-          width: 210px;
-          height: 210px;
-          border-radius: 50%;
-          margin: 20px;
+        #imgInput[type="file"] {
+          display: none;
         }
 
-        .mypage-welcom {
-          font-family: "Monoton", cursive;
-          //   animation: flicker 4s linear infinite;
-          font-weight: 100;
-          color: $neonNain;
-          font-size: 10px;
+        .mypage-photo img {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+        }
+
+        .mypage-form {
+          position: relative;
+          margin: 15px 0;
           margin-top: 20px;
+
+          img {
+            filter: opacity(0.5) drop-shadow(0 0 0 white);
+          }
+        }
+
+        .form__input {
+          position: absolute;
+          left: -999px;
+          width: 1px;
+          height: 1px;
+          opacity: 0;
+          visibility: hidden;
+        }
+        .form__label {
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          padding: 5px 10px;
+          background: $neonNain;
+          border-radius: 20px;
+          cursor: pointer;
+          transition: all 0.2s ease-in;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 5px;
+          }
+        }
+
+        .form__text {
+          font-weight: 200;
+          font-family: "Poppins", sans-serif;
+          font-size: 6px;
+          color: white;
+          margin-right: 5px;
+        }
+
+        .form__icon {
+          margin-right: 5px;
+          width: 15px;
+          height: 15px;
+          color: white;
+        }
+
+        h3 {
           color: rgb(172, 172, 172);
+          font-family: "Monoton", cursive;
+          font-weight: lighter;
         }
 
         .mypage-nickname {
           font-family: "Monoton", cursive;
           animation: flicker 4s linear infinite;
-          font-weight: 100;
+          font-weight: lighter;
           color: $neonNain;
           font-size: 20px;
-          margin-bottom: 10px;
+          margin-bottom: 15px;
         }
 
         .mypage-status {
-          margin-top: 20px;
           font-family: "Poppins", sans-serif;
           font-weight: 100;
           color: rgb(172, 172, 172);
-          box-shadow: 0px 1px 5px black;
           text-align: justify;
-          margin: 10px 40px;
-          padding: 20px;
+          margin: 0 40px;
+          padding: 0 20px;
           height: 20%;
           transition: all 0.4s ease-in-out;
+          text-align: center;
+
+          textarea {
+            resize: none;
+            width: 80%;
+            height: 80%;
+            outline: none;
+            padding: 5px 10px;
+            border-radius: 10px;
+            background-color: transparent;
+            color: rgb(172, 172, 172);
+            font-family: "Poppins", sans-serif;
+            font-weight: 100;
+            margin-top: 20px;
+
+            &:is(:focus, :valid) {
+              border-color: rgb(172, 172, 172);
+            }
+
+            &::-webkit-scrollbar {
+              display: none;
+            }
+
+            &::spelling-error {
+              display: none;
+            }
+          }
+        }
+
+        .mypage-status p {
+          color: rgb(172, 172, 172);
+          font-family: "Poppins", sans-serif;
+          font-weight: 100;
+          font-size: 15px;
         }
 
         .mypage-status:hover {
@@ -225,19 +305,42 @@
     }
     .mypage-button {
       outline: none;
-      padding: 10px 25px;
+      padding: 10px 15px;
       margin-top: 20px;
-      border: 3px solid gold;
+      border-radius: 20px;
+      border: 1px solid $neonNain;
       background-color: transparent;
-      color: gold;
+      color: $neonNain;
       letter-spacing: 2px;
       font-family: "Poppins", sans-serif;
       font-size: 10px;
-      font-weight: 200;
+      font-weight: 400;
       text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
 
       &:focus {
         outline: none;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-color: $neonNain;
+        top: 100%;
+        left: 0;
+        transition: all 0.6s;
+        z-index: -1;
+      }
+
+      &:hover::before {
+        transform: translateY(-100%);
+      }
+
+      &:hover {
+        color: white;
       }
     }
     .mypage-sidebar {

@@ -1,22 +1,23 @@
-import React from 'react';
+import React from "react";
 
-import './Input.scss';
+import "./Input.scss";
 
-function Input ({ message, setMessage, sendMessage }) {
+function Input({ message, setMessage, sendMessage }) {
   return (
-    <form className='input_form'>
+    <form className="input_form">
       <input
-        className='input_input'
-        type='text'
-        placeholder='Type a message..'
+        className="input_input"
+        type="text"
+        placeholder="Type a message.."
         value={message}
-        onChange={(event) => setMessage(event.target.value)}
-        onKeyPress={(event) =>
-          event.key === 'Enter' ? sendMessage(event) : null}
+        // onChange={(event) => setMessage(event.target.value)}
+        // onKeyPress={(event) =>
+        //   event.key === "Enter" ? sendMessage(event) : null
+        // }
       />
       <button
-        className='input_sendButton'
-        onClick={(event) => sendMessage(event)}
+        className="input_sendButton"
+        // onClick={(event) => sendMessage(event)}
       >
         Send
       </button>
