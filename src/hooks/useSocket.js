@@ -6,6 +6,8 @@ const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 const useSocket = (serverName, roomId, userInfo) => {
   const socket = useRef();
   const [messages, setMessages] = useState([]);
+  const [NsHeadCount, setNsHeadCount] = useState(0);
+  const [roomHeadCount, setRoomHeadCount] = useState(0);
   useEffect(() => {
     socket.current = io(`${ENDPOINT}/${serverName}`, {
       query: { serverName, roomId },
@@ -32,7 +34,7 @@ const useSocket = (serverName, roomId, userInfo) => {
     socket.current.on("currentNSLength", (data) => {
       setNsHeadCount(data);
     });
-    //현재 룸 접속자 인원 받아오기
+    //현재 룸 접속자 인원 받아오기(수정필요)
     socket.current.on("currentRoomLength", (data) => {
       setRoomHeadCount(data);
     });
