@@ -4,7 +4,7 @@ const { Op } = require('sequelize');
 
 module.exports = async (req, res) => {
   const userData = verifyAccess(req, res);
-  if (!userData) return res.status(400).send('Error');
+  if (userData) {
   const friend = await Users.findOne({ where: { nickname: req.params.nickname } });
   if (!friend) res.status(404).json({ message: 'Friend not found' });
   await Friends.destroy({
@@ -20,4 +20,5 @@ module.exports = async (req, res) => {
     }
   });
   res.status(202).json({ message: 'Success Delete' });
+}
 };
