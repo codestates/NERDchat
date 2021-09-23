@@ -28,6 +28,14 @@ const useSocket = (serverName, roomId, userInfo) => {
     //   .getUserMedia(audioOnlyConfig)
     //   .then((stream) => console.log(stream));
 
+    //현재 nameSpace 접속자 인원 받아오기
+    socket.current.on("currentNSLength", (data) => {
+      setNsHeadCount(data);
+    });
+    //현재 룸 접속자 인원 받아오기
+    socket.current.on("currentRoomLength", (data) => {
+      setRoomHeadCount(data);
+    });
     return () => {
       socket.current.close();
       socket.current.disconnect();
@@ -41,15 +49,6 @@ const useSocket = (serverName, roomId, userInfo) => {
   const sendMessage = (roomId, chatId, userInfo, newMsg) => {
     socket.current.emit("roomMessage", roomId, chatId, userInfo, newMsg);
   };
-
-  //현재 nameSpace 접속자 인원 받아오기
-  socket.current.on("currentNSLength", (data) => {
-    setNsHeadCount(data);
-  });
-  //현재 룸 접속자 인원 받아오기
-  socket.current.on("currentRoomLength", (data) => {
-    setRoomHeadCount(data);
-  });
 
   return { joinRoom, sendMessage, messages };
 };
