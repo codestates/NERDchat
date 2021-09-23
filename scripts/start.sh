@@ -12,5 +12,17 @@ export DATABASE_USER=$(aws ssm get-parameters --region us-east-1 --names DATABAS
 export HOST=$(aws ssm get-parameters --region us-east-1 --names HOST --query Parameters[0].Value | sed 's/"//g')
 export REDIS_HOST=$(aws ssm get-parameters --region us-east-1 --names REDIS_HOST --query Parameters[0].Value | sed 's/"//g')
 export REFRESH_SECRET=$(aws ssm get-parameters --region us-east-1 --names REFRESH_SECRET --query Parameters[0].Value | sed 's/"//g')
+export GOOGLE_CLIENT_ID=$(aws ssm get-parameters --region us-east-1 --names GOOGLE_CLIENT_ID --query Parameters[0].Value | sed 's/"//g')
+export GOOGLE_CLIENT_SECRET=$(aws ssm get-parameters --region us-east-1 --names GOOGLE_CLIENT_SECRET --query Parameters[0].Value | sed 's/"//g')
+export FACEBOOK_CLIENT_ID=$(aws ssm get-parameters --region us-east-1 --names FACEBOOK_CLIENT_ID --query Parameters[0].Value | sed 's/"//g')
+export FACEBOOK_CLIENT_SECRET=$(aws ssm get-parameters --region us-east-1 --names FACEBOOK_CLIENT_SECRET --query Parameters[0].Value | sed 's/"//g')
+export KAKAO_REST_API_KEY=$(aws ssm get-parameters --region us-east-1 --names KAKAO_REST_API_KEY --query Parameters[0].Value | sed 's/"//g')
+export ENDPOINT=$(aws ssm get-parameters --region us-east-1 --names ENDPOINT --query Parameters[0].Value | sed 's/"//g')
+export GMAIL=$(aws ssm get-parameters --region us-east-1 --names GMAIL --query Parameters[0].Value | sed 's/"//g')
+export GMAIL_PASSWORD=$(aws ssm get-parameters --region us-east-1 --names GMAIL_PASSWORD --query Parameters[0].Value | sed 's/"//g')
+export AccessKeyId=$(aws ssm get-parameters --region us-east-1 --names AccessKeyId --query Parameters[0].Value | sed 's/"//g')
+export SecretKey=$(aws ssm get-parameters --region us-east-1 --names SecretKey --query Parameters[0].Value | sed 's/"//g')
+export Region=$(aws ssm get-parameters --region us-east-1 --names Region --query Parameters[0].Value | sed 's/"//g')
+export BUCKET_NAME=$(aws ssm get-parameters --region us-east-1 --names BUCKET_NAME --query Parameters[0].Value | sed 's/"//g')
 
 authbind --deep pm2 start index.js --watch

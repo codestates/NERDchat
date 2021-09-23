@@ -4,20 +4,25 @@ const { Op } = require('sequelize');
 
 module.exports = async (req, res) => {
   const userData = verifyAccess(req, res);
-  if (!userData) {
-    return res.status(400).send('Error');
-  }
-  const friendsList = await Friends.findAll({
-    where: {
-      isValid: true,
-      [Op.or]: [
-        { user1id: userData.id },
-        { user2id: userData.id }]
-    },
-    include: {
-      model: Users,
+  if (userData) {
+    const friendsList = await Friends.findAll({
+      where: {
+        isValid: true,
+        [Op.or]: [
+          { user1id: userData.id },
+          { user2id: userData.id }
+        ]
+      },
+    });
+    const listSort = []
+    friendsList.map((el) => {
+      if(el.user1id === userData.id) listSort.push(el.user2id);
+      else if(el.user2id === userData.id) listSort.push(el.user1id)
+    })
+    const findUsers = await Users.findAll({ 
+      where: {id:{[Op.in]: listSort}},
       attributes: ['id', 'avatar', 'nickname']
-    }
-  });
-  res.status(200).json({ data: friendsList });
+    })
+    res.status(200).json({ data: findUsers });
+  }
 };

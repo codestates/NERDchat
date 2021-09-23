@@ -18,6 +18,7 @@ module.exports = async (req, res) => {
 
     res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
       .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
+      .cookie('oauth', oauth, { httpOnly: true, sameSite: 'none', secure: true })
       .status(200).json({
         data: { accessToken, id, avatar, userId, nickname, email, oauth, status },
         isLogin: true

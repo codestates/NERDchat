@@ -4,7 +4,7 @@ const { Op } = require('sequelize');
 
 module.exports = async (req, res) => {
   const userData = verifyAccess(req, res);
-  if (!userData) return res.status(400).send('Error');
+  if (userData) {
   const recipient = await Users.findOne({ where: { nickname: req.params.nickname } });
   if (!recipient) res.status(404).json({ message: 'User not found' });
   const isFriend = await Friends.findOne({
@@ -31,4 +31,5 @@ module.exports = async (req, res) => {
     await Friends.create(payload);
     res.status(201).json({ data: payload });
   }
+}
 };
