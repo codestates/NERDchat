@@ -19,7 +19,8 @@ module.exports = async (req, res) => {
     updatedAt: new Date()
   };
   await GameChatRooms.create(payload);
+  const roomData = await GameChatRooms.findOne({ where: { uuid } });
   res.status(201).json({
-    data: payload
+    data: roomData
   });
 };
