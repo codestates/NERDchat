@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import FriendList from '../../components/SideTap/FriendList/FriendList';
-import Messenger from '../../components/SideTap/Messenger/Messenger';
-import OnlineUser from '../../components/SideTap/OnlineUser/OnlineUser';
+import React, { useState } from "react";
+import FriendList from "../../components/SideTap/FriendList/FriendList";
+import Messenger from "../../components/SideTap/Messenger/Messenger";
+import OnlineUser from "../../components/SideTap/OnlineUser/OnlineUser";
 
-import './SideBar.scss';
+import "./SideBar.scss";
 
 const SideBar = () => {
   const [toggleState, setToggleState] = useState(1);
@@ -12,45 +12,44 @@ const SideBar = () => {
     setToggleState(index);
   };
   return (
-    <div className='sidebar-container'>
-      <div className='bloc-tabs'>
+    <div className="sidebar-container">
+      <div className="bloc-tabs">
         <button
-          className={toggleState === 1 ? 'tabs active-tabs' : 'tabs'}
+          className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
           onClick={() => toggleTab(1)}
         >
           FRIEND
         </button>
         <button
-          className={toggleState === 2 ? 'tabs active-tabs' : 'tabs'}
+          className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
           onClick={() => toggleTab(2)}
         >
           ONLINE
         </button>
         <button
-          className={toggleState === 3 ? 'tabs active-tabs' : 'tabs'}
+          className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
           onClick={() => toggleTab(3)}
         >
           MESSAGE
         </button>
       </div>
 
-      <div className='content-tabs'>
+      <div className="content-tabs">
         <div
-          className={toggleState === 1 ? 'content  active-content' : 'content'}
+          className={toggleState === 1 ? "content  active-content" : "content"}
         >
           <FriendList />
         </div>
-
         <div
-          className={toggleState === 2 ? 'content  active-content' : 'content'}
+          className={toggleState === 2 ? "content  active-content" : "content"}
         >
-          <OnlineUser />
+          {/* <OnlineUser /> */}
         </div>
 
         <div
-          className={toggleState === 3 ? 'content  active-content' : 'content'}
+          className={toggleState === 3 ? "content  active-content" : "content"}
         >
-          <Messenger />
+          {/* <Messenger /> */}
         </div>
       </div>
     </div>

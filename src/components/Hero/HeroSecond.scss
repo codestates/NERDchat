@@ -20,7 +20,7 @@
   margin-left: 50px;
 }
 
-span {
+.text-ani span {
   font-size: 2em;
 }
 
@@ -35,7 +35,7 @@ span {
   margin-right: 350px;
 }
 
-.sub-text h1 {
+.sub-text .second-new {
   text-align: justify;
   font-family: "Poppins", sans-serif;
   font-weight: 100;
@@ -45,7 +45,7 @@ span {
   font-size: 24px;
 }
 
-.text-ani .first {
+.first {
   position: relative;
   animation: bounce 0.5s ease-in-out infinite alternate;
 
@@ -58,16 +58,25 @@ span {
   }
 }
 
-.text-ani span:nth-child(2) {
+.sub-text-h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  color: rgb(216, 216, 216);
+  font-size: 24px;
+  width: 600px;
+  margin-right: 250px;
+}
+
+.text-ani .first:nth-child(2) {
   animation-delay: 0.1s;
 }
-.text-ani span:nth-child(3) {
+.text-ani .first:nth-child(3) {
   animation-delay: 0.2s;
 }
-.text-ani span:nth-child(4) {
+.text-ani .first:nth-child(4) {
   animation-delay: 0.3s;
 }
-.text-ani span:nth-child(5) {
+.text-ani .first:nth-child(5) {
   animation-delay: 0.4s;
 }
 

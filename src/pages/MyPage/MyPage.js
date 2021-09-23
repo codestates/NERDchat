@@ -1,99 +1,124 @@
-import React, { useContext } from 'react';
-import NavBar from '../../components/NavBar/NavBar';
-import SideBar from '../../UI/SideBar/SideBar';
-import { Context } from '../../context/ContextProvider';
-import './MyPage.scss';
+import React, { useState } from "react";
+import NavBar from "../../components/NavBar/NavBar";
+import SideBar from "../../UI/SideBar/SideBar";
 
-function MyPage () {
-  const { userInfo } = useContext(Context);
-  console.log(userInfo.nickname, userInfo.status, userInfo.email);
+import { IoImagesOutline, IoAttachOutline } from "react-icons/io5";
+
+import { Cookies } from "react-cookie";
+import "./MyPage.scss";
+
+function MyPage() {
+  const cookies = new Cookies();
+  let userInfo = cookies.get("userInfo");
+
+  const { userId, avatar, nickname, status, email } = userInfo;
+
+  const [profileImg, setProfileImg] = useState(
+    "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw8NDQ0NDQ0NDQ0NDQ0NDQ0NDw8NDQ0NFREWFhURFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDQ0NFgoNDisZEx4rKy0rKys3LS0rKysrKystKystKy0rKysrKysrLSsrKzcrKys3KysrKzcrKystNy0rK//AABEIAKgBLAMBIgACEQEDEQH/xAAXAAEBAQEAAAAAAAAAAAAAAAAAAQIH/8QAHRABAQACAgMBAAAAAAAAAAAAAAERYSExAnGRUf/EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwDuIAAAJZ13woAigAkqgAAAAAAAAAAAAAACKAAAz4+OM825tvNzjU00AAAAAAACKAAAAAAAIoAigIKAgoAAAioCiWbxudxQAARQABAUAAAAEwAoAAAigCKAAgCooCKAAACKAgoAAAgoIogKigIoACKAACKAAAIACiVQAQBUUEUAAARQAABFABFAAQFEUAEBQABFAAAAAABFABFAAARUAUAAAAAARQBFBFAARQAQFEAUQBQAAAAAAQFBAURQBFAAAAAEUASzjvG5jMUAAEUABFAAAAAAAAAAAAAEUAABIoAkUARQAAAABFARUUBFAAAAAAAAABFAAAAAABFAAAAABFAAARQAAAAABAVBQBFAABBUBRAFABAAVFAEVAUQBUAFQkUARQRUgCiAKIAoigCAKCAoAIogKAAIoIogKAAIoAICoqAoAIoACAKAAgoAgCiAKgAAACgCKAigACAqKACKCSKAIKAgoAgAoICooCKACKAigAIAqKAigACAoJZ7+0FAAAAABAAJ1+7UAAAAAEUBBQBFAAARQARQAAEUARQAQAUAEUAf/9k="
+  );
+
+  const imagehandler = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setProfileImg(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
+  console.log(profileImg);
+  console.log(userId, avatar, nickname, status);
   return (
-    <div className='mypage-container'>
-      <div className='mypage-nav'>
+    <div className="mypage-container">
+      <div className="mypage-nav">
         <NavBar />
       </div>
-      <div className='mypage-main'>
-        <div className='mypage-main-container'>
-          <div className='mypage-main-content'>
-            <div className='mypage-chat'>
-              <div className='mypage-card'>
-                <div className='mypage-photo'>
-                  <img
-                    src={require('../../images/dummy/white.jpeg').default}
-                    alt=''
-                  />
+      <div className="mypage-main">
+        <div className="mypage-main-container">
+          <div className="mypage-main-content">
+            <div className="mypage-chat">
+              <div className="mypage-card">
+                <div className="mypage-photo">
+                  <h3>WELCOM,</h3>
+                  <div className="mypage-nickname">
+                    <h1>{nickname}</h1>
+                  </div>
+                  <img src={avatar === null ? profileImg : avatar} alt="" />
                 </div>
-                <div className='mypage-welcom'>WELCOM,</div>
-                <div className='mypage-nickname'>
-                  {/* {userInfo.nickname} */}
-                  HORANG
-                </div>
-                <div className='mypage-status'>
-                  {/* {userInfo.status}  */}
-                  After the project, the game will be over.
+                <form action="form__input" className="mypage-form">
+                  <label htmlFor="form__input" className="form__label">
+                    <input
+                      type="file"
+                      id="form__input"
+                      className="form__input"
+                      accept="image/*"
+                      onChange={imagehandler}
+                    />
+                    {/* <img
+                      src={require("../../images/dummy/icon.png").default}
+                      className="form__icon"
+                      alt=""
+                    /> */}
+                    <IoAttachOutline className="form__icon" />
+                    <span className="form__text">Choose a Photo</span>
+                  </label>
+                </form>
+                <div className="mypage-status">
+                  {/* <p>What are you thinking?</p> */}
+                  <textarea spellcheck="false">{status}</textarea>
                 </div>
               </div>
-              <div className='mypage-info'>
-                <div className='mypage-infomation'>
+              <div className="mypage-info">
+                <div className="mypage-infomation">
                   <h2>INFORMATION</h2>
                 </div>
-                <div className='form'>
+                <div className="form">
                   <input
-                    type='text'
-                    id='email'
-                    className='form__input'
-                    autocomplete='off'
-                    placeholder=' '
+                    type="text"
+                    id="email"
+                    className="form__input"
+                    autocomplete="off"
+                    placeholder=" "
+                    disabled
                   />
-<<<<<<< HEAD
-                  <label for='email' className='form__label'>
-=======
-                  <label htmlFor='email' className='form__label'>
-                    {/* { userInfo.email} */}
->>>>>>> 9cbb7c5f39823a023362143013a0d0040dcfd816
-                    Email
+                  <label htmlFor="email" className="form__label">
+                    {email}
                   </label>
                 </div>
-                <div className='form'>
+                <div className="form">
                   <input
-                    type='password'
-                    id='password'
-                    className='form__input'
-                    autocomplete='off'
-                    placeholder=' '
+                    type="password"
+                    id="password"
+                    className="form__input"
+                    autocomplete="off"
+                    placeholder=" "
                   />
-<<<<<<< HEAD
-                  <label for='password' className='form__label'>
-=======
-                  <label htmlFor='password' className='form__label'>
->>>>>>> 9cbb7c5f39823a023362143013a0d0040dcfd816
-                    password
+                  <label htmlFor="password" className="form__label">
+                    Password
                   </label>
                 </div>
-                <div className='form'>
+                <div className="form">
                   <input
-                    type='password'
-                    id='passwordConfrim'
-                    className='form__input'
-                    autocomplete='off'
-                    placeholder=' '
+                    type="password"
+                    id="passwordConfrim"
+                    className="form__input"
+                    autocomplete="off"
+                    placeholder=" "
                   />
-<<<<<<< HEAD
-                  <label for='passwordConfrim' className='form__label'>
-=======
-                  <label htmlFor='passwordConfrim' className='form__label'>
->>>>>>> 9cbb7c5f39823a023362143013a0d0040dcfd816
+                  <label htmlFor="passwordConfrim" className="form__label">
                     Confrim Password
                   </label>
                 </div>
-                <button type='submit' className='mypage-button'>
+
+                <button type="submit" className="mypage-button">
                   Edit
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <div className='mypage-sidebar'>
+        <div className="mypage-sidebar">
           <SideBar />
         </div>
       </div>
