@@ -2,196 +2,198 @@ $dark: rgb(23, 23, 23);
 $neonNain: rgb(184, 126, 255);
 $neonSer: rgb(163, 16, 255);
 $neonPink: rgba(255, 0, 242, 0.618);
-@mixin glitchCopy { 
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+@mixin glitchCopy {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
-.room__card__container{
-    cursor: pointer;
-    width: 100%;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content:space-between;
-    border: 1px solid rgba(121, 121, 121, 0.1);
-    // position: relative;
-    background: rgba(255, 255, 255, 0.1);
-    // border-top: 1px solid rgba(255, 255, 255, 0.5);
-    // border-left: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 20px 20px 50x rgba(0, 0, 0, 0.5);
-    // backdrop-filter: blur(5px);
-    transition: box-shadow 1.2s;
-    color: white;
-    &:hover{
-        box-shadow: 0px 120px 0 0 $neonSer inset, 0 -120px 0 0 $neonSer inset;
-    }
+.room__card__container {
+  cursor: pointer;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(121, 121, 121, 0.1);
+  // position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  // border-top: 1px solid rgba(255, 255, 255, 0.5);
+  // border-left: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 20px 20px 50x rgba(0, 0, 0, 0.5);
+  // backdrop-filter: blur(5px);
+  transition: box-shadow 1.2s;
+  color: white;
+  &:hover {
+    box-shadow: 0px 120px 0 0 $neonSer inset, 0 -120px 0 0 $neonSer inset;
+  }
 
-    &:hover .room__title{
-        animation: glitch-skew 1s infinite linear alternate-reverse;
-    }
-    &:hover .room__title::before{
-        @include glitchCopy;
-        left: -2px;
-        text-shadow: 1px 0 #6d01fb, 2px 0 #eb06d8;
-        clip: rect(0, 0, 0, 0);
-        animation: glitch-anim 5s infinite linear alternate-reverse;
-    }
-    &:hover .room__title::after {
-        @include glitchCopy;
-        left: 2px;
-        text-shadow: 1px 0 #63c3ea, 2px 0 #2b30d1;
-        clip: rect(0, 0, 0, 0);
-        animation: glitch-anim2 1s infinite linear alternate-reverse;
-    }
-
-}
-
-
-.room__title__container{
-    width: 100%;
-    flex: 1 1 70%;
-    text-align: center;
+  &:hover .room__title {
+    animation: glitch-skew 1s infinite linear alternate-reverse;
+  }
+  &:hover .room__title::before {
+    @include glitchCopy;
+    left: -2px;
+    text-shadow: 1px 0 #6d01fb, 2px 0 #eb06d8;
+    clip: rect(0, 0, 0, 0);
+    animation: glitch-anim 5s infinite linear alternate-reverse;
+  }
+  &:hover .room__title::after {
+    @include glitchCopy;
+    left: 2px;
+    text-shadow: 1px 0 #63c3ea, 2px 0 #2b30d1;
+    clip: rect(0, 0, 0, 0);
+    animation: glitch-anim2 1s infinite linear alternate-reverse;
+  }
 }
 
-.room__capacity{
-    // position: absolute;
-    // right: 2em;
-    flex: 1 1 30%;
-    // border: 1px solid pink;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1em;
+.room__title {
+  display: flex;
+  justify-content: center;
+  // width: 100%;
+  // flex: 0 1 70%;
+  // text-align: center;
+  margin-left: 1em;
+  span {
+    font-size: 15px;
+  }
 }
 
-
-
+.room__capacity {
+  // position: absolute;
+  // right: 2em;
+  // flex: 0 1 30%;
+  // border: 1px solid pink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  margin-right: 1em;
+}
 
 @keyframes glitch-anim {
-    0% {
-        clip: rect(25px, 400px, 4px, 0);
-      }
-      5.88235% {
-        clip: rect(22px, 400px, 12px, 0);
-      }
-      11.76471% {
-        clip: rect(44px, 400px, 20px, 0);
-      }
-      17.64706% {
-        clip: rect(7px, 400px, 29px, 0);
-      }
-      23.52941% {
-        clip: rect(13px, 400px, 18px, 0);
-      }
-      29.41176% {
-        clip: rect(21px, 400px, 31px, 0);
-      }
-      35.29412% {
-        clip: rect(17px, 400px, 20px, 0);
-      }
-      41.17647% {
-        clip: rect(41px, 400px, 7px, 0);
-      }
-      47.05882% {
-        clip: rect(43px, 400px, 2px, 0);
-      }
-      52.94118% {
-        clip: rect(44px, 400px, 12px, 0);
-      }
-      58.82353% {
-        clip: rect(44px, 400px, 22px, 0);
-      }
-      64.70588% {
-        clip: rect(10px, 400px, 17px, 0);
-      }
-      70.58824% {
-        clip: rect(31px, 400px, 13px, 0);
-      }
-      76.47059% {
-        clip: rect(40px, 400px, 22px, 0);
-      }
-      82.35294% {
-        clip: rect(16px, 400px, 30px, 0);
-      }
-      88.23529% {
-        clip: rect(33px, 400px, 34px, 0);
-      }
-      94.11765% {
-        clip: rect(9px, 400px, 40px, 0);
-      }
-      to {
-        clip: rect(45px, 400px, 21px, 0);
-      }
-}
-  
-  // Same deal, just duplicated for ultra randomness.
-  @keyframes glitch-anim2 {
-    0% {
-        clip: rect(8px, 400px, 50px, 0);
-      }
-      5.88235% {
-        clip: rect(40px, 400px, 41px, 0);
-      }
-      11.76471% {
-        clip: rect(33px, 400px, 16px, 0);
-      }
-      17.64706% {
-        clip: rect(41px, 400px, 9px, 0);
-      }
-      23.52941% {
-        clip: rect(14px, 400px, 30px, 0);
-      }
-      29.41176% {
-        clip: rect(22px, 400px, 33px, 0);
-      }
-      35.29412% {
-        clip: rect(37px, 400px, 48px, 0);
-      }
-      41.17647% {
-        clip: rect(25px, 400px, 37px, 0);
-      }
-      47.05882% {
-        clip: rect(1px, 400px, 18px, 0);
-      }
-      52.94118% {
-        clip: rect(19px, 400px, 27px, 0);
-      }
-      58.82353% {
-        clip: rect(33px, 400px, 29px, 0);
-      }
-      64.70588% {
-        clip: rect(2px, 400px, 38px, 0);
-      }
-      70.58824% {
-        clip: rect(18px, 400px, 41px, 0);
-      }
-      76.47059% {
-        clip: rect(19px, 400px, 45px, 0);
-      }
-      82.35294% {
-        clip: rect(44px, 400px, 32px, 0);
-      }
-      88.23529% {
-        clip: rect(13px, 400px, 43px, 0);
-      }
-      94.11765% {
-        clip: rect(4px, 400px, 6px, 0);
-      }
-      to {
-        clip: rect(30px, 400px, 25px, 0);
-      }
+  0% {
+    clip: rect(25px, 400px, 4px, 0);
   }
-  
-  // only skews. Use for main text.
-  @keyframes glitch-skew {
-    $steps: 10;
-    @for $i from 0 through $steps {
-      #{percentage($i*(1/$steps))} {
-        transform: skew((random(10) - 5) + deg);
-      }
+  5.88235% {
+    clip: rect(22px, 400px, 12px, 0);
+  }
+  11.76471% {
+    clip: rect(44px, 400px, 20px, 0);
+  }
+  17.64706% {
+    clip: rect(7px, 400px, 29px, 0);
+  }
+  23.52941% {
+    clip: rect(13px, 400px, 18px, 0);
+  }
+  29.41176% {
+    clip: rect(21px, 400px, 31px, 0);
+  }
+  35.29412% {
+    clip: rect(17px, 400px, 20px, 0);
+  }
+  41.17647% {
+    clip: rect(41px, 400px, 7px, 0);
+  }
+  47.05882% {
+    clip: rect(43px, 400px, 2px, 0);
+  }
+  52.94118% {
+    clip: rect(44px, 400px, 12px, 0);
+  }
+  58.82353% {
+    clip: rect(44px, 400px, 22px, 0);
+  }
+  64.70588% {
+    clip: rect(10px, 400px, 17px, 0);
+  }
+  70.58824% {
+    clip: rect(31px, 400px, 13px, 0);
+  }
+  76.47059% {
+    clip: rect(40px, 400px, 22px, 0);
+  }
+  82.35294% {
+    clip: rect(16px, 400px, 30px, 0);
+  }
+  88.23529% {
+    clip: rect(33px, 400px, 34px, 0);
+  }
+  94.11765% {
+    clip: rect(9px, 400px, 40px, 0);
+  }
+  to {
+    clip: rect(45px, 400px, 21px, 0);
+  }
+}
+
+// Same deal, just duplicated for ultra randomness.
+@keyframes glitch-anim2 {
+  0% {
+    clip: rect(8px, 400px, 50px, 0);
+  }
+  5.88235% {
+    clip: rect(40px, 400px, 41px, 0);
+  }
+  11.76471% {
+    clip: rect(33px, 400px, 16px, 0);
+  }
+  17.64706% {
+    clip: rect(41px, 400px, 9px, 0);
+  }
+  23.52941% {
+    clip: rect(14px, 400px, 30px, 0);
+  }
+  29.41176% {
+    clip: rect(22px, 400px, 33px, 0);
+  }
+  35.29412% {
+    clip: rect(37px, 400px, 48px, 0);
+  }
+  41.17647% {
+    clip: rect(25px, 400px, 37px, 0);
+  }
+  47.05882% {
+    clip: rect(1px, 400px, 18px, 0);
+  }
+  52.94118% {
+    clip: rect(19px, 400px, 27px, 0);
+  }
+  58.82353% {
+    clip: rect(33px, 400px, 29px, 0);
+  }
+  64.70588% {
+    clip: rect(2px, 400px, 38px, 0);
+  }
+  70.58824% {
+    clip: rect(18px, 400px, 41px, 0);
+  }
+  76.47059% {
+    clip: rect(19px, 400px, 45px, 0);
+  }
+  82.35294% {
+    clip: rect(44px, 400px, 32px, 0);
+  }
+  88.23529% {
+    clip: rect(13px, 400px, 43px, 0);
+  }
+  94.11765% {
+    clip: rect(4px, 400px, 6px, 0);
+  }
+  to {
+    clip: rect(30px, 400px, 25px, 0);
+  }
+}
+
+// only skews. Use for main text.
+@keyframes glitch-skew {
+  $steps: 10;
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      transform: skew((random(10) - 5) + deg);
     }
   }
+}
