@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { Cookies } from "react-cookie";
-import axios from "axios";
 
 const Context = React.createContext({});
 
@@ -21,8 +20,6 @@ const userReducer = (state, action) => {
   }
 };
 
-const ENDPOINT = process.env.REACT_APP_ENDPOINT;
-
 const ContextProvider = ({ children }) => {
   const cookies = new Cookies();
   const [userInfo, dispatchUserInfo] = useReducer(userReducer, userInfoDefault);
@@ -37,40 +34,25 @@ const ContextProvider = ({ children }) => {
   const loginmodalHandler = () => {
     setLoginModalOpen((prev) => !prev);
   };
-
-  //유저정보 쿠키에 저장하기.
   const getUserInfo = (info) => {
     let cookieUserInfo = info;
     const { id, avatar, userId, nickname, email, oauth, status } =
       cookieUserInfo;
     cookieUserInfo = { id, avatar, userId, nickname, email, oauth, status };
     cookies.set("userInfo", cookieUserInfo);
-    // dispatchUserInfo({ type: "GET", item: info });
+    dispatchUserInfo({ type: "GET", item: info });
     // console.log('after dispatch',userInfo)
     // setUserInfo(info)
   };
-  //logout
-  const logoutHandler = async () => {
-    const res = axios.get(`${ENDPOINT}/logout`, { withCredentials: true });
-    console.log(res.isLogout);
-    if (res.isLogout) {
-      cookies.remove("userInfo");
-    }
-  };
+
   const [createRoomOpen, setCreateRoomOpen] = useState(false);
   const createRoomModalHandler = () => {
     setCreateRoomOpen((prev) => !prev);
   };
 
   useEffect(() => {
-    // const act = cookies.get("userInfo").accessToken;
-    // //여기서 서버에 통신을 보내서 유효한 값인지 확인하는것이 필요.
-    // if (act) {
-    //   setIsLogin(true);
-    // } else {
-    //   setIsLogin(false);
-    // }
-  }, []);
+    if (userInfo.accessToken) setIsLogin(true);
+  }, [userInfo]);
   // bookmark
   // friend lists
   // server game lists
@@ -87,7 +69,6 @@ const ContextProvider = ({ children }) => {
         createRoomOpen,
         createRoomModalHandler,
         userInfo,
-        logoutHandler,
       }}
     >
       {children}

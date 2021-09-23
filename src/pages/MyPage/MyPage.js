@@ -1,12 +1,34 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import SideBar from "../../UI/SideBar/SideBar";
-import { Context } from "../../context/ContextProvider";
+
+import { IoImagesOutline, IoAttachOutline } from "react-icons/io5";
+
+import { Cookies } from "react-cookie";
 import "./MyPage.scss";
 
 function MyPage() {
-  const { userInfo } = useContext(Context);
-  console.log(userInfo.nickname, userInfo.status, userInfo.email);
+  const cookies = new Cookies();
+  let userInfo = cookies.get("userInfo");
+
+  const { userId, avatar, nickname, status, email } = userInfo;
+
+  const [profileImg, setProfileImg] = useState(
+    "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw8NDQ0NDQ0NDQ0NDQ0NDQ0NDw8NDQ0NFREWFhURFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDQ0NFgoNDisZEx4rKy0rKys3LS0rKysrKystKystKy0rKysrKysrLSsrKzcrKys3KysrKzcrKystNy0rK//AABEIAKgBLAMBIgACEQEDEQH/xAAXAAEBAQEAAAAAAAAAAAAAAAAAAQIH/8QAHRABAQACAgMBAAAAAAAAAAAAAAERYSExAnGRUf/EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwDuIAAAJZ13woAigAkqgAAAAAAAAAAAAAACKAAAz4+OM825tvNzjU00AAAAAAACKAAAAAAAIoAigIKAgoAAAioCiWbxudxQAARQABAUAAAAEwAoAAAigCKAAgCooCKAAACKAgoAAAgoIogKigIoACKAACKAAAIACiVQAQBUUEUAAARQAABFABFAAQFEUAEBQABFAAAAAABFABFAAARUAUAAAAAARQBFBFAARQAQFEAUQBQAAAAAAQFBAURQBFAAAAAEUASzjvG5jMUAAEUABFAAAAAAAAAAAAAEUAABIoAkUARQAAAABFARUUBFAAAAAAAAABFAAAAAABFAAAAABFAAARQAAAAABAVBQBFAABBUBRAFABAAVFAEVAUQBUAFQkUARQRUgCiAKIAoigCAKCAoAIogKAAIoIogKAAIoAICoqAoAIoACAKAAgoAgCiAKgAAACgCKAigACAqKACKCSKAIKAgoAgAoICooCKACKAigAIAqKAigACAoJZ7+0FAAAAABAAJ1+7UAAAAAEUBBQBFAAARQARQAAEUARQAQAUAEUAf/9k="
+  );
+
+  const imagehandler = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setProfileImg(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
+  console.log(profileImg);
+  console.log(userId, avatar, nickname, status);
   return (
     <div className="mypage-container">
       <div className="mypage-nav">
@@ -18,19 +40,33 @@ function MyPage() {
             <div className="mypage-chat">
               <div className="mypage-card">
                 <div className="mypage-photo">
-                  <img
-                    src={require("../../images/dummy/white.jpeg").default}
-                    alt=""
-                  />
+                  <h3>WELCOM,</h3>
+                  <div className="mypage-nickname">
+                    <h1>{nickname}</h1>
+                  </div>
+                  <img src={avatar === null ? profileImg : avatar} alt="" />
                 </div>
-                <div className="mypage-welcom">WELCOM,</div>
-                <div className="mypage-nickname">
-                  {/* {userInfo.nickname} */}
-                  HORANG
-                </div>
+                <form action="form__input" className="mypage-form">
+                  <label htmlFor="form__input" className="form__label">
+                    <input
+                      type="file"
+                      id="form__input"
+                      className="form__input"
+                      accept="image/*"
+                      onChange={imagehandler}
+                    />
+                    {/* <img
+                      src={require("../../images/dummy/icon.png").default}
+                      className="form__icon"
+                      alt=""
+                    /> */}
+                    <IoAttachOutline className="form__icon" />
+                    <span className="form__text">Choose a Photo</span>
+                  </label>
+                </form>
                 <div className="mypage-status">
-                  {/* {userInfo.status}  */}
-                  After the project, the game will be over.
+                  {/* <p>What are you thinking?</p> */}
+                  <textarea spellcheck="false">{status}</textarea>
                 </div>
               </div>
               <div className="mypage-info">
@@ -44,10 +80,10 @@ function MyPage() {
                     className="form__input"
                     autocomplete="off"
                     placeholder=" "
+                    disabled
                   />
                   <label htmlFor="email" className="form__label">
-                    {/* { userInfo.email} */}
-                    Email
+                    {email}
                   </label>
                 </div>
                 <div className="form">
@@ -59,7 +95,7 @@ function MyPage() {
                     placeholder=" "
                   />
                   <label htmlFor="password" className="form__label">
-                    password
+                    Password
                   </label>
                 </div>
                 <div className="form">
@@ -74,6 +110,7 @@ function MyPage() {
                     Confrim Password
                   </label>
                 </div>
+
                 <button type="submit" className="mypage-button">
                   Edit
                 </button>
