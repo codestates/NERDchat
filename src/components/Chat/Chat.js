@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { IoChatbubblesOutline } from "react-icons/io5";
 import { useParams } from "react-router-dom";
+import Message from "./Message/Message";
+import Input from "../Chat/Input/Input";
 
 import "./Chat.scss";
 
@@ -7,6 +10,17 @@ import useSocket from "../../hooks/useSocket";
 import { Cookies } from "react-cookie";
 
 function Chat() {
+  const messageEl = useRef(null);
+
+  useEffect(() => {
+    if (messageEl) {
+      messageEl.current.addEventListener("DOMNodeInserted", (event) => {
+        const { currentTarget: target } = event;
+        target.scroll({ top: target.scrollHeight, behavior: "smooth" });
+      });
+    }
+  }, []);
+
   const cookies = new Cookies();
 
   let userInfo = cookies.get("userInfo");
@@ -33,33 +47,35 @@ function Chat() {
     e.preventDefault();
   };
   const sendHandler = (e) => {
-    e.preventDefault();
     sendMessage(roomId, chatId, userInfo, newMsg);
+    e.preventDefault();
     setNewMsg("");
   };
 
-  // const onKeyPress = (event) => {
-  //   if (event.key === "Enter") sendHandler();
-  // };
-
   return (
-    <div className="chat-container">
-      <div>
-        {messages.map((msg) => {
-          return (
-            <div className="msg__container">
-              <span>{msg.user}</span>
-              <span>{msg.body}</span>
+    <div className="chatApp">
+      <div className="chatApp__chat">
+        <div className="chatApp__head">
+          <IoChatbubblesOutline />
+        </div>
+        <div className="chatApp__messages" ref={messageEl}>
+          {messages.map((m, i) => (
+            <div
+              key={i}
+              className={`chatApp__msg${i % 2 !== 0 ? " dark" : ""}`}
+            >
+              <Message message={m} />
             </div>
-          );
-        })}
+          ))}
+        </div>
+        <div className="chatApp__footer">
+          <Input
+            msgInputHandler={msgInputHandler}
+            newMsg={newMsg}
+            sendHandler={sendHandler}
+          />
+        </div>
       </div>
-      <form>
-        <input type="text" onChange={msgInputHandler} value={newMsg} />
-        <button type="submit" onClick={sendHandler} onKeyPress={sendHandler}>
-          send!
-        </button>
-      </form>
     </div>
   );
 }
