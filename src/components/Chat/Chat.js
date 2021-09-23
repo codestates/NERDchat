@@ -12,14 +12,13 @@ function Chat() {
   let userInfo = cookies.get("userInfo");
 
   const [newMsg, setNewMsg] = useState("");
-  const [messages, setMessages] = useState([]);
   const { gameId, roomId, chatId } = useParams();
 
   const { id, userId, avatar, nickname } = userInfo;
 
   userInfo = { id, userId, avatar, nickname };
 
-  const { joinRoom, sendMessage, getMessage } = useSocket(
+  const { joinRoom, sendMessage, messages } = useSocket(
     gameId,
     roomId,
     userInfo
@@ -27,7 +26,6 @@ function Chat() {
 
   useEffect(() => {
     joinRoom();
-    getMessage();
   }, []);
 
   const msgInputHandler = (e) => {
@@ -35,8 +33,9 @@ function Chat() {
     e.preventDefault();
   };
   const sendHandler = (e) => {
-    sendMessage(roomId, chatId, userInfo, newMsg);
     e.preventDefault();
+    sendMessage(roomId, chatId, userInfo, newMsg);
+    setNewMsg("");
   };
 
   // const onKeyPress = (event) => {
@@ -45,10 +44,19 @@ function Chat() {
 
   return (
     <div className="chat-container">
-      <div></div>
+      <div>
+        {messages.map((msg) => {
+          return (
+            <div className="msg__container">
+              <span>{msg.user}</span>
+              <span>{msg.body}</span>
+            </div>
+          );
+        })}
+      </div>
       <form>
         <input type="text" onChange={msgInputHandler} value={newMsg} />
-        <button type="submit" onClick={sendHandler}>
+        <button type="submit" onClick={sendHandler} onKeyPress={sendHandler}>
           send!
         </button>
       </form>

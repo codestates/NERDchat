@@ -1,0 +1,20 @@
+.guide__msg {
+  display: flex;
+  margin-top: 1em;
+  justify-content: center;
+  align-items: center;
+}
+.logout__btn__container {
+  margin-top: 1em;
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    padding: 0.5em 1em;
+    border-radius: 0.2em;
+    border: none;
+    cursor: pointer;
+  }
+}
