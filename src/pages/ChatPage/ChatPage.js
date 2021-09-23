@@ -21,7 +21,6 @@ const ChatPage = () => {
           <div className="chatpage-main-content">
             <div className="chatpage-chat">
               <Chat />
-              <Input />
             </div>
             <div className="chatpage-vioce">voice</div>
           </div>

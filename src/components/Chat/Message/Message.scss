@@ -12,13 +12,11 @@
   float: left;
   font-size: 1.1em;
   word-wrap: break-word;
-  margin: 5px 0;
-  padding: 2px;
-  border-bottom: 1px solid rgb(184, 126, 255);
-}
+  padding: 2px 15px;
 
-.messageText img {
-  vertical-align: middle;
+  // border: 1px solid rgb(184, 126, 255);
+  border-radius: 50px;
+  background-color: rgb(184, 126, 255);
 }
 
 .messageContainer {
@@ -60,4 +58,5 @@
 
 .colorDark {
   color: #fff;
+  background-color: rgba(182, 182, 182, 0.358);
 }

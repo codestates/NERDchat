@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Cookies } from "react-cookie";
+import axios from "axios";
+
 import {
   IoBatteryFull,
   IoBatteryDead,
@@ -15,19 +18,25 @@ import "./FriendList.scss";
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const FriendList = () => {
+  const cookies = new Cookies();
+
+  let userInfo = cookies.get("userInfo");
+  console.log(userInfo);
+
   const [userName, setUserName] = useState("Nickname");
   const [loader, setLoader] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`${ENDPOINT}/friends/lists`, {
+        withCredentials: true,
+      })
+      .then((res) => console.log("!!!!!!!!!!", res));
+  }, []);
 
   const clickHandler = () => {
     setLoader((prev) => !prev);
   };
-  // const [data, setData] = useState([]);
-  // const [page, setPage] = useState(1);
-  // const [loader, setLoader] = useState(true);
-
-  // const loadinghandler = (e) => {
-  //   console.log(e);
-  // };
 
   return (
     <>
