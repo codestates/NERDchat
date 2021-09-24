@@ -3,7 +3,7 @@ const { generateAccess, verifyAccess } = require('../../middlewares/token');
 const { generatePassword } = require('../../middlewares/crypto');
 
 module.exports = async (req, res) => {
-  const userData = verifyAccess(req, res);
+  const userData = await verifyAccess(req, res);
   const { nickname, password, status } = req.body;
   const avatar = req.files[0].filename;
   try {
