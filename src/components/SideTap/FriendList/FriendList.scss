@@ -6,31 +6,47 @@
 .friendlist__body {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 20px;
   justify-content: center;
   align-items: center;
+  padding: 40px;
+
+  .friendlist__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
 
   .friendlist__body__nav {
     position: absolute;
 
     .friendlist__name {
-      width: 400px;
-      padding: 0 10px;
-      color: rgb(172, 172, 172);
-      border-radius: 5px;
-      line-height: 50px;
-      font-size: 20px;
-      font-family: "Poppins", sans-serif;
-      font-weight: 100;
+      // padding: 0 5px;
+      // color: rgb(172, 172, 172);
+      // border-radius: 5px;
+      // line-height: 40px;
+      // font-size: 20px;
+      // font-family: "Poppins", sans-serif;
+      // font-weight: 100;
       display: flex;
       flex-direction: row;
       align-items: center;
-    }
 
-    .name-icon {
-      margin-left: 250px;
-      cursor: pointer;
+      transition: all 0.2s ease-in;
+
+      .friendlist__name-span:hover {
+        cursor: pointer;
+        color: $neonNain;
+        filter: drop-shadow(1px 1px 2px $neonSer);
+      }
+
+      .name-icon-container {
+        display: flex;
+      }
+
+      .name-icon {
+        margin-left: 10px;
+      }
     }
   }
 }

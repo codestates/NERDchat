@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useReducer } from "react";
+import axios from "axios";
 import { Cookies } from "react-cookie";
 
 const Context = React.createContext({});
+
+const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const userInfoDefault = {
   accessToken: "",
@@ -22,6 +25,7 @@ const userReducer = (state, action) => {
 
 const ContextProvider = ({ children }) => {
   const cookies = new Cookies();
+  const [friends, setFriends] = useState([]);
   const [userInfo, dispatchUserInfo] = useReducer(userReducer, userInfoDefault);
   // loginmodal state
   const [isLogin, setIsLogin] = useState(false);
@@ -62,7 +66,11 @@ const ContextProvider = ({ children }) => {
     setCreateRoomOpen((prev) => !prev);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    axios
+      .get(`${ENDPOINT}/friends/lists`, { withCredentials: true })
+      .then((res) => setFriends(res.data.data));
+  }, []);
   // bookmark
   // friend lists
   // server game lists
@@ -85,6 +93,7 @@ const ContextProvider = ({ children }) => {
         addFriendModalOpen,
         deleteFriendModalHandler,
         addFriendModalHandler,
+        friends,
       }}
     >
       {children}
