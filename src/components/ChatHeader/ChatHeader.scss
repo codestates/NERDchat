@@ -12,21 +12,23 @@
   }
 
   .chatheader__icon {
-    margin: 0 20px;
+    margin: 0 10px;
     color: rgb(172, 172, 172);
+    margin-top: 7px;
   }
   .chatheader__title {
-    margin-right: 20px;
+    margin: 0 30px;
     color: rgb(172, 172, 172);
   }
 
   .chatheader__title span {
     font-weight: 100;
-    font-size: 30px;
+    font-size: 20px;
   }
   .chatheader__mic {
     flex: 1;
     color: rgb(172, 172, 172);
+    margin-top: 7px;
   }
 
   .chatheader__nember {
@@ -34,6 +36,6 @@
     color: rgb(172, 172, 172);
   }
   .chatheader__nember span {
-    font-size: 20px;
+    font-size: 15px;
   }
 }

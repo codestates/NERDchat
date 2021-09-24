@@ -60,10 +60,7 @@ function Chat() {
         </div>
         <div className="chatApp__messages" ref={messageEl}>
           {messages.map((m, i) => (
-            <div
-              key={i}
-              className={`chatApp__msg${i % 2 !== 0 ? " dark" : ""}`}
-            >
+            <div key={i} className={`chatApp__msg`}>
               <Message message={m} />
             </div>
           ))}

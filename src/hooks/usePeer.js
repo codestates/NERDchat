@@ -3,6 +3,7 @@ import Peer from "peerjs";
 
 export default function usePeer(roomId) {
   const myPeer = new Peer();
+  console.log(myPeer);
   //   const [mediaStream, SetMediaStream] = useState(null);
   //   const [myPeers, setPeers] = useState(null);
   //   const [myPeerID, setMyPeerID] = useState(null);
