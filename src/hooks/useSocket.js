@@ -1,13 +1,27 @@
 import { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
-// import Peer from "peerjs";
+import Peer from "peerjs";
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const useSocket = (serverName, roomId, userInfo) => {
   const socket = useRef();
+  const peer = new Peer();
   const [messages, setMessages] = useState([]);
-  const [nsHeadCount, setNsHeadCount] = useState(0);
+  const [peerId, setPeerId] = useState(null);
+  const [stream, setStream] = useState();
+  const [NsHeadCount, setNsHeadCount] = useState(0);
   const [roomHeadCount, setRoomHeadCount] = useState(0);
+
+  const voiceChatUid = roomId + "-vUid" + Math.floor(Math.random() * 100);
+  console.log("This is voiceChatUid, ", voiceChatUid);
+  const audioOnlyConfig = {
+    video: false,
+    audio: true,
+  };
+  const userMediaConfig = {
+    audio: { echoCancellation: true, noiseSuppression: true },
+    video: { facingMode: "user" },
+  };
 
   useEffect(() => {
     socket.current = io(`${ENDPOINT}/${serverName}`, {
@@ -29,15 +43,15 @@ const useSocket = (serverName, roomId, userInfo) => {
 
     // navigator.mediaDevices
     //   .getUserMedia(audioOnlyConfig)
-    //   .then((stream) => console.log(stream));
+    //   .then((stream) => setStream(stream), setPeerId(stream.id));
+
+    socket.current.on("userConnect", (data) => {
+      console.log(data);
+    });
 
     //현재 nameSpace 접속자 인원 받아오기
     socket.current.on("currentNSLength", (data) => {
-      console.log("This is total num", data);
       setNsHeadCount(data);
-    });
-    socket.current.emit("currentNSLength", "", (data) => {
-      console.log("This is emit from client", data);
     });
     //현재 룸 접속자 인원 받아오기(수정필요)
     socket.current.on("currentRoomLength", (data) => {
@@ -57,7 +71,11 @@ const useSocket = (serverName, roomId, userInfo) => {
     socket.current.emit("roomMessage", roomId, chatId, userInfo, newMsg);
   };
 
-  return { joinRoom, sendMessage, messages, nsHeadCount };
+  // const voiceChat = () => {
+  //   socket.current.emit("voiceChat", 1234, userInfo, peerId);
+  // };
+
+  return { joinRoom, sendMessage, messages };
 };
 
 export default useSocket;
