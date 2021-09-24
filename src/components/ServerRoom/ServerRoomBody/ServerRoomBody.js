@@ -2,6 +2,7 @@ import { useState, useRef, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import "./ServerRoomBody.scss";
 import ServerRoomCard from "../ServerRoomCard/ServerRoomCard";
+import Loader from "../../Loader/Loader";
 import useLists from "../../../hooks/useLists";
 
 const ServerRoomBody = ({ searchedLists, searched }) => {
@@ -36,7 +37,7 @@ const ServerRoomBody = ({ searchedLists, searched }) => {
       return (
         <div key={list.id} ref={lastElementRef}>
           {loading ? (
-            "loading"
+            <Loader />
           ) : (
             <ServerRoomCard
               gameId={gameId}
@@ -45,6 +46,7 @@ const ServerRoomBody = ({ searchedLists, searched }) => {
               uuid={list.uuid}
               max={list.max}
               loading={loading}
+              len={list.len}
             />
           )}
         </div>
@@ -53,7 +55,7 @@ const ServerRoomBody = ({ searchedLists, searched }) => {
       return (
         <div key={list.id}>
           {loading ? (
-            "loading"
+            <Loader />
           ) : (
             <ServerRoomCard
               gameId={gameId}
@@ -62,6 +64,7 @@ const ServerRoomBody = ({ searchedLists, searched }) => {
               uuid={list.uuid}
               max={list.max}
               loading={loading}
+              len={list.len}
             />
           )}
         </div>
@@ -70,18 +73,24 @@ const ServerRoomBody = ({ searchedLists, searched }) => {
   });
   const filteredLists = searchedLists.map((list, idx) => {
     return (
-      <div key={list.id}>
-        <ServerRoomCard
-          gameId={gameId}
-          id={list.id}
-          roomTitle={list.roomTitle}
-          uuid={list.uuid}
-          max={list.max}
-        />
-      </div>
+      <>
+        {loading ? (
+          <Loader />
+        ) : (
+          <div key={list.id}>
+            <ServerRoomCard
+              gameId={gameId}
+              id={list.id}
+              roomTitle={list.roomTitle}
+              uuid={list.uuid}
+              max={list.max}
+              len={list.len}
+            />
+          </div>
+        )}
+      </>
     );
   });
-
   return (
     <div className="room__big__container">
       <div className="roomLists__container">

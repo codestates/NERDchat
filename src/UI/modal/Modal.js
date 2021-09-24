@@ -13,18 +13,26 @@ const Modal = ({ children }) => {
     createRoomModalHandler,
     logoutModalOpen,
     logoutModalHandler,
+    deleteFriendModalOpen,
+    addFriendModalOpen,
+    deleteFriendModalHandler,
+    addFriendModalHandler,
   } = useContext(Context);
   const backgroundCloseHandler = (e) => {
     if (modalRef.current === e.target) {
       if (loginModalOpen) loginmodalHandler();
       else if (createRoomOpen) createRoomModalHandler();
       else if (logoutModalOpen) logoutModalHandler();
+      else if (deleteFriendModalOpen) deleteFriendModalHandler();
+      else if (addFriendModalOpen) addFriendModalHandler();
     }
   };
   const closeButtonHandler = (event) => {
     if (loginModalOpen) loginmodalHandler();
     else if (createRoomOpen) createRoomModalHandler();
     else if (logoutModalOpen) logoutModalHandler();
+    else if (deleteFriendModalOpen) deleteFriendModalHandler();
+    else if (addFriendModalOpen) addFriendModalHandler();
   };
   return (
     <div
