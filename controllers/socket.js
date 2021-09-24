@@ -5,7 +5,7 @@ module.exports = (socket) => {
   socket.on('joinRoom', async (roomUid, voiceChatUid, userData) => {
     // search User and Update User ` currentRoom ` Column
     try {
-      const { id, userId, avatar, nicsocketname } = userData;
+      const { id, userId, avatar, nickname } = userData;
       await Users.update({
         currentRoom: roomUid
       }, {

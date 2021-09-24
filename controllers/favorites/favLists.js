@@ -2,7 +2,7 @@ const { Favorites, GameCategory } = require('../../models');
 const { verifyAccess } = require('../../middlewares/token');
 
 module.exports = async (req, res) => {
-  const userData = verifyAccess(req, res);
+  const userData = await verifyAccess(req, res);
   if (userData) {
     const data = await Favorites.findAll({
       where: { userId: userData.id },

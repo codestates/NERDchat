@@ -3,7 +3,7 @@ const { verifyAccess } = require('../../middlewares/token');
 const { Op } = require('sequelize');
 
 module.exports = async (req, res) => {
-  const userData = verifyAccess(req, res);
+  const userData = await verifyAccess(req, res);
   if (userData) {
     const friendsList = await Friends.findAll({
       where: {

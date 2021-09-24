@@ -3,7 +3,7 @@ const { verifyAccess } = require('../../middlewares/token');
 const { Op } = require('sequelize');
 
 module.exports = async (req, res) => {
-  const userData = verifyAccess(req, res);
+  const userData = await verifyAccess(req, res);
   if (userData) {
   const friend = await Users.findOne({ where: { nickname: req.params.nickname } });
   if (!friend) res.status(404).json({ message: 'Friend not found' });

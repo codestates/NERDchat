@@ -2,7 +2,7 @@ const { Favorites, GameCategory } = require('../../models');
 const { verifyAccess } = require('../../middlewares/token');
 
 module.exports = async (req, res) => {
-  const userData = verifyAccess(req, res);
+  const userData = await verifyAccess(req, res);
   if (userData) {
     const gameId = req.params.gameId;
     const check = await GameCategory.findOne({ where: { id: gameId } });

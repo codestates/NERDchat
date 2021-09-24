@@ -2,10 +2,8 @@ const { Users } = require('../../models');
 const { verifyAccess } = require('../../middlewares/token');
 
 module.exports = async (req, res) => {
-  const userData = verifyAccess(req, res);
-  if (!userData) {
-    return res.status(400).send('Error');
-  }
+  const userData = await verifyAccess(req, res);
+  if (userData) {
   try {
     const { email, nickname } = userData;
     await Users.destroy({ where: { email, nickname } });
@@ -13,4 +11,5 @@ module.exports = async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+}
 };
