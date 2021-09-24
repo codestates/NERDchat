@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import FriendList from "../../components/SideTap/FriendList/FriendList";
 import Messenger from "../../components/SideTap/Messenger/Messenger";
 import OnlineUser from "../../components/SideTap/OnlineUser/OnlineUser";
+import { IoBatteryFull } from "react-icons/io5";
+
+import { Context } from "../../context/ContextProvider";
 
 import "./SideBar.scss";
 
 const SideBar = () => {
   const [toggleState, setToggleState] = useState(1);
+
+  const { friends } = useContext(Context);
+  console.log(friends);
 
   const toggleTab = (index) => {
     setToggleState(index);
@@ -38,18 +44,26 @@ const SideBar = () => {
         <div
           className={toggleState === 1 ? "content  active-content" : "content"}
         >
+          <IoBatteryFull size={30} className="content-BatteryFull" />
+          {friends.map((el) => (
+            <FriendList key={el.id} avatar={el.avatar} nickname={el.nickname} />
+          ))}
+          {/* <FriendList />
           <FriendList />
+          <FriendList />
+          <FriendList />
+          <FriendList /> */}
         </div>
         <div
           className={toggleState === 2 ? "content  active-content" : "content"}
         >
-          {/* <OnlineUser /> */}
+          <FriendList />
         </div>
 
         <div
           className={toggleState === 3 ? "content  active-content" : "content"}
         >
-          {/* <Messenger /> */}
+          <FriendList />
         </div>
       </div>
     </div>
