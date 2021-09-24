@@ -23,7 +23,8 @@ const ServerPageCard = ({ category, img, id, like }) => {
     const res = await axios.get(`${ENDPOINT}/favorites/request/${id}`, {
       withCredentials: true,
     });
-    if (!res) console.log(res.data.data);
+    console.log(res);
+    if (!res.data.data) console.log(res.data);
     if (res.data.data) setClicked((prev) => !prev);
   };
   useEffect(() => {

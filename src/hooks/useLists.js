@@ -26,7 +26,7 @@ const useLists = (pageNum, method, api, data) => {
       withCredentials: true,
       data: data,
     });
-    // console.log(res.data);
+    console.log(res.data);
     setLists((prev) => [...prev, ...res.data.data]);
     // setLists((prev) => {return [...new Set([...prev, ...res.data.data])]});
     setHasMore(res.data.data.length > 0);

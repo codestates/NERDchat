@@ -10,7 +10,8 @@ const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const ServerRoom = () => {
   const { gameId } = useParams();
-  // console.log(gameId)
+  const { message, sendMessage } = useSocket(gameId, "");
+  console.log("This is ServerRoom compo");
   const [searchedLists, setSearchedLists] = useState([]);
   const [isSearched, setIsSearched] = useState(0);
   const searchHandler = async (title) => {
@@ -19,7 +20,6 @@ const ServerRoom = () => {
     setSearchedLists(res.data);
     setIsSearched(1);
   };
-  const { message, sendMessage } = useSocket(gameId, "");
 
   return (
     <>
