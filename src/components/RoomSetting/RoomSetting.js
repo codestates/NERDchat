@@ -3,6 +3,7 @@ import Modal from "../../UI/modal/Modal";
 import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
 import { Context } from "../../context/ContextProvider";
+import Loader from "../Loader/Loader";
 import "./RoomSetting.scss";
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
@@ -15,6 +16,7 @@ const RoomSetting = () => {
   const [headCount, setHeadCount] = useState(0);
   const [title, setTitle] = useState("");
   const [err, setErr] = useState("");
+  const [loading, setLoading] = useState("false");
 
   const titleHandler = (e) => {
     setTitle(e.target.value);
@@ -24,14 +26,14 @@ const RoomSetting = () => {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-    // if (title.trim().length <= 2) {
-    //   setErr("Room Title should be longer than 2 letters");
-    //   console.log(222212, title, err);
-    // } else if (headCount < 2) {
-    //   setErr("Room Title should be longer than 2 letters");
-    // }
-    // if (err.length > 0) return alert("do it again");
-    console.log(serverId, title, headCount);
+    setLoading(true);
+    if (title.trim().length <= 2) {
+      setErr("Room Title should be longer than 2 letters");
+      console.log(222212, title, err);
+    } else if (headCount < 2) {
+      setErr("Room Title should be longer than 2 letters");
+    }
+    // console.log(serverId, title, headCount);
 
     const chatId = 1;
     if (title.trim().length > 2 && headCount >= 2) {
@@ -43,7 +45,7 @@ const RoomSetting = () => {
       const { roomTitle, uuid, gameId, current, max, createdAt } =
         res.data.data;
       console.log("This is created", res.data.data);
-
+      setLoading(false);
       createRoomModalHandler();
       // chatroom안으로 리 다이렉트 시키기.
       // chatId 달라고 하기.
@@ -53,6 +55,7 @@ const RoomSetting = () => {
 
   return (
     <>
+      {loading && <Loader />}
       <Modal>
         <form className="room__setting__container" onSubmit={submitHandler}>
           {/* <div>Room</div> */}

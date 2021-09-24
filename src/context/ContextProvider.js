@@ -27,6 +27,8 @@ const ContextProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [logoutModalOpen, setLogoutModalOpen] = useState(false);
+  const [deleteFriendModalOpen, setDeleteFriendModalOpen] = useState(false);
+  const [addFriendModalOpen, setAddFriendModalOpen] = useState(false);
 
   const isLoginHandler = () => {
     // logout은 false값 받아오기
@@ -37,6 +39,12 @@ const ContextProvider = ({ children }) => {
   };
   const logoutModalHandler = () => {
     setLogoutModalOpen((prev) => !prev);
+  };
+  const deleteFriendModalHandler = () => {
+    setDeleteFriendModalOpen((prev) => !prev);
+  };
+  const addFriendModalHandler = () => {
+    setAddFriendModalOpen((prev) => !prev);
   };
   const getUserInfo = (info) => {
     let cookieUserInfo = info;
@@ -73,6 +81,10 @@ const ContextProvider = ({ children }) => {
         userInfo,
         logoutModalOpen,
         logoutModalHandler,
+        deleteFriendModalOpen,
+        addFriendModalOpen,
+        deleteFriendModalHandler,
+        addFriendModalHandler,
       }}
     >
       {children}
