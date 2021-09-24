@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import Modal from "../../UI/modal/Modal";
 import axios from "axios";
-import Context from "../../context/ContextProvider";
+import { Context } from "../../context/ContextProvider";
 import "./UserDelete.scss";
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
-const UserDelete = () => {
+const UserDelete = ({ nickname }) => {
   const { deleteFriendModalHandler } = useContext(Context);
 
   const okHandler = async () => {

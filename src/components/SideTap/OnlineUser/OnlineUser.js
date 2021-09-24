@@ -1,108 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import { IoBatteryFull, IoBatteryDead } from 'react-icons/io5';
+import React, { useState, useRef } from "react";
 
-import './OnlineUser.scss';
-const PAGE_NUMBER = 1;
-function OnlineUser () {
-  const [userName, setUserName] = useState('Nickname');
+import { IoChevronDown } from "react-icons/io5";
+import OnlineUserDropDown from "./DropDown/OnlineUserDropDown";
+import "./OnlineUser.scss";
 
-  const [state, setState] = useState([]);
-  const [page, setPage] = useState(PAGE_NUMBER);
+const OnlineUser = () => {
+  const [userName, setUserName] = useState("");
+  const [loader, setLoader] = useState(false);
+  const dropRef = useRef();
 
+  const clickHandler = () => {
+    setLoader((prev) => !prev);
+  };
+
+  const backgroundCloseHandler = (e) => {
+    if (dropRef.current === e.target) {
+      setLoader(false);
+    }
+  };
   return (
-    <div className='userlist'>
-      <div className='useronline'>
-        <div className='user-container'>
-          <img
-            className='onlinefriend'
-            src={require('../../../images/dummy/white.jpeg').default}
-            alt=''
-          />
-          <span className='onlinefriendname'>{userName}</span>
-        </div>
-        <div className='user-container'>
-          <img
-            className='onlinefriend'
-            src={require('../../../images/dummy/white.jpeg').default}
-            alt=''
-          />
-          <span className='onlinefriendname'>{userName}</span>
-        </div>
-        <div className='user-container'>
-          <img
-            className='onlinefriend'
-            src={require('../../../images/dummy/white.jpeg').default}
-            alt=''
-          />
-          <span className='onlinefriendname'>{userName}</span>
-        </div>
-        <div className='user-container'>
-          <img
-            className='onlinefriend'
-            src={require('../../../images/dummy/white.jpeg').default}
-            alt=''
-          />
-          <span className='onlinefriendname'>{userName}</span>
-        </div>
-        <div className='user-container'>
-          <img
-            className='onlinefriend'
-            src={require('../../../images/dummy/white.jpeg').default}
-            alt=''
-          />
-          <span className='onlinefriendname'>{userName}</span>
-        </div>
-        <div className='user-container'>
-          <img
-            className='onlinefriend'
-            src={require('../../../images/dummy/white.jpeg').default}
-            alt=''
-          />
-          <span className='onlinefriendname'>{userName}</span>
-        </div>
-        <div className='user-container'>
-          <img
-            className='onlinefriend'
-            src={require('../../../images/dummy/white.jpeg').default}
-            alt=''
-          />
-          <span className='onlinefriendname'>{userName}</span>
-        </div>
-        <div className='user-container'>
-          <img
-            className='onlinefriend'
-            src={require('../../../images/dummy/white.jpeg').default}
-            alt=''
-          />
-          <span className='onlinefriendname'>{userName}</span>
-        </div>
-        <div className='user-container'>
-          <img
-            className='onlinefriend'
-            src={require('../../../images/dummy/white.jpeg').default}
-            alt=''
-          />
-          <span className='onlinefriendname'>{userName}</span>
-        </div>
-        <div className='user-container'>
-          <img
-            className='onlinefriend'
-            src={require('../../../images/dummy/white.jpeg').default}
-            alt=''
-          />
-          <span className='onlinefriendname'>{userName}</span>
-        </div>
-        <div className='user-container'>
-          <img
-            className='onlinefriend'
-            src={require('../../../images/dummy/white.jpeg').default}
-            alt=''
-          />
-          <span className='onlinefriendname'>{userName}</span>
+    <>
+      <div
+        className="onlineuser__body"
+        ref={dropRef}
+        onClick={backgroundCloseHandler}
+      >
+        <div className="onlineuser__body__nav">
+          <div className="onlineuser__name" onClick={clickHandler}>
+            <img
+              src={require("../../../images/dummy/white.jpeg").default}
+              className="onlineuser__avatar"
+              alt=""
+            />
+            <span className="onlineuser__name-span">{userName}</span>{" "}
+            <div className="user-icon-container">
+              <IoChevronDown size={15} className="user-icon" />
+            </div>
+          </div>
+          {loader && <OnlineUserDropDown />}
         </div>
       </div>
-    </div>
+    </>
   );
-}
+};
 
 export default OnlineUser;

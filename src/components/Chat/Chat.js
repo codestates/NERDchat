@@ -10,9 +10,9 @@ import useSocket from "../../hooks/useSocket";
 import { Cookies } from "react-cookie";
 
 function Chat() {
-  const audioList = useRef();
-  const audioRef = useRef();
-  console.log("chat compo");
+  // const audioList = useRef();
+  // const audioRef = useRef();
+  // console.log("chat compo");
   const messageEl = useRef(null);
 
   useEffect(() => {
@@ -37,9 +37,9 @@ function Chat() {
   const { joinRoom, sendMessage, messages } = useSocket(
     gameId,
     roomId,
-    userInfo,
-    audioList,
-    audioRef
+    userInfo
+    // audioList,
+    // audioRef
   );
 
   useEffect(() => {
@@ -69,9 +69,9 @@ function Chat() {
             </div>
           ))}
         </div>
-        <div ref={audioList}>
+        {/* <div ref={audioList}>
           <audio ref={audioRef}>mute</audio>
-        </div>
+        </div> */}
         <div className="chatApp__footer">
           <Input
             msgInputHandler={msgInputHandler}

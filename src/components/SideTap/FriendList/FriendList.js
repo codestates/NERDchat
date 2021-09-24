@@ -1,20 +1,11 @@
 import React, { useState, useRef } from "react";
-import { Cookies } from "react-cookie";
 
-import { IoBatteryFull, IoBatteryDead, IoChevronDown } from "react-icons/io5";
+import { IoChevronDown } from "react-icons/io5";
 import DropDown from "./DropDown/DropDown";
 
 import "./FriendList.scss";
 
-const ENDPOINT = process.env.REACT_APP_ENDPOINT;
-
 const FriendList = ({ avatar, nickname }) => {
-  const cookies = new Cookies();
-
-  console.log(nickname);
-
-  let userInfo = cookies.get("userInfo");
-
   const [userName, setUserName] = useState(nickname);
   const [loader, setLoader] = useState(false);
   const dropRef = useRef();
@@ -48,7 +39,7 @@ const FriendList = ({ avatar, nickname }) => {
               <IoChevronDown size={15} className="name-icon" />
             </div>
           </div>
-          {loader && <DropDown />}
+          {loader && <DropDown nickname={nickname} />}
         </div>
       </div>
     </>

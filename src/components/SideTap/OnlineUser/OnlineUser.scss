@@ -1,22 +1,52 @@
-.userlist {
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+
+@import "_color";
+
+.onlineuser__body {
   display: flex;
   flex-direction: column;
-  color: white;
-  width: 100%;
-  height: 100%;
   justify-content: center;
+  align-items: center;
+  padding: 40px;
 
-  .useronline {
-    border: 1px solid white;
-    flex: 1;
-    text-align: center;
-  }
-
-  .onlinefriend {
-    width: 30px;
-    height: 30px;
+  .onlineuser__avatar {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     margin-right: 10px;
-    margin-top: 15px;
+  }
+
+  .onlineuser__body__nav {
+    position: absolute;
+
+    .onlineuser__name {
+      // padding: 0 5px;
+      // color: rgb(172, 172, 172);
+      // border-radius: 5px;
+      // line-height: 40px;
+      // font-size: 20px;
+      // font-family: "Poppins", sans-serif;
+      // font-weight: 100;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      transition: all 0.2s ease-in;
+
+      .onlineuser__name-span:hover {
+        cursor: pointer;
+        color: $neonNain;
+        filter: drop-shadow(1px 1px 2px $neonSer);
+      }
+
+      .user-icon-container {
+        display: flex;
+      }
+
+      .user-icon {
+        margin-left: 10px;
+      }
+    }
   }
 }

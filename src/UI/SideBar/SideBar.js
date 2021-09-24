@@ -48,16 +48,12 @@ const SideBar = () => {
           {friends.map((el) => (
             <FriendList key={el.id} avatar={el.avatar} nickname={el.nickname} />
           ))}
-          {/* <FriendList />
-          <FriendList />
-          <FriendList />
-          <FriendList />
-          <FriendList /> */}
         </div>
         <div
           className={toggleState === 2 ? "content  active-content" : "content"}
         >
-          <FriendList />
+          <IoBatteryFull size={30} className="content-BatteryFull" />
+          <OnlineUser />
         </div>
 
         <div

@@ -1,8 +1,11 @@
 import React, { useState, useRef, useContext } from "react";
 import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
-import { AiFillFacebook } from "react-icons/ai";
-import kakao from "./kakao.png";
+import {
+  RiGoogleFill,
+  RiKakaoTalkFill,
+  RiFacebookBoxFill,
+} from "react-icons/ri";
 import { useHistory } from "react-router-dom";
 import { Context } from "../../context/ContextProvider";
 import "./LoginBody.scss";
@@ -89,36 +92,56 @@ const Login = () => {
       )}
       <form className="login__input__container" onSubmit={LoginHandler}>
         <div className="id__input__container">
-          <label htmlFor="id">아이디</label>
-          <input type="text" id="id" ref={idInputRef} />
+          <input
+            type="text"
+            id="id"
+            ref={idInputRef}
+            required
+            autocomplet="off"
+            className="form-control"
+            placeholder="ID"
+          />
+          <label htmlFor="id" className="form-label">
+            ID
+          </label>
         </div>
         <div className="pw__input__container">
-          <label htmlFor="pw">비밀번호</label>
-          <input type="password" id="pw" ref={pwInputRef} />
+          <input
+            type="password"
+            id="pw"
+            ref={pwInputRef}
+            placeholder="password"
+            autocomplet="off"
+            className="form-control"
+            placeholder="PASSWORD"
+          />
+          <label htmlFor="pw" className="form-label">
+            PASSWORD
+          </label>
         </div>
         <button type="submit" className="LoginBtn">
-          로그인
+          Login
         </button>
       </form>
       <div className="split__container">
         <div className="modal__split" />
-        <p>또는</p>
+        <p>OR</p>
         <div className="modal__split" />
       </div>
       <div className="social__login">
-        <button onClick={googleHandler}>
+        <button onClick={googleHandler} className="social__login-btn">
           <div className="google">
-            <FcGoogle size={35} />
+            <FcGoogle size={27} />
           </div>
         </button>
-        <button onClick={kakaoHandler}>
+        <button onClick={kakaoHandler} className="social__login-btn">
           <div className="kakao">
-            <img src={kakao} width="35px" alt="kakaoLogo" />
+            <RiKakaoTalkFill size={30} />
           </div>
         </button>
-        <button onClick={facebookHandler}>
+        <button onClick={facebookHandler} className="social__login-btn">
           <div className="facebook">
-            <AiFillFacebook size={35} style={{ fill: "#4267B2" }} />
+            <RiFacebookBoxFill size={30} />
           </div>
         </button>
       </div>
