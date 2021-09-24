@@ -11,7 +11,7 @@ module.exports = {
     const oauth = req.cookies.oauth;
     if (!accessToken) res.status(401).json({ message: 'token not found' });
     else {
-      switch(oauth) {
+      switch (oauth) {
         case 'none':
           try {
             const userData = jwt.verify(accessToken, process.env.ACCESS_SECRET);

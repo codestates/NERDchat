@@ -3,7 +3,7 @@ const { verifyAccess } = require('../../middlewares/token');
 const { v4 } = require('uuid');
 
 module.exports = async (req, res) => {
-  const userData = verifyAccess(req, res);
+  const userData = await verifyAccess(req, res);
   if (userData) {
     const { gameId, title, max } = req.body;
     const uuid = v4();

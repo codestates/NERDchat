@@ -2,7 +2,7 @@ const { GameCategory } = require('../../models');
 const { verifyAccess } = require('../../middlewares/token');
 
 module.exports = async (req, res) => {
-  const userData = verifyAccess(req, res);
+  const userData = await verifyAccess(req, res);
   const uuid = req.params.uuid;
   if (!userData.superuser) res.status(403).json({ message: 'not admin' });
   else {

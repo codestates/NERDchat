@@ -5,7 +5,7 @@ const io = require('socket.io')();
 
 module.exports = async (req, res) => {
   const { uuid } = req.params;
-  const userData = verifyAccess(req, res);
+  const userData = await verifyAccess(req, res);
   if (userData) {
     try {
       const usersRoomId = await Users.findOne({ where: { id: userData.id } });
