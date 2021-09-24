@@ -42,7 +42,7 @@ $neonSer: rgb(163, 16, 255);
       left: 0;
       $padding: 1.5rem;
       padding: $padding;
-      transform: transLateY(45%);
+      transform: transLateY(55%);
       transition: transform 500ms ease;
       cursor: pointer;
       .title__container {
@@ -75,9 +75,6 @@ $neonSer: rgb(163, 16, 255);
           // transform: scale(1);
           // width: 50px;
           // transition: transform 500ms infinite ease;
-          :hover {
-            color: $neonSer;
-          }
         }
       }
     }
@@ -100,6 +97,7 @@ $neonSer: rgb(163, 16, 255);
       opacity: 1;
     }
     &:hover .game__server__content__container > .server__arrow {
+      color: $neonSer;
       // transform: scale(1.1);
       animation: heartbeat 700ms infinite ease;
     }

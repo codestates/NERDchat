@@ -6,8 +6,9 @@ const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 const useSocket = (serverName, roomId, userInfo) => {
   const socket = useRef();
   const [messages, setMessages] = useState([]);
-  const [NsHeadCount, setNsHeadCount] = useState(0);
+  const [nsHeadCount, setNsHeadCount] = useState(0);
   const [roomHeadCount, setRoomHeadCount] = useState(0);
+
   useEffect(() => {
     socket.current = io(`${ENDPOINT}/${serverName}`, {
       query: { serverName, roomId },
@@ -32,7 +33,11 @@ const useSocket = (serverName, roomId, userInfo) => {
 
     //현재 nameSpace 접속자 인원 받아오기
     socket.current.on("currentNSLength", (data) => {
+      console.log("This is total num", data);
       setNsHeadCount(data);
+    });
+    socket.current.emit("currentNSLength", "", (data) => {
+      console.log("This is emit from client", data);
     });
     //현재 룸 접속자 인원 받아오기(수정필요)
     socket.current.on("currentRoomLength", (data) => {
@@ -52,7 +57,7 @@ const useSocket = (serverName, roomId, userInfo) => {
     socket.current.emit("roomMessage", roomId, chatId, userInfo, newMsg);
   };
 
-  return { joinRoom, sendMessage, messages };
+  return { joinRoom, sendMessage, messages, nsHeadCount };
 };
 
 export default useSocket;
