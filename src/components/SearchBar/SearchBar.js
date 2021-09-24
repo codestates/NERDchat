@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { IoSearchOutline, IoCloseOutline } from "react-icons/io5";
 import axios from "axios";
 
 import "./SearchBar.scss";
@@ -13,13 +14,57 @@ function SearchBar() {
     });
   }, []);
   console.log(game);
+
+  const [filteredData, setFilteredData] = useState([]);
+  const [wordEntered, setWordEntered] = useState("");
+
+  const handleFilter = (event) => {
+    const searchWord = event.target.value;
+    setWordEntered(searchWord);
+    const newFilter = game.filter((value) => {
+      return value.category.toLowerCase().includes(searchWord.toLowerCase());
+    });
+
+    if (searchWord === "") {
+      setFilteredData([]);
+    } else {
+      setFilteredData(newFilter);
+    }
+  };
+
+  const clearInput = () => {
+    setFilteredData([]);
+    setWordEntered("");
+  };
   return (
-    <div className="search__container">
-      <div className="search__inputs">
-        <input type="text" placeholder="Enter the Game Name" />
-        <div className="search__icon"></div>
+    <div className="search">
+      <div className="searchInputs">
+        <input
+          className="searchInputs-input"
+          type="text"
+          placeholder="Search the Game"
+          value={wordEntered}
+          onChange={handleFilter}
+        />
+        <div className="searchIcon">
+          {filteredData.length === 0 ? (
+            <IoSearchOutline className="searchIcon-search" />
+          ) : (
+            <IoCloseOutline id="clearBtn" onClick={clearInput} />
+          )}
+        </div>
       </div>
-      <div className="search__data"></div>
+      {filteredData.length != 0 && (
+        <div className="dataResult">
+          {filteredData.map((value, key) => {
+            return (
+              <a className="dataItem" target="_blank" key={key}>
+                <p className="dataItem-p">{value.category}</p>
+              </a>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
