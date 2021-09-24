@@ -12,8 +12,6 @@ const useSocket = (serverName, roomId, userInfo) => {
   const [NsHeadCount, setNsHeadCount] = useState(0);
   const [roomHeadCount, setRoomHeadCount] = useState(0);
 
-  const voiceChatUid = roomId + "-vUid" + Math.floor(Math.random() * 100);
-  console.log("This is voiceChatUid, ", voiceChatUid);
   const audioOnlyConfig = {
     video: false,
     audio: true,
