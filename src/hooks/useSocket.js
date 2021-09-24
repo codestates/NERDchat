@@ -5,27 +5,30 @@ const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const useSocket = (serverName, roomId, userInfo) => {
   const socket = useRef();
-  const peer = new Peer();
+  const myPeer = new Peer();
+  const audioList = useRef();
+  const audioref = useRef();
   const [messages, setMessages] = useState([]);
-  const [peerId, setPeerId] = useState(null);
-  const [stream, setStream] = useState();
-  const [NsHeadCount, setNsHeadCount] = useState(0);
+  const [nsHeadCount, setNsHeadCount] = useState(0);
   const [roomHeadCount, setRoomHeadCount] = useState(0);
 
-  const audioOnlyConfig = {
-    video: false,
-    audio: true,
-  };
-  const userMediaConfig = {
-    audio: { echoCancellation: true, noiseSuppression: true },
-    video: { facingMode: "user" },
-  };
-
+  const voiceChatUid = roomId + "-vUid" + Math.floor(Math.random() * 100);
+  console.log("This is voiceChatUid, ", voiceChatUid);
+  // const addAudioStream = (audio, stream) => {
+  //   audio.srcObject = stream;
+  //   audio.addEvent
+  // };
   useEffect(() => {
-    socket.current = io(`${ENDPOINT}/${serverName}`, {
-      query: { serverName, roomId },
-    });
-
+    socket.current = io(`${ENDPOINT}/${serverName}`);
+    if (roomId) {
+      socket.current.emit(
+        "joinRoom",
+        roomId,
+        voiceChatUid,
+        userInfo,
+        "welcome!!!"
+      );
+    }
     socket.current.on("welcomeRoom", (userData, msgData) =>
       console.log(userData, msgData)
     );
@@ -40,16 +43,19 @@ const useSocket = (serverName, roomId, userInfo) => {
     });
 
     // navigator.mediaDevices
-    //   .getUserMedia(audioOnlyConfig)
-    //   .then((stream) => setStream(stream), setPeerId(stream.id));
-
-    socket.current.on("userConnect", (data) => {
-      console.log(data);
-    });
+    //   .getUserMedia({ video: false, audio: true })
+    //   .then((stream) => {
+    //     myPeer.on("call", (call) => call.answer(stream));
+    //     socket.current.on("");
+    //   });
 
     //현재 nameSpace 접속자 인원 받아오기
     socket.current.on("currentNSLength", (data) => {
+      console.log("This is total num", data);
       setNsHeadCount(data);
+    });
+    socket.current.emit("currentNSLength", "", (data) => {
+      console.log("This is emit from client", data);
     });
     //현재 룸 접속자 인원 받아오기(수정필요)
     socket.current.on("currentRoomLength", (data) => {
@@ -62,18 +68,23 @@ const useSocket = (serverName, roomId, userInfo) => {
   }, []);
 
   const joinRoom = () => {
-    socket.current.emit("joinRoom", roomId, 1234, userInfo, "welcome!!!");
+    socket.current.emit(
+      "joinRoom",
+      roomId,
+      voiceChatUid,
+      userInfo,
+      "welcome!!!"
+    );
   };
 
   const sendMessage = (roomId, chatId, userInfo, newMsg) => {
     socket.current.emit("roomMessage", roomId, chatId, userInfo, newMsg);
   };
 
-  // const voiceChat = () => {
-  //   socket.current.emit("voiceChat", 1234, userInfo, peerId);
-  // };
+  const createPeer = () => {};
+  const addpeer = () => {};
 
-  return { joinRoom, sendMessage, messages };
+  return { joinRoom, sendMessage, messages, nsHeadCount };
 };
 
 export default useSocket;
