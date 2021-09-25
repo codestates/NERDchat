@@ -3,11 +3,13 @@ import { IoChatbubblesOutline } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import Message from "./Message/Message";
 import Input from "../Chat/Input/Input";
+import { ReactComponent as Glasses } from "../../images/glasses.svg";
 
 import "./Chat.scss";
 
 import useSocket from "../../hooks/useSocket";
 import { Cookies } from "react-cookie";
+import NerdChatHeader from "./Message/NerdChatHeader/NerdChatHeader";
 
 function Chat() {
   // const audioList = useRef();
@@ -59,9 +61,7 @@ function Chat() {
   return (
     <div className="chatApp">
       <div className="chatApp__chat">
-        <div className="chatApp__head">
-          <IoChatbubblesOutline />
-        </div>
+        <div className="chatApp__head"></div>
         <div className="chatApp__messages" ref={messageEl}>
           {messages.map((m, i) => (
             <div key={i} className={`chatApp__msg`}>

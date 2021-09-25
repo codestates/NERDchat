@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import {
   IoFingerPrintOutline,
@@ -11,15 +11,17 @@ import { Context } from "../../../../context/ContextProvider";
 import "./DropDown.scss";
 
 function DropDown({ nickname }) {
+  const [userNickname, setUserNickname] = useState(nickname);
   const { deleteFriendModalHandler, deleteFriendModalOpen } =
     useContext(Context);
 
   const deleteModalHandler = () => {
     deleteFriendModalHandler();
   };
+
   return (
     <div className="friendlist__wrapper">
-      {deleteFriendModalOpen && <UserDelete nickname={nickname} />}
+      {deleteFriendModalOpen && <UserDelete nickname={userNickname} />}
       <ul className="friendlist__menu">
         <li className="friendlist__li">
           <a href="#" className="friendlist__a">

@@ -19,13 +19,11 @@
     .chatpage-main-container {
       display: flex;
       flex-direction: column;
-      // background-color: #fff;
-      width: 70%;
+      width: 76%;
     }
 
     .chatpage-main-header {
       flex: 0.1;
-      // border: 1px solid blueviolet;
       margin-bottom: 10px;
       box-shadow: -2px 2px 15px black;
     }
@@ -35,17 +33,13 @@
       flex: 1;
     }
     .chatpage-chat {
-      // border: 1px solid blueviolet;
-      // background-color: #fff;
-      flex: 1;
+      flex: 1.5;
       height: 100%;
       margin-right: 10px;
       box-shadow: -3px 3px 15px black;
     }
 
     .chatpage-vioce {
-      // border: 1px solid blueviolet;
-      // background-color: #fff;
       flex: 1;
       height: 100%;
       box-shadow: 0 3px 15px black;
@@ -58,4 +52,3 @@
     }
   }
 }
-// .chatpage-sidebar  flex: 0.8;

@@ -39,7 +39,7 @@ const FriendList = ({ avatar, nickname }) => {
               <IoChevronDown size={15} className="name-icon" />
             </div>
           </div>
-          {loader && <DropDown nickname={nickname} />}
+          {loader && <DropDown nickname={userName} />}
         </div>
       </div>
     </>

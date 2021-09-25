@@ -6,10 +6,10 @@ $title: rgb(172, 172, 172);
 .err__container {
   display: flex;
   justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
   font-size: 15px;
-  border: 2px solid rgb(216, 43, 43);
-  border-radius: 0.2em;
-  padding: 0.3em;
+  color: rgb(223, 36, 36);
 }
 
 .id__input__container,

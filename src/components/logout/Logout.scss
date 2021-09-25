@@ -1,23 +1,46 @@
+$dark: rgb(23, 23, 23);
+$neonMain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+$title: rgb(172, 172, 172);
+
 .guide__msg {
   display: flex;
+  flex-direction: row;
   margin-top: 1em;
+  margin-bottom: 20px;
   justify-content: center;
   align-items: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+}
+
+.nerdchat {
+  margin-left: 5px;
+  font-family: "Monoton", cursive;
+  font-size: 1.4rem;
+  font-weight: lighter;
+  filter: drop-shadow(1px 1px 2px $neonSer);
+  animation: flicker 2s linear infinite;
 }
 .logout__btn__container {
-  margin-top: 1em;
+  margin-bottom: 1em;
   display: flex;
   gap: 1em;
   justify-content: center;
   align-items: center;
 
-  button {
+  .logout__btn {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
     padding: 0.5em 1em;
-    border-radius: 0.2em;
     // border: black 1px solid;
-    color: rgb(179, 179, 179);
-    cursor: pointer;
-    // background: rgba(255, 255, 255, 0.2);
-    background: #292929;
+    border: 1px solid $title;
+    background: transparent;
+    border-radius: 50px;
+    color: $title;
+  }
+  .logout__btn:hover {
+    border: 1px solid $neonMain;
+    filter: drop-shadow(1px 1px 2px $neonSer);
   }
 }

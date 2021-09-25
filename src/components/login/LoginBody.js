@@ -35,9 +35,9 @@ const Login = () => {
     const enteredId = idInputRef.current.value;
     const enteredPw = pwInputRef.current.value;
     if (enteredId.trim().length < 4 || enteredId.trim().length > 25) {
-      setErr("ID should be longer than 6 letters");
+      setErr("ID는 6자 이상이어야 합니다.");
     } else if (enteredPw.trim().length < 6) {
-      setErr("PW should be longer than 6 letters");
+      setErr("PW는 6자 이상이어야 합니다.");
     }
     const headers = {
       id: enteredId,
