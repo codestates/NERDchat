@@ -1,20 +1,23 @@
 const express = require('express');
 const cors = require('cors');
-const http = require('http');
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
+const Redis = require('ioredis');
+const redisClient = new Redis(6379, process.env.REDIS_HOST);
 const app = express();
-const jwt = require('jsonwebtoken');
-const httpServer = http.createServer(app);
+const httpServer = require('http').createServer(app);
 const io = require('socket.io')(httpServer, {
   cors: {
     origin: true,
     credentials: true,
-    methods: ['GET', 'POST', 'OPTIONS', 'HEAD'],
-    allowedHeaders: true
-  }
+    methods: ['GET', 'POST', 'OPTIONS', 'HEAD']
+  },
+  adapter: require('socket.io-redis')({
+    pubClient: redisClient,
+    subClient: redisClient.duplicate()
+  })
 });
-const PORT = process.env.PORT || 8080;
+const { setupWorker } = require('@socket.io/sticky');
 
 const routes = require('./routes/index');
 const controller = require('./controllers/index');
@@ -23,23 +26,19 @@ app.use(
   cors({
     origin: true,
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-    allowedHeaders: true,
-    exposedHeaders: true
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
   })
 );
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => res.send('Hello, world!!!!!!'));
-app.get('/header', (req, res) => {
-  console.log(req.headers);
-  res.json(req.headers);
-});
 
 app.use('/', routes);
 
-io.on('connection', controller.socket);
+io.use(controller.socket.useCookie);
 
-app.listen(PORT, () => console.log(`Server is Running ${PORT}`));
+io.of(/^\/\d+$/).on('connection', controller.socket.socket);
+
+setupWorker(io);

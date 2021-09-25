@@ -4,5 +4,6 @@ module.exports = {
   withdraw: require('./withdraw'),
   logout: require('./logout'),
   profile: require('./profile'),
-  fixProfile: require('./fixprofile')
+  fixProfile: require('./fixprofile'),
+  emailVerify: require('./emailVerify')
 };

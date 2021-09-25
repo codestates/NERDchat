@@ -3,14 +3,14 @@ const { verifyAccess } = require('../../middlewares/token');
 
 module.exports = async (req, res) => {
   const userData = await verifyAccess(req, res);
-  if (userData) {
+  const id = req.params.id;
+  if (!userData.superuser) res.status(403).json({ message: 'not admin' });
+  else {
     try {
-      const { email, nickname } = userData;
-      await Users.destroy({ where: { email, nickname } });
-      res.status(200).json({ message: 'Success: Withdraw' });
+      await Users.destory({ where: { id } });
+      res.status(202).json({ message: 'delete user' });
     } catch (err) {
       console.log(err);
     }
   }
-}
 };

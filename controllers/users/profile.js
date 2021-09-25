@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
     if (!userInfo) res.status(404).json({ profile: 'not found' });
     else {
       const { avatar, userId, nickname, email, status } = userInfo;
-      res.status(302).json({
+      res.status(200).json({
         data: {
           avatar,
           userId,

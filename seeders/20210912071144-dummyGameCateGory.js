@@ -1,7 +1,5 @@
 'use strict';
 
-const { v4 } = require('uuid');
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     /**
@@ -13,21 +11,14 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('GameChatRooms', [{
-      roomAdmin: null,
-      roomTitle: '듀오 서폿 구함',
-      uuid: v4(),
-      gameId: 1,
-      max: 2,
+    await queryInterface.bulkInsert('GameCategories', [{
+      image: 'https://cdn1.dotesports.com/wp-content/uploads/2019/09/12195522/league-of-legends.jpg',
+      category: 'League Of Legends',
       createdAt: new Date(),
       updatedAt: new Date()
-    },
-    {
-      roomAdmin: null,
-      roomTitle: 'rr',
-      uuid: v4(),
-      gameId: 1,
-      max: 2,
+    }, {
+      image: 'https://assets.nintendo.com/image/upload/c_pad,f_auto,h_613,q_auto,w_1089/ncom/en_US/games/switch/d/dead-by-daylight-switch/hero?v=2021090716',
+      category: 'Dead By Daylight',
       createdAt: new Date(),
       updatedAt: new Date()
     }]);
@@ -40,6 +31,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('GameChatRooms', null, {});
+    await queryInterface.bulkDelete('GameCateGories', null, {});
   }
 };
