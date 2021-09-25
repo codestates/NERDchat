@@ -36,7 +36,7 @@ const LoginTab = ({ isLoginClicked, loginTablHandler }) => {
             }
             onClick={() => loginTablHandler(0)}
           >
-            Sign In
+            Sign Up
           </div>
         </div>
         <div className="modal__tab__split" />

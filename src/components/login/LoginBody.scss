@@ -13,11 +13,22 @@ $title: rgb(172, 172, 172);
 }
 
 .id__input__container,
-.pw__input__container {
+.pw__input__container,
+.nickname__input__container,
+.pwc__input__container {
   transition: all 0.3s;
-  margin: 30px 80px 10px 80px;
+  margin: 10px 80px 10px 80px;
   font-family: "Poppins", sans-serif;
   font-weight: 100;
+}
+
+.email__input__container,
+.verify__email__input__container {
+  transition: all 0.3s;
+  margin: 10px 50px 20px 50px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-size: 14px;
 }
 
 .form-label {
@@ -52,7 +63,9 @@ $title: rgb(172, 172, 172);
   color: transparent;
 }
 .id__input__container:focus-within,
-.pw__input__container:focus-within {
+.pw__input__container:focus-within,
+.nickname__input__container:focus-within,
+.pwc__input__container:focus-within {
   transform: scale(1.05, 1.05);
 }
 .form-control:focus + .form-label,
@@ -80,9 +93,9 @@ $title: rgb(172, 172, 172);
   border: 1px solid $neonMain;
   filter: drop-shadow(1px 1px 2px $neonSer);
 }
-.LoginBtn:active {
-  transform: scale(0.99);
-}
+// .LoginBtn:active {
+//   transform: scale(0.99);
+// }
 
 .split__container {
   margin: 20px 4em;
