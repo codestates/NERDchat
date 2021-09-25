@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const axios = require('axios');
-const {Users} = require('../models')
+const { Users } = require('../models');
 require('dotenv').config();
 
 module.exports = {
@@ -28,21 +28,25 @@ module.exports = {
               method: 'GET',
               params: { access_token: accessToken }
             });
-            if(!kakaoData.data) {
+            if (!kakaoData.data) {
               res.status(400).json({ message: 'token expired' });
               return null;
-            }
-            else {
-              const userData = await Users.findOne({where: {userId: kakaoData.data.properties.nickname}})
+            } else {
+              const userData = await Users.findOne({ where: { userId: kakaoData.data.properties.nickname } });
               const payload = {
-                id: userData.id, avatar: userData.avatar, userId: userData.userId,
-                nickname: userData.nickname, email: userData.email, oauth: userData.oauth, status: userData.status
-              }
-              return payload
+                id: userData.id,
+                avatar: userData.avatar,
+                userId: userData.userId,
+                nickname: userData.nickname,
+                email: userData.email,
+                oauth: userData.oauth,
+                status: userData.status
+              };
+              return payload;
               // id, avatar, userId, nickname, email, oauth, status
             }
           } catch (err) {
-            res.status(400).json({message: 'token expired'});
+            res.status(400).json({ message: 'token expired' });
             return null;
           }
 
@@ -56,23 +60,27 @@ module.exports = {
                 scope: 'https://www.googleapis.com/auth/userinfo.email'
               }
             });
-            if(!googleData.data) {
+            if (!googleData.data) {
               res.status(400).json({ message: 'token expired' });
               return null;
-            }
-            else {
+            } else {
               const userData = await Users.findOne({ where: { userId: googleData.data.sub } });
               const payload = {
-                id: userData.id, avatar: userData.avatar, userId: userData.userId,
-                nickname: userData.nickname, email: userData.email, oauth: userData.oauth, status: userData.status
-              }
-              return payload
+                id: userData.id,
+                avatar: userData.avatar,
+                userId: userData.userId,
+                nickname: userData.nickname,
+                email: userData.email,
+                oauth: userData.oauth,
+                status: userData.status
+              };
+              return payload;
             }
           } catch (err) {
-            res.status(400).json({message: 'token expired'})
+            res.status(400).json({ message: 'token expired' });
             return null;
           }
-        
+
         case 'facebook':
           try {
             const fbData = await axios({
@@ -83,23 +91,27 @@ module.exports = {
                 access_token: accessToken
               }
             });
-            if(!fbData.data) {
+            if (!fbData.data) {
               res.status(400).json({ message: 'token expired' });
               return null;
-            }
-            else {
+            } else {
               const userData = await Users.findOne({ where: { userId: fbData.data.sub } });
               const payload = {
-                id: userData.id, avatar: userData.avatar, userId: userData.userId,
-                nickname: userData.nickname, email: userData.email, oauth: userData.oauth, status: userData.status
-              }
-              return payload
+                id: userData.id,
+                avatar: userData.avatar,
+                userId: userData.userId,
+                nickname: userData.nickname,
+                email: userData.email,
+                oauth: userData.oauth,
+                status: userData.status
+              };
+              return payload;
             }
           } catch (err) {
-            res.status(400).json({message: 'token expired'})
+            res.status(400).json({ message: 'token expired' });
             return null;
           }
       }
     }
-  },
+  }
 };

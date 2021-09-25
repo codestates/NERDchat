@@ -9,15 +9,15 @@ module.exports = async (req, res) => {
     const listData = await GameChatRooms.findAll({ where: { gameId }, offset, limit: 10 });
     if (!listData) res.status(404).json({ message: 'rooms not found' });
     else {
-      const data = []
+      const data = [];
       listData.map((el) => {
         const temp = {};
-        for(let key in el.dataValues) {
-          temp[key] = el[key]
-          if(key === 'uuid') temp.len = io.sockets.adapter.rooms.get(el[key]) || 0;
+        for (const key in el.dataValues) {
+          temp[key] = el[key];
+          if (key === 'uuid') temp.len = io.sockets.adapter.rooms.get(el[key]) || 0;
         }
-        data.push(temp)
-      })
+        data.push(temp);
+      });
       res.status(200).json({ data });
     }
   } catch (err) {
