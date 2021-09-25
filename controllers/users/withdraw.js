@@ -11,5 +11,5 @@ module.exports = async (req, res) => {
     } catch (err) {
       console.log(err);
     }
-  }
+  } else {}
 };
