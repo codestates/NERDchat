@@ -6,7 +6,7 @@ $title: rgb(172, 172, 172);
 .guide__msg {
   display: flex;
   flex-direction: row;
-  margin-top: 1em;
+  margin-top: 0.8em;
   margin-bottom: 20px;
   justify-content: center;
   align-items: center;
@@ -23,7 +23,7 @@ $title: rgb(172, 172, 172);
   animation: flicker 2s linear infinite;
 }
 .logout__btn__container {
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   display: flex;
   gap: 1em;
   justify-content: center;

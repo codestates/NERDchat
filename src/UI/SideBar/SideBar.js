@@ -49,15 +49,11 @@ const SideBar = () => {
         </div>
         <div
           className={toggleState === 2 ? "content  active-content" : "content"}
-        >
-          <OnlineUser />
-        </div>
+        ></div>
 
         <div
           className={toggleState === 3 ? "content  active-content" : "content"}
-        >
-          <FriendList />
-        </div>
+        ></div>
       </div>
     </div>
   );

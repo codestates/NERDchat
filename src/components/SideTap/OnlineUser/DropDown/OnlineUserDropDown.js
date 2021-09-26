@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import {
   IoFingerPrintOutline,
@@ -11,46 +11,48 @@ import { Context } from "../../../../context/ContextProvider";
 import "./OnlineUserDropDown.scss";
 
 function OnlineUserDropDown({ nickname }) {
+  const [userNickname, setUserNickname] = useState(nickname);
   const { deleteFriendModalHandler, deleteFriendModalOpen } =
     useContext(Context);
 
   const deleteModalHandler = () => {
     deleteFriendModalHandler();
   };
+
   return (
-    <div className="onlineuser__wrapper">
-      {deleteFriendModalOpen && <UserDelete nickname={nickname} />}
-      <ul className="onlineuser__menu">
-        <li className="onlineuser__li">
-          <a href="#" className="onlineuser__a">
-            <div className="onlineuser__icon">
-              <IoFingerPrintOutline className="onlineuser__icon_icon" />
+    <div className="onlinelist__wrapper">
+      {deleteFriendModalOpen && <UserDelete nickname={userNickname} />}
+      <ul className="onlinelist__menu">
+        <li className="onlinelist__li">
+          <a href="#" className="onlinelist__a">
+            <div className="onlinelist__icon">
+              <IoFingerPrintOutline className="icona" />
             </div>
             Information
           </a>
         </li>
-        <li className="onlineuser__li">
+        <li className="onlinelist__li">
           <a href="#">
-            <div className="onlineuser__icon">
-              <IoMailOpenOutline />
+            <div className="onlinelist__icon">
+              <IoMailOpenOutline className="icona" />
             </div>
             Message
           </a>
         </li>
-        <li className="onlineuser__li">
+        <li className="onlinelist__li">
           <a href="#">
-            <div className="onlineuser__icon">
-              <IoNotificationsOutline />
+            <div className="onlinelist__icon">
+              <IoNotificationsOutline className="icona" />
             </div>
             Invite
           </a>
         </li>
-        <li className="onlineuser__li">
+        <li className="onlinelist__li">
           <a href="#" onClick={deleteModalHandler}>
-            <div className="onlineuser__icon">
-              <IoAddOutline />
+            <div className="onlinelist__icon">
+              <IoAddOutline className="icona" />
             </div>
-            Add
+            Delete
           </a>
         </li>
       </ul>

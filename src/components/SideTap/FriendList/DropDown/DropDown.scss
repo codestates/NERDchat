@@ -1,14 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@200&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
-
-@import "_color";
+$dark: rgb(23, 23, 23);
+$neonMain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+$title: rgb(172, 172, 172);
 
 .friendlist__wrapper {
   position: absolute;
-  top: 50px;
-  display: flex;
-  width: 400px;
-  background: rgb(11, 11, 11);
+  width: 150px;
+  background: rgba(77, 77, 77, 0.243);
+  backdrop-filter: blur(0.5em);
+  margin-left: 150px;
+
   border-radius: 5px;
   z-index: 1;
 
@@ -26,33 +29,37 @@
 }
 .friendlist__menu {
   list-style: none;
-  width: 400px;
-  padding: 10px;
+  width: 150px;
 
   .friendlist__li {
     line-height: 55px;
-    transition: all 0.7s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
 
   .friendlist__li:hover {
-    background: rgba(63, 63, 63, 0.332);
+    background: rgba(12, 12, 12, 0.277);
     border-radius: 5px;
+
+    .icona {
+      color: $neonMain;
+      filter: drop-shadow(1px 1px 2px $neonSer);
+    }
   }
 }
 
-.friendlist__name {
-  width: 400px;
-  padding: 0 10px;
-  color: rgb(172, 172, 172);
-  border-radius: 5px;
-  line-height: 50px;
-  font-size: 20px;
-  font-family: "Poppins", sans-serif;
-  font-weight: 100;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
+// .friendlist__name {
+//   width: 400px;
+//   padding: 0 10px;
+//   color: rgb(172, 172, 172);
+//   border-radius: 5px;
+//   line-height: 50px;
+//   font-size: 20px;
+//   font-family: "Poppins", sans-serif;
+//   font-weight: 100;
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+// }
 
 .friendlist__icon {
   height: 40px;
@@ -62,5 +69,6 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  background: rgba(12, 12, 12, 0.277);
   border-radius: 50%;
 }

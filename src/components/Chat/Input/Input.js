@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoPaperPlaneOutline } from "react-icons/io5";
-
+import { IoIosPaperPlane } from "react-icons/io";
 import "./Input.scss";
 
 function Input({ msgInputHandler, newMsg, sendHandler }) {
@@ -17,7 +17,7 @@ function Input({ msgInputHandler, newMsg, sendHandler }) {
         }
       />
       <button className="input_sendButton" onClick={sendHandler}>
-        <IoPaperPlaneOutline size={25} />
+        <IoIosPaperPlane size={25} />
       </button>
     </form>
   );

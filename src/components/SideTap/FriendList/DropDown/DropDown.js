@@ -26,15 +26,15 @@ function DropDown({ nickname }) {
         <li className="friendlist__li">
           <a href="#" className="friendlist__a">
             <div className="friendlist__icon">
-              <IoFingerPrintOutline className="friendlist__icon_icon" />
+              <IoFingerPrintOutline className="icona" />
             </div>
-            Information
+            Info
           </a>
         </li>
         <li className="friendlist__li">
           <a href="#">
             <div className="friendlist__icon">
-              <IoMailOpenOutline />
+              <IoMailOpenOutline className="icona" />
             </div>
             Message
           </a>
@@ -42,7 +42,7 @@ function DropDown({ nickname }) {
         <li className="friendlist__li">
           <a href="#">
             <div className="friendlist__icon">
-              <IoNotificationsOutline />
+              <IoNotificationsOutline className="icona" />
             </div>
             Invite
           </a>
@@ -50,7 +50,7 @@ function DropDown({ nickname }) {
         <li className="friendlist__li">
           <a href="#" onClick={deleteModalHandler}>
             <div className="friendlist__icon">
-              <IoCutOutline />
+              <IoCutOutline className="icona" />
             </div>
             Delete
           </a>
