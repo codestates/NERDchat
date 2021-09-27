@@ -37,7 +37,7 @@ app.get('/', (req, res) => res.send('Hello, world!!!!!!'));
 
 app.use('/', routes);
 
-io.use(controller.socket.useCookie);
+io.use(controller.socket.useToken);
 
 io.of(/^\/\d+$/).on('connection', controller.socket.socket);
 
