@@ -5,25 +5,17 @@ import Messenger from "../../components/SideTap/Messenger/Messenger";
 import OnlineUser from "../../components/SideTap/OnlineUser/OnlineUser";
 
 import { Context } from "../../context/ContextProvider";
-
 import useSocket from "../../hooks/useSocket";
-import { Cookies } from "react-cookie";
-import { useParams } from "react-router-dom";
 
 import "./SideBar.scss";
 
 const SideBar = () => {
   const [toggleState, setToggleState] = useState(1);
-
-  const cookies = new Cookies();
-  let userInfo = cookies.get("userInfo");
-
-  const { gameId, roomId, chatId } = useParams();
+  // const { users } = useSocket();
 
   const { friends } = useContext(Context);
+  console.log(friends);
 
-  const { users } = useSocket(gameId, roomId, userInfo, "", "");
-  console.log(users);
   const toggleTab = (index) => {
     setToggleState(index);
   };
@@ -64,7 +56,9 @@ const SideBar = () => {
 
         <div
           className={toggleState === 3 ? "content  active-content" : "content"}
-        ></div>
+        >
+          {toggleState === 3 && <Messenger />}
+        </div>
       </div>
     </div>
   );
