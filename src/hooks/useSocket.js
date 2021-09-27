@@ -39,6 +39,7 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
   useEffect(() => {
     socket.current = io(`${ENDPOINT}/${serverName}`, { autoConnect: false });
     const token = localStorage.getItem("socketToken");
+    socket.current.roomId = roomId ? roomId : null;
 
     socket.current.on("connect", () => {
       users.forEach((el) => {
