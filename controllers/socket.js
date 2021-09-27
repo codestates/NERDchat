@@ -17,7 +17,7 @@ module.exports = {
       nickname: socket.nickname,
       connected: true
     });
-    socket.emit('cookie', {
+    socket.emit('token', {
       token: socket.token,
       userId: socket.userId
     });
@@ -125,22 +125,22 @@ module.exports = {
       ns.emit('currentNSLength', ns.adapter.sids.size);
     });
   },
-  useCookie: async (socket, next) => {
-    const socketToken = socket.handshake.auth.socketToken;
-    if (socketToken) {
-      const token = await tokenStore.findCookie(socketToken);
+  useToken: async (socket, next) => {
+    const token = socket.handshake.auth.token;
+    if (token) {
+      const token = await tokenStore.findToken(token);
       if (token) {
-        socket.socketToken = socketToken;
+        socket.token = token;
         socket.userId = token.userId;
         socket.nickname = token.nickname;
         return next();
       }
     }
     const guest = `Guest${Math.ceil(Math.random() * 1000000)}`;
-    const nickname = socket.handshake.auth.nickname || guest;
+    const nickname = socket.handshake.auth.nickname ? socket.handshake.auth.nickname : guest;
 
-    socket.socketToken = randomId();
-    socket.userId = randomId();
+    socket.token = randomId();
+    socket.userId = socket.hadndshake.auth.userId ? socket.hadndshake.auth.userId : randomId();
     socket.nickname = nickname;
     next();
   }
