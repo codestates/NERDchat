@@ -1,11 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import "./ServerRoomCard.scss";
 import { BsFillMicFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { Context } from "../../../context/ContextProvider";
+import Login from "../../login/Login";
 
 const ServerRoomCard = ({ gameId, id, roomTitle, uuid, max, loading, len }) => {
+  const { loginModalOpen, loginmodalHandler } = useContext(Context);
+  const history = useHistory();
+  const getIntoServer = () => {
+    if (!localStorage.getItem("nerd-logged-in")) {
+      loginmodalHandler();
+      return;
+    }
+    const path = `/gameId=${gameId}/roomId=${uuid}/chatId=${id}`;
+    history.push(path);
+  };
   return (
-    <Link to={`/gameId=${gameId}/roomId=${uuid}/chatId=${id}`}>
+    <div onClick={getIntoServer}>
+      {loginModalOpen && <Login />}
       <div className="room__card__container">
         <div className="room__title" text-attr={roomTitle}>
           <span>{roomTitle}</span>
@@ -14,7 +27,7 @@ const ServerRoomCard = ({ gameId, id, roomTitle, uuid, max, loading, len }) => {
           {len}/{max} <BsFillMicFill />
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

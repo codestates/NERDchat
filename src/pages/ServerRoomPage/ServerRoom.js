@@ -5,11 +5,9 @@ import ServerRoomBody from "../../components/ServerRoom/ServerRoomBody/ServerRoo
 import ServerRoomHeader from "../../components/ServerRoom/ServerRoomHeader/ServerRoomHeader";
 const ServerRoom = () => {
   return (
-    <div className="server__room__container">
-      <div className="room__content">
-        <ServerRoomHeader />
-        <ServerRoomBody />
-      </div>
+    <div className="room__content">
+      <ServerRoomHeader />
+      <ServerRoomBody />
     </div>
   );
 };
