@@ -12,6 +12,7 @@ const messageStore = new RedisMessageStore(redisClient);
 
 module.exports = {
   socket: async (socket) => {
+    console.log(socket.token);
     tokenStore.saveToken(socket.token, {
       userId: socket.userId,
       nickname: socket.nickname,
@@ -36,6 +37,8 @@ module.exports = {
       if (messagesPerUser.has(otherUser)) { messagesPerUser.get(otherUser).push(message); } else messagesPerUser.set(otherUser, [message]);
     });
     tokens.forEach((token) => {
+      const idx = users.findIndex(item => item.userId === token.userId);
+      if (idx > -1) users.splice(idx, 1);
       users.push({
         userId: token.userId,
         nickname: token.nickname,
@@ -44,7 +47,6 @@ module.exports = {
       });
     });
     socket.emit('users', users);
-
     // notify existing users
     socket.broadcast.emit('user connected', {
       userId: socket.userId,
@@ -53,7 +55,6 @@ module.exports = {
       messages: []
     });
 
-    const io = require('socket.io')();
     socket.on('private message', ({ content, to }) => {
       const message = {
         content,
@@ -66,7 +67,7 @@ module.exports = {
 
     // notify users => disconnection
     socket.on('disconnect', async () => {
-      const matchingSockets = await io.in(socket.userId).allSockets();
+      const matchingSockets = await ns.in(socket.userId).allSockets();
       const isDisconnected = matchingSockets.size === 0;
       if (isDisconnected) {
         // notify other users
@@ -116,9 +117,9 @@ module.exports = {
     });
     socket.on('voiceChat', (voiceChatUid, userData, peerId) => {
       const { id, userId } = userData;
-      ns.broadcat.to(voiceChatUid).emit('userConnect', peerId);
+      socket.broadcast.to(voiceChatUid).emit('userConnect', peerId);
       socket.on('disconnect', () => {
-        ns.broadcast.to(voiceChatUid).emit('userDisconnect', peerId);
+        socket.broadcast.to(voiceChatUid).emit('userDisconnect', peerId);
       });
     });
     socket.on('currentNSLength', () => {
@@ -126,19 +127,18 @@ module.exports = {
     });
   },
   useToken: async (socket, next) => {
-    const token = socket.handshake.auth.token;
+    const token = socket.handshake.auth.token ? socket.handshake.auth.token : null;
     if (token) {
-      const token = await tokenStore.findToken(token);
-      if (token) {
-        socket.token = token;
-        socket.userId = token.userId;
-        socket.nickname = token.nickname;
+      const findToken = await tokenStore.findToken(token);
+      if (findToken) {
+        socket.token = findToken;
+        socket.userId = findToken.userId;
+        socket.nickname = findToken.nickname;
         return next();
       }
     }
     const guest = `Guest${Math.ceil(Math.random() * 1000000)}`;
     const nickname = socket.handshake.auth.nickname ? socket.handshake.auth.nickname : guest;
-
     socket.token = randomId();
     socket.userId = socket.handshake.auth.userId ? socket.handshake.auth.userId : randomId();
     socket.nickname = nickname;
