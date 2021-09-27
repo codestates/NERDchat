@@ -40,7 +40,7 @@ module.exports = {
         userId: token.userId,
         nickname: token.nickname,
         connected: token.connected,
-        messages: messagesPerUser.get(session.userId) || []
+        messages: messagesPerUser.get(token.userId) || []
       });
     });
     socket.emit('users', users);
@@ -140,7 +140,7 @@ module.exports = {
     const nickname = socket.handshake.auth.nickname ? socket.handshake.auth.nickname : guest;
 
     socket.token = randomId();
-    socket.userId = socket.hadndshake.auth.userId ? socket.hadndshake.auth.userId : randomId();
+    socket.userId = socket.handshake.auth.userId ? socket.handshake.auth.userId : randomId();
     socket.nickname = nickname;
     next();
   }
