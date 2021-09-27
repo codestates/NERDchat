@@ -11,7 +11,7 @@ import "./SideBar.scss";
 
 const SideBar = () => {
   const [toggleState, setToggleState] = useState(1);
-  const { users } = useSocket();
+  // const { users } = useSocket();
 
   const { friends } = useContext(Context);
   console.log(friends);
@@ -56,7 +56,9 @@ const SideBar = () => {
 
         <div
           className={toggleState === 3 ? "content  active-content" : "content"}
-        ></div>
+        >
+          {toggleState === 3 && <Messenger />}
+        </div>
       </div>
     </div>
   );
