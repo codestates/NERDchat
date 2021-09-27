@@ -6,12 +6,20 @@ import OnlineUser from "../../components/SideTap/OnlineUser/OnlineUser";
 
 import { Context } from "../../context/ContextProvider";
 import useSocket from "../../hooks/useSocket";
+import { Cookies } from "react-cookie";
+import { useParams } from "react-router-dom";
 
 import "./SideBar.scss";
 
 const SideBar = () => {
   const [toggleState, setToggleState] = useState(1);
-  // const { users } = useSocket();
+
+  const cookies = new Cookies();
+  let userInfo = cookies.get("userInfo");
+
+  const { gameId, roomId, chatId } = useParams();
+
+  const { users } = useSocket(gameId, roomId, userInfo, "", "");
 
   const { friends } = useContext(Context);
   console.log(friends);
