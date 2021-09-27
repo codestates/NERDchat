@@ -7,7 +7,6 @@ import "./Messenger.scss";
 
 const Messenger = () => {
   const cookies = new Cookies();
-
   let userInfo = cookies.get("userInfo");
   const { gameId } = useParams();
   const { messages } = useSocket(gameId, "", userInfo, "", "");
