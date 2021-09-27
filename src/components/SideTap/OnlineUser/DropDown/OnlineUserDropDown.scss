@@ -5,7 +5,7 @@ $neonMain: rgb(184, 126, 255);
 $neonSer: rgb(163, 16, 255);
 $title: rgb(172, 172, 172);
 
-.friendlist__wrapper {
+.onlinelist__wrapper {
   position: absolute;
   width: 150px;
   background: rgba(77, 77, 77, 0.243);
@@ -27,16 +27,16 @@ $title: rgb(172, 172, 172);
     border-radius: 8px;
   }
 }
-.friendlist__menu {
+.onlinelist__menu {
   list-style: none;
   width: 150px;
 
-  .friendlist__li {
+  .onlinelist__li {
     line-height: 55px;
     transition: all 0.3s ease-in-out;
   }
 
-  .friendlist__li:hover {
+  .onlinelist__li:hover {
     background: rgba(12, 12, 12, 0.277);
     border-radius: 5px;
 
@@ -47,7 +47,7 @@ $title: rgb(172, 172, 172);
   }
 }
 
-// .friendlist__name {
+// .onlinelist__name {
 //   width: 400px;
 //   padding: 0 10px;
 //   color: rgb(172, 172, 172);
@@ -61,7 +61,7 @@ $title: rgb(172, 172, 172);
 //   align-items: center;
 // }
 
-.friendlist__icon {
+.onlinelist__icon {
   height: 40px;
   width: 40px;
   margin-right: 13px;

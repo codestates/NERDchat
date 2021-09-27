@@ -5,12 +5,15 @@ import ServerRoomHeader from "./ServerRoomHeader/ServerRoomHeader";
 import ServerSearch from "./ServerSerch/ServerSearch";
 import useSocket from "../../hooks/useSocket";
 import { useParams } from "react-router-dom";
+import { Cookies } from "react-cookie";
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const ServerRoom = () => {
+  const cookies = new Cookies();
+  const userInfo = cookies.get("userInfo");
   const { gameId } = useParams();
-  const { message, sendMessage } = useSocket(gameId, "");
+  const { message, sendMessage } = useSocket(gameId, "", userInfo);
   console.log("This is ServerRoom compo");
   const [searchedLists, setSearchedLists] = useState([]);
   const [isSearched, setIsSearched] = useState(0);

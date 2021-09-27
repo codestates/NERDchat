@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import Modal from "../../UI/modal/Modal";
 import axios from "axios";
-import Context from "../../context/ContextProvider";
+import { Context } from "../../context/ContextProvider";
 import "./UserDelete.scss";
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
-const UserDelete = () => {
+const UserDelete = ({ nickname }) => {
   const { deleteFriendModalHandler } = useContext(Context);
 
   const okHandler = async () => {
@@ -22,12 +22,18 @@ const UserDelete = () => {
   };
   return (
     <Modal>
-      <div>
-        <div>Do you want to unfriend this user?</div>
+      <div className="delete__container">
+        <div className="delete__title">Do you want to unfriend this user?</div>
       </div>
       <div>
-        <button onClick={okHandler}>OK</button>
-        <button onClick={noHandler}>Cancel</button>
+        <div className="delete__container-btn">
+          <button className="delete__btn-yes" onClick={okHandler}>
+            OK
+          </button>
+          <button className="delete__btn-no" onClick={noHandler}>
+            Cancel
+          </button>
+        </div>
       </div>
     </Modal>
   );

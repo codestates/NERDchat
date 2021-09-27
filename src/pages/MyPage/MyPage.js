@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
-import SideBar from "../../UI/SideBar/SideBar";
-
-import { IoImagesOutline, IoAttachOutline } from "react-icons/io5";
 
 import { Cookies } from "react-cookie";
+
+import {
+  IoHomeOutline,
+  IoChatbubblesOutline,
+  IoBookOutline,
+  IoSettingsOutline,
+} from "react-icons/io5";
+
 import "./MyPage.scss";
 
 function MyPage() {
@@ -27,99 +32,36 @@ function MyPage() {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  console.log(profileImg);
-  console.log(userId, avatar, nickname, status);
   return (
-    <div className="mypage-container">
-      <div className="mypage-nav">
+    <div className="mypage__container">
+      <div className="mypage__nav">
         <NavBar />
       </div>
-      <div className="mypage-main">
-        <div className="mypage-main-container">
-          <div className="mypage-main-content">
-            <div className="mypage-chat">
-              <div className="mypage-card">
-                <div className="mypage-photo">
-                  <h3>WELCOM,</h3>
-                  <div className="mypage-nickname">
-                    <h1>{nickname}</h1>
-                  </div>
-                  <img src={avatar === null ? profileImg : avatar} alt="" />
-                </div>
-                <form action="form__input" className="mypage-form">
-                  <label htmlFor="form__input" className="form__label">
-                    <input
-                      type="file"
-                      id="form__input"
-                      className="form__input"
-                      accept="image/*"
-                      onChange={imagehandler}
-                    />
-                    {/* <img
-                      src={require("../../images/dummy/icon.png").default}
-                      className="form__icon"
-                      alt=""
-                    /> */}
-                    <IoAttachOutline className="form__icon" />
-                    <span className="form__text">Choose a Photo</span>
-                  </label>
-                </form>
-                <div className="mypage-status">
-                  {/* <p>What are you thinking?</p> */}
-                  <textarea spellcheck="false">{status}</textarea>
-                </div>
-              </div>
-              <div className="mypage-info">
-                <div className="mypage-infomation">
-                  <h2>INFORMATION</h2>
-                </div>
-                <div className="form">
-                  <input
-                    type="text"
-                    id="email"
-                    className="form__input"
-                    autocomplete="off"
-                    placeholder=" "
-                    disabled
-                  />
-                  <label htmlFor="email" className="form__label">
-                    {email}
-                  </label>
-                </div>
-                <div className="form">
-                  <input
-                    type="password"
-                    id="password"
-                    className="form__input"
-                    autocomplete="off"
-                    placeholder=" "
-                  />
-                  <label htmlFor="password" className="form__label">
-                    Password
-                  </label>
-                </div>
-                <div className="form">
-                  <input
-                    type="password"
-                    id="passwordConfrim"
-                    className="form__input"
-                    autocomplete="off"
-                    placeholder=" "
-                  />
-                  <label htmlFor="passwordConfrim" className="form__label">
-                    Confrim Password
-                  </label>
-                </div>
-
-                <button type="submit" className="mypage-button">
-                  Edit
-                </button>
-              </div>
+      <div className="mypage__main">
+        <div className="mypage__dashboard">
+          <div className="mypage__user">
+            <img src={avatar === null ? profileImg : avatar} alt="" />
+            <h3>{nickname}</h3>
+            <textarea>{status}</textarea>
+          </div>
+          <div className="mypage__links">
+            <div className="mypage__link">
+              <IoHomeOutline />
+              <h2>HOME</h2>
+            </div>
+            <div className="mypage__link">
+              <IoChatbubblesOutline />
+              <h2>MESSAGE</h2>
+            </div>
+            <div className="mypage__link">
+              <IoBookOutline />
+              <h2>BOOKMARK</h2>
+            </div>
+            <div className="mypage__link">
+              <IoSettingsOutline />
+              <h2>SETTING</h2>
             </div>
           </div>
-        </div>
-        <div className="mypage-sidebar">
-          <SideBar />
         </div>
       </div>
     </div>

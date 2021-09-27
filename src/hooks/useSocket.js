@@ -6,12 +6,14 @@ const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
   const socket = useRef();
   const myPeer = new Peer();
-  // const audioList = useRef();
-  // const audioRef = useRef();
   const [messages, setMessages] = useState([]);
   const [nsHeadCount, setNsHeadCount] = useState(0);
   const [roomHeadCount, setRoomHeadCount] = useState(0);
-  // console.log("This is userInfo", userInfo);
+  const [mic, setMic] = useState(true);
+  const { nickname, userId } = userInfo;
+  console.log("This is userInfo", userId);
+
+  const users = [];
   let voiceChatUid = "";
   if (roomId) {
     voiceChatUid = roomId + "-vUid" + Math.floor(Math.random() * 100);
@@ -24,8 +26,71 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     });
     audioList.current.append(audio);
   };
+
+  const handleMuteMic = () => {
+    setMic(!mic);
+
+    let currentAudio = audioRef.current.getAudioTracks();
+    currentAudio.forEach((track) => {
+      track.enabled = !track.enabled;
+    });
+  };
+
   useEffect(() => {
-    socket.current = io(`${ENDPOINT}/${serverName}`);
+    socket.current = io(`${ENDPOINT}/${serverName}`, { autoConnect: false });
+    const token = localStorage.getItem("socketToken");
+
+    socket.current.on("connect", () => {
+      users.forEach((el) => {
+        if (el.userId === userId) {
+          el.connected = true;
+        }
+      });
+    });
+
+    socket.current.auth = { nickname, userId };
+    socket.current.connect();
+    if (token) {
+      socket.current.auth = { token };
+      socket.current.connect();
+    }
+
+    socket.current.on("token", ({ token, userId }) => {
+      socket.current.auth = { token };
+      localStorage.setItem("token", token);
+      socket.current.userId = userId;
+    });
+
+    socket.current.on("users", (data) => {
+      data.forEach((el) => {
+        users.push(el);
+      });
+      users.sort((a, b) => {
+        return a - b;
+      });
+    });
+
+    socket.current.on("user connected", (data) => {
+      for (let i = 0; i < users.length; i++) {
+        const existingUser = users[i];
+        if (existingUser.userId === data.userId) {
+          existingUser.connected = true;
+          return;
+        }
+      }
+      users.push(data);
+    });
+
+    socket.current.on("user disconnected", (data) => {
+      for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+        if (user.userId === data) {
+          user.connected = false;
+          break;
+        }
+      }
+    });
+
     socket.current.on("welcomeRoom", (userData, msgData) =>
       console.log(userData, msgData)
     );
@@ -37,6 +102,31 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
         mine: userData.userId === userInfo.userId,
       };
       setMessages((prevM) => [...prevM, incomingMsg]);
+    });
+
+    socket.current.on("private message", ({ content, from, to }) => {
+      // for (let i = 0; i < users.length; i++) {
+      //   const user = users[i];
+      //   const fromSelf = socket.userId === from
+      //   if (user.userId === (fromSelf ? to : from)) {
+      //     user.messages.push({
+      //       content, fromSelf
+      //     });
+      //     if (user !== selectedUser) {
+      //       user.hasNewMessages = true;
+      //     }
+      //     break;
+      //   }
+      // }
+      // selectedUser -> onlien, friend list에서 내가 선택하는 유저의 아이디
+    });
+
+    socket.current.on("disconenct", () => {
+      users.forEach((el) => {
+        if (el.userId === userId) {
+          el.connected = false;
+        }
+      });
     });
 
     //Voice
@@ -80,9 +170,19 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     socket.current.on("currentRoomLength", (data) => {
       setRoomHeadCount(data);
     });
+
     return () => {
-      socket.current.close();
-      socket.current.disconnect();
+      socket.current.off("connect");
+      socket.current.off("token");
+      socket.current.off("users");
+      socket.current.off("user connected");
+      socket.current.off("user disconnected");
+      socket.current.off("private message");
+      socket.current.off("disconenct");
+      socket.current.off("welcomeRoom");
+      socket.current.off("roomMessage");
+      socket.current.off("currentNSLength");
+      socket.current.off("currentRoomLength");
     };
   }, [serverName, roomId]);
 
@@ -96,11 +196,15 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     );
   };
 
+  const privateMessage = (msgData, userId) => {
+    socket.current.emit("private message", { content: msgData, to: userId });
+  };
+
   const sendMessage = (roomId, chatId, userInfo, newMsg) => {
     socket.current.emit("roomMessage", roomId, chatId, userInfo, newMsg);
   };
 
-  return { joinRoom, sendMessage, messages, nsHeadCount };
+  return { joinRoom, sendMessage, messages, nsHeadCount, users, handleMuteMic };
 };
 
 export default useSocket;

@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import SideBar from "../../UI/SideBar/SideBar";
 import Chat from "../../components/Chat/Chat";
-import Input from "../../components/Chat/Input/Input";
 import ChatHeader from "../../components/ChatHeader/ChatHeader";
 
 import "./ChatPage.scss";

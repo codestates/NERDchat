@@ -1,22 +1,108 @@
-.userlist {
-  display: flex;
-  flex-direction: column;
-  color: white;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
+$dark: rgb(23, 23, 23);
+$neonMain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+$title: rgb(172, 172, 172);
 
-  .useronline {
-    border: 1px solid white;
-    flex: 1;
-    text-align: center;
+.online__container {
+  display: flex;
+  height: 55px;
+  justify-content: space-between;
+
+  .online__avatar-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px 0;
+
+    .online__avatar {
+      width: 35px;
+      height: 35px;
+      border-radius: 50px;
+    }
+
+    .online__onliness {
+      position: absolute;
+      color: rgb(186, 234, 92);
+      border-radius: 10px;
+      margin-bottom: 20px;
+      margin-left: 24px;
+    }
+
+    .online__online {
+      border: 2px solid $dark;
+      background-color: $dark;
+      border-radius: 10px;
+    }
   }
 
-  .onlinefriend {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 10px;
-    margin-top: 15px;
+  .online__name {
+    color: $title;
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    margin-left: 10px;
+  }
+  .online__dropstart {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+
+    .online__drop {
+      color: rgba(172, 172, 172, 0.537);
+      cursor: pointer;
+    }
+  }
+  .online__drop-click {
+    color: $neonMain;
+    filter: drop-shadow(1px 1px 2px $neonSer);
+    cursor: pointer;
   }
 }
+
+// .friendlist__body {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 40px;
+
+//   .friendlist__avatar {
+//     width: 40px;
+//     height: 40px;
+//     border-radius: 50%;
+//     margin-right: 10px;
+//   }
+
+//   .friendlist__body__nav {
+//     position: absolute;
+
+//     .friendlist__name {
+//       // padding: 0 5px;
+//       // color: rgb(172, 172, 172);
+//       // border-radius: 5px;
+//       // line-height: 40px;
+//       // font-size: 20px;
+//       // font-family: "Poppins", sans-serif;
+//       // font-weight: 100;
+//       display: flex;
+//       flex-direction: row;
+//       align-items: center;
+
+//       transition: all 0.2s ease-in;
+
+//       .friendlist__name-span:hover {
+//         cursor: pointer;
+//         color: $neonMain;
+//         filter: drop-shadow(1px 1px 2px $neonSer);
+//       }
+
+//       .name-icon-container {
+//         display: flex;
+//       }
+
+//       .name-icon {
+//         margin-left: 10px;
+//       }
+//     }
+//   }
+// }

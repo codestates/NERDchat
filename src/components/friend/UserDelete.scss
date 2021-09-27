@@ -1,0 +1,47 @@
+$dark: rgb(23, 23, 23);
+$neonMain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+$title: rgb(172, 172, 172);
+
+.delete__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .delete__title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    margin-top: 0.7em;
+    margin-bottom: 10px;
+  }
+}
+
+.delete__container-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .delete__btn-yes,
+  .delete__btn-no {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    padding: 0.5em 1em;
+    border: 1px solid $title;
+    background: transparent;
+    border-radius: 50px;
+    color: $title;
+  }
+
+  .delete__btn-yes,
+  .delete__btn-no {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .delete__btn-yes:hover,
+  .delete__btn-no:hover {
+    border: 1px solid $neonMain;
+    filter: drop-shadow(1px 1px 2px $neonSer);
+  }
+}

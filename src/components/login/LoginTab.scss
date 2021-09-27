@@ -1,62 +1,67 @@
 $dark: rgb(23, 23, 23);
 $neonNain: rgb(184, 126, 255);
 $neonSer: rgb(163, 16, 255);
-.modal__tab__container{
-    // position: relative;
-            img{
-            position: absolute;
-            width: 50px;
-            // margin-right: 1em;
-        }
-    .tab__header{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        span{
-            color: white;
-            margin-right: 2px;
-            position: relative;
-            text-shadow: -3px 0.7px rgba(119, 0, 255, 0.536);
-        }
+.modal__tab__container {
+  // position: relative;
+  //   img {
+  //     position: absolute;
+  //     width: 50px;
+  //   }
 
-        // span::after {
-        //     content: '';
-        //     left: -1px;
-        //     text-shadow: -2px 0 rgba(255, 0, 242, 0.618);
-        // }
+  .tab__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .tab__header-span {
+      color: $neonNain;
+      position: relative;
+      font-family: "Monoton", cursive;
+      font-size: 1.8rem;
+      font-weight: lighter;
+      filter: drop-shadow(1px 1px 2px $neonSer);
+      animation: flicker 2s linear infinite;
     }
+
+    .tab__header-h3 {
+      font-family: "Poppins", sans-serif;
+      font-weight: 100;
+      font-size: 20px;
+    }
+  }
 }
 
-.modal__tab{
-    margin-top: 1em ;
-    display: flex;
-    gap: 1em;
-    margin-bottom: 0.5em;
-    div{
-        font-weight: bold;
-        position: relative;
-    }
-    .modal__tab__options{
-        cursor: pointer;
-        font-size: 13px;
-    }
-    .clicked__tab {
-        cursor: pointer;
-        color: $neonSer;
-        font-size: 13px;
-    }
-    .clicked__tab::after {
-        content: "";
-        position: absolute;
-        /* inset: 0; */
-        width: 100%;
-        top: 22px;
-        left: 0px;
-        border-bottom: $neonSer solid 2px;
-    }
-    
+.modal__tab {
+  margin-top: 2em;
+  display: flex;
+  gap: 1em;
+  margin-bottom: 0.5em;
+  justify-content: center;
+
+  div {
+    font-weight: bold;
+    position: relative;
+  }
+  .modal__tab__options {
+    cursor: pointer;
+    font-size: 13px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+  }
+  .clicked__tab {
+    cursor: pointer;
+    color: $neonNain;
+    font-size: 13px;
+  }
+  .clicked__tab::after {
+    content: "";
+    position: absolute;
+    /* inset: 0; */
+    width: 100%;
+    top: 22px;
+    left: 0px;
+    border-bottom: 1px solid;
+  }
 }
 .modal__tab__split {
-    height: 1px;
-    border-top: 0.1px solid #37373a;
+  height: 1px;
 }

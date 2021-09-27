@@ -1,32 +1,39 @@
 $dark: rgb(23, 23, 23);
 $neonMain: rgb(184, 126, 255);
 $neonSer: rgb(163, 16, 255);
-.errMsg{
-    font-weight: 400;
-    color: rgb(216, 43, 43);
+
+$title: rgb(172, 172, 172);
+
+.errMsg {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-size: 12px;
+  text-align: center;
+  color: rgb(223, 36, 36);
 }
 .email__code__container,
-.verify__email__container{
+.verify__email__container {
   margin-top: 0.2em;
   display: flex;
   align-items: center;
   gap: 0.5em;
-  // flex-direction: row;
-  input{
+  input {
     height: 28px;
     flex: 1 1 auto;
-    // background: #37373a;
-    border-radius: 0.3em;
-    border: 2px solid #37373a;
-    color: $dark;
-    margin-bottom: 3px;
-  }
-  input:focus{
     outline: none;
-    border: 2px solid $neonMain;
+    background: transparent;
+    margin-bottom: 3px;
+    box-shadow: none;
+    border-style: none none solid none;
+    width: 100%;
+    color: $title;
+    transition: all 0.5s;
   }
-  button{
-    min-width: 88px;
+  input:focus {
+    outline: none;
+  }
+  button {
+    min-width: 80px;
   }
   // .email__code__btn{
   //   flex: 1 1 auto;
@@ -34,38 +41,58 @@ $neonSer: rgb(163, 16, 255);
   // }
 }
 
-.contract{
-    font-weight: 400;
-    font-size: 12px;
-    text-align: center;
-    opacity: 70%;
-    color: white;
+.contract {
+  // font-family: "GmarketSansLight";
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-size: 12px;
+  text-align: center;
+  opacity: 70%;
+  color: $title;
+  margin: 0 50px;
 }
-.signUpBtn, .verify__email__btn, .email__code__btn{
-    cursor: pointer;
-    // margin-top: 1em;
-    background-color: $neonSer;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    padding: 0.5em;
-    font-size: 12px;
-    font-weight: bold;
+.signUpBtn,
+.verify__email__btn,
+.email__code__btn {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  color: $title;
+  border: 1px solid $title;
+  background-color: transparent;
+  border-radius: 50px;
+  padding: 8px;
+  margin: 0 auto;
+  font-size: 11px;
 }
-  .signUpBtn:hover, .verify__email__btn:hover, .email__code__btn:hover{
-    background-color: rgb(150, 11, 236);
+.signUpBtn:hover,
+.verify__email__btn:hover,
+.email__code__btn:hover {
+  border: 1px solid $neonMain;
+  filter: drop-shadow(1px 1px 2px $neonSer);
 }
-  .signUpBtn:active, .verify__email__btn:active, .email__code__btn:active{
-    transform: scale(0.99);
-}
-.disabledBtn{
-    cursor: pointer;
-    margin-top: 1em;
-    background-color: grey;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    padding: 0.5em;
-    font-size: 12px;
-    font-weight: bold;
+// .signUpBtn:active,
+// .verify__email__btn:active,
+// .email__code__btn:active {
+//   transform: scale(0.99);
+// }
+.disabledBtn {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  color: $title;
+  border: 1px solid $title;
+  background-color: transparent;
+  border-radius: 50px;
+  padding: 8px;
+  margin: 17px auto 0px;
+  font-size: 14px;
 }

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Modal from "../../UI/modal/Modal";
 import axios from "axios";
-import Context from "../../context/ContextProvider";
+import { Context } from "../../context/ContextProvider";
 import "./UserAdd.scss";
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { IoChatbubblesOutline } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import Message from "./Message/Message";
 import Input from "../Chat/Input/Input";
@@ -59,9 +58,7 @@ function Chat() {
   return (
     <div className="chatApp">
       <div className="chatApp__chat">
-        <div className="chatApp__head">
-          <IoChatbubblesOutline />
-        </div>
+        <div className="chatApp__head"></div>
         <div className="chatApp__messages" ref={messageEl}>
           {messages.map((m, i) => (
             <div key={i} className={`chatApp__msg`}>
@@ -69,9 +66,9 @@ function Chat() {
             </div>
           ))}
         </div>
-        <div ref={audioList}>
+        {/* <div ref={audioList}>
           <audio ref={audioRef}>mute</audio>
-        </div>
+        </div> */}
         <div className="chatApp__footer">
           <Input
             msgInputHandler={msgInputHandler}

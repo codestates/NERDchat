@@ -24,11 +24,9 @@ select:focus {
 .input_sendButton {
   font-family: "Monoton", cursive;
   color: rgb(184, 126, 255);
-  text-shadow: 0 0 3px rgb(163, 16, 255);
-  text-transform: uppercase;
+  text-shadow: 0 0 1px rgb(163, 16, 255);
   text-decoration: none;
   background: transparent;
-  padding: 20px;
   display: inline-block;
   border: none;
   width: 20%;
@@ -37,6 +35,5 @@ select:focus {
 
 .input_sendButton:hover {
   /* text-shadow: 0 0 3px rgb(163, 16, 255); */
-  filter: drop-shadow(0 0 2px rgb(163, 16, 255));
-  width: 20%;
+  filter: drop-shadow(0 0 1px rgb(163, 16, 255));
 }

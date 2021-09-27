@@ -4,13 +4,13 @@ import {
   IoFingerPrintOutline,
   IoMailOpenOutline,
   IoNotificationsOutline,
-  IoCutOutline,
+  IoAddOutline,
 } from "react-icons/io5";
 import UserDelete from "../../../friend/UserDelete";
 import { Context } from "../../../../context/ContextProvider";
-import "./DropDown.scss";
+import "./OnlineUserDropDown.scss";
 
-function DropDown({ nickname }) {
+function OnlineUserDropDown({ nickname }) {
   const [userNickname, setUserNickname] = useState(nickname);
   const { deleteFriendModalHandler, deleteFriendModalOpen } =
     useContext(Context);
@@ -20,37 +20,37 @@ function DropDown({ nickname }) {
   };
 
   return (
-    <div className="friendlist__wrapper">
+    <div className="onlinelist__wrapper">
       {deleteFriendModalOpen && <UserDelete nickname={userNickname} />}
-      <ul className="friendlist__menu">
-        <li className="friendlist__li">
-          <a href="#" className="friendlist__a">
-            <div className="friendlist__icon">
+      <ul className="onlinelist__menu">
+        <li className="onlinelist__li">
+          <a href="#" className="onlinelist__a">
+            <div className="onlinelist__icon">
               <IoFingerPrintOutline className="icona" />
             </div>
-            Info
+            Information
           </a>
         </li>
-        <li className="friendlist__li">
+        <li className="onlinelist__li">
           <a href="#">
-            <div className="friendlist__icon">
+            <div className="onlinelist__icon">
               <IoMailOpenOutline className="icona" />
             </div>
             Message
           </a>
         </li>
-        <li className="friendlist__li">
+        <li className="onlinelist__li">
           <a href="#">
-            <div className="friendlist__icon">
+            <div className="onlinelist__icon">
               <IoNotificationsOutline className="icona" />
             </div>
             Invite
           </a>
         </li>
-        <li className="friendlist__li">
+        <li className="onlinelist__li">
           <a href="#" onClick={deleteModalHandler}>
-            <div className="friendlist__icon">
-              <IoCutOutline className="icona" />
+            <div className="onlinelist__icon">
+              <IoAddOutline className="icona" />
             </div>
             Delete
           </a>
@@ -60,4 +60,4 @@ function DropDown({ nickname }) {
   );
 }
 
-export default DropDown;
+export default OnlineUserDropDown;

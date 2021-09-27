@@ -27,10 +27,17 @@ const Logout = () => {
   return (
     <Modal>
       <div>
-        <div className="guide__msg">로그아웃 하시겠습니까?</div>
+        <div className="guide__msg">
+          Log out of
+          <p className="nerdchat">NERDchat</p>
+        </div>
         <div className="logout__btn__container">
-          <button onClick={yesHandler}>yes</button>
-          <button onClick={noHandler}>no</button>
+          <button className="logout__btn" onClick={yesHandler}>
+            YES
+          </button>
+          <button className="logout__btn" onClick={noHandler}>
+            NO
+          </button>
         </div>
       </div>
     </Modal>
