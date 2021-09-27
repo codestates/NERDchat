@@ -122,7 +122,7 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
       // selectedUser -> onlien, friend list에서 내가 선택하는 유저의 아이디
     });
 
-    socket.current.on("disconnect", () => {
+    socket.current.on("disconenct", () => {
       users.forEach((el) => {
         if (el.userId === userId) {
           el.connected = false;
