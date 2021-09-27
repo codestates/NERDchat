@@ -12,17 +12,17 @@ module.exports = async (req, res) => {
           { user1id: userData.id },
           { user2id: userData.id }
         ]
-      },
+      }
     });
-    const listSort = []
+    const listSort = [];
     friendsList.map((el) => {
-      if(el.user1id === userData.id) listSort.push(el.user2id);
-      else if(el.user2id === userData.id) listSort.push(el.user1id)
-    })
-    const findUsers = await Users.findAll({ 
-      where: {id:{[Op.in]: listSort}},
+      if (el.user1id === userData.id) listSort.push(el.user2id);
+      else if (el.user2id === userData.id) listSort.push(el.user1id);
+    });
+    const findUsers = await Users.findAll({
+      where: { id: { [Op.in]: listSort } },
       attributes: ['id', 'avatar', 'nickname']
-    })
+    });
     res.status(200).json({ data: findUsers });
   }
 };

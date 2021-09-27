@@ -1,20 +1,23 @@
 const express = require('express');
 const cors = require('cors');
-const http = require('http');
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
-const { createClient } = require('redis');
-const redisAdapter = require('@socket.io/redis-adapter');
+const Redis = require('ioredis');
+const redisClient = new Redis(6379, process.env.REDIS_HOST);
 const app = express();
-const httpServer = http.createServer(app);
+const httpServer = require('http').createServer(app);
 const io = require('socket.io')(httpServer, {
   cors: {
     origin: true,
     credentials: true,
     methods: ['GET', 'POST', 'OPTIONS', 'HEAD']
-  }
+  },
+  adapter: require('socket.io-redis')({
+    pubClient: redisClient,
+    subClient: redisClient.duplicate()
+  })
 });
-const PORT = process.env.PORT || 8080;
+const { setupWorker } = require('@socket.io/sticky');
 
 const routes = require('./routes/index');
 const controller = require('./controllers/index');
@@ -34,10 +37,8 @@ app.get('/', (req, res) => res.send('Hello, world!!!!!!'));
 
 app.use('/', routes);
 
-const pubClient = createClient({ host: process.env.REDIS_HOST, port: 6379 });
-const subClient = pubClient.duplicate();
-io.adapter(redisAdapter(pubClient, subClient));
+io.use(controller.socket.useCookie);
 
-io.of(/^\/\d+$/).on('connection', controller.socket);
+io.of(/^\/\d+$/).on('connection', controller.socket.socket);
 
-httpServer.listen(PORT, () => console.log(`Server is Running ${PORT}`));
+setupWorker(io);

@@ -25,4 +25,4 @@ export SecretKey=$(aws ssm get-parameters --region us-east-1 --names SecretKey -
 export Region=$(aws ssm get-parameters --region us-east-1 --names Region --query Parameters[0].Value | sed 's/"//g')
 export BUCKET_NAME=$(aws ssm get-parameters --region us-east-1 --names BUCKET_NAME --query Parameters[0].Value | sed 's/"//g')
 
-authbind --deep pm2 start index.js --watch
+authbind --deep pm2 start cluster.js --watch
