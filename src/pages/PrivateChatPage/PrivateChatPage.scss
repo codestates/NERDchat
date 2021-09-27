@@ -1,0 +1,56 @@
+.private__container {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  align-items: center;
+
+  .private__nav {
+    width: 100%;
+    height: 150px;
+  }
+
+  .private__main {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 85%;
+    padding: 20px 10rem 40px;
+
+    .private__main-container {
+      display: flex;
+      flex-direction: column;
+      width: 76%;
+    }
+
+    .private__main-header {
+      flex: 0.1;
+      margin-bottom: 10px;
+      box-shadow: -1px 1px 15px black;
+    }
+    .private__main-content {
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+    }
+    .private__chat {
+      flex: 1.5;
+      height: 100%;
+      margin-right: 10px;
+      box-shadow: -2px 2px 15px black;
+    }
+
+    .private__vioce {
+      flex: 1;
+      height: 100%;
+      box-shadow: 0 3px 15px black;
+    }
+
+    .private__sidebar {
+      flex: 1;
+      margin-left: 10px;
+      box-shadow: 3px 3px 15px black;
+    }
+  }
+}

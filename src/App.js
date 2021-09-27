@@ -5,6 +5,7 @@ import ChatPage from "./pages/ChatPage/ChatPage";
 import ServerPage from "./pages/serverpage/ServerPage";
 import ServerRoomPage from "./pages/ServerRoomPage/ServerRoomPage";
 import Mypage from "./pages/MyPage/MyPage";
+import PrivateChatPage from "./pages/PrivateChatPage/PrivateChatPage";
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
         </Route>
         <Route exact path="/mypage">
           <Mypage />
+        </Route>
+        <Route exact path="/private">
+          <PrivateChatPage />
         </Route>
       </Switch>
     </BrowserRouter>

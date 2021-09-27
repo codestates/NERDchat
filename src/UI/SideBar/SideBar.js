@@ -1,14 +1,17 @@
 import React, { useState, useContext } from "react";
 import FriendList from "../../components/SideTap/FriendList/FriendList";
+
 import Messenger from "../../components/SideTap/Messenger/Messenger";
 import OnlineUser from "../../components/SideTap/OnlineUser/OnlineUser";
 
 import { Context } from "../../context/ContextProvider";
+import useSocket from "../../hooks/useSocket";
 
 import "./SideBar.scss";
 
 const SideBar = () => {
   const [toggleState, setToggleState] = useState(1);
+  const { users } = useSocket();
 
   const { friends } = useContext(Context);
   console.log(friends);

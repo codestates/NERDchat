@@ -15,11 +15,11 @@
 
 .bloc-tabs {
   display: flex;
+  justify-content: space-around;
 }
 .tabs {
-  padding: 20px 0;
+  padding: 15px 0;
   text-align: center;
-  width: 50%;
   cursor: pointer;
   background-color: $dark;
   color: rgb(172, 172, 172);
@@ -29,12 +29,8 @@
   outline: none;
   transition: all 0.4s ease-in-out;
 }
-// .tabs:not(:last-child) {
-//   border-right: 1px solid rgba(159, 159, 159, 0.274);
-// }
 
 .active-tabs {
-  //   border-bottom: 1px solid transparent;
   color: $neonNain;
   text-shadow: 0 0 3px rgb(163, 16, 255);
 }
@@ -44,7 +40,7 @@
   display: block;
   position: absolute;
   //   color: $neonNain;
-  top: 40px;
+  top: 50px;
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% + 2px);

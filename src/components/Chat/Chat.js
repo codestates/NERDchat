@@ -1,20 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { IoChatbubblesOutline } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import Message from "./Message/Message";
 import Input from "../Chat/Input/Input";
-import { ReactComponent as Glasses } from "../../images/glasses.svg";
 
 import "./Chat.scss";
 
 import useSocket from "../../hooks/useSocket";
 import { Cookies } from "react-cookie";
-import NerdChatHeader from "./Message/NerdChatHeader/NerdChatHeader";
 
 function Chat() {
-  // const audioList = useRef();
-  // const audioRef = useRef();
-  // console.log("chat compo");
+  const audioList = useRef();
+  const audioRef = useRef();
+  console.log("chat compo");
   const messageEl = useRef(null);
 
   useEffect(() => {
@@ -39,9 +36,9 @@ function Chat() {
   const { joinRoom, sendMessage, messages } = useSocket(
     gameId,
     roomId,
-    userInfo
-    // audioList,
-    // audioRef
+    userInfo,
+    audioList,
+    audioRef
   );
 
   useEffect(() => {
