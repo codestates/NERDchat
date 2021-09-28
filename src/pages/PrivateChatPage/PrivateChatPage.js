@@ -3,11 +3,13 @@ import React from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import SideBar from "../../UI/SideBar/SideBar";
 import Chat from "../../components/Chat/Chat";
+import DMChat from "../../components/DMChat/DMChat";
 import ChatHeader from "../../components/ChatHeader/ChatHeader";
 
 import "./PrivateChatPage.scss";
 
-function PrivateChatPage() {
+function PrivateChatPage(props) {
+  const { messages, nickname } = props.location.state;
   return (
     <div className="private__container">
       <div className="private__nav">
@@ -20,7 +22,7 @@ function PrivateChatPage() {
           </div>
           <div className="private__main-content">
             <div className="private__chat">
-              <Chat />
+              <DMChat to={nickname} />
             </div>
           </div>
         </div>
