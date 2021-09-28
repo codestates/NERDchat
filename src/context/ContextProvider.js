@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useReducer } from "react";
-import axios from "axios";
 import { Cookies } from "react-cookie";
 
 const Context = React.createContext({});
@@ -72,9 +71,9 @@ const ContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    axios
-      .get(`${ENDPOINT}/friends/lists`, { withCredentials: true })
-      .then((res) => setFriends(res.data.data));
+    // axios
+    //   .get(`${ENDPOINT}/friends/lists`, { withCredentials: true })
+    //   .then((res) => setFriends(res.data.data));
   }, []);
   // bookmark
   // friend lists
@@ -98,7 +97,6 @@ const ContextProvider = ({ children }) => {
         addFriendModalOpen,
         deleteFriendModalHandler,
         addFriendModalHandler,
-        friends,
         userInfoModalHandler,
         userInfoModalOpen,
       }}

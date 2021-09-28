@@ -12,6 +12,7 @@ const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 const ServerRoom = () => {
   const cookies = new Cookies();
   const userInfo = cookies.get("userInfo");
+
   const { gameId } = useParams();
   const { message, sendMessage } = useSocket(gameId, "", userInfo);
   console.log("This is ServerRoom compo");
