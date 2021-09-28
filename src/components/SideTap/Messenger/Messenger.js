@@ -9,7 +9,8 @@ const Messenger = () => {
   const cookies = new Cookies();
   let userInfo = cookies.get("userInfo");
   const { gameId } = useParams();
-  const { messages } = useSocket(gameId, "", userInfo, "", "");
+  const { users } = useSocket(gameId, "", userInfo, "", "");
+  console.log(users);
   return (
     <div className="messagelist">
       <div className="messageonline">message</div>

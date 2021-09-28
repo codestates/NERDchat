@@ -49,10 +49,11 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
       });
     });
 
-    socket.current.auth = { nickname, userId };
-    socket.current.connect();
     if (token) {
-      socket.current.auth = { token };
+      socket.current.auth = { token, nickname, userId };
+      socket.current.connect();
+    } else {
+      socket.current.auth = { nickname, userId };
       socket.current.connect();
     }
 
