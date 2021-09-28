@@ -2,6 +2,7 @@ const { Users, GameChatRooms, Messages } = require('../models');
 const crypto = require('crypto');
 const randomId = () => crypto.randomBytes(10).toString('hex');
 const Redis = require('ioredis');
+require('dotenv').config()
 const redisClient = new Redis(6379, process.env.REDIS_HOST, { password: process.env.REDIS_PASSWORD });
 
 const { RedisTokenStore } = require('../store/tokenStore');
@@ -16,6 +17,7 @@ const roomMessageStore = new RedisRoomMessageStore(redisClient);
 module.exports = {
   socket: async (socket) => {
     const ns = socket.nsp;
+
     tokenStore.saveToken(socket.token, {
       userId: socket.userId,
       nickname: socket.nickname,
