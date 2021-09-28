@@ -26,9 +26,7 @@ function App() {
         <Route exact path="/mypage">
           <Mypage />
         </Route>
-        <Route exact path="/private">
-          <PrivateChatPage />
-        </Route>
+        <Route exact path="/private" component={PrivateChatPage} />
       </Switch>
     </BrowserRouter>
   );

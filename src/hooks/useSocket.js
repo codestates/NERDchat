@@ -11,8 +11,7 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
   const [roomHeadCount, setRoomHeadCount] = useState(0);
   const [mic, setMic] = useState(true);
   const { nickname, userId } = userInfo;
-  console.log("This is userInfo", userId);
-
+  const [userList, setUserList] = useState([]);
   const users = [];
   let voiceChatUid = "";
   if (roomId) {
@@ -70,6 +69,7 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
       users.sort((a, b) => {
         return a - b;
       });
+      setUserList(users);
     });
 
     socket.current.on("user connected", (data) => {
@@ -81,6 +81,7 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
         }
       }
       users.push(data);
+      // setUserList(users);
     });
 
     socket.current.on("user disconnected", (data) => {
@@ -91,6 +92,7 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
           break;
         }
       }
+      // setUserList(users);
     });
 
     socket.current.on("welcomeRoom", (userData, msgData) =>
@@ -172,7 +174,6 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     socket.current.on("currentRoomLength", (data) => {
       setRoomHeadCount(data);
     });
-
     return () => {
       socket.current.off("connect");
       socket.current.off("token");
@@ -206,7 +207,16 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     socket.current.emit("roomMessage", roomId, chatId, userInfo, newMsg);
   };
 
-  return { joinRoom, sendMessage, messages, nsHeadCount, users, handleMuteMic };
+  // console.log("This is useSocket users", userList);
+  return {
+    joinRoom,
+    sendMessage,
+    messages,
+    nsHeadCount,
+    users,
+    handleMuteMic,
+    userList,
+  };
 };
 
 export default useSocket;

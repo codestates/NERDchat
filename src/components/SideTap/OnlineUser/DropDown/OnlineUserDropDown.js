@@ -1,16 +1,16 @@
 import React, { useContext, useState } from "react";
-
 import {
   IoFingerPrintOutline,
   IoMailOpenOutline,
   IoNotificationsOutline,
   IoAddOutline,
 } from "react-icons/io5";
+import { Link } from "react-router-dom";
 import UserDelete from "../../../friend/UserDelete";
 import { Context } from "../../../../context/ContextProvider";
 import "./OnlineUserDropDown.scss";
 
-function OnlineUserDropDown({ nickname }) {
+function OnlineUserDropDown({ nickname, messages }) {
   const [userNickname, setUserNickname] = useState(nickname);
   const { deleteFriendModalHandler, deleteFriendModalOpen } =
     useContext(Context);
@@ -32,12 +32,18 @@ function OnlineUserDropDown({ nickname }) {
           </a>
         </li>
         <li className="onlinelist__li">
-          <a href="#">
+          <Link
+            to="/private"
+            state={{
+              messages: messages,
+              nickname: nickname,
+            }}
+          >
             <div className="onlinelist__icon">
               <IoMailOpenOutline className="icona" />
             </div>
             Message
-          </a>
+          </Link>
         </li>
         <li className="onlinelist__li">
           <a href="#">
