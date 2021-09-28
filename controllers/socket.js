@@ -2,7 +2,7 @@ const { Users, GameChatRooms, Messages } = require('../models');
 const crypto = require('crypto');
 const randomId = () => crypto.randomBytes(10).toString('hex');
 const Redis = require('ioredis');
-const redisClient = new Redis(6379, process.env.REDIS_HOST);
+const redisClient = new Redis(6379, process.env.REDIS_HOST, { password: process.env.REDIS_PASSWORD });
 
 const { RedisTokenStore } = require('../store/tokenStore');
 const tokenStore = new RedisTokenStore(redisClient);
@@ -10,9 +10,12 @@ const tokenStore = new RedisTokenStore(redisClient);
 const { RedisMessageStore } = require('../store/messageStore');
 const messageStore = new RedisMessageStore(redisClient);
 
+const { RedisRoomMessageStore } = require('../store/roomMessageStore');
+const roomMessageStore = new RedisRoomMessageStore(redisClient);
+
 module.exports = {
   socket: async (socket) => {
-    console.log(socket.token);
+    const ns = socket.nsp;
     tokenStore.saveToken(socket.token, {
       userId: socket.userId,
       nickname: socket.nickname,
@@ -81,7 +84,6 @@ module.exports = {
       }
     });
 
-    const ns = socket.nsp;
     socket.on('joinRoom', async (roomUid, voiceChatUid, userData) => {
     // search User and Update User ` currentRoom ` Column
       try {
@@ -101,13 +103,11 @@ module.exports = {
 
     socket.on('roomMessage', async (roomUid, roomId, userData, msgData) => {
       try {
-        const { id, userId, avatar, nickname } = userData;
-        await Messages.create({
-          userId: id,
-          roomId,
+        roomMessageStore.saveRoomMessages({
+          uuid: roomUid,
+          id: roomId,
           message: msgData,
-          createdAt: new Date(),
-          updatedAt: new Date()
+          userData
         });
         ns.to(roomUid).emit('roomMessage', userData, msgData);
       } catch (err) {
