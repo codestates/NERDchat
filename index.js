@@ -3,7 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const Redis = require('ioredis');
-const redisClient = new Redis(6379, process.env.REDIS_HOST);
+const redisClient = new Redis(6379, process.env.REDIS_HOST, { password: process.env.REDIS_PASSWORD });
 const app = express();
 const httpServer = require('http').createServer(app);
 const io = require('socket.io')(httpServer, {
