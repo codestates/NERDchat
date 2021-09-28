@@ -1,0 +1,332 @@
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap");
+$dark: rgb(23, 23, 23);
+$neonNain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+$title: rgb(172, 172, 172);
+
+.setting-container {
+  display: flex;
+  position: absolute;
+
+  .setting-main {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+
+    .setting-main-container {
+      display: flex;
+      flex-direction: column;
+      // background-color: #fff;
+      width: 70%;
+    }
+
+    .setting-main-content {
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+    }
+    .setting-chat {
+      display: flex;
+      flex: 1;
+      height: 100%;
+
+      .setting-card {
+        // border: 1px solid blueviolet;
+        margin: 30px;
+        flex: 0.5;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+
+        #imgInput[type="file"] {
+          display: none;
+        }
+
+        .setting-form {
+          position: relative;
+          margin: 15px 0;
+          margin-top: 20px;
+
+          img {
+            filter: opacity(0.5) drop-shadow(0 0 0 white);
+          }
+        }
+
+        .form__input {
+          position: absolute;
+          left: -999px;
+          width: 1px;
+          height: 1px;
+          opacity: 0;
+          visibility: hidden;
+        }
+        .form__label {
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          padding: 5px 10px;
+          background: $neonNain;
+          border-radius: 20px;
+          cursor: pointer;
+          transition: all 0.2s ease-in;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 5px;
+          }
+        }
+
+        .form__text {
+          font-weight: 200;
+          font-family: "Poppins", sans-serif;
+          font-size: 6px;
+          color: white;
+          margin-right: 5px;
+        }
+
+        .form__icon {
+          margin-right: 5px;
+          width: 15px;
+          height: 15px;
+          color: white;
+        }
+
+        h3 {
+          color: rgb(172, 172, 172);
+          font-family: "Monoton", cursive;
+          font-weight: lighter;
+        }
+
+        .setting-nickname {
+          font-family: "Monoton", cursive;
+          animation: flicker 4s linear infinite;
+          font-weight: lighter;
+          color: $neonNain;
+          font-size: 20px;
+          margin-bottom: 15px;
+        }
+
+        .setting-status {
+          font-family: "Poppins", sans-serif;
+          font-weight: 100;
+          color: rgb(172, 172, 172);
+          text-align: justify;
+          margin: 0 40px;
+          padding: 0 20px;
+          height: 20%;
+          transition: all 0.4s ease-in-out;
+          text-align: center;
+
+          textarea {
+            resize: none;
+            width: 80%;
+            height: 80%;
+            outline: none;
+            padding: 5px 10px;
+            border-radius: 10px;
+            background-color: transparent;
+            color: rgb(172, 172, 172);
+            font-family: "Poppins", sans-serif;
+            font-weight: 100;
+            margin-top: 20px;
+
+            &:is(:focus, :valid) {
+              border-color: rgb(172, 172, 172);
+            }
+
+            &::-webkit-scrollbar {
+              display: none;
+            }
+
+            &::spelling-error {
+              display: none;
+            }
+          }
+        }
+
+        .setting-status p {
+          color: rgb(172, 172, 172);
+          font-family: "Poppins", sans-serif;
+          font-weight: 100;
+          font-size: 15px;
+        }
+
+        .setting-status:hover {
+          transform: scale(1.05);
+        }
+      }
+
+      .setting-info {
+        // border: 1px solid blueviolet;
+        margin: 10px;
+        flex: 0.6;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .setting-infomation {
+          margin-bottom: 30px;
+          padding: 0 10px;
+          box-shadow: 0px 1px 5px black;
+        }
+        .setting-infomation h2 {
+          font-family: "Monoton", cursive;
+          color: rgb(172, 172, 172);
+          font-weight: lighter;
+        }
+
+        // .setting__form {
+        //   position: relative;
+
+        //   .setting__input {
+        //     top: 0;
+        //     left: 0;
+        //     position: absolute;
+        //     border: 1px solid rgb(172, 172, 172);
+        //     border-radius: 10px;
+        //     font-family: "Poppins", sans-serif;
+        //     font-size: inherit;
+        //     color: rgb(172, 172, 172);
+        //     outline: none;
+        //     width: 70%;
+        //     padding: 0.5rem 1rem;
+        //     background: none;
+
+        //     &:hover {
+        //       border-color: $neonNain;
+        //     }
+        //     &:focus {
+        //       border-color: $neonSer;
+        //     }
+        //   }
+        //   .setting__lable {
+        //     position: absolute;
+        //     left: 1rem;
+        //     top: 0.8rem;
+        //     color: white;
+        //     cursor: text;
+        //     padding: 0 4px;
+        //     transition: top 200ms ease-in, left 200ms ease-in,
+        //       font-size 200ms ease-in;
+        //     background-color: $dark;
+        //   }
+
+        //   .setting__input:focus ~ .setting__lable,
+        //   .setting__input:not(:placeholder-shown).setting__input:not(:focus)
+        //     ~ .setting__lable {
+        //     top: -0.5rem;
+        //     font-size: 0.8rem;
+        //     left: 0.8rem;
+        //   }
+        // }
+        .form {
+          position: relative;
+          width: 20rem;
+          height: 3rem;
+          margin: 20px 0;
+
+          &__input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 1px solid rgb(172, 172, 172);
+            border-radius: 50px;
+            font-family: "Poppins", sans-serif;
+            font-size: inherit;
+            color: rgb(172, 172, 172);
+            outline: none;
+            padding: 1.25rem;
+            background: none;
+            transition: all 0.2s ease-in;
+
+            &:hover {
+              border-color: $neonNain;
+              box-shadow: 0 0 5px rgb(163, 16, 255);
+            }
+
+            /* Change border when input focus*/
+
+            &:focus {
+              border-color: $neonNain;
+              box-shadow: 0 0 5px rgb(163, 16, 255);
+            }
+          }
+
+          &__label {
+            position: absolute;
+            left: 1rem;
+            top: 0.7rem;
+            padding: 0 0.1rem;
+            color: rgb(172, 172, 172);
+            cursor: text;
+            font-family: "Poppins", sans-serif;
+            font-weight: 200;
+            transition: top 200ms ease-in, left 200ms ease-in,
+              font-size 200ms ease-in;
+            background-color: $dark;
+          }
+        }
+
+        .form__input:focus ~ .form__label,
+        .form__input:not(:placeholder-shown).form__input:not(:focus)
+          ~ .form__label {
+          top: -0.5rem;
+          font-size: 0.8rem;
+          left: 0.9rem;
+          color: $neonNain;
+          text-shadow: 0 0 5px rgb(163, 16, 255);
+        }
+      }
+    }
+    .setting-button {
+      outline: none;
+      padding: 10px 15px;
+      margin-top: 20px;
+      border-radius: 20px;
+      border: 1px solid $neonNain;
+      background-color: transparent;
+      color: $neonNain;
+      letter-spacing: 2px;
+      font-family: "Poppins", sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+
+      &:focus {
+        outline: none;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-color: $neonNain;
+        top: 100%;
+        left: 0;
+        transition: all 0.6s;
+        z-index: -1;
+      }
+
+      &:hover::before {
+        transform: translateY(-100%);
+      }
+
+      &:hover {
+        color: white;
+      }
+    }
+    .setting-sidebar {
+      flex: 1;
+      margin-left: 10px;
+      box-shadow: 3px 3px 15px black;
+    }
+  }
+}

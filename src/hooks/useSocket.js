@@ -19,13 +19,13 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     voiceChatUid = roomId + "-vUid" + Math.floor(Math.random() * 100);
     // console.log("This is voiceChatUid, ", voiceChatUid);
   }
-  const addAudioStream = (audio, stream) => {
-    audio.srcObject = stream;
-    audio.addEventListener("loadedmetadata", () => {
-      audio.play();
-    });
-    audioList.current.append(audio);
-  };
+  // const addAudioStream = (audio, stream) => {
+  //   audio.srcObject = stream;
+  //   audio.addEventListener("loadedmetadata", () => {
+  //     audio.play();
+  //   });
+  //   audioList.current.append(audio);
+  // };
 
   const handleMuteMic = () => {
     setMic(!mic);
@@ -131,35 +131,35 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
       });
     });
 
-    //Voice
-    if (voiceChatUid.length !== 0) {
-      navigator.mediaDevices
-        .getUserMedia({ video: false, audio: true })
-        .then((stream) => {
-          myPeer.on("open", (peerId) => {
-            socket.current.emit("voiceChat", voiceChatUid, userInfo, peerId);
-          });
-          addAudioStream(audioRef.current, stream);
-          myPeer.on("call", (call) => {
-            call.answer(stream);
-            const audio = document.createElement("audio");
-            audio.setAttribute("autoPlay", "playsInline");
-            call.on("stream", (userAudio) => {
-              addAudioStream(audio, userAudio);
-            });
-          });
-          socket.current.on("userConnect", (peerId) => {
-            const peerCall = myPeer.call(peerId, stream);
-            const audio = document.createElement("audio");
-            peerCall.on("stream", (userAudio) => {
-              addAudioStream(audio, userAudio);
-            });
-            peerCall.on("close", () => {
-              audio.remove();
-            });
-          });
-        });
-    }
+    // //Voice
+    // if (voiceChatUid.length !== 0) {
+    //   navigator.mediaDevices
+    //     .getUserMedia({ video: false, audio: true })
+    //     .then((stream) => {
+    //       myPeer.on("open", (peerId) => {
+    //         socket.current.emit("voiceChat", voiceChatUid, userInfo, peerId);
+    //       });
+    //       addAudioStream(audioRef.current, stream);
+    //       myPeer.on("call", (call) => {
+    //         call.answer(stream);
+    //         const audio = document.createElement("audio");
+    //         audio.setAttribute("autoPlay", "playsInline");
+    //         call.on("stream", (userAudio) => {
+    //           addAudioStream(audio, userAudio);
+    //         });
+    //       });
+    //       socket.current.on("userConnect", (peerId) => {
+    //         const peerCall = myPeer.call(peerId, stream);
+    //         const audio = document.createElement("audio");
+    //         peerCall.on("stream", (userAudio) => {
+    //           addAudioStream(audio, userAudio);
+    //         });
+    //         peerCall.on("close", () => {
+    //           audio.remove();
+    //         });
+    //       });
+    //     });
+    // }
 
     //현재 nameSpace 접속자 인원 받아오기
     socket.current.on("currentNSLength", (data) => {
