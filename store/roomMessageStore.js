@@ -24,4 +24,21 @@ class RedisRoomMessageStore extends RoomMessageStore {
     super();
     this.redisClient = redisClient;
   }
+
+  saveRoomMessages (message) {
+    const value = JSON.stringify(message);
+    this.redisClient.multi()
+      .rpush(`room:${message.uuid}`, value)
+      .expire(`room:${message.uuid}`, MESSAGE_TTL)
+      .exec();
+  }
+
+  findRoomMessagesForUser (uuid) {
+    return this.redisClient.lrange(`room:${uuid}`, 0, -1)
+      .then((results) => results.map((result) => JSON.parse(result)));
+  }
 }
+module.exports = {
+  InMemoryRoomMessageStore,
+  RedisRoomMessageStore
+};

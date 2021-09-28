@@ -11,6 +11,7 @@ export DATABASE_PASSWORD=$(aws ssm get-parameters --region us-east-1 --names DAT
 export DATABASE_USER=$(aws ssm get-parameters --region us-east-1 --names DATABASE_USER --query Parameters[0].Value | sed 's/"//g')
 export HOST=$(aws ssm get-parameters --region us-east-1 --names HOST --query Parameters[0].Value | sed 's/"//g')
 export REDIS_HOST=$(aws ssm get-parameters --region us-east-1 --names REDIS_HOST --query Parameters[0].Value | sed 's/"//g')
+export REDIS_PASSWORD=$(aws ssm get-parameters --region us-east-1 --names REDIS_PASSWORD --query Parameters[0].Value | sed 's/"//g')
 export REFRESH_SECRET=$(aws ssm get-parameters --region us-east-1 --names REFRESH_SECRET --query Parameters[0].Value | sed 's/"//g')
 export GOOGLE_CLIENT_ID=$(aws ssm get-parameters --region us-east-1 --names GOOGLE_CLIENT_ID --query Parameters[0].Value | sed 's/"//g')
 export GOOGLE_CLIENT_SECRET=$(aws ssm get-parameters --region us-east-1 --names GOOGLE_CLIENT_SECRET --query Parameters[0].Value | sed 's/"//g')
