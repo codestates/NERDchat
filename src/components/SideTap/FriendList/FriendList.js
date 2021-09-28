@@ -31,7 +31,11 @@ const FriendList = ({ avatar, nickname }) => {
         <div className="friend__avatar-container">
           <img
             className="friend__avatar"
-            src={require("../../../images/dummy/white.jpeg").default}
+            src={
+              avatar !== null
+                ? avatar
+                : require("../../../images/dummy/white.jpeg").default
+            }
             alt=""
           />
           <div className="friend__onliness">
