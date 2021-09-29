@@ -3,6 +3,7 @@ import axios from "axios";
 import "./SignUp.scss";
 import { Context } from "../../context/ContextProvider";
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
+const CODE = process.env.REACT_APP_EMAIL_CODE;
 
 const SignUp = () => {
   const { loginmodalHandler } = useContext(Context);
@@ -19,7 +20,7 @@ const SignUp = () => {
     emailIsValid: true,
     verifyCode: "",
   });
-  const [AVerifyCode, setAVerifyCode] = useState("123");
+  const [AVerifyCode, setAVerifyCode] = useState(CODE);
   const [emailIsVerified, setEmailIsVerified] = useState(false);
   const [confirmClicked, setConfirmClicked] = useState(false);
   const [formIsValid, setFormIsValid] = useState(false);
@@ -165,7 +166,7 @@ const SignUp = () => {
 
   // 이메일 인증 요청
   const sendEmailHandler = async () => {
-    const res = await axios.put(`${ENDPOINT}/emailV`, { email });
+    const res = await axios.post(`${ENDPOINT}/emailVerify`, { email });
     // const res.data.verifyToken
     setAVerifyCode(res.data.data.verifyToken);
   };
@@ -179,8 +180,10 @@ const SignUp = () => {
   // 이메일 인증코드 확인
   const emailCodeHandler = (e) => {
     setConfirmClicked(true);
-    if (verifyCode === AVerifyCode) setEmailIsVerified(true);
-    else setEmailIsVerified(false);
+    if (+verifyCode === AVerifyCode) {
+      console.log("working");
+      setEmailIsVerified(true);
+    } else setEmailIsVerified(false);
     // console.log(emailIsVerified);
   };
   // 회원가입 요청
@@ -305,6 +308,9 @@ const SignUp = () => {
           </div>
           {!emailIsVerified && verifyCode.length !== 0 && confirmClicked && (
             <p className="errMsg">인증 번호가 일치하지 않습니다.</p>
+          )}
+          {emailIsVerified && confirmClicked && (
+            <p className="codeConfirmMsg">인증이 완료 되었습니다.</p>
           )}
         </div>
         <div>

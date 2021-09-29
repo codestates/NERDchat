@@ -2,18 +2,22 @@ import { useRef, useEffect, useState } from "react";
 import Message from "../../components/Chat/Message/Message";
 import useSocket from "../../hooks/useSocket";
 import Input from "../../components/Chat/Input/Input";
+import { Cookies } from "react-cookie";
 
 const DMChat = ({ to }) => {
-  const messages = { body: "hi", user: "mark", mine: false };
+  const cookies = new Cookies();
+  const userInfo = cookies.get("userInfo");
+  const messages = [{ body: "hi", user: "mark", mine: false }];
   const messageEl = useRef(null);
   const [newMsg, setNewMsg] = useState("");
-  const { privateMessage, joinRoom } = useSocket(
-    "serverName",
-    "roomId",
-    "userInfo",
-    "audioList",
-    "audioRef"
+  const { privateMessage, joinRoom, users } = useSocket(
+    null,
+    to,
+    userInfo,
+    "",
+    ""
   );
+  console.log(123123123, users);
   useEffect(() => {
     if (messageEl) {
       messageEl.current.addEventListener("DOMNodeInserted", (event) => {
@@ -23,7 +27,7 @@ const DMChat = ({ to }) => {
     }
   }, []);
   useEffect(() => {
-    joinRoom();
+    // joinRoom();
   }, []);
   const msgInputHandler = (e) => {
     setNewMsg(e.target.value);
