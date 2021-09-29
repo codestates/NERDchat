@@ -24,8 +24,8 @@ class InMemoryTokenStore extends TokenStore {
 }
 
 const TOKEN_TTL = 24 * 60 * 60;
-const mapToken = ([userId, nickname, connected]) =>
-  userId ? { userId, nickname, connected: connected === 'true' } : undefined;
+const mapToken = ([userId, avatar, nickname, connected]) =>
+  userId ? { userId, avatar, nickname, connected: connected === 'true' } : undefined;
 
 class RedisTokenStore extends TokenStore {
   constructor (redisClient) {
@@ -35,16 +35,18 @@ class RedisTokenStore extends TokenStore {
 
   findToken (id) {
     return this.redisClient
-      .hmget(`token:${id}`, 'userId', 'nickname', 'connected')
+      .hmget(`token:${id}`, 'userId', 'avatar', 'nickname', 'connected')
       .then(mapToken);
   }
 
-  saveToken (id, { userId, nickname, connected }) {
+  saveToken (id, { userId, avatar, nickname, connected }) {
     this.redisClient.multi()
       .hset(
                 `token:${id}`,
                 'userId',
                 userId,
+                'avatar',
+                avatar,
                 'nickname',
                 nickname,
                 'connected',
@@ -68,7 +70,7 @@ class RedisTokenStore extends TokenStore {
     } while (nextIndex !== 0);
     const commands = [];
     keys.forEach((key) => {
-      commands.push(['hmget', key, 'userId', 'nickname', 'connected']);
+      commands.push(['hmget', key, 'userId', 'avatar', 'nickname', 'connected']);
     });
     return this.redisClient.multi(commands).exec()
       .then((results) => {
