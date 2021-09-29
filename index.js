@@ -37,6 +37,7 @@ app.get('/', (req, res) => res.send('Hello, world!!!!!!'));
 
 app.use('/', routes);
 
-io.of(/^\/\d+$/).use(controller.socket.useToken).on('connection', controller.socket.socket);
+io.use(controller.socket.useToken).on('connection', controller.socket.rootSocket);
+io.of(/^\/\d+$/).on('connection', controller.socket.nspSocket);
 
 setupWorker(io);
