@@ -1,7 +1,8 @@
 # NERDchat
 
 ## Logo
-<img src="https://user-images.githubusercontent.com/79839230/132945747-d75e1792-a210-4a14-92c6-5c4f67e27eea.gif" width="300" height="200" />  <img src="https://user-images.githubusercontent.com/79839230/132945813-7729507a-275f-41cc-8635-7927839a2bb9.gif" width="300" height="200" />
+<img src="https://user-images.githubusercontent.com/79839230/132945747-d75e1792-a210-4a14-92c6-5c4f67e27eea.gif" width="300" height="200" />
+<img src="https://user-images.githubusercontent.com/79839230/132945813-7729507a-275f-41cc-8635-7927839a2bb9.gif" width="300" height="200" />
 
 ## About
 병민: 야, 나랑 같이 포아너(For honor) 안 할래?
@@ -25,26 +26,26 @@
 
 ### Front
 
-![Front_React](https://img.shields.io/badge/FRONT-REACT-blue?style=for-the-badge&logo=react)
+![Front_React](https://img.shields.io/badge/FRONT-REACT-61DAFB?style=for-the-badge&logo=react)
 
-![Front_JS](https://img.shields.io/badge/FRONT-JAVASCRIPT-yellow?style=for-the-badge&logo=javascript)
+![Front_JS](https://img.shields.io/badge/FRONT-JAVASCRIPT-F7DF1E?style=for-the-badge&logo=javascript)
 
-![Front_SASS](https://img.shields.io/badge/FRONT-SASS-pink?style=for-the-badge&logo=Sass)
+![Front_SASS](https://img.shields.io/badge/FRONT-SASS-CC6699?style=for-the-badge&logo=Sass)
 
-![Front_Styled-Components](https://img.shields.io/badge/FRONT-STYLED%20COMPONENTS-purple?style=for-the-badge&logo=styled-components)
+![Front_Socket.io](https://img.shields.io/badge/FRONT-Socket.io-010101?style=for-the-badge&logo=Socket.io)
 
-![Front_Socket.io](https://img.shields.io/badge/FRONT-Socket.io-black?style=for-the-badge&logo=Socket.io)
-
-![Front_WebRTC](https://img.shields.io/badge/FRONT-WebRTC-orange?style=for-the-badge&logo=WebRTC)
+![Front_WebRTC](https://img.shields.io/badge/FRONT-WebRTC-333333?style=for-the-badge&logo=WebRTC)
 
 ### Back
 
-![Back_NodeJS](https://img.shields.io/badge/BACK-NODE.JS-green?style=for-the-badge&logo=node.js)
+![Back_NodeJS](https://img.shields.io/badge/BACK-NODE.JS-339933?style=for-the-badge&logo=node.js)
 
-![Back_Express](https://img.shields.io/badge/BACK-EXPRESS-white?style=for-the-badge&logo=express)
+![Back_Express](https://img.shields.io/badge/BACK-EXPRESS-000000?style=for-the-badge&logo=express)
 
-![Back_Sequelize](https://img.shields.io/badge/BACK-Sequelize-skyblue?style=for-the-badge&logo=Sequelize)
+![Back_Sequelize](https://img.shields.io/badge/BACK-Sequelize-52B0E7?style=for-the-badge&logo=Sequelize)
 
-![Back_Socket.io](https://img.shields.io/badge/BACK-Socket.io-black?style=for-the-badge&logo=Socket.io)
+![Back_Socket.io](https://img.shields.io/badge/BACK-Socket.io-010101?style=for-the-badge&logo=Socket.io)
 
-![Back_WebRTC](https://img.shields.io/badge/BACK-WebRTC-orange?style=for-the-badge&logo=WebRTC)
+![Back_Redis](https://img.shields.io/badge/BACK-REDIS-DC382D?style=for-the-badge&logo=redis)
+
+![Back_JWT](https://img.shields.io/badge/BACK-JWT-000000?style=for-the-badge&logo=JSON%20Web%20Tokens)
