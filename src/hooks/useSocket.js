@@ -36,7 +36,19 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
   };
 
   useEffect(() => {
-    socket.current = io(`${ENDPOINT}/${serverName}`, { autoConnect: false });
+    // if (!serverName) {
+    //   console.log("there is no ns");
+    //   socket.current = io(`${ENDPOINT}`, {
+    //     autoConnect: false,
+    //     transports: ["websocket"],
+    //   });
+    // } else {
+    // console.log(444444, serverName);
+    socket.current = io(`${ENDPOINT}/${serverName}`, {
+      autoConnect: false,
+      // transports: ["websocket"],
+    });
+    // }
     const token = localStorage.getItem("socketToken");
     socket.current.roomId = roomId ? roomId : null;
 
@@ -57,12 +69,14 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     }
 
     socket.current.on("token", ({ token, userId }) => {
+      console.log(77777, token);
       socket.current.auth = { token };
       localStorage.setItem("token", token);
       socket.current.userId = userId;
     });
 
     socket.current.on("users", (data) => {
+      console.log(11414141414, data);
       data.forEach((el) => {
         users.push(el);
       });
@@ -216,6 +230,7 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     users,
     handleMuteMic,
     userList,
+    privateMessage,
   };
 };
 
