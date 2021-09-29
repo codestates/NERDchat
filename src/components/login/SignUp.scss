@@ -11,6 +11,13 @@ $title: rgb(172, 172, 172);
   text-align: center;
   color: rgb(223, 36, 36);
 }
+.codeConfirmMsg {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-size: 12px;
+  text-align: center;
+  color: $neonMain;
+}
 .email__code__container,
 .verify__email__container {
   margin-top: 0.2em;

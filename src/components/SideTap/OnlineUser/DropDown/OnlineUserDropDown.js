@@ -11,10 +11,11 @@ import { Context } from "../../../../context/ContextProvider";
 import "./OnlineUserDropDown.scss";
 
 function OnlineUserDropDown({ nickname, messages }) {
+  console.log(1111, window.location.href);
+  console.log(2222, window.location);
   const [userNickname, setUserNickname] = useState(nickname);
   const { deleteFriendModalHandler, deleteFriendModalOpen } =
     useContext(Context);
-
   const deleteModalHandler = () => {
     deleteFriendModalHandler();
   };
@@ -33,7 +34,7 @@ function OnlineUserDropDown({ nickname, messages }) {
         </li>
         <li className="onlinelist__li">
           <Link
-            to="/private"
+            to={`/private=${nickname}`}
             state={{
               messages: messages,
               nickname: nickname,

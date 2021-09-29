@@ -11,22 +11,15 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
-        <Route path="/servers">
-          <ServerPage />
-        </Route>
-        <Route exact path="/gameId=:gameId">
-          <ServerRoomPage />
-        </Route>
-        <Route path="/gameId=:gameId/roomId=:roomId/chatId=:chatId">
-          <ChatPage />
-        </Route>
-        <Route exact path="/mypage">
-          <Mypage />
-        </Route>
-        <Route exact path="/private" component={PrivateChatPage} />
+        <Route exact path="/" component={HomePage} />
+        <Route path="/servers" component={ServerPage} />
+        <Route exact path="/gameId=:gameId" component={ServerRoomPage} />
+        <Route
+          path="/gameId=:gameId/roomId=:roomId/chatId=:chatId"
+          component={ChatPage}
+        />
+        <Route exact path="/mypage" component={Mypage} />
+        <Route exact path="/private=:toId" component={PrivateChatPage} />
       </Switch>
     </BrowserRouter>
   );
