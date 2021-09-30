@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { IoPaperPlaneOutline } from "react-icons/io5";
+import React from "react";
 import { IoIosPaperPlane } from "react-icons/io";
 import "./Input.scss";
 

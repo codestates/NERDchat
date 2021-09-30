@@ -31,12 +31,16 @@ const OnlineUser = ({ avatar, nickname, messages }) => {
         <div className="online__avatar-container">
           <img
             className="online__avatar"
-            src={require("../../../images/dummy/white.jpeg").default}
+            src={
+              avatar !== null
+                ? avatar
+                : require("../../../images/dummy/white.jpeg").default
+            }
             alt=""
           />
-          <div className="online__onliness">
+          {/* <div className="online__onliness">
             <IoEllipseSharp size={15} className="online__online" />
-          </div>
+          </div> */}
           <div className="online__name">{nickname}</div>
         </div>
         <div className="online__dropstart" onClick={clickHandler}>
