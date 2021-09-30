@@ -24,6 +24,7 @@ const SideBar = () => {
   const path = useParams();
 
   const { userListRef } = useDM(userInfo, path);
+  console.log("나는 리스트", userListRef);
 
   useEffect(() => {
     axios
