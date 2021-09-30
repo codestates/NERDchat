@@ -7,7 +7,7 @@ import { Cookies } from "react-cookie";
 const DMChat = ({ to }) => {
   const cookies = new Cookies();
   const userInfo = cookies.get("userInfo");
-  const inputRef = useRef();
+  // const inputRef = useRef();
   const messageEl = useRef(null);
   const [newMsg, setNewMsg] = useState("");
   const { privateMessageHandler, userList, userListRef } = useDM(to, userInfo);
@@ -59,15 +59,15 @@ const DMChat = ({ to }) => {
           ))} */}
         </div>
         <div className="chatApp__footer">
-          <form onSubmit={sendHandler}>
+          {/* <form onSubmit={sendHandler}>
             <input ref={inputRef} />
             <button type="submit">click</button>
-          </form>
-          {/* <Input
+          </form> */}
+          <Input
             msgInputHandler={msgInputHandler}
             newMsg={newMsg}
             sendHandler={sendHandler}
-          /> */}
+          />
         </div>
       </div>
     </div>
