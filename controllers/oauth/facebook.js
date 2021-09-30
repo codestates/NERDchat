@@ -26,12 +26,12 @@ module.exports = async (req, res) => {
         access_token: accessToken
       }
     });
-    console.log(userData.data);
-    const userInfo = Users.findOne({ where: { userid: userData.data.id } });
+    // console.log(userData.data);
+    const userInfo = await Users.findOne({ where: { userid: userData.data.id } });
+    // console.log(userInfo);
     if (!userInfo) {
-      const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
-      const payload = {
-        avatar: userData.data.picture,
+      await Users.create({
+        avatar: userData.data.picture.data.url,
         userId: userData.data.id,
         nickname: userData.data.id,
         email: userData.data.email,
@@ -41,25 +41,27 @@ module.exports = async (req, res) => {
         currentRoom: null,
         created_at: new Date(),
         updated_at: new Date()
-      };
-      await Users.create({ payload });
-      res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
-        .cookie('oauth', 'facebook', { httpOnly: true, sameSite: 'none', secure: true }).redirect(
-          process.env.ENDPOINT + '/servers'
-        )
-        .status(200).json({
-          data: {
-            accessToken,
-            // id,
-            avatar: payload.avatar,
-            userId: payload.userId,
-            nickname: payload.nickname,
-            email: payload.email,
-            oauth: payload.oauth,
-            status: payload.status
-          }
-        });
+      });
     }
+    const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
+    const payload = {
+      avatar: userData.data.picture.data.url,
+      userId: userData.data.id,
+      nickname: userData.data.id,
+      email: userData.data.email,
+      valid: false,
+      oauth: 'Facebook',
+      status: null,
+      currentRoom: null,
+      created_at: new Date(),
+      updated_at: new Date()
+    };
+    console.log(payload);
+    res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
+      .cookie('oauth', 'facebook', { httpOnly: true, sameSite: 'none', secure: true }).redirect(
+        process.env.GO_HOME + '/servers'
+      )
+      .status(200).json({ data: { payload } });
   } catch (err) {
     console.log(err);
   }

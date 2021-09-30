@@ -25,10 +25,10 @@ module.exports = async (req, res) => {
       params: { access_token: accessToken }
     });
     // console.log(userData.data.id);
-    const userInfo = Users.findOne({ where: { userId: userData.data.id } });
+    const userInfo = await Users.findOne({ where: { userId: userData.data.id } });
+    // console.log(111111111,userInfo)
     if (!userInfo) {
-      const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
-      const payload = {
+      await Users.create({
         avatar: userData.data.properties.profile_image,
         userId: userData.data.id,
         nickname: userData.data.id,
@@ -39,26 +39,27 @@ module.exports = async (req, res) => {
         currentRoom: null,
         created_at: new Date(),
         updated_at: new Date()
-      };
-      await Users.create({ payload });
-      res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
-        .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
-        .cookie('oauth', 'kakao', { httpOnly: true, sameSite: 'none', secure: true }).redirect(
-          process.env.ENDPOINT + '/servers'
-        )
-        .status(200).json({
-          data: {
-            accessToken,
-            // id,
-            avatar: payload.avatar,
-            userId: payload.userId,
-            nickname: payload.nickname,
-            email: payload.email,
-            oauth: payload.oauth,
-            status: payload.status
-          }
-        });
+      });
     }
+    const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
+    const payload = {
+      avatar: userData.data.properties.profile_image,
+      userId: userData.data.id,
+      nickname: userData.data.id,
+      email: userData.data.kakao_account.email || null,
+      valid: false,
+      oauth: 'Kakao',
+      status: null,
+      currentRoom: null,
+      created_at: new Date(),
+      updated_at: new Date()
+    };
+    res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
+      .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
+      .cookie('oauth', 'kakao', { httpOnly: true, sameSite: 'none', secure: true }).redirect(
+        process.env.GO_HOME + '/servers'
+      )
+      .status(200).json({ data: { payload } });
   } catch (err) {
     console.log(err);
   }

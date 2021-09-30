@@ -12,6 +12,7 @@ const { RedisMessageStore } = require('../store/messageStore');
 const messageStore = new RedisMessageStore(redisClient);
 
 const { RedisRoomMessageStore } = require('../store/roomMessageStore');
+const { Socket } = require('dgram');
 const roomMessageStore = new RedisRoomMessageStore(redisClient);
 
 module.exports = {
