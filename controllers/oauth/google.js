@@ -29,9 +29,9 @@ module.exports = async (req, res) => {
         }
       });
       const userInfo = await Users.findOne({ where: { userId: userData.data.sub } });
+      // console.log(userInfo)
       if (!userInfo) {
-        const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
-        const payload = {
+        await Users.create({
           avatar: userData.data.picture,
           userId: userData.data.sub,
           nickname: userData.data.sub,
@@ -42,30 +42,32 @@ module.exports = async (req, res) => {
           currentRoom: null,
           created_at: new Date(),
           updated_at: new Date()
-        };
-        console.log(payload);
-        await Users.create({ payload });
-        res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
-          .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
-          .cookie('oauth', 'google', { httpOnly: true, sameSite: 'none', secure: true }).redirect(
-            process.env.ENDPOINT + '/servers'
-          )
-          .status(200).json({
-            data: {
-              accessToken,
-              // id,
-              avatar: payload.avatar,
-              userId: payload.userId,
-              nickname: payload.nickname,
-              email: payload.email,
-              oauth: payload.oauth,
-              status: payload.status
-            }
-          });
+        });
       }
+      const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
+      const payload = {
+        avatar: userData.data.picture,
+        userId: userData.data.sub,
+        nickname: userData.data.sub,
+        email: userData.data.email,
+        valid: false,
+        oauth: 'Google',
+        status: null,
+        currentRoom: null,
+        created_at: new Date(),
+        updated_at: new Date()
+      };
+
+      res
+        .cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
+        .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
+        .cookie('oauth', 'google', { httpOnly: true, sameSite: 'none', secure: true })
+        .writeHead(200, { Location: process.env.Go_HOME + '/servers' });
+      res.send({ data: { payload } });
+      // res.redirect(200, process.env.GO_HOME + '/servers');
+      // res.render(process.env.GO_HOME + '/servers', { data: payload });
     }
   } catch (err) {
     console.log(err);
   }
 };
-// multer에 대한것도 해야해. 주소에 대한 것도 다 바꿔야 해.리다이렉트는?
