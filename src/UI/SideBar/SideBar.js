@@ -24,6 +24,7 @@ const SideBar = () => {
   const path = useParams();
 
   const { userListRef } = useDM(userInfo, path);
+  console.log("나는 리스트", userListRef);
 
   useEffect(() => {
     axios
@@ -75,7 +76,7 @@ const SideBar = () => {
         >
           {toggleState === 2 &&
             userListRef.current.map((el) => {
-              if (el.userId !== userInfo.userId) {
+              if (el.userId !== userInfo.userId && el.connected === true) {
                 return (
                   <OnlineUser
                     key={el.userId}
