@@ -11,15 +11,12 @@ const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const ServerRoom = () => {
   const cookies = new Cookies();
-  const userInfo = cookies.get("userInfo");
-
+  let userInfo = cookies.get("userInfo");
   const { gameId } = useParams();
   const { message, sendMessage } = useSocket(gameId, "", userInfo);
-  console.log("This is ServerRoom compo");
   const [searchedLists, setSearchedLists] = useState([]);
   const [isSearched, setIsSearched] = useState(0);
   const searchHandler = async (title) => {
-    console.log(title);
     const res = await axios.get(`${ENDPOINT}/rooms/search/${title}`);
     setSearchedLists(res.data);
     setIsSearched(1);

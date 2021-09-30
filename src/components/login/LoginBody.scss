@@ -20,6 +20,13 @@ $title: rgb(172, 172, 172);
   margin: 10px 80px 10px 80px;
   font-family: "Poppins", sans-serif;
   font-weight: 100;
+
+  input {
+    z-index: 3;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 .email__input__container,
@@ -39,6 +46,9 @@ $title: rgb(172, 172, 172);
   transform: translateY(-1.5em);
   transform-origin: 0 0;
   transition: all 0.3s;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .form-control {
