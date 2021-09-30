@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import NavBar from "../../components/NavBar/NavBar";
-import BookMarkList from "../../components/MypageDashBoardContent/BookMarkList/BookMarkList";
 import MessagesList from "../../components/MypageDashBoardContent/MessagesList/MessagesList";
 import SettingInfo from "../../components/MypageDashBoardContent/SettingInfo/SettingInfo";
 import { Cookies } from "react-cookie";

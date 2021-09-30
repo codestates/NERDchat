@@ -9,8 +9,8 @@ import ChatHeader from "../../components/ChatHeader/ChatHeader";
 import "./PrivateChatPage.scss";
 
 function PrivateChatPage(props) {
-  // const { messages, nickname } = props.location.state;
   const { toId } = props.match.params;
+
   return (
     <div className="private__container">
       <div className="private__nav">

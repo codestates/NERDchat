@@ -9,7 +9,7 @@ const Message = ({ message }) => {
   let today = new Date();
   let time = today.getHours() + ":" + today.getMinutes();
 
-  const [currentTime, setCurrentTime] = useState(time);
+  const [currentTime] = useState(time);
 
   return mine ? (
     <>

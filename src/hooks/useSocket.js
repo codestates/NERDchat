@@ -4,21 +4,29 @@ import Peer from "peerjs";
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
+<<<<<<< HEAD
   const socket = useRef();
   const myPeer = new Peer();
   // console.log(333333, "from useSocket", userInfo);
+=======
+>>>>>>> aa3f1302bd1d555868eb9abace376b1a9f541f23
   const [messages, setMessages] = useState([]);
   const [nsHeadCount, setNsHeadCount] = useState(0);
   const [roomHeadCount, setRoomHeadCount] = useState(0);
   const [mic, setMic] = useState(true);
-  const { nickname, userId } = userInfo;
   const [userList, setUserList] = useState([]);
+
+  const socket = useRef();
+  const myPeer = new Peer();
+  const { nickname, userId } = userInfo;
+
   const users = [];
+
   let voiceChatUid = "";
   if (roomId) {
     voiceChatUid = roomId + "-vUid" + Math.floor(Math.random() * 100);
-    // console.log("This is voiceChatUid, ", voiceChatUid);
   }
+
   // const addAudioStream = (audio, stream) => {
   //   audio.srcObject = stream;
   //   audio.addEventListener("loadedmetadata", () => {
@@ -37,18 +45,10 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
   };
 
   useEffect(() => {
-    // if (!serverName) {
-    //   console.log("there is no ns");
-    //   socket.current = io(`${ENDPOINT}`, {
-    //     autoConnect: false,
-    //     transports: ["websocket"],
-    //   });
-    // } else {
-    // console.log(444444, serverName);
     socket.current = io(`${ENDPOINT}/${serverName}`, {
       autoConnect: false,
-      // transports: ["websocket"],
     });
+<<<<<<< HEAD
     socket.current.connect();
     // }
     // const token = localStorage.getItem("socketToken");
@@ -109,6 +109,64 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     //   }
     //   // setUserList(users);
     // });
+=======
+
+    const token = localStorage.getItem("socketToken");
+    socket.current.roomId = roomId ? roomId : null;
+
+    socket.current.on("connect", () => {
+      users.forEach((el) => {
+        if (el.userId === userId) {
+          el.connected = true;
+        }
+      });
+    });
+
+    if (token) {
+      socket.current.auth = { token, nickname, userId };
+      socket.current.connect();
+    } else {
+      socket.current.auth = { nickname, userId };
+      socket.current.connect();
+    }
+
+    socket.current.on("token", ({ token, userId }) => {
+      socket.current.auth = { token };
+      localStorage.setItem("token", token);
+      socket.current.userId = userId;
+    });
+
+    socket.current.on("users", (data) => {
+      data.forEach((el) => {
+        users.push(el);
+      });
+      users.sort((a, b) => {
+        return a - b;
+      });
+      setUserList(users);
+    });
+
+    socket.current.on("user connected", (data) => {
+      for (let i = 0; i < users.length; i++) {
+        const existingUser = users[i];
+        if (existingUser.userId === data.userId) {
+          existingUser.connected = true;
+          return;
+        }
+      }
+      users.push(data);
+    });
+
+    socket.current.on("user disconnected", (data) => {
+      for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+        if (user.userId === data) {
+          user.connected = false;
+          break;
+        }
+      }
+    });
+>>>>>>> aa3f1302bd1d555868eb9abace376b1a9f541f23
 
     socket.current.on("welcomeRoom", (userData, msgData) =>
       console.log(userData, msgData)
@@ -126,10 +184,11 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     socket.current.on("private message", ({ content, from, to }) => {
       // for (let i = 0; i < users.length; i++) {
       //   const user = users[i];
-      //   const fromSelf = socket.userId === from
+      //   const fromSelf = socket.userId === from;
       //   if (user.userId === (fromSelf ? to : from)) {
       //     user.messages.push({
-      //       content, fromSelf
+      //       content,
+      //       fromSelf,
       //     });
       //     if (user !== selectedUser) {
       //       user.hasNewMessages = true;

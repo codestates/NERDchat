@@ -38,9 +38,9 @@ const FriendList = ({ avatar, nickname }) => {
             }
             alt=""
           />
-          <div className="friend__onliness">
+          {/* <div className="friend__onliness">
             <IoEllipseSharp size={15} className="friend__online" />
-          </div>
+          </div> */}
           <div className="friend__name">{nickname}</div>
         </div>
         <div className="friend__dropstart" onClick={clickHandler}>
