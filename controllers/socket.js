@@ -12,12 +12,43 @@ const { RedisMessageStore } = require('../store/messageStore');
 const messageStore = new RedisMessageStore(redisClient);
 
 const { RedisRoomMessageStore } = require('../store/roomMessageStore');
-const { Socket } = require('dgram');
 const roomMessageStore = new RedisRoomMessageStore(redisClient);
 
 module.exports = {
   nspSocket: async (socket) => {
     const ns = socket.nsp;
+
+    tokenStore.saveToken(socket.token, {
+      userId: socket.userId,
+      avatar: socket.avatar,
+      nickname: socket.nickname,
+      connected: true
+    });
+    socket.emit('token', {
+      token: socket.token,
+      userId: socket.userId
+    });
+
+    const users = [];
+    const [tokens] = await Promise.all([
+      tokenStore.findAllToken()
+    ]);
+    tokens.forEach((token) => {
+      users.push({
+        userId: token.userId,
+        nickname: token.nickname,
+        avatar: token.avatar,
+        connected: token.connected,
+      });
+    });
+    socket.emit('users', users);
+
+    socket.broadcast.emit('user connected', {
+      userId: socket.userId,
+      nickname: socket.nickname,
+      avatar: socket.avatar,
+      connected: true,
+    });
 
     socket.on('joinRoom', async (roomUid, voiceChatUid, userData) => {
     // search User and Update User ` currentRoom ` Column
@@ -28,37 +59,47 @@ module.exports = {
         }, {
           where: { id, userId }
         });
-        socket.join([roomUid, voiceChatUid]);
+        socket.join(roomUid);
         ns.to(roomUid).emit('welcomeRoom', userData);
       } catch (err) {
         console.log(err);
         return null;
       }
     });
-
-    socket.on('roomMessage', async (roomUid, roomId, userData, msgData) => {
-      try {
-        roomMessageStore.saveRoomMessages({
-          uuid: roomUid,
-          id: roomId,
-          message: msgData,
-          userData
-        });
-        ns.to(roomUid).emit('roomMessage', userData, msgData);
-      } catch (err) {
-        console.log(err);
-        return null;
-      }
-    });
-    socket.on('voiceChat', (voiceChatUid, userData, peerId) => {
-      const { id, userId } = userData;
-      socket.broadcast.to(voiceChatUid).emit('userConnect', peerId);
+    socket.on('voiceChat', (voiceChatUid, userPeerId) => {
+      socket.join(voiceChatUid);
+      ns.to(voiceChatUid).emit('userConnect', userPeerId);
       socket.on('disconnect', () => {
-        socket.broadcast.to(voiceChatUid).emit('userDisconnect', peerId);
+        ns.to(voiceChatUid).emit('userDisconnect', userPeerId);
       });
     });
-    socket.on('currentNSLength', () => {
-      ns.emit('currentNSLength', ns.adapter.sids.size);
+
+    socket.on('roomMessage', (roomUid, roomId, userData, msgData) => {
+      ns.to(roomUid).emit('roomMessage', userData, msgData);
+      roomMessageStore.saveRoomMessages({
+        uuid: roomUid,
+        id: roomId,
+        message: msgData,
+        userData
+      });
+    });
+
+    socket.on('serverSize', () => socket.emit('serverSize', ns.adapter.sids.size))
+
+    socket.on('disconnect', async () => {
+      const matchingSockets = await socket.in(socket.userId).allSockets();
+      const isDisconnected = matchingSockets.size === 0;
+      if (isDisconnected) {
+        // notify other users
+        socket.broadcast.emit('user disconnected', socket.userId);
+        // update connection status
+        tokenStore.saveToken(socket.token, {
+          userId: socket.userId,
+          avatar: socket.avatar,
+          nickname: socket.nickname,
+          connected: false
+        });
+      }
     });
   },
 
@@ -98,13 +139,6 @@ module.exports = {
     });
     socket.emit('users', users);
     // notify existing users
-    socket.broadcast.emit('user connected', {
-      userId: socket.userId,
-      nickname: socket.nickname,
-      avatar: socket.avatar,
-      connected: true,
-      messages: []
-    });
 
     socket.on('private message', ({ content, to }) => {
       const message = {
@@ -117,21 +151,6 @@ module.exports = {
     });
 
     // notify users => disconnection
-    socket.on('disconnect', async () => {
-      const matchingSockets = await socket.in(socket.userId).allSockets();
-      const isDisconnected = matchingSockets.size === 0;
-      if (isDisconnected) {
-        // notify other users
-        socket.broadcast.emit('user disconnected', socket.userId);
-        // update connection status
-        tokenStore.saveToken(socket.token, {
-          userId: socket.userId,
-          avatar: socket.avatar,
-          nickname: socket.nickname,
-          connected: false
-        });
-      }
-    });
   },
 
   useToken: async (socket, next) => {
@@ -139,7 +158,7 @@ module.exports = {
     if (token) {
       const findToken = await tokenStore.findToken(token);
       if (findToken) {
-        socket.token = findToken;
+        socket.token = token;
         socket.userId = findToken.userId;
         socket.nickname = findToken.nickname;
         return next();
