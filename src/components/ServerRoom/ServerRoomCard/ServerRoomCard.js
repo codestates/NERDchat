@@ -18,7 +18,6 @@ const ServerRoomCard = ({ gameId, id, roomTitle, uuid, max, loading, len }) => {
   };
   return (
     <div onClick={getIntoServer}>
-      {loginModalOpen && <Login />}
       <div className="room__card__container">
         <div className="room__title" text-attr={roomTitle}>
           <span>{roomTitle}</span>

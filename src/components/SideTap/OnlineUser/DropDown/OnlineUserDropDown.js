@@ -5,14 +5,16 @@ import {
   IoNotificationsOutline,
   IoAddOutline,
 } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import UserDelete from "../../../friend/UserDelete";
 import { Context } from "../../../../context/ContextProvider";
 import "./OnlineUserDropDown.scss";
 
 function OnlineUserDropDown({ nickname, messages }) {
-  console.log(1111, window.location.href);
-  console.log(2222, window.location);
+  const { gameId, roomId, chatId } = useParams();
+  const inviteLink = window.location.href;
+  console.log("from onlineuserdropdown: ", gameId, roomId, chatId);
+  console.log("InviteLink from onlineuserdropdown: ", inviteLink);
   const [userNickname, setUserNickname] = useState(nickname);
   const { deleteFriendModalHandler, deleteFriendModalOpen } =
     useContext(Context);

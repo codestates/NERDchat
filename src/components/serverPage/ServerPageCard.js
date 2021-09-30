@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { IoBookmarkOutline, IoBookmark } from "react-icons/io5";
 import { BsChevronDoubleDown } from "react-icons/bs";
@@ -11,11 +11,13 @@ import "./ServerPageCard.scss";
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const ServerPageCard = ({ category, img, id, like }) => {
+  const history = useHistory();
   const { loginModalOpen, loginmodalHandler } = useContext(Context);
   const [clicked, setClicked] = useState(false);
 
   const addBookmarkHandler = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
+    e.stopPropagation();
     if (!localStorage.getItem("nerd-logged-in")) {
       loginmodalHandler();
       return;
@@ -27,6 +29,10 @@ const ServerPageCard = ({ category, img, id, like }) => {
     if (!res.data.data) console.log(res.data);
     if (res.data.data) setClicked((prev) => !prev);
   };
+  const getIntoServer = () => {
+    const path = `/gameId=${id}`;
+    history.push(path);
+  };
   useEffect(() => {
     console.log("test", like);
     if (like) setClicked(true);
@@ -34,11 +40,10 @@ const ServerPageCard = ({ category, img, id, like }) => {
   }, []);
   return (
     <>
-      {loginModalOpen && <Login />}
-      <Link
+      <div
         className="grid__items"
         style={{ textDecoration: "none" }}
-        to={`/gameId=${id}`}
+        onClick={getIntoServer}
       >
         <div
           className="game__list__card"
@@ -70,7 +75,7 @@ const ServerPageCard = ({ category, img, id, like }) => {
             )}
           </div>
         </div>
-      </Link>
+      </div>
     </>
   );
 };

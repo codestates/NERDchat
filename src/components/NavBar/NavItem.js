@@ -5,7 +5,7 @@ import {
   IoFingerPrintOutline,
   IoConstructOutline,
 } from "react-icons/io5";
-
+import { useHistory } from "react-router-dom";
 import "./NavItem.scss";
 import DropdownMenu from "./DropdownMenu";
 import Login from "../../components/login/Login";
@@ -13,6 +13,7 @@ import Logout from "../logout/Logout";
 import { Context } from "../../context/ContextProvider";
 
 const NavItem = () => {
+  const history = useHistory();
   // const dropEl = useRef();
   const [isLogin, setIsLogin] = useState(false);
   const {
@@ -25,6 +26,15 @@ const NavItem = () => {
 
   const openHandler = () => {
     setOpen(!open);
+  };
+
+  const mypageHandler = () => {
+    if (!localStorage.getItem("nerd-logged-in")) {
+      loginmodalHandler();
+      return;
+    }
+    const path = `/mypage`;
+    history.push(path);
   };
 
   useEffect(() => {
@@ -56,9 +66,9 @@ const NavItem = () => {
             <IoFingerPrintOutline size={30} />
           </a>
         )}
-        <a href="/mypage" className="icon-button">
+        <div className="icon-button" onClick={mypageHandler}>
           <IoConstructOutline size={30} />
-        </a>
+        </div>
       </li>
     </>
   );

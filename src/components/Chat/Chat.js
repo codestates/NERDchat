@@ -43,7 +43,7 @@ function Chat() {
 
   useEffect(() => {
     joinRoom();
-  }, []);
+  }, [joinRoom]);
 
   const msgInputHandler = (e) => {
     setNewMsg(e.target.value);

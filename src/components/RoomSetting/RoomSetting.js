@@ -39,7 +39,7 @@ const RoomSetting = () => {
     if (title.trim().length > 2 && headCount >= 2) {
       const res = await axios.put(
         `${ENDPOINT}/rooms/create`,
-        { serverId, title, headCount },
+        { gameId: serverId, title, max: headCount },
         { withCredentials: true }
       );
       const { roomTitle, uuid, gameId, current, max, createdAt } =
