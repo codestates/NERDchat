@@ -7,8 +7,6 @@ import OnlineUserDropDown from "./DropDown/OnlineUserDropDown";
 import "./OnlineUser.scss";
 
 const OnlineUser = ({ avatar, nickname, messages }) => {
-  console.log(avatar, nickname, messages);
-
   const [loader, setLoader] = useState(false);
   const dropRef = useRef();
 

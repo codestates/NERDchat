@@ -16,7 +16,6 @@ import "./OnlineUserDropDown.scss";
 function OnlineUserDropDown({ nickname, messages }) {
   const { gameId, roomId, chatId } = useParams();
   const inviteLink = window.location.href;
-
   const {
     deleteFriendModalHandler,
     deleteFriendModalOpen,
