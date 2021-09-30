@@ -59,8 +59,10 @@ const DMChat = ({ to }) => {
           ))} */}
         </div>
         <div className="chatApp__footer">
-          <input ref={inputRef} />
-          <button>click</button>
+          <form onSubmit={sendHandler}>
+            <input ref={inputRef} />
+            <button type="submit">click</button>
+          </form>
           {/* <Input
             msgInputHandler={msgInputHandler}
             newMsg={newMsg}
