@@ -33,7 +33,9 @@ function OnlineUserDropDown({ nickname, messages }) {
 
   return (
     <div className="onlinelist__wrapper">
-      {privateModalOpen && <PrivateMessageModal nickname={nickname} />}
+      {privateModalOpen && (
+        <PrivateMessageModal nickname={nickname} messages={messages} />
+      )}
       {deleteFriendModalOpen && <UserDelete nickname={nickname} />}
       <ul className="onlinelist__menu">
         <li className="onlinelist__li">

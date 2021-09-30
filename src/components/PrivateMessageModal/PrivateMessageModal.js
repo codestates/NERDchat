@@ -6,7 +6,7 @@ import useDM from "../../hooks/useDM";
 import PMessage from "./PMessage/PMessage";
 import PInput from "./PInput/PInput";
 
-function PrivateMessageModal({ nickname }) {
+function PrivateMessageModal({ nickname, messages }) {
   const [newMsg, setNewMsg] = useState("");
 
   const cookies = new Cookies();
@@ -14,7 +14,6 @@ function PrivateMessageModal({ nickname }) {
   const messageEl = useRef(null);
 
   const { privateMessageHandler, msg, userListRef } = useDM(userInfo, nickname);
-  console.log("나는 메시지", msg);
 
   const msgInputHandler = (e) => {
     setNewMsg(e.target.value);
