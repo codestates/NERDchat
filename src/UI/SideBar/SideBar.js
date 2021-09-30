@@ -83,6 +83,7 @@ const SideBar = () => {
                     avatar={el.avatar}
                     nickname={el.nickname}
                     messages={el.messages}
+                    list={el}
                   />
                 );
               }

@@ -8,13 +8,11 @@ import PInput from "./PInput/PInput";
 
 function PrivateMessageModal({ nickname, messages }) {
   const [newMsg, setNewMsg] = useState("");
-
   const cookies = new Cookies();
   const userInfo = cookies.get("userInfo");
   const messageEl = useRef(null);
 
   const { privateMessageHandler, msg, userListRef } = useDM(userInfo, nickname);
-
   const msgInputHandler = (e) => {
     setNewMsg(e.target.value);
     e.preventDefault();

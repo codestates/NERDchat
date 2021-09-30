@@ -2,7 +2,7 @@ import React from "react";
 
 import { IoAttachOutline } from "react-icons/io5";
 import { Cookies } from "react-cookie";
-
+import axios from "axios";
 import "./SettingInfo.scss";
 
 function SettingInfo({ profileImg, setProfileImg }) {
