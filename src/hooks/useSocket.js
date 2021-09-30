@@ -6,6 +6,7 @@ const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
   const socket = useRef();
   const myPeer = new Peer();
+  // console.log(333333, "from useSocket", userInfo);
   const [messages, setMessages] = useState([]);
   const [nsHeadCount, setNsHeadCount] = useState(0);
   const [roomHeadCount, setRoomHeadCount] = useState(0);
@@ -48,72 +49,72 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
       autoConnect: false,
       // transports: ["websocket"],
     });
+    socket.current.connect();
     // }
-    const token = localStorage.getItem("socketToken");
-    socket.current.roomId = roomId ? roomId : null;
+    // const token = localStorage.getItem("socketToken");
+    // socket.current.roomId = roomId ? roomId : null;
 
-    socket.current.on("connect", () => {
-      users.forEach((el) => {
-        if (el.userId === userId) {
-          el.connected = true;
-        }
-      });
-    });
+    // socket.current.on("connect", () => {
+    //   users.forEach((el) => {
+    //     if (el.userId === userId) {
+    //       el.connected = true;
+    //     }
+    //   });
+    // });
 
-    if (token) {
-      socket.current.auth = { token, nickname, userId };
-      socket.current.connect();
-    } else {
-      socket.current.auth = { nickname, userId };
-      socket.current.connect();
-    }
+    // if (token) {
+    //   socket.current.auth = { token, nickname, userId };
+    //   socket.current.connect();
+    // } else {
+    //   socket.current.auth = { nickname, userId };
+    //   socket.current.connect();
+    // }
 
-    socket.current.on("token", ({ token, userId }) => {
-      console.log(77777, token);
-      socket.current.auth = { token };
-      localStorage.setItem("token", token);
-      socket.current.userId = userId;
-    });
+    // socket.current.on("token", ({ token, userId }) => {
+    //   socket.current.auth = { token };
+    //   localStorage.setItem("socketToken", token);
+    //   socket.current.userId = userId;
+    // });
 
-    socket.current.on("users", (data) => {
-      console.log(11414141414, data);
-      data.forEach((el) => {
-        users.push(el);
-      });
-      users.sort((a, b) => {
-        return a - b;
-      });
-      setUserList(users);
-    });
+    // socket.current.on("users", (data) => {
+    //   // console.log(11414141414, data);
+    //   data.forEach((el) => {
+    //     users.push(el);
+    //   });
+    //   users.sort((a, b) => {
+    //     return a - b;
+    //   });
+    //   setUserList(users);
+    // });
 
-    socket.current.on("user connected", (data) => {
-      for (let i = 0; i < users.length; i++) {
-        const existingUser = users[i];
-        if (existingUser.userId === data.userId) {
-          existingUser.connected = true;
-          return;
-        }
-      }
-      users.push(data);
-      // setUserList(users);
-    });
+    // socket.current.on("user connected", (data) => {
+    //   for (let i = 0; i < users.length; i++) {
+    //     const existingUser = users[i];
+    //     if (existingUser.userId === data.userId) {
+    //       existingUser.connected = true;
+    //       return;
+    //     }
+    //   }
+    //   users.push(data);
+    //   // setUserList(users);
+    // });
 
-    socket.current.on("user disconnected", (data) => {
-      for (let i = 0; i < users.length; i++) {
-        const user = users[i];
-        if (user.userId === data) {
-          user.connected = false;
-          break;
-        }
-      }
-      // setUserList(users);
-    });
+    // socket.current.on("user disconnected", (data) => {
+    //   for (let i = 0; i < users.length; i++) {
+    //     const user = users[i];
+    //     if (user.userId === data) {
+    //       user.connected = false;
+    //       break;
+    //     }
+    //   }
+    //   // setUserList(users);
+    // });
 
     socket.current.on("welcomeRoom", (userData, msgData) =>
       console.log(userData, msgData)
     );
     socket.current.on("roomMessage", (userData, msgData) => {
-      console.log(userData);
+      console.log(1111111111, userData);
       const incomingMsg = {
         body: msgData,
         user: userData.userId,

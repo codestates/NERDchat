@@ -3,7 +3,7 @@ import FriendList from "../../components/SideTap/FriendList/FriendList";
 import axios from "axios";
 import Messenger from "../../components/SideTap/Messenger/Messenger";
 import OnlineUser from "../../components/SideTap/OnlineUser/OnlineUser";
-import useSocket from "../../hooks/useSocket";
+import useDM from "../../hooks/useDM";
 import { Cookies } from "react-cookie";
 import { useParams } from "react-router-dom";
 
@@ -17,10 +17,9 @@ const SideBar = () => {
   const cookies = new Cookies();
   let userInfo = cookies.get("userInfo");
 
-  const { gameId, roomId, chatId } = useParams();
-  const { userList } = useSocket(gameId, roomId, userInfo, "", "");
-
-  let temp = userList.filter((el) => el !== undefined && el.connected === true);
+  const { gameId } = useParams();
+  const { userList } = useDM(gameId, userInfo);
+  // let temp = userList.filter((el) => el !== undefined && el.connected === true);
   let trueUsers = [
     {
       id: "loading",
@@ -29,10 +28,10 @@ const SideBar = () => {
       messages: [],
     },
   ];
-  trueUsers = temp.filter((el, idx) => {
-    let Fidx = temp.findIndex((item) => el.userId === item.userId);
-    if (Fidx === idx) return el;
-  });
+  // trueUsers = temp.filter((el, idx) => {
+  //   let Fidx = temp.findIndex((item) => el.userId === item.userId);
+  //   if (Fidx === idx) return el;
+  // });
 
   useEffect(() => {
     axios

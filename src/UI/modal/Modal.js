@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from "react";
+import ReactDOM from "react-dom";
 import "./Modal.scss";
-import { ReactComponent as Glasses } from "../../images/glasses.svg";
 import { IoMdClose } from "react-icons/io";
 import { Context } from "../../context/ContextProvider";
 
@@ -38,22 +38,26 @@ const Modal = ({ children }) => {
     else if (addFriendModalOpen) addFriendModalHandler();
     else if (userInfoModalOpen) userInfoModalHandler();
   };
+
+  const portalPlace = document.getElementById("overlay");
   return (
-    <div
-      className="modal__background"
-      ref={modalRef}
-      onClick={backgroundCloseHandler}
-    >
-      <div className="modal__wrapper">
-        <div className="modal__context">
-          {/* <Glasses className="modal__logo" /> */}
-          {children}
-        </div>
-        <div className="closeButton" onClick={closeButtonHandler}>
-          <IoMdClose className="closeIcon" size={20} />
-        </div>
-      </div>
-    </div>
+    <>
+      {ReactDOM.createPortal(
+        <div
+          className="modal__background"
+          ref={modalRef}
+          onClick={backgroundCloseHandler}
+        >
+          <div className="modal__wrapper">
+            <div className="modal__context">{children}</div>
+            <div className="closeButton" onClick={closeButtonHandler}>
+              <IoMdClose className="closeIcon" size={20} />
+            </div>
+          </div>
+        </div>,
+        portalPlace
+      )}
+    </>
   );
 };
 
