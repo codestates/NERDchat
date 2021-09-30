@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-
+import { Link, useParams } from "react-router-dom";
 import {
   IoFingerPrintOutline,
   IoMailOpenOutline,
@@ -10,7 +10,10 @@ import UserDelete from "../../../friend/UserDelete";
 import { Context } from "../../../../context/ContextProvider";
 import "./DropDown.scss";
 
-function DropDown({ nickname }) {
+function DropDown({ nickname, messages }) {
+  const { gameId, roomId, chatId } = useParams();
+  const inviteLink = window.location.href;
+
   const [userNickname, setUserNickname] = useState(nickname);
   const { deleteFriendModalHandler, deleteFriendModalOpen } =
     useContext(Context);
@@ -32,12 +35,18 @@ function DropDown({ nickname }) {
           </a>
         </li>
         <li className="friendlist__li">
-          <a href="#">
+          <Link
+            to={`/private=${nickname}`}
+            state={{
+              messages: messages,
+              nickname: nickname,
+            }}
+          >
             <div className="friendlist__icon">
               <IoMailOpenOutline className="icona" />
             </div>
             Message
-          </a>
+          </Link>
         </li>
         <li className="friendlist__li">
           <a href="#">

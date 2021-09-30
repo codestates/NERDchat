@@ -1,10 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
+
 import {
   IoFingerPrintOutline,
   IoMailOpenOutline,
   IoNotificationsOutline,
   IoAddOutline,
 } from "react-icons/io5";
+
+import PrivateMessageModal from "../../../PrivateMessageModal/PrivateMessageModal";
 import { Link, useParams } from "react-router-dom";
 import UserDelete from "../../../friend/UserDelete";
 import { Context } from "../../../../context/ContextProvider";
@@ -13,18 +16,25 @@ import "./OnlineUserDropDown.scss";
 function OnlineUserDropDown({ nickname, messages }) {
   const { gameId, roomId, chatId } = useParams();
   const inviteLink = window.location.href;
-  console.log("from onlineuserdropdown: ", gameId, roomId, chatId);
-  console.log("InviteLink from onlineuserdropdown: ", inviteLink);
-  const [userNickname, setUserNickname] = useState(nickname);
-  const { deleteFriendModalHandler, deleteFriendModalOpen } =
-    useContext(Context);
+
+  const {
+    deleteFriendModalHandler,
+    deleteFriendModalOpen,
+    privateModalHandler,
+    privateModalOpen,
+  } = useContext(Context);
+
   const deleteModalHandler = () => {
     deleteFriendModalHandler();
+  };
+  const privateModalOpenHandler = () => {
+    privateModalHandler();
   };
 
   return (
     <div className="onlinelist__wrapper">
-      {deleteFriendModalOpen && <UserDelete nickname={userNickname} />}
+      {privateModalOpen && <PrivateMessageModal nickname={nickname} />}
+      {deleteFriendModalOpen && <UserDelete nickname={nickname} />}
       <ul className="onlinelist__menu">
         <li className="onlinelist__li">
           <a href="#" className="onlinelist__a">
@@ -35,18 +45,12 @@ function OnlineUserDropDown({ nickname, messages }) {
           </a>
         </li>
         <li className="onlinelist__li">
-          <Link
-            to={`/private=${nickname}`}
-            state={{
-              messages: messages,
-              nickname: nickname,
-            }}
-          >
+          <div onClick={privateModalOpenHandler}>
             <div className="onlinelist__icon">
               <IoMailOpenOutline className="icona" />
             </div>
             Message
-          </Link>
+          </div>
         </li>
         <li className="onlinelist__li">
           <a href="#">

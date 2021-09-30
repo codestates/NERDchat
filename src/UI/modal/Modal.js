@@ -19,6 +19,8 @@ const Modal = ({ children }) => {
     addFriendModalHandler,
     userInfoModalOpen,
     userInfoModalHandler,
+    privateModalHandler,
+    privateModalOpen,
   } = useContext(Context);
   const backgroundCloseHandler = (e) => {
     if (modalRef.current === e.target) {
@@ -28,6 +30,7 @@ const Modal = ({ children }) => {
       else if (deleteFriendModalOpen) deleteFriendModalHandler();
       else if (addFriendModalOpen) addFriendModalHandler();
       else if (userInfoModalOpen) userInfoModalHandler();
+      else if (privateModalOpen) privateModalHandler();
     }
   };
   const closeButtonHandler = (event) => {
@@ -37,6 +40,7 @@ const Modal = ({ children }) => {
     else if (deleteFriendModalOpen) deleteFriendModalHandler();
     else if (addFriendModalOpen) addFriendModalHandler();
     else if (userInfoModalOpen) userInfoModalHandler();
+    else if (privateModalOpen) privateModalHandler();
   };
 
   const portalPlace = document.getElementById("overlay");

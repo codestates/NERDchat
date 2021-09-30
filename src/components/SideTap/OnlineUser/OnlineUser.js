@@ -7,7 +7,8 @@ import OnlineUserDropDown from "./DropDown/OnlineUserDropDown";
 import "./OnlineUser.scss";
 
 const OnlineUser = ({ avatar, nickname, messages }) => {
-  const [userName, setUserName] = useState(nickname);
+  console.log(avatar, nickname, messages);
+
   const [loader, setLoader] = useState(false);
   const dropRef = useRef();
 
@@ -32,7 +33,7 @@ const OnlineUser = ({ avatar, nickname, messages }) => {
           <img
             className="online__avatar"
             src={
-              avatar !== null
+              avatar !== ""
                 ? avatar
                 : require("../../../images/dummy/white.jpeg").default
             }
@@ -50,7 +51,7 @@ const OnlineUser = ({ avatar, nickname, messages }) => {
           />
         </div>
       </div>
-      {loader && <OnlineUserDropDown nickname={userName} messages={messages} />}
+      {loader && <OnlineUserDropDown nickname={nickname} messages={messages} />}
     </>
   );
 };

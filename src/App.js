@@ -19,7 +19,7 @@ function App() {
           component={ChatPage}
         />
         <Route exact path="/mypage" component={Mypage} />
-        <Route exact path="/private=:toId" component={PrivateChatPage} />
+        {/* <Route exact path="/private=:toId" component={PrivateChatPage} /> */}
       </Switch>
     </BrowserRouter>
   );
