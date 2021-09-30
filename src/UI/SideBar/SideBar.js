@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import FriendList from "../../components/SideTap/FriendList/FriendList";
 import axios from "axios";
 import Messenger from "../../components/SideTap/Messenger/Messenger";
-import OnlineUser from "../../components/SideTap/OnlineUser/OnlineUser";
+import useDM from "../../hooks/useDM";
 import useSocket from "../../hooks/useSocket";
 import { Cookies } from "react-cookie";
 import { useParams } from "react-router-dom";
@@ -14,25 +14,27 @@ const SideBar = () => {
   const [toggleState, setToggleState] = useState(1);
   const [friends, setFriends] = useState([]);
 
-  const cookies = new Cookies();
-  let userInfo = cookies.get("userInfo");
+  // const cookies = new Cookies();
 
-  const { gameId, roomId, chatId } = useParams();
-  const { userList } = useSocket(gameId, roomId, userInfo, "", "");
+  // let userInfo = cookies.get("userInfo");
+  // const path = useParams();
 
-  let temp = userList.filter((el) => el !== undefined && el.connected === true);
-  let trueUsers = [
-    {
-      id: "loading",
-      avatar: "loading",
-      nickname: "loading",
-      messages: [],
-    },
-  ];
-  trueUsers = temp.filter((el, idx) => {
-    let Fidx = temp.findIndex((item) => el.userId === item.userId);
-    if (Fidx === idx) return el;
-  });
+  // const { userDM } = useDM(userInfo, path);
+  // console.log(userDM);
+  // const { userList } = useSocket("", "", userInfo, "", "");
+  // let temp = userList.filter((el) => el !== undefined && el.connected === true);
+  // let trueUsers = [
+  //   {
+  //     id: "loading",
+  //     avatar: "loading",
+  //     nickname: "loading",
+  //     messages: [],
+  //   },
+  // ];
+  // trueUsers = temp.filter((el, idx) => {
+  //   let Fidx = temp.findIndex((item) => el.userId === item.userId);
+  //   if (Fidx === idx) return el;
+  // });
 
   useEffect(() => {
     axios
@@ -79,24 +81,31 @@ const SideBar = () => {
         <div
           className={toggleState === 1 ? "content  active-content" : "content"}
         >
-          {friends.map((el) => (
-            <FriendList key={el.id} avatar={el.avatar} nickname={el.nickname} />
-          ))}
+          {toggleState === 1 &&
+            friends.map((el) => (
+              <FriendList
+                key={el.id}
+                avatar={el.avatar}
+                nickname={el.nickname}
+              />
+            ))}
         </div>
         <div
           className={toggleState === 2 ? "content  active-content" : "content"}
-        ></div>
-        {toggleState === 2 &&
-          trueUsers.map((el, idx) => {
-            return (
-              <OnlineUser
-                key={el.userId}
-                avatar={null}
-                nickname={el.nickname}
-                messages={el.messages}
-              />
-            );
-          })}
+        >
+          {/* {toggleState === 2 &&
+            trueUsers.map((el) => {
+              return (
+                <OnlineUser
+                  key={el.userId}
+                  avatar={null}
+                  nickname={el.nickname}
+                  messages={el.messages}
+                />
+              );
+            })} */}
+        </div>
+
         <div
           className={toggleState === 3 ? "content  active-content" : "content"}
         >

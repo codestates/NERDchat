@@ -1,6 +1,5 @@
 import React, { useContext, useRef } from "react";
 import "./Modal.scss";
-import { ReactComponent as Glasses } from "../../images/glasses.svg";
 import { IoMdClose } from "react-icons/io";
 import { Context } from "../../context/ContextProvider";
 

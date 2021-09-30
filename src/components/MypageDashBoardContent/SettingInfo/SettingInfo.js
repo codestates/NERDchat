@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { IoAttachOutline } from "react-icons/io5";
 import { Cookies } from "react-cookie";

@@ -29,7 +29,7 @@ function OnlineUserDropDown({ nickname, messages }) {
             <div className="onlinelist__icon">
               <IoFingerPrintOutline className="icona" />
             </div>
-            Information
+            Info
           </a>
         </li>
         <li className="onlinelist__li">
@@ -59,7 +59,7 @@ function OnlineUserDropDown({ nickname, messages }) {
             <div className="onlinelist__icon">
               <IoAddOutline className="icona" />
             </div>
-            Delete
+            Add
           </a>
         </li>
       </ul>

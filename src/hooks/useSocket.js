@@ -4,20 +4,23 @@ import Peer from "peerjs";
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
-  const socket = useRef();
-  const myPeer = new Peer();
   const [messages, setMessages] = useState([]);
   const [nsHeadCount, setNsHeadCount] = useState(0);
   const [roomHeadCount, setRoomHeadCount] = useState(0);
   const [mic, setMic] = useState(true);
-  const { nickname, userId } = userInfo;
   const [userList, setUserList] = useState([]);
+
+  const socket = useRef();
+  const myPeer = new Peer();
+  const { nickname, userId } = userInfo;
+
   const users = [];
+
   let voiceChatUid = "";
   if (roomId) {
     voiceChatUid = roomId + "-vUid" + Math.floor(Math.random() * 100);
-    // console.log("This is voiceChatUid, ", voiceChatUid);
   }
+
   // const addAudioStream = (audio, stream) => {
   //   audio.srcObject = stream;
   //   audio.addEventListener("loadedmetadata", () => {
@@ -36,19 +39,10 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
   };
 
   useEffect(() => {
-    // if (!serverName) {
-    //   console.log("there is no ns");
-    //   socket.current = io(`${ENDPOINT}`, {
-    //     autoConnect: false,
-    //     transports: ["websocket"],
-    //   });
-    // } else {
-    // console.log(444444, serverName);
     socket.current = io(`${ENDPOINT}/${serverName}`, {
       autoConnect: false,
-      // transports: ["websocket"],
     });
-    // }
+
     const token = localStorage.getItem("socketToken");
     socket.current.roomId = roomId ? roomId : null;
 
@@ -69,14 +63,12 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     }
 
     socket.current.on("token", ({ token, userId }) => {
-      console.log(77777, token);
       socket.current.auth = { token };
       localStorage.setItem("token", token);
       socket.current.userId = userId;
     });
 
     socket.current.on("users", (data) => {
-      console.log(11414141414, data);
       data.forEach((el) => {
         users.push(el);
       });
@@ -95,7 +87,6 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
         }
       }
       users.push(data);
-      // setUserList(users);
     });
 
     socket.current.on("user disconnected", (data) => {
@@ -106,7 +97,6 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
           break;
         }
       }
-      // setUserList(users);
     });
 
     socket.current.on("welcomeRoom", (userData, msgData) =>
@@ -125,10 +115,11 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     socket.current.on("private message", ({ content, from, to }) => {
       // for (let i = 0; i < users.length; i++) {
       //   const user = users[i];
-      //   const fromSelf = socket.userId === from
+      //   const fromSelf = socket.userId === from;
       //   if (user.userId === (fromSelf ? to : from)) {
       //     user.messages.push({
-      //       content, fromSelf
+      //       content,
+      //       fromSelf,
       //     });
       //     if (user !== selectedUser) {
       //       user.hasNewMessages = true;

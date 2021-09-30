@@ -18,15 +18,15 @@ $title: rgb(172, 172, 172);
       width: 35px;
       height: 35px;
       border-radius: 50px;
+      position: relative;
     }
 
-    .online__onliness {
-      position: absolute;
-      color: rgb(186, 234, 92);
-      border-radius: 10px;
-      margin-bottom: 20px;
-      margin-left: 24px;
-    }
+    // .online__onliness {
+    //   color: rgb(186, 234, 92);
+    //   border-radius: 10px;
+    //   margin-bottom: 20px;
+    //   margin-left: 24px;
+    // }
 
     .online__online {
       border: 2px solid $dark;

@@ -9,9 +9,9 @@ import useLists from "../../hooks/useLists";
 function ChatHeader({ path }) {
   const { gameId } = useParams();
 
-  const [currentNum, setCurrentNum] = useState(2);
+  const [currentNum] = useState(2);
 
-  const [pageNum, setPageNum] = useState(1);
+  const [pageNum] = useState(1);
 
   const { lists } = useLists(pageNum, "post", "/rooms/list/", { gameId });
 
