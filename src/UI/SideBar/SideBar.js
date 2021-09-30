@@ -75,13 +75,14 @@ const SideBar = () => {
         >
           {toggleState === 2 &&
             userListRef.current.map((el) => {
-              if (el.userId !== userInfo.userId) {
+              if (el.userId !== userInfo.userId && el.connected === true) {
                 return (
                   <OnlineUser
                     key={el.userId}
                     avatar={el.avatar}
                     nickname={el.nickname}
                     messages={el.messages}
+                    list={el}
                   />
                 );
               }
