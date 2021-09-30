@@ -5,7 +5,6 @@ import Loader from "../components/Loader/Loader";
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const useLists = (pageNum, method, api, data) => {
-  // console.log(data)
   const [loading, setLoading] = useState(true);
   const [lists, setLists] = useState([]);
   const [hasMore, setHasMore] = useState(false);
@@ -26,7 +25,6 @@ const useLists = (pageNum, method, api, data) => {
       withCredentials: true,
       data: data,
     });
-    console.log(res.data);
     setLists((prev) => [...prev, ...res.data.data]);
     // setLists((prev) => {return [...new Set([...prev, ...res.data.data])]});
     setHasMore(res.data.data.length > 0);

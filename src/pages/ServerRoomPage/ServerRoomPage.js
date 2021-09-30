@@ -6,7 +6,7 @@ const ServerRoomPage = () => {
   return (
     <>
       <NavBar />
-      <div class="server__room__big__container">
+      <div className="server__room__big__container">
         <div className="server__room__container">
           <div className="room__content">
             <ServerRoom />

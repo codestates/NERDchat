@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { IoEllipseSharp } from "react-icons/io5";
+import { Cookies } from "react-cookie";
 
 import "./DMMessage.scss";
 
-const DMMessage = () => {
+const DMMessage = ({ content }) => {
+  const cookies = new Cookies();
+  const userInfo = cookies.get("userInfo");
   let today = new Date();
   let time = today.getHours() + ":" + today.getMinutes();
-
   const [currentTime] = useState(time);
 
   // return mine ? (

@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
+
 import Peer from "peerjs";
+
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
@@ -12,6 +14,7 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
 
   const socket = useRef();
   const myPeer = new Peer();
+
   const { nickname, userId } = userInfo;
 
   const users = [];
@@ -103,7 +106,6 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
       console.log(userData, msgData)
     );
     socket.current.on("roomMessage", (userData, msgData) => {
-      console.log(1111111111, userData);
       const incomingMsg = {
         body: msgData,
         user: userData.userId,
@@ -204,24 +206,16 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     );
   };
 
-  const privateMessage = (msgData, userId) => {
-    socket.current.emit("private message", { content: msgData, to: userId });
-  };
-
   const sendMessage = (roomId, chatId, userInfo, newMsg) => {
     socket.current.emit("roomMessage", roomId, chatId, userInfo, newMsg);
   };
 
-  // console.log("This is useSocket users", userList);
   return {
     joinRoom,
     sendMessage,
     messages,
     nsHeadCount,
-    users,
     handleMuteMic,
-    userList,
-    privateMessage,
   };
 };
 
