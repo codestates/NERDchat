@@ -88,8 +88,6 @@ module.exports = {
       if (messagesPerUser.has(otherUser)) { messagesPerUser.get(otherUser).push(message); } else messagesPerUser.set(otherUser, [message]);
     });
     tokens.forEach((token) => {
-      const idx = users.findIndex(item => item.userId === token.userId);
-      if (idx > -1) users.splice(idx, 1);
       users.push({
         userId: token.userId,
         nickname: token.nickname,
