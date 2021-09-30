@@ -37,12 +37,10 @@ function OnlineUserDropDown({ nickname, messages }) {
         <li className="onlinelist__li">
           <Link
             to={`/private=${nickname}`}
-            state={
-              {
-                // messages: messages,
-                // nickname: nickname,
-              }
-            }
+            state={{
+              messages: messages,
+              nickname: nickname,
+            }}
           >
             <div className="onlinelist__icon">
               <IoMailOpenOutline className="icona" />

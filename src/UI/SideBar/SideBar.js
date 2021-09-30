@@ -3,7 +3,11 @@ import FriendList from "../../components/SideTap/FriendList/FriendList";
 import axios from "axios";
 import Messenger from "../../components/SideTap/Messenger/Messenger";
 import OnlineUser from "../../components/SideTap/OnlineUser/OnlineUser";
+<<<<<<< HEAD
 import useDM from "../../hooks/useDM";
+=======
+import useSocket from "../../hooks/useSocket";
+>>>>>>> 7593cabed6ea5966f52c9c187cdd574dbcaee086
 import { Cookies } from "react-cookie";
 import { useParams } from "react-router-dom";
 

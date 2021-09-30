@@ -9,7 +9,6 @@ import ChatHeader from "../../components/ChatHeader/ChatHeader";
 import "./PrivateChatPage.scss";
 
 function PrivateChatPage(props) {
-  console.log(1111, "from private chat page", props);
   // const { messages, nickname } = props.location.state;
   const { toId } = props.match.params;
   return (
