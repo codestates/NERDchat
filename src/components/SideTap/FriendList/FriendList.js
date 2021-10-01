@@ -6,7 +6,14 @@ import DropDown from "./DropDown/DropDown";
 
 import "./FriendList.scss";
 
-const FriendList = ({ avatar, nickname, privateHandler, msg }) => {
+const FriendList = ({
+  avatar,
+  nickname,
+  messages,
+  online,
+  privateHandler,
+  msg,
+}) => {
   const [loader, setLoader] = useState(false);
   const dropRef = useRef();
 
@@ -29,9 +36,9 @@ const FriendList = ({ avatar, nickname, privateHandler, msg }) => {
       >
         <div className="friend__avatar-container">
           <img
-            className="friend__avatar"
+            className={online ? "friend__avatar" : "friendoff__avatar"}
             src={
-              avatar !== null
+              avatar
                 ? avatar
                 : require("../../../images/dummy/white.jpeg").default
             }
@@ -40,7 +47,9 @@ const FriendList = ({ avatar, nickname, privateHandler, msg }) => {
           {/* <div className="friend__onliness">
             <IoEllipseSharp size={15} className="friend__online" />
           </div> */}
-          <div className="friend__name">{nickname}</div>
+          <div className={online ? "friend__name" : "friendoff__name"}>
+            {nickname}
+          </div>
         </div>
         <div className="friend__dropstart" onClick={clickHandler}>
           <IoChevronDownOutline
@@ -53,6 +62,7 @@ const FriendList = ({ avatar, nickname, privateHandler, msg }) => {
         <DropDown
           nickname={nickname}
           privateHandler={privateHandler}
+          messages={messages}
           msg={msg}
         />
       )}

@@ -20,6 +20,12 @@ $title: rgb(172, 172, 172);
       border-radius: 50px;
     }
 
+    .friendoff__avatar {
+      width: 35px;
+      height: 35px;
+      border-radius: 50px;
+    }
+
     .friend__onliness {
       position: absolute;
       color: rgb(186, 234, 92);
@@ -37,6 +43,12 @@ $title: rgb(172, 172, 172);
 
   .friend__name {
     color: $title;
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    margin-left: 10px;
+  }
+  .friendoff__name {
+    color: rgb(91, 91, 91);
     font-family: "Poppins", sans-serif;
     font-weight: 200;
     margin-left: 10px;
