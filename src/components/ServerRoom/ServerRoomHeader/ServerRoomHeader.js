@@ -8,8 +8,9 @@ import RoomSetting from "../../RoomSetting/RoomSetting";
 import useSocket from "../../../hooks/useSocket";
 
 const ServerRoomHeader = ({ gameId }) => {
-  const { nsHeadCount } = useSocket(gameId, "", "");
+  const { userList } = useSocket(gameId, "", "");
   const { createRoomOpen, createRoomModalHandler } = useContext(Context);
+  const userNum = userList.filter((user) => user.connected === true).length;
 
   const creatRoomHandler = () => {
     createRoomModalHandler();
@@ -24,7 +25,7 @@ const ServerRoomHeader = ({ gameId }) => {
           <h2 data-text="NERDchat">NERDchat</h2>
         </Link>
         <div className="headCount__container">
-          {`현재 접속자 수: ${nsHeadCount}`}
+          {`현재 접속자 수: ${userNum}`}
         </div>
         {/* <ServerSearch /> */}
         <button className="create__room" onClick={creatRoomHandler}>

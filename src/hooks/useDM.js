@@ -8,7 +8,7 @@ function useDM(userInfo, to) {
   const { userId, nickname, avatar } = userInfo;
 
   useEffect(() => {
-    const token = localStorage.getItem("socketToken");
+    const token = localStorage.getItem(`socketToken${userId}`);
 
     if (token) {
       socket.auth = { token, nickname, userId, avatar };
@@ -21,7 +21,7 @@ function useDM(userInfo, to) {
     socket.on("token", ({ token, userId }) => {
       socket.auth = { ...socket.auth, token };
       socket.userId = userId;
-      localStorage.setItem("socketToken", token);
+      // localStorage.setItem(`socketToken${userId}`, token);
     });
 
     socket.on("connect", () => {
@@ -54,12 +54,13 @@ function useDM(userInfo, to) {
     });
 
     socket.on("users", (data) => {
+      console.log(7777777777, data);
       data.forEach((serverUser) => {
         for (let i = 0; i < userListRef.current.length; i++) {
           const existingUser = userListRef.current[i];
-          if (serverUser.userId === to) {
-            setMsg(serverUser.messages);
-          }
+          // if (serverUser.userId === to) {
+          //   setMsg(serverUser.messages);
+          // }
           if (existingUser.userId === serverUser.userId) {
             existingUser.connected = serverUser.connected;
             existingUser.messages = serverUser.messages;
