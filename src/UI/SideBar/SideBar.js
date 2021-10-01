@@ -116,7 +116,25 @@ const SideBar = () => {
         <div
           className={toggleState === 3 ? "content  active-content" : "content"}
         >
-          {toggleState === 3 && <Messenger />}
+          {toggleState === 3 &&
+            userListRef.current
+              .sort((a, b) =>
+                a.connected === b.connected ? 0 : -a.connected ? -1 : 1
+              )
+              .filter(
+                (acc) => acc.userId !== userInfo.userId && acc.nickname !== ""
+              )
+              .map((el) => (
+                <Messenger
+                  key={el.userId}
+                  avatar={el.avatar}
+                  nickname={el.nickname}
+                  messages={el.messages}
+                  online={el.connected}
+                  privateHandler={privateMessageHandler}
+                  msg={msg}
+                />
+              ))}
         </div>
       </div>
     </div>
