@@ -18,7 +18,6 @@ const Logout = () => {
     });
     cookies.remove("userInfo");
     localStorage.removeItem("nerd-logged-in");
-    localStorage.removeItem("socketToken");
     history.push("/");
     logoutModalHandler();
   };

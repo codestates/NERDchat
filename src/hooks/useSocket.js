@@ -47,7 +47,7 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
       autoConnect: false,
     });
 
-    const token = localStorage.getItem("socketToken");
+    const token = localStorage.getItem(`socketToken${userId}`);
     socket.current.roomId = roomId ? roomId : null;
 
     socket.current.on("connect", () => {
@@ -68,7 +68,7 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
 
     socket.current.on("token", ({ token, userId }) => {
       socket.current.auth = { token };
-      localStorage.setItem("token", token);
+      localStorage.setItem(`socketToken${userId}`, token);
       socket.current.userId = userId;
     });
 

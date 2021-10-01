@@ -12,7 +12,7 @@ import UserInfo from "../../../userInfo/UserInfo";
 import { Context } from "../../../../context/ContextProvider";
 import "./DropDown.scss";
 
-function DropDown({ nickname, privateHandler, msg }) {
+function DropDown({ nickname, privateHandler, msg, messages }) {
   const { gameId, roomId, chatId } = useParams();
   const inviteLink = window.location.href;
 
@@ -42,6 +42,7 @@ function DropDown({ nickname, privateHandler, msg }) {
         <PrivateMessageModal
           nickname={nickname}
           privateHandler={privateHandler}
+          messages={messages}
           msg={msg}
         />
       )}
@@ -49,11 +50,7 @@ function DropDown({ nickname, privateHandler, msg }) {
       {userInfoModalOpen && <UserInfo nickname={nickname} />}
       <ul className="friendlist__menu">
         <li className="friendlist__li">
-          <a
-            href="#"
-            className="friendlist__a"
-            onClick={userInfoModalOpenHandler}
-          >
+          <a className="friendlist__a" onClick={userInfoModalOpenHandler}>
             <div className="friendlist__icon">
               <IoFingerPrintOutline className="icona" />
             </div>
@@ -61,15 +58,15 @@ function DropDown({ nickname, privateHandler, msg }) {
           </a>
         </li>
         <li className="friendlist__li">
-          <div onClick={privateModalOpenHandler}>
+          <a onClick={privateModalOpenHandler}>
             <div className="friendlist__icon">
               <IoMailOpenOutline className="icona" />
             </div>
             Message
-          </div>
+          </a>
         </li>
         <li className="friendlist__li">
-          <a href="#">
+          <a>
             <div className="friendlist__icon">
               <IoNotificationsOutline className="icona" />
             </div>
@@ -77,7 +74,7 @@ function DropDown({ nickname, privateHandler, msg }) {
           </a>
         </li>
         <li className="friendlist__li">
-          <a href="#" onClick={deleteModalHandler}>
+          <a onClick={deleteModalHandler}>
             <div className="friendlist__icon">
               <IoCutOutline className="icona" />
             </div>
