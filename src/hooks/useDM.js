@@ -5,7 +5,6 @@ import socket from "./socket";
 function useDM(userInfo, to) {
   const [msg, setMsg] = useState([]);
   const userListRef = useRef([]);
-
   const { userId, nickname, avatar } = userInfo;
 
   useEffect(() => {
@@ -105,16 +104,11 @@ function useDM(userInfo, to) {
     };
   }, [to]);
 
-  const findIdx = (to) => {
-    const idx = userListRef.current.findIndex((el) => el.userId === to);
-    console.log(userListRef.current[idx].messages);
-  };
-
   const privateMessageHandler = (msgData, to) => {
     setMsg((msg) => [...msg, { content: msgData, from: socket.userId, to }]);
     socket.emit("private message", { content: msgData, to });
   };
-  return { privateMessageHandler, userListRef, findIdx, msg };
+  return { privateMessageHandler, userListRef, msg };
 }
 
 export default useDM;

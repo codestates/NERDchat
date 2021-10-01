@@ -8,23 +8,23 @@ import {
 } from "react-icons/io5";
 
 import PrivateMessageModal from "../../../PrivateMessageModal/PrivateMessageModal";
-import { Link, useParams } from "react-router-dom";
-import UserDelete from "../../../friend/UserDelete";
+import { useParams } from "react-router-dom";
+import UserAdd from "../../../friend/UserAdd";
 import { Context } from "../../../../context/ContextProvider";
 import "./OnlineUserDropDown.scss";
 
-function OnlineUserDropDown({ nickname, messages }) {
+function OnlineUserDropDown({ nickname, messages, privateHandler, msg }) {
   const { gameId, roomId, chatId } = useParams();
   const inviteLink = window.location.href;
   const {
-    deleteFriendModalHandler,
-    deleteFriendModalOpen,
+    addFriendModalHandler,
+    addFriendModalOpen,
     privateModalHandler,
     privateModalOpen,
   } = useContext(Context);
 
-  const deleteModalHandler = () => {
-    deleteFriendModalHandler();
+  const addUserModalHandler = () => {
+    addFriendModalHandler();
   };
   const privateModalOpenHandler = () => {
     privateModalHandler();
@@ -33,9 +33,14 @@ function OnlineUserDropDown({ nickname, messages }) {
   return (
     <div className="onlinelist__wrapper">
       {privateModalOpen && (
-        <PrivateMessageModal nickname={nickname} messages={messages} />
+        <PrivateMessageModal
+          nickname={nickname}
+          messages={messages}
+          privateHandler={privateHandler}
+          msg={msg}
+        />
       )}
-      {deleteFriendModalOpen && <UserDelete nickname={nickname} />}
+      {addFriendModalOpen && <UserAdd nickname={nickname} />}
       <ul className="onlinelist__menu">
         <li className="onlinelist__li">
           <a href="#" className="onlinelist__a">
@@ -62,7 +67,7 @@ function OnlineUserDropDown({ nickname, messages }) {
           </a>
         </li>
         <li className="onlinelist__li">
-          <a href="#" onClick={deleteModalHandler}>
+          <a href="#" onClick={addUserModalHandler}>
             <div className="onlinelist__icon">
               <IoAddOutline className="icona" />
             </div>

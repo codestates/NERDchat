@@ -1,0 +1,52 @@
+$dark: rgb(23, 23, 23);
+$neonMain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+$title: rgb(172, 172, 172);
+
+.avatar__container {
+  display: flex;
+  justify-content: space-around;
+
+  .avatar__container-img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .avatar__container-img-cur {
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+  }
+
+  .userInfo__container {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: center;
+
+    .userInfo__nic,
+    .userInfo__status,
+    .userInfo__email {
+      font-family: "Poppins", sans-serif;
+      font-weight: 100;
+      color: $title;
+    }
+
+    .userInfo__nic-title {
+      font-family: "Monoton", cursive;
+      font-size: 1rem;
+      font-weight: lighter;
+      color: $title;
+    }
+  }
+
+  .userInfo__Close-btn {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    padding: 0.5em 1em;
+    border: 1px solid $title;
+    background: transparent;
+    border-radius: 50px;
+    color: $title;
+  }
+}

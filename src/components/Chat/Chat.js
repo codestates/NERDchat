@@ -11,7 +11,6 @@ import { Cookies } from "react-cookie";
 function Chat() {
   const audioList = useRef();
   const audioRef = useRef();
-  console.log("chat compo");
   const messageEl = useRef(null);
 
   useEffect(() => {

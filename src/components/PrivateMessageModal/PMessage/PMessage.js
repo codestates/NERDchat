@@ -5,9 +5,9 @@ import { IoEllipseSharp } from "react-icons/io5";
 import "./PMessage.scss";
 
 const PMessage = (message) => {
+  console.log(message);
   const cookies = new Cookies();
   const userInfo = cookies.get("userInfo");
-
   let mine = message.message.from === userInfo.userId;
   const fromMe = message.message.from;
 
