@@ -5,7 +5,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import SideBar from "../../UI/SideBar/SideBar";
 import Chat from "../../components/Chat/Chat";
 import ChatHeader from "../../components/ChatHeader/ChatHeader";
-
+import Voice from "../../components/Chat/Voice/Voice";
 import "./ChatPage.scss";
 
 const ChatPage = () => {
@@ -25,7 +25,9 @@ const ChatPage = () => {
             <div className="chatpage-chat">
               <Chat />
             </div>
-            <div className="chatpage-vioce">voice</div>
+            <div className="chatpage-vioce">
+              <Voice />
+            </div>
           </div>
         </div>
         <div className="chatpage-sidebar">

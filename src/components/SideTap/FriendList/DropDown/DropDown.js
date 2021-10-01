@@ -6,28 +6,54 @@ import {
   IoNotificationsOutline,
   IoCutOutline,
 } from "react-icons/io5";
+import PrivateMessageModal from "../../../PrivateMessageModal/PrivateMessageModal";
 import UserDelete from "../../../friend/UserDelete";
+import UserInfo from "../../../userInfo/UserInfo";
 import { Context } from "../../../../context/ContextProvider";
 import "./DropDown.scss";
 
-function DropDown({ nickname, messages }) {
+function DropDown({ nickname, privateHandler, msg }) {
   const { gameId, roomId, chatId } = useParams();
   const inviteLink = window.location.href;
 
-  const [userNickname, setUserNickname] = useState(nickname);
-  const { deleteFriendModalHandler, deleteFriendModalOpen } =
-    useContext(Context);
+  const {
+    deleteFriendModalHandler,
+    deleteFriendModalOpen,
+    privateModalHandler,
+    privateModalOpen,
+    userInfoModalHandler,
+    userInfoModalOpen,
+  } = useContext(Context);
 
   const deleteModalHandler = () => {
     deleteFriendModalHandler();
   };
+  const privateModalOpenHandler = () => {
+    privateModalHandler();
+  };
+
+  const userInfoModalOpenHandler = () => {
+    userInfoModalHandler();
+  };
 
   return (
     <div className="friendlist__wrapper">
-      {deleteFriendModalOpen && <UserDelete nickname={userNickname} />}
+      {privateModalOpen && (
+        <PrivateMessageModal
+          nickname={nickname}
+          privateHandler={privateHandler}
+          msg={msg}
+        />
+      )}
+      {deleteFriendModalOpen && <UserDelete nickname={nickname} />}
+      {userInfoModalOpen && <UserInfo nickname={nickname} />}
       <ul className="friendlist__menu">
         <li className="friendlist__li">
-          <a href="#" className="friendlist__a">
+          <a
+            href="#"
+            className="friendlist__a"
+            onClick={userInfoModalOpenHandler}
+          >
             <div className="friendlist__icon">
               <IoFingerPrintOutline className="icona" />
             </div>
@@ -35,18 +61,12 @@ function DropDown({ nickname, messages }) {
           </a>
         </li>
         <li className="friendlist__li">
-          <Link
-            to={`/private=${nickname}`}
-            state={{
-              messages: messages,
-              nickname: nickname,
-            }}
-          >
+          <div onClick={privateModalOpenHandler}>
             <div className="friendlist__icon">
               <IoMailOpenOutline className="icona" />
             </div>
             Message
-          </Link>
+          </div>
         </li>
         <li className="friendlist__li">
           <a href="#">

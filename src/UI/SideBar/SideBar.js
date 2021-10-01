@@ -23,9 +23,8 @@ const SideBar = () => {
 
   const path = useParams();
 
-  const { userListRef } = useDM(userInfo, path);
-  console.log("나는 리스트", userListRef);
-
+  const { userListRef, privateMessageHandler, msg } = useDM(userInfo, path);
+  console.log(userListRef);
   useEffect(() => {
     axios
       .get(`${ENDPOINT}/friends/lists`, { withCredentials: true })
@@ -68,6 +67,8 @@ const SideBar = () => {
                 key={el.id}
                 avatar={el.avatar}
                 nickname={el.nickname}
+                privateHandler={privateMessageHandler}
+                msg={msg}
               />
             ))}
         </div>
@@ -75,19 +76,24 @@ const SideBar = () => {
           className={toggleState === 2 ? "content  active-content" : "content"}
         >
           {toggleState === 2 &&
-            userListRef.current.map((el) => {
-              if (el.userId !== userInfo.userId && el.connected === true) {
-                return (
-                  <OnlineUser
-                    key={el.userId}
-                    avatar={el.avatar}
-                    nickname={el.nickname}
-                    messages={el.messages}
-                    list={el}
-                  />
-                );
-              }
-            })}
+            userListRef.current
+              .sort((a, b) =>
+                a.connected === b.connected ? 0 : -a.connected ? -1 : 1
+              )
+              .filter(
+                (acc) => acc.userId !== userInfo.userId && acc.nickname !== ""
+              )
+              .map((el) => (
+                <OnlineUser
+                  key={el.userId}
+                  avatar={el.avatar}
+                  nickname={el.nickname}
+                  messages={el.messages}
+                  online={el.connected}
+                  privateHandler={privateMessageHandler}
+                  msg={msg}
+                />
+              ))}
         </div>
 
         <div

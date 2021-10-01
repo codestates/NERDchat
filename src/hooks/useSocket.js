@@ -7,6 +7,7 @@ const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
   const [messages, setMessages] = useState([]);
+  const [peers, setPeers] = useState([]);
   const [nsHeadCount, setNsHeadCount] = useState(0);
   const [roomHeadCount, setRoomHeadCount] = useState(0);
   const [mic, setMic] = useState(true);
@@ -114,24 +115,6 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
       setMessages((prevM) => [...prevM, incomingMsg]);
     });
 
-    socket.current.on("private message", ({ content, from, to }) => {
-      // for (let i = 0; i < users.length; i++) {
-      //   const user = users[i];
-      //   const fromSelf = socket.userId === from;
-      //   if (user.userId === (fromSelf ? to : from)) {
-      //     user.messages.push({
-      //       content,
-      //       fromSelf,
-      //     });
-      //     if (user !== selectedUser) {
-      //       user.hasNewMessages = true;
-      //     }
-      //     break;
-      //   }
-      // }
-      // selectedUser -> onlien, friend list에서 내가 선택하는 유저의 아이디
-    });
-
     socket.current.on("disconenct", () => {
       users.forEach((el) => {
         if (el.userId === userId) {
@@ -140,6 +123,17 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
       });
     });
 
+    if (voiceChatUid.length !== 0) {
+      navigator.mediaDevices
+        .getUserMedia({ video: false, audio: true })
+        .then((stream) => {
+          console.log(stream.id);
+          myPeer.on("open", (peerId) => {
+            console.log("My peer is on!");
+            socket.current.emit("voiceChat", voiceChatUid, userInfo, peerId);
+          });
+        });
+    }
     // //Voice
     // if (voiceChatUid.length !== 0) {
     //   navigator.mediaDevices
@@ -187,7 +181,6 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
       socket.current.off("users");
       socket.current.off("user connected");
       socket.current.off("user disconnected");
-      socket.current.off("private message");
       socket.current.off("disconenct");
       socket.current.off("welcomeRoom");
       socket.current.off("roomMessage");
@@ -216,6 +209,7 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     messages,
     nsHeadCount,
     handleMuteMic,
+    userList,
   };
 };
 

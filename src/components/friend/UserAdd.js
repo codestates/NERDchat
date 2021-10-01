@@ -6,7 +6,7 @@ import "./UserAdd.scss";
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
-const UserAdd = () => {
+const UserAdd = ({ nickname }) => {
   const { addFriendModalHandler } = useContext(Context);
 
   //친구초대 승낙
@@ -37,12 +37,18 @@ const UserAdd = () => {
 
   return (
     <Modal>
-      <div>
-        <div>Add User to Friend List?</div>
+      <div className="adduser_container">
+        <div className="adduser_title">Add User to Friend List?</div>
       </div>
       <div>
-        <button onClick={okHandler}>OK</button>
-        <button onClick={noHandler}>Cancel</button>
+        <div className="adduser_container-btn">
+          <button className="adduser_btn-yes" onClick={okHandler}>
+            OK
+          </button>
+          <button className="adduser_btn-no" onClick={noHandler}>
+            Cancel
+          </button>
+        </div>
       </div>
     </Modal>
   );
