@@ -17,9 +17,7 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
   const myPeer = new Peer();
 
   const { nickname, userId } = userInfo;
-
   const users = [];
-
   let voiceChatUid = "";
   if (roomId) {
     voiceChatUid = roomId + "-vUid" + Math.floor(Math.random() * 100);
@@ -43,138 +41,140 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
   };
 
   useEffect(() => {
-    socket.current = io(`${ENDPOINT}/${serverName}`, {
-      autoConnect: false,
-    });
-
-    const token = localStorage.getItem(`socketToken${userId}`);
-    socket.current.roomId = roomId ? roomId : null;
-
-    socket.current.on("connect", () => {
-      users.forEach((el) => {
-        if (el.userId === userId) {
-          el.connected = true;
-        }
+    if (userId) {
+      socket.current = io(`${ENDPOINT}/${serverName}`, {
+        autoConnect: false,
       });
-    });
 
-    if (token) {
-      socket.current.auth = { token, nickname, userId };
-      socket.current.connect();
-    } else {
-      socket.current.auth = { nickname, userId };
-      socket.current.connect();
-    }
+      const token = localStorage.getItem(`socketToken${userId}`);
+      socket.current.roomId = roomId ? roomId : null;
 
-    socket.current.on("token", ({ token, userId }) => {
-      socket.current.auth = { token };
-      localStorage.setItem(`socketToken${userId}`, token);
-      socket.current.userId = userId;
-    });
-
-    socket.current.on("users", (data) => {
-      data.forEach((el) => {
-        users.push(el);
-      });
-      users.sort((a, b) => {
-        return a - b;
-      });
-      setUserList(users);
-    });
-
-    socket.current.on("user connected", (data) => {
-      for (let i = 0; i < users.length; i++) {
-        const existingUser = users[i];
-        if (existingUser.userId === data.userId) {
-          existingUser.connected = true;
-          return;
-        }
-      }
-      users.push(data);
-    });
-
-    socket.current.on("user disconnected", (data) => {
-      for (let i = 0; i < users.length; i++) {
-        const user = users[i];
-        if (user.userId === data) {
-          user.connected = false;
-          break;
-        }
-      }
-    });
-
-    socket.current.on("welcomeRoom", (userData, msgData) =>
-      console.log(userData, msgData)
-    );
-    socket.current.on("roomMessage", (userData, msgData) => {
-      const incomingMsg = {
-        body: msgData,
-        user: userData.userId,
-        mine: userData.userId === userInfo.userId,
-      };
-      setMessages((prevM) => [...prevM, incomingMsg]);
-    });
-
-    socket.current.on("disconenct", () => {
-      users.forEach((el) => {
-        if (el.userId === userId) {
-          el.connected = false;
-        }
-      });
-    });
-
-    if (voiceChatUid.length !== 0) {
-      navigator.mediaDevices
-        .getUserMedia({ video: false, audio: true })
-        .then((stream) => {
-          console.log(stream.id);
-          myPeer.on("open", (peerId) => {
-            console.log("My peer is on!");
-            socket.current.emit("voiceChat", voiceChatUid, userInfo, peerId);
-          });
+      socket.current.on("connect", () => {
+        users.forEach((el) => {
+          if (el.userId === userId) {
+            el.connected = true;
+          }
         });
-    }
-    // //Voice
-    // if (voiceChatUid.length !== 0) {
-    //   navigator.mediaDevices
-    //     .getUserMedia({ video: false, audio: true })
-    //     .then((stream) => {
-    //       myPeer.on("open", (peerId) => {
-    //         socket.current.emit("voiceChat", voiceChatUid, userInfo, peerId);
-    //       });
-    //       addAudioStream(audioRef.current, stream);
-    //       myPeer.on("call", (call) => {
-    //         call.answer(stream);
-    //         const audio = document.createElement("audio");
-    //         audio.setAttribute("autoPlay", "playsInline");
-    //         call.on("stream", (userAudio) => {
-    //           addAudioStream(audio, userAudio);
-    //         });
-    //       });
-    //       socket.current.on("userConnect", (peerId) => {
-    //         const peerCall = myPeer.call(peerId, stream);
-    //         const audio = document.createElement("audio");
-    //         peerCall.on("stream", (userAudio) => {
-    //           addAudioStream(audio, userAudio);
-    //         });
-    //         peerCall.on("close", () => {
-    //           audio.remove();
-    //         });
-    //       });
-    //     });
-    // }
+      });
 
-    //현재 nameSpace 접속자 인원 받아오기
-    socket.current.on("currentNSLength", (data) => {
-      setNsHeadCount(data / 2);
-    });
-    socket.current.emit("currentNSLength", "", (data) => {
-      console.log("This is emit from client", data);
-    });
-    //현재 룸 접속자 인원 받아오기(수정필요)
-    socket.current.on("currentRoomLength", (data) => {
-      setRoomHeadCount(data);
-    });
+      if (token) {
+        socket.current.auth = { token, nickname, userId };
+        socket.current.connect();
+      } else {
+        socket.current.auth = { nickname, userId };
+        socket.current.connect();
+      }
+
+      socket.current.on("token", ({ token, userId }) => {
+        socket.current.auth = { token };
+        localStorage.setItem(`socketToken${userId}`, token);
+        socket.current.userId = userId;
+      });
+
+      socket.current.on("users", (data) => {
+        data.forEach((el) => {
+          users.push(el);
+        });
+        users.sort((a, b) => {
+          return a - b;
+        });
+        setUserList(users);
+      });
+
+      socket.current.on("user connected", (data) => {
+        for (let i = 0; i < users.length; i++) {
+          const existingUser = users[i];
+          if (existingUser.userId === data.userId) {
+            existingUser.connected = true;
+            return;
+          }
+        }
+        users.push(data);
+      });
+
+      socket.current.on("user disconnected", (data) => {
+        for (let i = 0; i < users.length; i++) {
+          const user = users[i];
+          if (user.userId === data) {
+            user.connected = false;
+            break;
+          }
+        }
+      });
+
+      socket.current.on("welcomeRoom", (userData, msgData) =>
+        console.log(userData, msgData)
+      );
+      socket.current.on("roomMessage", (userData, msgData) => {
+        const incomingMsg = {
+          body: msgData,
+          user: userData.userId,
+          mine: userData.userId === userInfo.userId,
+        };
+        setMessages((prevM) => [...prevM, incomingMsg]);
+      });
+
+      socket.current.on("disconenct", () => {
+        users.forEach((el) => {
+          if (el.userId === userId) {
+            el.connected = false;
+          }
+        });
+      });
+
+      if (voiceChatUid.length !== 0) {
+        navigator.mediaDevices
+          .getUserMedia({ video: false, audio: true })
+          .then((stream) => {
+            console.log(stream.id);
+            myPeer.on("open", (peerId) => {
+              console.log("My peer is on!");
+              socket.current.emit("voiceChat", voiceChatUid, userInfo, peerId);
+            });
+          });
+      }
+      // //Voice
+      // if (voiceChatUid.length !== 0) {
+      //   navigator.mediaDevices
+      //     .getUserMedia({ video: false, audio: true })
+      //     .then((stream) => {
+      //       myPeer.on("open", (peerId) => {
+      //         socket.current.emit("voiceChat", voiceChatUid, userInfo, peerId);
+      //       });
+      //       addAudioStream(audioRef.current, stream);
+      //       myPeer.on("call", (call) => {
+      //         call.answer(stream);
+      //         const audio = document.createElement("audio");
+      //         audio.setAttribute("autoPlay", "playsInline");
+      //         call.on("stream", (userAudio) => {
+      //           addAudioStream(audio, userAudio);
+      //         });
+      //       });
+      //       socket.current.on("userConnect", (peerId) => {
+      //         const peerCall = myPeer.call(peerId, stream);
+      //         const audio = document.createElement("audio");
+      //         peerCall.on("stream", (userAudio) => {
+      //           addAudioStream(audio, userAudio);
+      //         });
+      //         peerCall.on("close", () => {
+      //           audio.remove();
+      //         });
+      //       });
+      //     });
+      // }
+
+      //현재 nameSpace 접속자 인원 받아오기
+      socket.current.on("currentNSLength", (data) => {
+        setNsHeadCount(data / 2);
+      });
+      socket.current.emit("currentNSLength", "", (data) => {
+        console.log("This is emit from client", data);
+      });
+      //현재 룸 접속자 인원 받아오기(수정필요)
+      socket.current.on("currentRoomLength", (data) => {
+        setRoomHeadCount(data);
+      });
+    }
     return () => {
       socket.current.off("connect");
       socket.current.off("token");
