@@ -3,10 +3,13 @@ const { generateAccess, verifyAccess } = require('../../middlewares/token');
 const { generatePassword } = require('../../middlewares/crypto');
 
 module.exports = async (req, res) => {
-  const userData = await verifyAccess(req, res);
-  const { nickname, password, status } = req.body;
-  const avatar = req.files[0].filename;
   try {
+    const userData = await verifyAccess(req, res);
+    const { nickname, password, status } = req.body;
+    let avatar;
+    console.log(req.file);
+    if (req.file) avatar = req.file.location;
+    else avatar = null;
     const origin = await Users.findOne({
       where: { email: userData.email, nickname: userData.nickname }
     });
@@ -14,7 +17,7 @@ module.exports = async (req, res) => {
       var newPassword = generatePassword(password);
     }
     await Users.update({
-      avatar: avatar.location || origin.avatar,
+      avatar: avatar || origin.avatar,
       nickname: nickname || origin.nickname,
       password: newPassword || origin.password,
       status: status || origin.status,
