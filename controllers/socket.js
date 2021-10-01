@@ -2,7 +2,7 @@ const { Users, GameChatRooms, Messages } = require('../models');
 const crypto = require('crypto');
 const randomId = () => crypto.randomBytes(10).toString('hex');
 const Redis = require('ioredis');
-require('dotenv').config()
+require('dotenv').config();
 const redisClient = new Redis(6379, process.env.REDIS_HOST, { password: process.env.REDIS_PASSWORD });
 
 const { RedisTokenStore } = require('../store/tokenStore');
@@ -38,7 +38,7 @@ module.exports = {
         userId: token.userId,
         nickname: token.nickname,
         avatar: token.avatar,
-        connected: token.connected,
+        connected: token.connected
       });
     });
     socket.emit('users', users);
@@ -47,7 +47,7 @@ module.exports = {
       userId: socket.userId,
       nickname: socket.nickname,
       avatar: socket.avatar,
-      connected: true,
+      connected: true
     });
 
     socket.on('joinRoom', async (roomUid, voiceChatUid, userData) => {
@@ -84,7 +84,7 @@ module.exports = {
       });
     });
 
-    socket.on('serverSize', () => socket.emit('serverSize', ns.adapter.sids.size))
+    socket.on('serverSize', () => socket.emit('serverSize', ns.adapter.sids.size));
 
     socket.on('disconnect', async () => {
       const matchingSockets = await socket.in(socket.userId).allSockets();

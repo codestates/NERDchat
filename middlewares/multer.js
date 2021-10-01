@@ -2,7 +2,7 @@ const multer = require('multer');
 const path = require('path');
 const multerS3 = require('multer-s3');
 const aws = require('aws-sdk');
-const randomstring = require("randomstring");
+const randomstring = require('randomstring');
 require('dotenv').config();
 
 module.exports = {
@@ -19,8 +19,8 @@ module.exports = {
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: (req, file, cb) => {
-          var fileName = randomstring.generate(25);
-          var mimeType;
+          const fileName = randomstring.generate(25);
+          let mimeType;
           switch (file.mimetype) { // 파일 타입을 거릅니다.
             case 'image/jpeg':
               mimeType = 'jpg';
@@ -40,16 +40,16 @@ module.exports = {
           }
           cb(null, `avatar/${Date.now()}_${fileName}.${mimeType}`);
 
-      // storage: multer.diskStorage({
-      //   destination: function (req, file, cb) {
-      //     cb(null, './uploads');
-      //   },
-      //   filename: async function (req, file, cb) {
-      //     cb(null, new Date().valueOf() + path.extname(file.originalname));
+          // storage: multer.diskStorage({
+          //   destination: function (req, file, cb) {
+          //     cb(null, './uploads');
+          //   },
+          //   filename: async function (req, file, cb) {
+          //     cb(null, new Date().valueOf() + path.extname(file.originalname));
         }
-      }) 
+      })
     });
-    
+
     return upload.single('avatar')(req, res, next);
   }
 };

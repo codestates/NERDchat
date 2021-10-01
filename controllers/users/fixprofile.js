@@ -4,12 +4,12 @@ const { generatePassword } = require('../../middlewares/crypto');
 
 module.exports = async (req, res) => {
   try {
-  const userData = await verifyAccess(req, res);
-  const { nickname, password, status } = req.body;
+    const userData = await verifyAccess(req, res);
+    const { nickname, password, status } = req.body;
     let avatar;
-    console.log(req.file)
-  if (req.file) avatar = req.file.location
-  else avatar = null;
+    console.log(req.file);
+    if (req.file) avatar = req.file.location;
+    else avatar = null;
     const origin = await Users.findOne({
       where: { email: userData.email, nickname: userData.nickname }
     });
