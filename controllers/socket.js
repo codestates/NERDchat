@@ -50,7 +50,7 @@ module.exports = {
       connected: true
     });
 
-    socket.on('joinRoom', async (roomUid, voiceChatUid, userData) => {
+    socket.on('joinRoom', async (roomUid, userData, peerId) => {
     // search User and Update User ` currentRoom ` Column
       try {
         const { id, userId, avatar, nickname } = userData;
@@ -60,19 +60,35 @@ module.exports = {
           where: { id, userId }
         });
         socket.join(roomUid);
+        socket.broadcast.to(roomUid).emit('userConnect', peerId);
         ns.to(roomUid).emit('welcomeRoom', userData);
+
+        socket.on('disconnect', () => {
+          socket.broadcast.to(roomUid).emit('userDisconnect', peerId);
+        });
       } catch (err) {
         console.log(err);
         return null;
       }
     });
-    socket.on('voiceChat', (voiceChatUid, userPeerId) => {
-      socket.join(voiceChatUid);
-      ns.to(voiceChatUid).emit('userConnect', userPeerId);
-      socket.on('disconnect', () => {
-        ns.to(voiceChatUid).emit('userDisconnect', userPeerId);
-      });
-    });
+
+    socket.on('offer', (offer, roomUid) => {
+      ns.to(roomUid).emit('offer', offer);
+    })
+    socket.on('answer', (answer, roomUid) => {
+      ns.to(roomUid).emit('answer', answer);
+    })
+    socket.on('ice', (ice, roomUid) => {
+      ns.to(roomUid).emit('ice', ice);
+    })
+
+    // socket.on('voiceChat', (voiceChatUid, userPeerId) => {
+    //   socket.join(voiceChatUid);
+    //   ns.to(voiceChatUid).emit('userConnect', userPeerId);
+    //   socket.on('disconnect', () => {
+    //     ns.to(voiceChatUid).emit('userDisconnect', userPeerId);
+    //   });
+    // });
 
     socket.on('roomMessage', (roomUid, roomId, userData, msgData) => {
       ns.to(roomUid).emit('roomMessage', userData, msgData);
