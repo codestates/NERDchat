@@ -29,7 +29,6 @@ function useDM(userInfo, to) {
         const existingUser = userListRef.current[i];
         if (existingUser.userId === userId) {
           existingUser.connect = true;
-          break;
         }
       }
     });
@@ -39,7 +38,6 @@ function useDM(userInfo, to) {
         const existingUser = userListRef.current[i];
         if (existingUser.userId === userId) {
           existingUser.connect = false;
-          break;
         }
       }
     });
@@ -53,16 +51,6 @@ function useDM(userInfo, to) {
         }
       }
       userListRef.current.push(data);
-    });
-
-    socket.on("user disconnected", (data) => {
-      for (let i = 0; i < userListRef.current.length; i++) {
-        const existingUser = userListRef.current[i];
-        if (existingUser.userId === data) {
-          existingUser.connected = false;
-          return;
-        }
-      }
     });
 
     socket.on("users", (data) => {
@@ -80,6 +68,17 @@ function useDM(userInfo, to) {
         }
         userListRef.current.push(serverUser);
       });
+    });
+
+    socket.on("user disconnected", (data) => {
+      for (let i = 0; i < userListRef.current.length; i++) {
+        const existingUser = userListRef.current[i];
+        if (existingUser.userId === data) {
+          existingUser.connected = false;
+          return;
+        }
+      }
+      return;
     });
 
     socket.on("private message", (message) => {
