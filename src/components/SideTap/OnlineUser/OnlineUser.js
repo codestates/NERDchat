@@ -6,7 +6,14 @@ import OnlineUserDropDown from "./DropDown/OnlineUserDropDown";
 
 import "./OnlineUser.scss";
 
-const OnlineUser = ({ avatar, nickname, messages }) => {
+const OnlineUser = ({
+  avatar,
+  nickname,
+  messages,
+  online,
+  privateHandler,
+  msg,
+}) => {
   const [loader, setLoader] = useState(false);
   const dropRef = useRef();
 
@@ -40,7 +47,9 @@ const OnlineUser = ({ avatar, nickname, messages }) => {
           {/* <div className="online__onliness">
             <IoEllipseSharp size={15} className="online__online" />
           </div> */}
-          <div className="online__name">{nickname}</div>
+          <div className={online ? "online__name" : "offline__name"}>
+            {nickname}
+          </div>
         </div>
         <div className="online__dropstart" onClick={clickHandler}>
           <IoChevronDownOutline
@@ -49,7 +58,14 @@ const OnlineUser = ({ avatar, nickname, messages }) => {
           />
         </div>
       </div>
-      {loader && <OnlineUserDropDown nickname={nickname} messages={messages} />}
+      {loader && (
+        <OnlineUserDropDown
+          nickname={nickname}
+          messages={messages}
+          privateHandler={privateHandler}
+          msg={msg}
+        />
+      )}
     </>
   );
 };

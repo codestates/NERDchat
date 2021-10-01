@@ -6,8 +6,7 @@ import DropDown from "./DropDown/DropDown";
 
 import "./FriendList.scss";
 
-const FriendList = ({ avatar, nickname }) => {
-  const [userName, setUserName] = useState(nickname);
+const FriendList = ({ avatar, nickname, privateHandler, msg }) => {
   const [loader, setLoader] = useState(false);
   const dropRef = useRef();
 
@@ -50,7 +49,13 @@ const FriendList = ({ avatar, nickname }) => {
           />
         </div>
       </div>
-      {loader && <DropDown nickname={userName} />}
+      {loader && (
+        <DropDown
+          nickname={nickname}
+          privateHandler={privateHandler}
+          msg={msg}
+        />
+      )}
     </>
   );
 };
