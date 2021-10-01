@@ -84,7 +84,7 @@ module.exports = {
       });
     });
 
-    socket.on('serverSize', () => socket.emit('serverSize', ns.adapter.sids.size));
+    socket.on('serverSize', () => socket.emit('serverSize', users.length));
 
     socket.on('disconnect', async () => {
       const matchingSockets = await socket.in(socket.userId).allSockets();
