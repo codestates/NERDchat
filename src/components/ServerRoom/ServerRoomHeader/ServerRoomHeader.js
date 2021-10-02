@@ -3,19 +3,22 @@ import { IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { Context } from "../../../context/ContextProvider";
 import "./ServerRoomHeader.scss";
-import ServerSearch from "../ServerSerch/ServerSearch";
 import RoomSetting from "../../RoomSetting/RoomSetting";
 import useSocket from "../../../hooks/useSocket";
+import socket from "../../../hooks/socket";
 
 const ServerRoomHeader = ({ gameId }) => {
-  const { userList } = useSocket(gameId, "", "");
+  const [userNum, setUserNum] = useState(0);
   const { createRoomOpen, createRoomModalHandler } = useContext(Context);
-  const userNum = userList.filter((user) => user.connected === true).length;
+  // const userNum = userList.filter((user) => user.connected === true).length;
 
   const creatRoomHandler = () => {
     createRoomModalHandler();
   };
 
+  // useEffect(() => {
+  //   const num = getUserHead();
+  // }, []);
   return (
     <>
       {createRoomOpen && <RoomSetting />}

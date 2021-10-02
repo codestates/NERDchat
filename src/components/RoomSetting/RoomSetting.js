@@ -12,7 +12,7 @@ const RoomSetting = () => {
   const history = useHistory();
   const { createRoomModalHandler } = useContext(Context);
   const { gameId } = useParams();
-  const [serverId, setServerId] = useState(gameId);
+  const sreverId = gameId;
   const [headCount, setHeadCount] = useState(0);
   const [title, setTitle] = useState("");
   const [err, setErr] = useState("");
@@ -26,26 +26,22 @@ const RoomSetting = () => {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-    setLoading(true);
+
     if (title.trim().length <= 2) {
       setErr("Room Title should be longer than 2 letters");
-      console.log(222212, title, err);
     } else if (headCount < 2) {
-      setErr("Room Title should be longer than 2 letters");
+      setErr("HeadCount should be bigger than 2");
     }
-    // console.log(serverId, title, headCount);
 
     const chatId = 1;
     if (title.trim().length > 2 && headCount >= 2) {
       const res = await axios.put(
         `${ENDPOINT}/rooms/create`,
-        { gameId: serverId, title, max: headCount },
+        { gameId: sreverId, title, max: headCount },
         { withCredentials: true }
       );
-      const { roomTitle, uuid, gameId, current, max, createdAt } =
-        res.data.data;
-      console.log("This is created", res.data.data);
-      setLoading(false);
+      const { uuid, gameId } = res.data.data;
+
       createRoomModalHandler();
       // chatroom안으로 리 다이렉트 시키기.
       // chatId 달라고 하기.
@@ -86,6 +82,9 @@ const RoomSetting = () => {
               />
               <p>{headCount} 명</p>
             </div>
+          </div>
+          <div className="room__err__container">
+            {err && <span>{err}</span>}
           </div>
           <div className="create__container">
             <button type="submit">Create!</button>

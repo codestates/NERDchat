@@ -1,21 +1,18 @@
 import React, { useContext } from "react";
-
 import {
   IoFingerPrintOutline,
   IoMailOpenOutline,
   IoNotificationsOutline,
   IoAddOutline,
 } from "react-icons/io5";
+import PrivateMessageModal from "../../PrivateMessageModal/PrivateMessageModal";
+import UserAdd from "../../friend/UserAdd";
+import UserInfo from "../../userInfo/UserInfo";
+import Invite from "../../invite/Invite";
+import { Context } from "../../../context/ContextProvider";
+import "./MsgListDropDown.scss";
 
-import PrivateMessageModal from "../../../PrivateMessageModal/PrivateMessageModal";
-import { useParams } from "react-router-dom";
-import UserAdd from "../../../friend/UserAdd";
-import UserInfo from "../../../userInfo/UserInfo";
-import Invite from "../../../invite/Invite";
-import { Context } from "../../../../context/ContextProvider";
-import "./OnlineUserDropDown.scss";
-
-function OnlineUserDropDown({ nickname, messages, userInfo }) {
+const MsgListDropDown = ({ nickname, messages, userInfo }) => {
   const {
     userInfoModalHandler,
     userInfoModalOpen,
@@ -41,7 +38,7 @@ function OnlineUserDropDown({ nickname, messages, userInfo }) {
   };
 
   return (
-    <div className="onlinelist__wrapper">
+    <div className="msgList__wrapper">
       {privateModalOpen && (
         <PrivateMessageModal nickname={nickname} messages={messages} />
       )}
@@ -50,34 +47,34 @@ function OnlineUserDropDown({ nickname, messages, userInfo }) {
       {addFriendModalOpen && (
         <UserAdd nickname={nickname} userInfo={userInfo} />
       )}
-      <ul className="onlinelist__menu">
-        <li className="onlinelist__li">
-          <div className="onlinelist__a" onClick={userInfoModalOpenHandler}>
-            <div className="onlinelist__icon">
+      <ul className="msgList__menu">
+        <li className="msgList__li">
+          <div className="msgList__a" onClick={userInfoModalOpenHandler}>
+            <div className="msgList__icon">
               <IoFingerPrintOutline className="icona" />
             </div>
             Info
           </div>
         </li>
-        <li className="onlinelist__li">
-          <div className="onlinelist__a" onClick={privateModalOpenHandler}>
-            <div className="onlinelist__icon">
+        <li className="msgList__li">
+          <div className="msgList__a" onClick={privateModalOpenHandler}>
+            <div className="msgList__icon">
               <IoMailOpenOutline className="icona" />
             </div>
             Message
           </div>
         </li>
-        <li className="onlinelist__li">
-          <div className="onlinelist__a" onClick={inviteModalOpenHandler}>
-            <div className="onlinelist__icon">
+        <li className="msgList__li">
+          <div className="msgList__a" onClick={inviteModalOpenHandler}>
+            <div className="msgList__icon">
               <IoNotificationsOutline className="icona" />
             </div>
             Invite
           </div>
         </li>
-        <li className="onlinelist__li">
-          <div className="onlinelist__a" onClick={addUserModalHandler}>
-            <div className="onlinelist__icon">
+        <li className="msgList__li">
+          <div className="msgList__a" onClick={addUserModalHandler}>
+            <div className="msgList__icon">
               <IoAddOutline className="icona" />
             </div>
             Add
@@ -86,6 +83,6 @@ function OnlineUserDropDown({ nickname, messages, userInfo }) {
       </ul>
     </div>
   );
-}
+};
 
-export default OnlineUserDropDown;
+export default MsgListDropDown;

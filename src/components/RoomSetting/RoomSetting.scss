@@ -1,6 +1,7 @@
 $dark: rgb(23, 23, 23);
-$neonNain: rgb(184, 126, 255);
+$neonMain: rgb(184, 126, 255);
 $neonSer: rgb(163, 16, 255);
+$title: rgb(172, 172, 172);
 .room__setting__container {
   display: flex;
   flex-direction: column;
@@ -29,21 +30,48 @@ $neonSer: rgb(163, 16, 255);
       }
     }
   }
+  .room__err__container {
+    color: rgb(199, 71, 71);
+    text-align: center;
+  }
   .create__container {
     display: flex;
     justify-content: center;
 
     button {
-      background: $neonSer;
-      color: white;
-      cursor: pointer;
-      padding: 0.5em 1em;
-      width: 100px;
+      position: relative;
+      padding: 0.5rem 1rem;
+      font-family: "Poppins", sans-serif;
+      font-weight: 100;
+
+      border: 1px solid $title;
+      background: transparent;
+      border-radius: 50px;
+      color: $title;
+      overflow: hidden;
       &:hover {
-        background: rgb(172, 45, 252);
+        cursor: pointer;
       }
       &:active {
         transform: scale(0.98);
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-color: $neonSer;
+        top: 100%;
+        left: 0;
+        transition: all 0.6s;
+        z-index: -3;
+      }
+      &:hover::before {
+        transform: translateY(-100%);
+      }
+
+      &:hover {
+        color: white;
       }
     }
   }

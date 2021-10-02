@@ -1,12 +1,11 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import "./ServerRoomCard.scss";
 import { BsFillMicFill } from "react-icons/bs";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Context } from "../../../context/ContextProvider";
-import Login from "../../login/Login";
 
 const ServerRoomCard = ({ gameId, id, roomTitle, uuid, max, loading, len }) => {
-  const { loginModalOpen, loginmodalHandler } = useContext(Context);
+  const { loginmodalHandler } = useContext(Context);
   const history = useHistory();
   const getIntoServer = () => {
     if (!localStorage.getItem("nerd-logged-in")) {

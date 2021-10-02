@@ -9,13 +9,11 @@ import {
 import PrivateMessageModal from "../../../PrivateMessageModal/PrivateMessageModal";
 import UserDelete from "../../../friend/UserDelete";
 import UserInfo from "../../../userInfo/UserInfo";
+import Invite from "../../../invite/Invite";
 import { Context } from "../../../../context/ContextProvider";
 import "./DropDown.scss";
 
-function DropDown({ nickname, privateHandler, msg, messages }) {
-  const { gameId, roomId, chatId } = useParams();
-  const inviteLink = window.location.href;
-
+function DropDown({ nickname, userInfo, messages }) {
   const {
     deleteFriendModalHandler,
     deleteFriendModalOpen,
@@ -23,31 +21,31 @@ function DropDown({ nickname, privateHandler, msg, messages }) {
     privateModalOpen,
     userInfoModalHandler,
     userInfoModalOpen,
+    inviteModalOpen,
+    inviteModalHandler,
   } = useContext(Context);
 
   const deleteModalHandler = () => {
     deleteFriendModalHandler();
   };
+
   const privateModalOpenHandler = () => {
     privateModalHandler();
   };
-
   const userInfoModalOpenHandler = () => {
     userInfoModalHandler();
   };
-
+  const inviteModalOpenHandler = () => {
+    inviteModalHandler();
+  };
   return (
     <div className="friendlist__wrapper">
       {privateModalOpen && (
-        <PrivateMessageModal
-          nickname={nickname}
-          privateHandler={privateHandler}
-          messages={messages}
-          msg={msg}
-        />
+        <PrivateMessageModal nickname={nickname} messages={messages} />
       )}
-      {deleteFriendModalOpen && <UserDelete nickname={nickname} />}
       {userInfoModalOpen && <UserInfo nickname={nickname} />}
+      {inviteModalOpen && <Invite nickname={nickname} userInfo={userInfo} />}
+      {deleteFriendModalOpen && <UserDelete nickname={nickname} />}
       <ul className="friendlist__menu">
         <li className="friendlist__li">
           <a className="friendlist__a" onClick={userInfoModalOpenHandler}>
@@ -66,7 +64,7 @@ function DropDown({ nickname, privateHandler, msg, messages }) {
           </a>
         </li>
         <li className="friendlist__li">
-          <a>
+          <a onClick={inviteModalOpenHandler}>
             <div className="friendlist__icon">
               <IoNotificationsOutline className="icona" />
             </div>

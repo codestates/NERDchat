@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import NavBar from "../../components/NavBar/NavBar";
 import MessagesList from "../../components/MypageDashBoardContent/MessagesList/MessagesList";
@@ -29,16 +29,19 @@ function MyPage() {
   const actionhandle = (index) => {
     setState(index);
   };
+  useEffect(() => {
+    setProfileImg(userInfo.avatar);
+  }, [userInfo]);
 
-  const imagehandler = (e) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setProfileImg(reader.result);
-      }
-    };
-    reader.readAsDataURL(e.target.files[0]);
-  };
+  // const imagehandler = (e) => {
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     if (reader.readyState === 2) {
+  //       setProfileImg(reader.result);
+  //     }
+  //   };
+  //   reader.readAsDataURL(e.target.files[0]);
+  // };
 
   return (
     <div className="mypage__container">
