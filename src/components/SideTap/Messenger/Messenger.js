@@ -1,40 +1,19 @@
-import { useContext } from "react";
-import { useParams } from "react-router-dom";
-import useSocket from "../../../hooks/useSocket";
-import { Cookies } from "react-cookie";
-import { Context } from "../../../context/ContextProvider";
-import PrivateMessageModal from "../../PrivateMessageModal/PrivateMessageModal";
+import { useState } from "react";
+import MsgListDropDown from "./MsgListDropDown";
 
 import "./Messenger.scss";
 
-const Messenger = ({
-  avatar,
-  nickname,
-  messages,
-  online,
-  privateHandler,
-  msg,
-}) => {
-  const { privateModalHandler, privateModalOpen } = useContext(Context);
-  const cookies = new Cookies();
-  let userInfo = cookies.get("userInfo");
-  const { gameId } = useParams();
-
-  const privateModalOpenHandler = () => {
-    privateModalHandler();
+const Messenger = ({ avatar, nickname, messages, userInfo }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  //문제는 각각의 Messenger들은 개별적인 컴포넌트이긴 하지만,
+  //현재 Messenger컴포넌트가 열려있는 상황(메신저 탭이 선택된 상황)에서 상태값이 변경되게 되면,
+  //모든 Messenger컴포넌트에서 모달이 열려버리게 된다.
+  const modalHandler = () => {
+    setModalOpen((prev) => !prev);
   };
-
   return (
     <>
-      {privateModalOpen && (
-        <PrivateMessageModal
-          nickname={nickname}
-          messages={messages}
-          privateHandler={privateHandler}
-          msg={msg}
-        />
-      )}
-      <div className="messagelist" onClick={privateModalOpenHandler}>
+      <div className="messagelist" onClick={modalHandler}>
         <div className="userInfo__container">
           <div className="m__avatar__container">
             <img
@@ -53,12 +32,17 @@ const Messenger = ({
             <p>{nickname}</p>
           </div>
           <div className="latest__message__content">
-            {msg.length > 0
-              ? msg[msg.length - 1].content
-              : messages[messages.length - 1].content}
+            {/* {msg[msg.length - 1].content} */}
           </div>
         </div>
       </div>
+      {modalOpen && (
+        <MsgListDropDown
+          userInfo={userInfo}
+          nickname={nickname}
+          messages={messages}
+        />
+      )}
     </>
   );
 };

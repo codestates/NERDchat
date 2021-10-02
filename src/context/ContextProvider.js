@@ -35,6 +35,7 @@ const ContextProvider = ({ children }) => {
   const [addFriendModalOpen, setAddFriendModalOpen] = useState(false);
   const [userInfoModalOpen, setUserInfoModalOpen] = useState(false);
   const [privateModalOpen, setPrivateModalOpen] = useState(false);
+  const [inviteModalOpen, setInviteModalOpen] = useState(false);
 
   const isLoginHandler = () => {
     // logout은 false값 받아오기
@@ -59,6 +60,9 @@ const ContextProvider = ({ children }) => {
   const privateModalHandler = () => {
     setPrivateModalOpen((prev) => !prev);
   };
+  const inviteModalHandler = () => {
+    setInviteModalOpen((prev) => !prev);
+  };
   const getUserInfo = (info) => {
     let cookieUserInfo = info;
     const { id, avatar, userId, nickname, email, oauth, status } =
@@ -75,11 +79,6 @@ const ContextProvider = ({ children }) => {
     setCreateRoomOpen((prev) => !prev);
   };
 
-  useEffect(() => {
-    axios
-      .get(`${ENDPOINT}/friends/lists`, { withCredentials: true })
-      .then((res) => setFriends(res.data.data));
-  }, []);
   // bookmark
   // friend lists
   // server game lists
@@ -106,6 +105,8 @@ const ContextProvider = ({ children }) => {
         userInfoModalOpen,
         privateModalHandler,
         privateModalOpen,
+        inviteModalOpen,
+        inviteModalHandler,
         friends,
       }}
     >

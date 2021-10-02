@@ -15,7 +15,7 @@ $title: rgb(172, 172, 172);
   border-radius: 5px;
   z-index: 1;
 
-  ul li a {
+  ul li .onlinelist__a {
     text-decoration: none;
     color: rgb(172, 172, 172);
     list-style: none;
@@ -25,6 +25,9 @@ $title: rgb(172, 172, 172);
     padding: 0 10px;
     align-items: center;
     border-radius: 8px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 .onlinelist__menu {

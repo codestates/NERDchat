@@ -6,14 +6,7 @@ import OnlineUserDropDown from "./DropDown/OnlineUserDropDown";
 
 import "./OnlineUser.scss";
 
-const OnlineUser = ({
-  avatar,
-  nickname,
-  messages,
-  online,
-  privateHandler,
-  msg,
-}) => {
+const OnlineUser = ({ avatar, nickname, messages, online, userInfo }) => {
   const [loader, setLoader] = useState(false);
   const dropRef = useRef();
 
@@ -62,8 +55,7 @@ const OnlineUser = ({
         <OnlineUserDropDown
           nickname={nickname}
           messages={messages}
-          privateHandler={privateHandler}
-          msg={msg}
+          userInfo={userInfo}
         />
       )}
     </>

@@ -164,7 +164,7 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
       // }
 
       //현재 nameSpace 접속자 인원 받아오기
-      socket.current.on("currentNSLength", (data) => {
+      socket.current.on("serverSize", (data) => {
         setNsHeadCount(data / 2);
       });
       socket.current.emit("currentNSLength", "", (data) => {
@@ -174,19 +174,20 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
       socket.current.on("currentRoomLength", (data) => {
         setRoomHeadCount(data);
       });
+
+      return () => {
+        socket.current.off("connect");
+        socket.current.off("token");
+        socket.current.off("users");
+        socket.current.off("user connected");
+        socket.current.off("user disconnected");
+        socket.current.off("disconenct");
+        socket.current.off("welcomeRoom");
+        socket.current.off("roomMessage");
+        socket.current.off("currentNSLength");
+        socket.current.off("currentRoomLength");
+      };
     }
-    return () => {
-      socket.current.off("connect");
-      socket.current.off("token");
-      socket.current.off("users");
-      socket.current.off("user connected");
-      socket.current.off("user disconnected");
-      socket.current.off("disconenct");
-      socket.current.off("welcomeRoom");
-      socket.current.off("roomMessage");
-      socket.current.off("currentNSLength");
-      socket.current.off("currentRoomLength");
-    };
   }, [serverName, roomId]);
 
   const joinRoom = () => {
@@ -203,6 +204,14 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     socket.current.emit("roomMessage", roomId, chatId, userInfo, newMsg);
   };
 
+  // const getUserHead = () => {
+  //   socket.current.emit("serverSize", () => {
+  //     socket.current.on("serverSize", (data) => {
+  //       console.log(data);
+  //     });
+  //   });
+  // };
+
   return {
     joinRoom,
     sendMessage,
@@ -210,6 +219,7 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     nsHeadCount,
     handleMuteMic,
     userList,
+    // getUserHead,
   };
 };
 
