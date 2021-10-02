@@ -1,85 +1,95 @@
-import { useEffect, useRef, useState } from "react";
-import Modal from "../../UI/modal/Modal";
-import PMessage from "./PMessage/PMessage";
-import PInput from "./PInput/PInput";
-import socket from "../../hooks/socket";
-import { Cookies } from "react-cookie";
+import React, { useState } from "react";
+import { IoEllipseSharp } from "react-icons/io5";
+import axios from "axios";
+import socket from "../../../hooks/socket";
+import "./PMessage.scss";
 
-function PrivateMessageModal({ nickname, messages }) {
-  const cookies = new Cookies();
-  const userInfo = cookies.get("userInfo");
-  const [msgHistory, setMsgHistory] = useState(messages);
-  const [msg, setMsg] = useState([]);
-  const [newMsg, setNewMsg] = useState("");
-  const messageEl = useRef(null);
-  const newMessageEl = useRef(null);
+const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
-  //정보 최신화 핸들러
-  useEffect(() => {
-    socket.on("private message", ({ content, to, invite, friend }) => {
-      console.log("listen!", invite);
-      const incomingM = { content, from: nickname, to, invite, friend };
-      setMsg((prev) => [...prev, incomingM]);
+const PMessage = ({ message, userInfo, setMsg }) => {
+  const { content, from, invite, friend } = message;
+  // console.log(777, content, from, to);
+
+  let mine = from === userInfo.userId;
+
+  let today = new Date();
+  let time = today.getHours() + ":" + today.getMinutes();
+
+  const [currentTime] = useState(time);
+  const acceptFriendHandler = async (e) => {
+    const res = await axios.post(`${ENDPOINT}/friends/accept/${from}`, true, {
+      withCredentials: true,
     });
-    return () => {
-      socket.off("private message");
+    console.log(res);
+    socket.emit("private message", {
+      content: `${from}님의 친구요청을 승낙 하였습니다.`,
+      to: from,
+    });
+    const incomingM = {
+      content: `${from}님의 친구요청을 승낙 하였습니다.`,
+      from: userInfo.userId,
+      to: from,
     };
-  }, [nickname, messages]);
-
-  //메시지입력핸들러
-  const msgInputHandler = (e) => {
-    setNewMsg(e.target.value);
-    e.preventDefault();
-  };
-
-  //메시지 보내기
-  const sendHandler = (e) => {
-    socket.emit("private message", { content: newMsg, to: nickname });
-    const incomingM = { content: newMsg, from: userInfo.userId, to: nickname };
     setMsg((prev) => [...prev, incomingM]);
     e.preventDefault();
-    setNewMsg("");
   };
-
-  useEffect(() => {
-    messageEl.current.scrollTop = messageEl.current.scrollHeight;
-  });
-
-  useEffect(() => {
-    if (messageEl.current) {
-      messageEl.current.addEventListener("DOMNodeInserted", (event) => {
-        const { currentTarget: target } = event;
-        target.scroll({ top: target.scrollHeight, behavior: "smooth" });
-      });
-    }
-  }, [msg]);
-
-  return (
-    <Modal>
-      <div className="chatApp__messages" ref={messageEl}>
-        {msgHistory &&
-          msgHistory.map((m, i) => (
-            <div key={i} className={`chatApp__msg`}>
-              <PMessage message={m} userInfo={userInfo} setMsg={setMsg} />
-            </div>
-          ))}
-        {msg &&
-          msg.map((m, i) => (
-            <div key={i} className={`chatApp__msg`}>
-              <PMessage message={m} userInfo={userInfo} setMsg={setMsg} />
-            </div>
-          ))}
-        <div ref={newMessageEl} />
+  const denyFriendHandler = async (e) => {
+    const res = await axios.post(`${ENDPOINT}/friends/accept/${from}`, false, {
+      withCredentials: true,
+    });
+    console.log(res);
+    socket.emit("private message", {
+      content: `${from}님의 친구요청을 거절 하였습니다.`,
+      to: from,
+    });
+    const incomingM = {
+      content: `${from}님의 친구요청을 거절 하였습니다.`,
+      from: userInfo.userId,
+      to: from,
+    };
+    setMsg((prev) => [...prev, incomingM]);
+    e.preventDefault();
+  };
+  return mine ? (
+    <>
+      <div className="fromcurrent__container">
+        <div className="fromcurrent__time">{currentTime}</div>
+        <div className="fromcurrent__name">
+          {from}
+          <IoEllipseSharp size={8} className="onlines" />
+        </div>
       </div>
-      <div className="chatApp__footer">
-        <PInput
-          msgInputHandler={msgInputHandler}
-          newMsg={newMsg}
-          sendHandler={sendHandler}
-        />
+      <div className="fromcurrent__body-container">
+        <div className="fromcurrent__body">
+          {invite && !friend ? <a href={content}>{content}</a> : content}
+        </div>
       </div>
-    </Modal>
+    </>
+  ) : (
+    <>
+      <div className="touser__container">
+        <div className="touser__name">
+          <IoEllipseSharp size={8} className="onliness" />
+          {from}
+        </div>
+        <span className="touser__time">{currentTime}</span>
+      </div>
+      <div className="touser__body-container">
+        <div className="touser__body">
+          {invite && !friend ? <a href={content}>{content}</a> : content}
+          {friend && (
+            <>
+              <p>{content}</p>
+              <div>
+                <button onClick={acceptFriendHandler}>YES</button>
+                <button onClick={denyFriendHandler}>NO</button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </>
   );
-}
+};
 
-export default PrivateMessageModal;
+export default PMessage;
