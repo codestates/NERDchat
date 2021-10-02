@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+$dark: rgb(23, 23, 23);
+$neonMain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+$title: rgb(172, 172, 172);
+
+.msgList__wrapper {
+  //   position: absolute;
+  width: 150px;
+  background: rgba(77, 77, 77, 0.243);
+  backdrop-filter: blur(0.5em);
+  right: -150px;
+  top: 0;
+  border-radius: 5px;
+  z-index: 1;
+
+  ul li .msgList__a {
+    text-decoration: none;
+    color: rgb(172, 172, 172);
+    list-style: none;
+    display: flex;
+    font-size: 18px;
+    font-weight: 100;
+    padding: 0 10px;
+    align-items: center;
+    border-radius: 8px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+.msgList__menu {
+  list-style: none;
+  width: 150px;
+
+  .msgList__li {
+    line-height: 55px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .msgList__li:hover {
+    background: rgba(12, 12, 12, 0.277);
+    border-radius: 5px;
+
+    .icona {
+      color: $neonMain;
+      filter: drop-shadow(1px 1px 2px $neonSer);
+    }
+  }
+}
+
+.msgList__icon {
+  height: 40px;
+  width: 40px;
+  margin-right: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(12, 12, 12, 0.277);
+  border-radius: 50%;
+}

@@ -9,8 +9,6 @@ import useSocket from "../../hooks/useSocket";
 import { Cookies } from "react-cookie";
 
 function Chat() {
-  const audioList = useRef();
-  const audioRef = useRef();
   const messageEl = useRef(null);
 
   useEffect(() => {
@@ -25,31 +23,45 @@ function Chat() {
   const cookies = new Cookies();
 
   let userInfo = cookies.get("userInfo");
-  const [newMsg, setNewMsg] = useState("");
-  const { gameId, roomId, chatId } = useParams();
 
+  const [newMsg, setNewMsg] = useState("");
+  const [messages, setMessages] = useState([]);
+  const { gameId, roomId, chatId } = useParams();
   const { id, userId, avatar, nickname } = userInfo;
 
   userInfo = { id, userId, avatar, nickname };
 
-  const { joinRoom, sendMessage, messages } = useSocket(
-    gameId,
-    roomId,
-    userInfo,
-    audioList,
-    audioRef
-  );
+  const { socket, joinRoom } = useSocket(gameId, roomId, userInfo);
 
   useEffect(() => {
     joinRoom();
-  }, [joinRoom]);
+
+    socket.current.on("welcomeRoom", (userData, msgData) =>
+      console.log(userData, msgData)
+    );
+
+    socket.current.on("roomMessage", (userData, msgData) => {
+      console.log(userData, msgData);
+      const incomingMsg = {
+        body: msgData,
+        user: userData.userId,
+        mine: userData.userId === userInfo.userId,
+      };
+      setMessages((prevM) => [...prevM, incomingMsg]);
+    });
+
+    return () => {
+      socket.current.off("welcomeRoom");
+      socket.current.off("roomMessage");
+    };
+  }, [gameId, roomId]);
 
   const msgInputHandler = (e) => {
     setNewMsg(e.target.value);
     e.preventDefault();
   };
   const sendHandler = (e) => {
-    sendMessage(roomId, chatId, userInfo, newMsg);
+    socket.current.emit("roomMessage", roomId, chatId, userInfo, newMsg);
     e.preventDefault();
     setNewMsg("");
   };
@@ -65,9 +77,6 @@ function Chat() {
             </div>
           ))}
         </div>
-        {/* <div ref={audioList}>
-          <audio ref={audioRef}>mute</audio>
-        </div> */}
         <div className="chatApp__footer">
           <Input
             msgInputHandler={msgInputHandler}
