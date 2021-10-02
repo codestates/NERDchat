@@ -25,8 +25,7 @@ const ServerPageCard = ({ category, img, id, like }) => {
     const res = await axios.get(`${ENDPOINT}/favorites/request/${id}`, {
       withCredentials: true,
     });
-    console.log(res);
-    if (!res.data.data) console.log(res.data);
+    if (!res.data.data) console.log(res);
     if (res.data.data) setClicked((prev) => !prev);
   };
   const getIntoServer = () => {
@@ -34,7 +33,6 @@ const ServerPageCard = ({ category, img, id, like }) => {
     history.push(path);
   };
   useEffect(() => {
-    console.log("test", like);
     if (like) setClicked(true);
     else setClicked(false);
   }, []);

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { IoAttachOutline } from "react-icons/io5";
 import { Cookies } from "react-cookie";
 import axios from "axios";
@@ -15,53 +15,53 @@ function SettingInfo({ profileImg, setProfileImg }) {
 
   const [formIsValid, setFormIsValid] = useState(false);
   const [pImage, setPImage] = useState(null);
-  const { userId, avatar, nickname, status, email } = userInfo;
+  const [pwd, setPwd] = useState("");
+  const [cPwd, setCPwd] = useState("");
+
+  const { email } = userInfo;
+
+  useEffect(() => {
+    if (pwd.length > 0 && cPwd.length > 0 && pwd === cPwd) {
+      setFormIsValid(true);
+    } else setFormIsValid(false);
+  }, [pwd, cPwd]);
 
   const imagehandler = (e) => {
     setPImage(e.target.files);
-    // const reader = new FileReader();
-    // reader.onload = () => {
-    //   if (reader.readyState === 2) {
-    //     setProfileImg(reader.result);
-    //   }
-    // };
-    // reader.readAsDataURL(e.target.files[0]);
   };
-
+  const pwdHandler = (e) => {
+    setPwd(e.target.value);
+  };
   const confirmPwHandler = (e) => {
-    if (
-      e.target.value === passwordRef.current.value &&
-      nicknameRef.current.value.length > 2 &&
-      passwordRef.current.value.length > 6 &&
-      statusRef.current.value.length > 2
-    ) {
-      setFormIsValid(true);
-    } else setFormIsValid(false);
+    setCPwd(e.target.value);
   };
 
+  //수정된 정보 서버로 보내기
   const fixInfoHandler = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    if (pImage.length > 0) {
+    if (pImage) {
       for (let i = 0; i < pImage.length; i++) {
         const imgForm = pImage[i];
         formData.append("avatar", imgForm, imgForm.name);
       }
     }
-    formData.append("nickname", nicknameRef.current.value);
-    formData.append("password", passwordRef.current.value);
-    formData.append("status", statusRef.current.value);
-    for (let key of formData.keys()) {
-      console.log(key);
+    if (nicknameRef.current.value.length > 0) {
+      formData.append("nickname", nicknameRef.current.value);
     }
-    for (let value of formData.values()) {
-      console.log(value);
+    if (statusRef.current.value.length > 0) {
+      formData.append("status", statusRef.current.value);
     }
-    // const config = {
-    //   headers: { "content-type": "multipart/form-data" },
-    //   withCredentials: true,
-    // };
-    // const res = await axios.patch(`${ENDPOINT}/fixprofile`, formData, config);
+    formData.append("password", pwd);
+
+    //formData의 데이터 읽는 방법
+    // for (let key of formData.keys()) {
+    //   console.log(key);
+    // }
+    // for (let value of formData.values()) {
+    //   console.log(value);
+    // }
+
     const res = await axios({
       method: "patch",
       url: `${ENDPOINT}/fixprofile`,
@@ -70,7 +70,22 @@ function SettingInfo({ profileImg, setProfileImg }) {
       withCredentials: true,
     });
 
-    console.log(res);
+    // res 형식: "data": {
+    //     "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEyM2M5QG5hdmVyLmNvbSIsIm5pY2tuYW1lIjoibW9tbyIsImlhdCI6MTYzMzE1NTc1MywiZXhwIjoxNjMzMjQyMTUzfQ.LIZYoRnG8sVlKGuLo9MOUN84Iw2RihPT_eJqrO6R3aU",
+    //     "id": 4,
+    //     "avatar": "https://nerd-client.s3.amazonaws.com/avatar/1633155749493_UiHmUcGj0a9OBnxPXq7SifGcp.png",
+    //     "userId": "hohoho",
+    //     "nickname": "momo",
+    //     "email": "123c9@naver.com",
+    //     "status": null
+    // }
+    // console.log(777777, res.data.data);
+
+    //정보 쿠키에 반영하고, 저장해주는 것 필요.
+    cookies.set("userInfo", res.data.data);
+
+    //바로 반영하기 위해, 새로고침하기
+    window.location.reload();
   };
 
   return (
@@ -140,7 +155,7 @@ function SettingInfo({ profileImg, setProfileImg }) {
                       ref={statusRef}
                     />
                     <label htmlFor="status" className="form__label">
-                      {status}
+                      Status
                     </label>
                   </div>
                   <div className="form">
@@ -151,6 +166,7 @@ function SettingInfo({ profileImg, setProfileImg }) {
                       autoComplete="off"
                       placeholder=" "
                       ref={passwordRef}
+                      onChange={pwdHandler}
                     />
                     <label htmlFor="password" className="form__label">
                       Password
@@ -172,7 +188,7 @@ function SettingInfo({ profileImg, setProfileImg }) {
                   <button
                     type="submit"
                     className="setting-button"
-                    // disabled={formIsValid ? false : true}
+                    disabled={formIsValid ? false : true}
                   >
                     Edit
                   </button>

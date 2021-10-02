@@ -10,12 +10,12 @@ const UserDelete = ({ nickname }) => {
   const { deleteFriendModalHandler } = useContext(Context);
 
   const okHandler = async () => {
-    //nickname을 어떻게 받아올지가 문제, 아마 친구리스트에서 클릭할때 props로 내려주면 될듯?
     const res = await axios.delete(`${ENDPOINT}/friends/delete/${nickname}`, {
       withCredentials: true,
     });
     console.log(res);
     deleteFriendModalHandler();
+    window.location.reload();
   };
   const noHandler = () => {
     deleteFriendModalHandler();

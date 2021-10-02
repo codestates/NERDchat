@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import ServerRoomBody from "./ServerRoomBody/ServerRoomBody";
 import ServerRoomHeader from "./ServerRoomHeader/ServerRoomHeader";

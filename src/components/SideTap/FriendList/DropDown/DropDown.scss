@@ -25,6 +25,9 @@ $title: rgb(172, 172, 172);
     padding: 0 10px;
     align-items: center;
     border-radius: 8px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 .friendlist__menu {
