@@ -81,6 +81,15 @@ const ContextProvider = ({ children }) => {
 
   // bookmark
   // friend lists
+  const getFriendsListHandler = async () => {
+    const res = await axios.get(`${ENDPOINT}/friends/lists`, {
+      withCredentials: true,
+    });
+    setFriends(res.data.data);
+  };
+  useEffect(() => {
+    getFriendsListHandler();
+  }, []);
   // server game lists
   // login userInfo
   // online user ->실시간 어떻게 구현하지...?
