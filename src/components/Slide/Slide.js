@@ -29,7 +29,7 @@ const Slide = () => {
         <input type="radio" name="slider" id="s3" />
         <input type="radio" name="slider" id="s4" />
         <input type="radio" name="slider" id="s5" />
-        <label for="s1" id="slide1">
+        <label htmlFor="s1" id="slide1">
           <div className="col-md-4 col-sm-6">
             <div className="card">
               <img src={gameList[0]?.image} />
@@ -43,7 +43,7 @@ const Slide = () => {
             </div>
           </div>
         </label>
-        <label for="s2" id="slide2">
+        <label htmlFor="s2" id="slide2">
           <div className="col-md-4 col-sm-6">
             <div className="card">
               <img src={gameList[1]?.image} />
@@ -57,7 +57,7 @@ const Slide = () => {
             </div>
           </div>
         </label>
-        <label for="s3" id="slide3">
+        <label htmlFor="s3" id="slide3">
           <div className="col-md-4 col-sm-6">
             <div className="card">
               <img src={gameList[2]?.image} />
@@ -71,7 +71,7 @@ const Slide = () => {
             </div>
           </div>
         </label>
-        <label for="s4" id="slide4">
+        <label htmlFor="s4" id="slide4">
           <div className="col-md-4 col-sm-6">
             <div className="card">
               <img src={gameList[3]?.image} />
@@ -85,7 +85,7 @@ const Slide = () => {
             </div>
           </div>
         </label>
-        <label for="s5" id="slide5">
+        <label htmlFor="s5" id="slide5">
           <div className="col-md-4 col-sm-6">
             <div className="card">
               <img src={gameList[2]?.image} />

@@ -56,7 +56,7 @@ const ServerPage = () => {
   // const loading = false;
 
   return (
-    <div class="server__list__container">
+    <div className="server__list__container">
       <NavBar />
       <div className="big__container">
         <div className="game__list__card__container">
@@ -66,7 +66,7 @@ const ServerPage = () => {
               return (
                 <div ref={lastElementRef}>
                   <ServerPageCard
-                    key={list.id}
+                    key={list.category}
                     id={list.id}
                     category={list.category}
                     img={list.image}
@@ -78,7 +78,7 @@ const ServerPage = () => {
               return (
                 <div>
                   <ServerPageCard
-                    key={list.id}
+                    key={list.category}
                     id={list.id}
                     category={list.category}
                     img={list.image}

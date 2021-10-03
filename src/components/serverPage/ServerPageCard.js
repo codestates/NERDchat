@@ -47,8 +47,7 @@ const ServerPageCard = ({ category, img, id, like }) => {
           className="game__list__card"
           style={{
             backgroundImage: `url(${img})`,
-            // width: "100px",
-            height: "250px",
+
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
@@ -58,7 +57,7 @@ const ServerPageCard = ({ category, img, id, like }) => {
             <div className="title__container">
               <p className="game__title">{category}</p>
             </div>
-            <div class="game__server__content__container">
+            <div className="game__server__content__container">
               <p className="game__server__content">Into Server</p>
               <div className="server__arrow">
                 <BsChevronDoubleDown size={20} />

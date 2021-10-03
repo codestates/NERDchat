@@ -39,6 +39,9 @@ function OnlineUserDropDown({ nickname, messages, userInfo }) {
   const inviteModalOpenHandler = () => {
     inviteModalHandler();
   };
+  const sendInviteMsgHandler = (fuc) => {
+    fuc();
+  };
 
   return (
     <div className="onlinelist__wrapper">

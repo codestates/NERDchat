@@ -5,7 +5,7 @@ import PInput from "./PInput/PInput";
 import socket from "../../hooks/socket";
 import { Cookies } from "react-cookie";
 
-function PrivateMessageModal({ nickname, messages }) {
+function PrivateMessageModal({ nickname, messages, setLastMsg }) {
   const cookies = new Cookies();
   const userInfo = cookies.get("userInfo");
   const [msgHistory, setMsgHistory] = useState(messages);
@@ -20,11 +20,12 @@ function PrivateMessageModal({ nickname, messages }) {
       console.log("listen!", invite);
       const incomingM = { content, from: nickname, to, invite, friend };
       setMsg((prev) => [...prev, incomingM]);
+      setLastMsg(incomingM);
     });
     return () => {
       socket.off("private message");
     };
-  }, [nickname, messages]);
+  }, [nickname, messages, socket]);
 
   //메시지입력핸들러
   const msgInputHandler = (e) => {
@@ -37,6 +38,7 @@ function PrivateMessageModal({ nickname, messages }) {
     socket.emit("private message", { content: newMsg, to: nickname });
     const incomingM = { content: newMsg, from: userInfo.userId, to: nickname };
     setMsg((prev) => [...prev, incomingM]);
+    setLastMsg(incomingM);
     e.preventDefault();
     setNewMsg("");
   };
