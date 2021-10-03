@@ -2,7 +2,7 @@ import React from "react";
 import { IoIosPaperPlane } from "react-icons/io";
 import "./PInput.scss";
 
-function PInput({ msgInputHandler, newMsg, sendHandler }) {
+function PInput({ msgInputHandler, newMsg, sendHandler, setNewMsg }) {
   return (
     <form className="pinput_form">
       <input

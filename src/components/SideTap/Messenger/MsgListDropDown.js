@@ -12,7 +12,14 @@ import Invite from "../../invite/Invite";
 import { Context } from "../../../context/ContextProvider";
 import "./MsgListDropDown.scss";
 
-const MsgListDropDown = ({ nickname, messages, userInfo, setLastMsg }) => {
+const MsgListDropDown = ({
+  nickname,
+  messages,
+  userInfo,
+  msg,
+  sendHandler,
+  setMsg,
+}) => {
   const {
     userInfoModalHandler,
     userInfoModalOpen,
@@ -43,7 +50,9 @@ const MsgListDropDown = ({ nickname, messages, userInfo, setLastMsg }) => {
         <PrivateMessageModal
           nickname={nickname}
           messages={messages}
-          setLastMsg={setLastMsg}
+          msg={msg}
+          sendHandler={sendHandler}
+          setMsg={setMsg}
         />
       )}
       {userInfoModalOpen && <UserInfo nickname={nickname} />}

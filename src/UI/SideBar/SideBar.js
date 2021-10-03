@@ -27,7 +27,6 @@ const SideBar = () => {
       withCredentials: true,
     });
     const givenFriends = res.data.data;
-    console.log(7777, userListRef);
     const temp = [];
     for (let i = 0; i < givenFriends.length; i++) {
       for (let j = 0; j < userListRef.current.length; j++) {
@@ -114,7 +113,7 @@ const SideBar = () => {
                   nickname={el.nickname}
                   messages={el.messages}
                   online={el.connected}
-                  userInfo={userInfo}
+                  userInfo={[userInfo]}
                 />
               ))}
         </div>

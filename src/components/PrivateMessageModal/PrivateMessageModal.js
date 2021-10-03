@@ -5,42 +5,22 @@ import PInput from "./PInput/PInput";
 import socket from "../../hooks/socket";
 import { Cookies } from "react-cookie";
 
-function PrivateMessageModal({ nickname, messages, setLastMsg }) {
+function PrivateMessageModal({ nickname, setMsg, messages, msg, sendHandler }) {
   const cookies = new Cookies();
   const userInfo = cookies.get("userInfo");
   const [msgHistory, setMsgHistory] = useState(messages);
-  const [msg, setMsg] = useState([]);
+  // const [msg, setMsg] = useState([]);
   const [newMsg, setNewMsg] = useState("");
   const messageEl = useRef(null);
   const newMessageEl = useRef(null);
-
-  //정보 최신화 핸들러
-  useEffect(() => {
-    socket.on("private message", ({ content, to, invite, friend }) => {
-      console.log("listen!", invite);
-      const incomingM = { content, from: nickname, to, invite, friend };
-      setMsg((prev) => [...prev, incomingM]);
-      if (setLastMsg) setLastMsg(incomingM);
-    });
-    return () => {
-      socket.off("private message");
-    };
-  }, [nickname, messages, socket, newMsg]);
+  console.log(9999, msg);
+  const testmsg = [];
+  // const testmsg = msg[0][nickname] || [];
 
   //메시지입력핸들러
   const msgInputHandler = (e) => {
     e.preventDefault();
     setNewMsg(e.target.value);
-  };
-
-  //메시지 보내기
-  const sendHandler = (e) => {
-    e.preventDefault();
-    socket.emit("private message", { content: newMsg, to: nickname });
-    const incomingM = { content: newMsg, from: userInfo.userId, to: nickname };
-    setMsg((prev) => [...prev, incomingM]);
-    if (setLastMsg) setLastMsg(incomingM);
-    setNewMsg("");
   };
 
   useEffect(() => {
@@ -65,10 +45,10 @@ function PrivateMessageModal({ nickname, messages, setLastMsg }) {
               <PMessage message={m} userInfo={userInfo} setMsg={setMsg} />
             </div>
           ))}
-        {msg &&
-          msg.map((m, i) => (
+        {testmsg &&
+          testmsg.map((m, i) => (
             <div key={i} className={`chatApp__msg`}>
-              <PMessage message={m} userInfo={userInfo} setMsg={setMsg} />
+              <PMessage message={m} userInfo={userInfo} />
             </div>
           ))}
         <div ref={newMessageEl} />
@@ -78,6 +58,7 @@ function PrivateMessageModal({ nickname, messages, setLastMsg }) {
           msgInputHandler={msgInputHandler}
           newMsg={newMsg}
           sendHandler={sendHandler}
+          setNewMsg={setNewMsg}
         />
       </div>
     </Modal>
