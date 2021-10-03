@@ -12,13 +12,7 @@ import Invite from "../../invite/Invite";
 import { Context } from "../../../context/ContextProvider";
 import "./MsgListDropDown.scss";
 
-const MsgListDropDown = ({
-  nickname,
-  messages,
-  userInfo,
-  setLastMsg,
-  dropDownHandler,
-}) => {
+const MsgListDropDown = ({ nickname, messages, userInfo, setLastMsg }) => {
   const {
     userInfoModalHandler,
     userInfoModalOpen,
@@ -42,12 +36,9 @@ const MsgListDropDown = ({
   const inviteModalOpenHandler = () => {
     inviteModalHandler();
   };
-  const closeDropDown = (e) => {
-    console.log(e.target);
-    dropDownHandler();
-  };
+
   return (
-    <div className="msgList__wrapper" onClick={closeDropDown}>
+    <div className="msgList__wrapper">
       {privateModalOpen && (
         <PrivateMessageModal
           nickname={nickname}

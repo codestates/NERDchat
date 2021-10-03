@@ -9,6 +9,7 @@ import { Link, useHistory } from "react-router-dom";
 import "./NavItem.scss";
 import Login from "../../components/login/Login";
 import Logout from "../logout/Logout";
+import DropdownMenu from "./DropdownMenu";
 import { Context } from "../../context/ContextProvider";
 
 const NavItem = () => {
@@ -24,7 +25,7 @@ const NavItem = () => {
   const [open, setOpen] = useState(false);
 
   const openHandler = () => {
-    setOpen(!open);
+    setOpen((prev) => !prev);
   };
 
   const mypageHandler = () => {
@@ -52,7 +53,7 @@ const NavItem = () => {
         <div className="icon-button" onClick={openHandler}>
           <IoBookOutline size={30} />
         </div>
-        {/* {open && <DropdownMenu />} */}
+        {open && <DropdownMenu />}
         {!isLogin && (
           <div className="icon-button" onClick={loginmodalHandler}>
             <IoFingerPrintOutline size={30} />

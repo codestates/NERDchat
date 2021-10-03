@@ -51,7 +51,7 @@ const RoomSetting = () => {
 
   return (
     <>
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
       <Modal>
         <form className="room__setting__container" onSubmit={submitHandler}>
           {/* <div>Room</div> */}

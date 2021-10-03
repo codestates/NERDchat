@@ -163,16 +163,11 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
       //     });
       // }
 
-      //현재 nameSpace 접속자 인원 받아오기
+      //현재 nameSpace 접속자 인원 받아오기(현재 서버에서 users를 오프라인 온라인 모두 보내주고 있음. )
+      //우선, users.length를 클라 쪽에서 필터해서 쓰자.
+      socket.current.emit("serverSize");
       socket.current.on("serverSize", (data) => {
-        setNsHeadCount(data / 2);
-      });
-      socket.current.emit("currentNSLength", "", (data) => {
-        console.log("This is emit from client", data);
-      });
-      //현재 룸 접속자 인원 받아오기(수정필요)
-      socket.current.on("currentRoomLength", (data) => {
-        setRoomHeadCount(data);
+        setNsHeadCount(data);
       });
 
       return () => {
@@ -204,14 +199,6 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     socket.current.emit("roomMessage", roomId, chatId, userInfo, newMsg);
   };
 
-  // const getUserHead = () => {
-  //   socket.current.emit("serverSize", () => {
-  //     socket.current.on("serverSize", (data) => {
-  //       console.log(data);
-  //     });
-  //   });
-  // };
-
   return {
     joinRoom,
     sendMessage,
@@ -219,7 +206,6 @@ const useSocket = (serverName, roomId, userInfo, audioList, audioRef) => {
     nsHeadCount,
     handleMuteMic,
     userList,
-    // getUserHead,
   };
 };
 

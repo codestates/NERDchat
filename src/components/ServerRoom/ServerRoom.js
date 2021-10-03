@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import ServerRoomBody from "./ServerRoomBody/ServerRoomBody";
 import ServerRoomHeader from "./ServerRoomHeader/ServerRoomHeader";
@@ -13,18 +13,27 @@ const ServerRoom = () => {
   const cookies = new Cookies();
   let userInfo = cookies.get("userInfo");
   const { gameId } = useParams();
-  const { message, sendMessage } = useSocket(gameId, "", userInfo);
+  const { userList } = useSocket(gameId, "", userInfo, "", "");
   const [searchedLists, setSearchedLists] = useState([]);
   const [isSearched, setIsSearched] = useState(0);
+  //현재 온라인인 users의 길이
+  const [headCount, setHeadCount] = useState(0);
   const searchHandler = async (title) => {
     const res = await axios.get(`${ENDPOINT}/rooms/search/${title}`);
     setSearchedLists(res.data);
     setIsSearched(1);
   };
+  const getOnlineUserNum = () => {
+    const length = userList.filter((user) => user.connected === true).length;
+    setHeadCount(length);
+  };
+  useEffect(() => {
+    getOnlineUserNum();
+  }, [userList, getOnlineUserNum]);
 
   return (
     <>
-      <ServerRoomHeader gameId={gameId} />
+      <ServerRoomHeader gameId={gameId} headCount={headCount} />
       <ServerSearch searchHandler={searchHandler} />
       <ServerRoomBody searchedLists={searchedLists} searched={isSearched} />
     </>

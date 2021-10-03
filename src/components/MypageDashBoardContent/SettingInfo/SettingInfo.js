@@ -55,12 +55,12 @@ function SettingInfo({ profileImg, setProfileImg }) {
     formData.append("password", pwd);
 
     //formData의 데이터 읽는 방법
-    // for (let key of formData.keys()) {
-    //   console.log(key);
-    // }
-    // for (let value of formData.values()) {
-    //   console.log(value);
-    // }
+    for (let key of formData.keys()) {
+      console.log(key);
+    }
+    for (let value of formData.values()) {
+      console.log(value);
+    }
 
     const res = await axios({
       method: "patch",
@@ -79,7 +79,7 @@ function SettingInfo({ profileImg, setProfileImg }) {
     //     "email": "123c9@naver.com",
     //     "status": null
     // }
-    // console.log(777777, res.data.data);
+    console.log(777777, res.data.data);
 
     //정보 쿠키에 반영하고, 저장해주는 것 필요.
     cookies.set("userInfo", res.data.data);

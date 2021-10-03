@@ -27,6 +27,7 @@ const SideBar = () => {
       withCredentials: true,
     });
     const givenFriends = res.data.data;
+    console.log(7777, userListRef);
     const temp = [];
     for (let i = 0; i < givenFriends.length; i++) {
       for (let j = 0; j < userListRef.current.length; j++) {
@@ -39,9 +40,13 @@ const SideBar = () => {
   };
   useEffect(() => {
     setLoading(true);
-    getFriendsListHandler();
-    setLoading(false);
-  }, [loading, toggleState]);
+    const delayReq = setTimeout(() => {
+      getFriendsListHandler();
+      setLoading(false);
+    }, 300);
+
+    return () => clearTimeout(delayReq);
+  }, []);
 
   const toggleTab = (index) => {
     setToggleState(index);

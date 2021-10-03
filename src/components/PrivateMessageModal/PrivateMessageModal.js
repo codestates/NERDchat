@@ -20,26 +20,26 @@ function PrivateMessageModal({ nickname, messages, setLastMsg }) {
       console.log("listen!", invite);
       const incomingM = { content, from: nickname, to, invite, friend };
       setMsg((prev) => [...prev, incomingM]);
-      setLastMsg(incomingM);
+      if (setLastMsg) setLastMsg(incomingM);
     });
     return () => {
       socket.off("private message");
     };
-  }, [nickname, messages, socket]);
+  }, [nickname, messages, socket, newMsg]);
 
   //메시지입력핸들러
   const msgInputHandler = (e) => {
-    setNewMsg(e.target.value);
     e.preventDefault();
+    setNewMsg(e.target.value);
   };
 
   //메시지 보내기
   const sendHandler = (e) => {
+    e.preventDefault();
     socket.emit("private message", { content: newMsg, to: nickname });
     const incomingM = { content: newMsg, from: userInfo.userId, to: nickname };
     setMsg((prev) => [...prev, incomingM]);
-    setLastMsg(incomingM);
-    e.preventDefault();
+    if (setLastMsg) setLastMsg(incomingM);
     setNewMsg("");
   };
 
