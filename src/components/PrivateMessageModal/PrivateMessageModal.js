@@ -5,44 +5,19 @@ import PInput from "./PInput/PInput";
 import socket from "../../hooks/socket";
 import { Cookies } from "react-cookie";
 
-function PrivateMessageModal({ nickname, messages, setLastMsg }) {
+function PrivateMessageModal({ nickname, setMsg, messages, msg }) {
   const cookies = new Cookies();
   const userInfo = cookies.get("userInfo");
   const [msgHistory, setMsgHistory] = useState(messages);
-  const [msg, setMsg] = useState([]);
-  const [newMsg, setNewMsg] = useState("");
+  // const [newMsg, setNewMsg] = useState("");
   const messageEl = useRef(null);
   const newMessageEl = useRef(null);
-
-  //정보 최신화 핸들러
-  useEffect(() => {
-    socket.on("private message", ({ content, to, invite, friend }) => {
-      console.log("listen!", invite);
-      const incomingM = { content, from: nickname, to, invite, friend };
-      setMsg((prev) => [...prev, incomingM]);
-      setLastMsg(incomingM);
-    });
-    return () => {
-      socket.off("private message");
-    };
-  }, [nickname, messages, socket]);
-
-  //메시지입력핸들러
-  const msgInputHandler = (e) => {
-    setNewMsg(e.target.value);
-    e.preventDefault();
-  };
-
-  //메시지 보내기
-  const sendHandler = (e) => {
-    socket.emit("private message", { content: newMsg, to: nickname });
-    const incomingM = { content: newMsg, from: userInfo.userId, to: nickname };
-    setMsg((prev) => [...prev, incomingM]);
-    setLastMsg(incomingM);
-    e.preventDefault();
-    setNewMsg("");
-  };
-
+  // //메시지입력핸들러
+  // const msgInputHandler = (e) => {
+  //   e.preventDefault();
+  //   setNewMsg(e.target.value);
+  // };
+  console.log(12312312123, msg);
   useEffect(() => {
     messageEl.current.scrollTop = messageEl.current.scrollHeight;
   });
@@ -56,6 +31,39 @@ function PrivateMessageModal({ nickname, messages, setLastMsg }) {
     }
   }, [msg]);
 
+  const sendHandler = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const sendingM = {
+      content: e.target.value,
+      from: userInfo.nickname,
+      to: nickname,
+    };
+    socket.emit("private message", { content: e.target.value, to: nickname });
+    setMsg((prev) => {
+      const temp = { ...prev.data };
+      const sender = nickname;
+      if (!temp[nickname]) {
+        temp[sender] = [sendingM];
+        if (!temp[userInfo.nickname]) {
+          temp[userInfo.nickname] = [sendingM];
+        } else {
+          temp[userInfo.nickname].push(sendingM);
+        }
+        return { data: temp };
+      } else {
+        if (!temp[userInfo.nickname]) {
+          temp[userInfo.nickname] = [sendingM];
+        } else {
+          temp[userInfo.nickname].push(sendingM);
+        }
+        temp[sender].push(sendingM);
+
+        return { data: temp };
+      }
+    });
+  };
+
   return (
     <Modal>
       <div className="chatApp__messages" ref={messageEl}>
@@ -65,19 +73,20 @@ function PrivateMessageModal({ nickname, messages, setLastMsg }) {
               <PMessage message={m} userInfo={userInfo} setMsg={setMsg} />
             </div>
           ))}
-        {msg &&
-          msg.map((m, i) => (
+        {msg[nickname] &&
+          msg[nickname].map((m, i) => (
             <div key={i} className={`chatApp__msg`}>
-              <PMessage message={m} userInfo={userInfo} setMsg={setMsg} />
+              <PMessage message={m} userInfo={userInfo} />
             </div>
           ))}
         <div ref={newMessageEl} />
       </div>
       <div className="chatApp__footer">
         <PInput
-          msgInputHandler={msgInputHandler}
-          newMsg={newMsg}
+          // msgInputHandler={msgInputHandler}
+          // newMsg={newMsg}
           sendHandler={sendHandler}
+          // setNewMsg={setNewMsg}
         />
       </div>
     </Modal>

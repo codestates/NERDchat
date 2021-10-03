@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoIosPaperPlane } from "react-icons/io";
 import "./PInput.scss";
 
-function PInput({ msgInputHandler, newMsg, sendHandler }) {
+function PInput({ sendHandler }) {
+  const [newMsg, setNewMsg] = useState("");
+  //메시지입력핸들러
+  const msgInputHandler = (e) => {
+    e.preventDefault();
+    setNewMsg(e.target.value);
+  };
+
+  const enterHandler = (e) => {
+    sendHandler(e);
+    setNewMsg("");
+  };
+
   return (
     <form className="pinput_form">
       <input
@@ -12,10 +24,10 @@ function PInput({ msgInputHandler, newMsg, sendHandler }) {
         value={newMsg}
         onChange={msgInputHandler}
         onKeyPress={(event) =>
-          event.key === "Enter" ? sendHandler(event) : null
+          event.key === "Enter" ? enterHandler(event) : null
         }
       />
-      <button className="pinput_sendButton" onClick={sendHandler}>
+      <button className="pinput_sendButton" onClick={enterHandler}>
         <IoIosPaperPlane size={25} />
       </button>
     </form>

@@ -15,7 +15,14 @@ import Invite from "../../../invite/Invite";
 import { Context } from "../../../../context/ContextProvider";
 import "./OnlineUserDropDown.scss";
 
-function OnlineUserDropDown({ nickname, messages, userInfo }) {
+function OnlineUserDropDown({
+  nickname,
+  messages,
+  userInfo,
+  msg,
+  sendHandler,
+  setMsg,
+}) {
   const {
     userInfoModalHandler,
     userInfoModalOpen,
@@ -46,7 +53,12 @@ function OnlineUserDropDown({ nickname, messages, userInfo }) {
   return (
     <div className="onlinelist__wrapper">
       {privateModalOpen && (
-        <PrivateMessageModal nickname={nickname} messages={messages} />
+        <PrivateMessageModal
+          nickname={nickname}
+          messages={messages}
+          msg={msg.data}
+          setMsg={setMsg}
+        />
       )}
       {userInfoModalOpen && <UserInfo nickname={nickname} />}
       {inviteModalOpen && <Invite nickname={nickname} userInfo={userInfo} />}

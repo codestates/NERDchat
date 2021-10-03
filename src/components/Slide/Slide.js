@@ -17,10 +17,9 @@ const Slide = () => {
   useEffect(() => {
     axios.get(`${ENDPOINT}/category/lists/1`).then((data) => {
       const list = data.data.data;
-      console.log(list);
     });
   }, []);
-  console.log(loading);
+
   return (
     <div className="slider-container">
       <section id="slider">

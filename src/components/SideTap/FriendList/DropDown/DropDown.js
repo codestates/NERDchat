@@ -13,7 +13,7 @@ import Invite from "../../../invite/Invite";
 import { Context } from "../../../../context/ContextProvider";
 import "./DropDown.scss";
 
-function DropDown({ nickname, userInfo, messages }) {
+function DropDown({ nickname, messages, userInfo, msg, sendHandler, setMsg }) {
   const {
     deleteFriendModalHandler,
     deleteFriendModalOpen,
@@ -41,7 +41,12 @@ function DropDown({ nickname, userInfo, messages }) {
   return (
     <div className="friendlist__wrapper">
       {privateModalOpen && (
-        <PrivateMessageModal nickname={nickname} messages={messages} />
+        <PrivateMessageModal
+          nickname={nickname}
+          messages={messages}
+          msg={msg.data}
+          setMsg={setMsg}
+        />
       )}
       {userInfoModalOpen && <UserInfo nickname={nickname} />}
       {inviteModalOpen && <Invite nickname={nickname} userInfo={userInfo} />}

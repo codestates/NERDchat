@@ -1,14 +1,48 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { IoChevronDownOutline, IoEllipseSharp } from "react-icons/io5";
 
 import DropDown from "./DropDown/DropDown";
-
+import socket from "../../../hooks/socket";
 import "./FriendList.scss";
 
 const FriendList = ({ avatar, nickname, messages, online, userInfo }) => {
   const [loader, setLoader] = useState(false);
+  const [msg, setMsg] = useState({ data: {} });
   const dropRef = useRef();
+
+  useEffect(() => {
+    socket.on(
+      "private message",
+      async ({ content, from, to, invite, friend }) => {
+        const incomingM = { content, from, to, invite, friend };
+        setMsg((prev) => {
+          const temp = { ...prev.data };
+          const sender = from;
+          if (!temp[to]) {
+            temp[sender] = [incomingM];
+            if (!temp[to]) {
+              temp[to] = [incomingM];
+            } else {
+              temp[to].push(incomingM);
+            }
+            return { data: temp };
+          } else {
+            if (!temp[to]) {
+              temp[to] = [incomingM];
+            } else {
+              temp[to].push(incomingM);
+            }
+            temp[sender].push(incomingM);
+            return { data: temp };
+          }
+        });
+      }
+    );
+    return () => {
+      socket.off("private message");
+    };
+  }, [nickname]);
 
   const clickHandler = () => {
     setLoader((prev) => !prev);
@@ -52,7 +86,14 @@ const FriendList = ({ avatar, nickname, messages, online, userInfo }) => {
         </div>
       </div>
       {loader && (
-        <DropDown nickname={nickname} messages={messages} userInfo={userInfo} />
+        <DropDown
+          userInfo={userInfo}
+          nickname={nickname}
+          messages={messages}
+          msg={msg}
+          // sendHandler={sendHandler}
+          setMsg={setMsg}
+        />
       )}
     </>
   );
