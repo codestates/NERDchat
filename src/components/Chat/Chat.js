@@ -39,7 +39,6 @@ function Chat() {
     socket.current.on("welcomeRoom", (userData, msgData) =>
       console.log(userData, msgData)
     );
-
     socket.current.on("roomMessage", (userData, msgData) => {
       console.log(userData, msgData);
       const incomingMsg = {
