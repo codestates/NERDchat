@@ -94,31 +94,12 @@ function SettingInfo({ profileImg, setProfileImg }) {
         <div className="setting-main-container">
           <div className="setting-main-content">
             <div className="setting-chat">
-              <form action="form__input" className="setting-form">
-                <label htmlFor="form__input" className="form__label">
-                  <input
-                    type="file"
-                    id="form__input"
-                    className="form__input"
-                    accept="image/*"
-                    name="pImage"
-                    onChange={imagehandler}
-                  />
-                  {/* <img
-                      src={require("../../images/dummy/icon.png").default}
-                      className="form__icon"
-                      alt=""
-                    /> */}
-                  <IoAttachOutline className="form__icon" />
-                  <span className="form__text">Choose a Photo</span>
-                </label>
-              </form>
-
               <form onSubmit={fixInfoHandler}>
                 <div className="setting-info">
                   <div className="setting-infomation">
                     <h2>INFORMATION</h2>
                   </div>
+
                   <div className="form">
                     <input
                       type="text"
@@ -185,6 +166,16 @@ function SettingInfo({ profileImg, setProfileImg }) {
                       Confrim Password
                     </label>
                   </div>
+                  <form action="form__input" className="setting-form">
+                    <input
+                      type="file"
+                      id="form__input"
+                      className="form__input"
+                      accept="image/*"
+                      name="pImage"
+                      onChange={imagehandler}
+                    />
+                  </form>
                   <button
                     type="submit"
                     className="setting-button"

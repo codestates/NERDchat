@@ -178,50 +178,50 @@ $title: rgb(172, 172, 172);
           font-weight: lighter;
         }
 
-        // .setting__form {
-        //   position: relative;
+        .setting__form {
+          position: relative;
 
-        //   .setting__input {
-        //     top: 0;
-        //     left: 0;
-        //     position: absolute;
-        //     border: 1px solid rgb(172, 172, 172);
-        //     border-radius: 10px;
-        //     font-family: "Poppins", sans-serif;
-        //     font-size: inherit;
-        //     color: rgb(172, 172, 172);
-        //     outline: none;
-        //     width: 70%;
-        //     padding: 0.5rem 1rem;
-        //     background: none;
+          .setting__input {
+            top: 0;
+            left: 0;
+            position: absolute;
+            border: 1px solid rgb(172, 172, 172);
+            border-radius: 10px;
+            font-family: "Poppins", sans-serif;
+            font-size: inherit;
+            color: rgb(172, 172, 172);
+            outline: none;
+            width: 70%;
+            padding: 0.5rem 1rem;
+            background: none;
 
-        //     &:hover {
-        //       border-color: $neonNain;
-        //     }
-        //     &:focus {
-        //       border-color: $neonSer;
-        //     }
-        //   }
-        //   .setting__lable {
-        //     position: absolute;
-        //     left: 1rem;
-        //     top: 0.8rem;
-        //     color: white;
-        //     cursor: text;
-        //     padding: 0 4px;
-        //     transition: top 200ms ease-in, left 200ms ease-in,
-        //       font-size 200ms ease-in;
-        //     background-color: $dark;
-        //   }
+            &:hover {
+              border-color: $neonNain;
+            }
+            &:focus {
+              border-color: $neonSer;
+            }
+          }
+          .setting__lable {
+            position: absolute;
+            left: 1rem;
+            top: 0.8rem;
+            color: white;
+            cursor: text;
+            padding: 0 4px;
+            transition: top 200ms ease-in, left 200ms ease-in,
+              font-size 200ms ease-in;
+            background-color: $dark;
+          }
 
-        //   .setting__input:focus ~ .setting__lable,
-        //   .setting__input:not(:placeholder-shown).setting__input:not(:focus)
-        //     ~ .setting__lable {
-        //     top: -0.5rem;
-        //     font-size: 0.8rem;
-        //     left: 0.8rem;
-        //   }
-        // }
+          .setting__input:focus ~ .setting__lable,
+          .setting__input:not(:placeholder-shown).setting__input:not(:focus)
+            ~ .setting__lable {
+            top: -0.5rem;
+            font-size: 0.8rem;
+            left: 0.8rem;
+          }
+        }
         .form {
           position: relative;
           width: 20rem;
@@ -229,7 +229,6 @@ $title: rgb(172, 172, 172);
           margin: 20px 0;
 
           &__input {
-            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -328,5 +327,18 @@ $title: rgb(172, 172, 172);
       margin-left: 10px;
       box-shadow: 3px 3px 15px black;
     }
+  }
+
+  input[type="file"]::file-selector-button {
+    padding: 15px 40px;
+    border-radius: 50px;
+    border: none;
+    color: $neonSer;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    transition: all 0.5s ease-in-out;
   }
 }
