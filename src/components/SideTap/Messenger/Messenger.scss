@@ -11,6 +11,10 @@ $title: rgb(172, 172, 172);
   justify-content: flex-start;
   padding: 0.3rem;
   margin-bottom: 1rem;
+
+  &.offline {
+    opacity: 0.6;
+  }
   &:hover {
     background: rgb(94, 94, 94);
     border-radius: 2rem;

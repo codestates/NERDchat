@@ -17,16 +17,18 @@ const UserAdd = ({ nickname, userInfo }) => {
     const res = await axios.get(`${ENDPOINT}/friends/send/${nickname}`, {
       withCredentials: true,
     });
-    console.log(777, res);
     //요청이 잘 보내짐.
-    //메시지 모달창을 열고, 친구초대 메시지를 보내자. 모달창 열 필요는 없을듯
+    //메시지 모달창을 열고, 친구초대 메시지를 보내자. 형제 컴포넌트라 새로운 메시지 상태관리 불가...
+    //모달창 열 필요는 없을듯
     socket.emit("private message", {
       content: `${userInfo.userId}님의 친구초대를 승락하시겠습니까?`,
       to: nickname,
       invite: -1,
       friend: 1,
     });
-    privateModalHandler();
+    //새로고침 하고 열면 제대로 메시지 있찌 않을까?
+    // window.location.reload();
+    // privateModalHandler();
   };
 
   //취소
