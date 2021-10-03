@@ -8,40 +8,62 @@ import "./OnlineUser.scss";
 
 const OnlineUser = ({ avatar, nickname, messages, online, userInfo }) => {
   const [loader, setLoader] = useState(false);
-  const [msg, setMsg] = useState([]);
+  const [msg, setMsg] = useState({ data: {} });
   const dropRef = useRef();
 
   useEffect(() => {
-    socket.on("private message", ({ content, to, invite, friend }) => {
-      console.log("listen!", content, to);
-      const incomingM = { content, from: nickname, to, invite, friend };
-      setMsg((prev) => [...prev, incomingM]);
-    });
+    socket.on(
+      "private message",
+      async ({ content, from, to, invite, friend }) => {
+        const incomingM = { content, from, to, invite, friend };
+        setMsg((prev) => {
+          const temp = { ...prev.data };
+          const sender = from;
+          if (!temp[to]) {
+            temp[sender] = [incomingM];
+            if (!temp[to]) {
+              temp[to] = [incomingM];
+            } else {
+              temp[to].push(incomingM);
+            }
+            return { data: temp };
+          } else {
+            if (!temp[to]) {
+              temp[to] = [incomingM];
+            } else {
+              temp[to].push(incomingM);
+            }
+            temp[sender].push(incomingM);
+            return { data: temp };
+          }
+        });
+      }
+    );
     return () => {
       socket.off("private message");
     };
-  }, [socket]);
+  }, [nickname]);
 
   const clickHandler = () => {
     setLoader((prev) => !prev);
   };
   //메시지 보내기
-  const sendHandler = (e) => {
-    e.preventDefault();
-    socket.emit("private message", { content: e.target.value, to: nickname });
-    const incomingM = {
-      content: e.target.value,
-      from: userInfo.userId,
-      to: nickname,
-    };
-    setMsg((prev) => [...prev, incomingM]);
-  };
+  // const sendHandler = (e) => {
+  //   e.preventDefault();
+  //   socket.emit("private message", { content: e.target.value, to: nickname });
+  //   const incomingM = {
+  //     content: e.target.value,
+  //     from: userInfo.userId,
+  //     to: nickname,
+  //   };
+  //   setMsg((prev) => [...prev, incomingM]);
+  // };
   const backgroundCloseHandler = (e) => {
     if (dropRef.current === e.target) {
       setLoader(false);
     }
   };
-
+  console.log(2818893128918923, msg);
   return (
     <>
       <div
@@ -79,7 +101,7 @@ const OnlineUser = ({ avatar, nickname, messages, online, userInfo }) => {
           nickname={nickname}
           messages={messages}
           msg={msg}
-          sendHandler={sendHandler}
+          // sendHandler={sendHandler}
           setMsg={setMsg}
         />
       )}

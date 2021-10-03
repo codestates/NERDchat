@@ -47,6 +47,8 @@ const SideBar = () => {
     return () => clearTimeout(delayReq);
   }, []);
 
+  useEffect(() => {}, []);
+
   const toggleTab = (index) => {
     setToggleState(index);
   };
@@ -113,7 +115,7 @@ const SideBar = () => {
                   nickname={el.nickname}
                   messages={el.messages}
                   online={el.connected}
-                  userInfo={[userInfo]}
+                  userInfo={userInfo}
                 />
               ))}
         </div>

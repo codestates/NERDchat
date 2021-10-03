@@ -50,8 +50,8 @@ const MsgListDropDown = ({
         <PrivateMessageModal
           nickname={nickname}
           messages={messages}
-          msg={msg}
-          sendHandler={sendHandler}
+          msg={msg.data}
+          // sendHandler={sendHandler}
           setMsg={setMsg}
         />
       )}

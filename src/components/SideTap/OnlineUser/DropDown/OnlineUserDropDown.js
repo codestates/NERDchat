@@ -56,8 +56,7 @@ function OnlineUserDropDown({
         <PrivateMessageModal
           nickname={nickname}
           messages={messages}
-          msg={msg}
-          sendHandler={sendHandler}
+          msg={msg.data}
           setMsg={setMsg}
         />
       )}

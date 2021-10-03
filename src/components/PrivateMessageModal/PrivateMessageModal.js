@@ -5,24 +5,19 @@ import PInput from "./PInput/PInput";
 import socket from "../../hooks/socket";
 import { Cookies } from "react-cookie";
 
-function PrivateMessageModal({ nickname, setMsg, messages, msg, sendHandler }) {
+function PrivateMessageModal({ nickname, setMsg, messages, msg }) {
   const cookies = new Cookies();
   const userInfo = cookies.get("userInfo");
   const [msgHistory, setMsgHistory] = useState(messages);
-  // const [msg, setMsg] = useState([]);
-  const [newMsg, setNewMsg] = useState("");
+  // const [newMsg, setNewMsg] = useState("");
   const messageEl = useRef(null);
   const newMessageEl = useRef(null);
-  console.log(9999, msg);
-  const testmsg = [];
-  // const testmsg = msg[0][nickname] || [];
-
-  //메시지입력핸들러
-  const msgInputHandler = (e) => {
-    e.preventDefault();
-    setNewMsg(e.target.value);
-  };
-
+  // //메시지입력핸들러
+  // const msgInputHandler = (e) => {
+  //   e.preventDefault();
+  //   setNewMsg(e.target.value);
+  // };
+  console.log(12312312123, msg);
   useEffect(() => {
     messageEl.current.scrollTop = messageEl.current.scrollHeight;
   });
@@ -36,6 +31,39 @@ function PrivateMessageModal({ nickname, setMsg, messages, msg, sendHandler }) {
     }
   }, [msg]);
 
+  const sendHandler = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const sendingM = {
+      content: e.target.value,
+      from: userInfo.nickname,
+      to: nickname,
+    };
+    socket.emit("private message", { content: e.target.value, to: nickname });
+    setMsg((prev) => {
+      const temp = { ...prev.data };
+      const sender = nickname;
+      if (!temp[nickname]) {
+        temp[sender] = [sendingM];
+        if (!temp[userInfo.nickname]) {
+          temp[userInfo.nickname] = [sendingM];
+        } else {
+          temp[userInfo.nickname].push(sendingM);
+        }
+        return { data: temp };
+      } else {
+        if (!temp[userInfo.nickname]) {
+          temp[userInfo.nickname] = [sendingM];
+        } else {
+          temp[userInfo.nickname].push(sendingM);
+        }
+        temp[sender].push(sendingM);
+
+        return { data: temp };
+      }
+    });
+  };
+
   return (
     <Modal>
       <div className="chatApp__messages" ref={messageEl}>
@@ -45,8 +73,8 @@ function PrivateMessageModal({ nickname, setMsg, messages, msg, sendHandler }) {
               <PMessage message={m} userInfo={userInfo} setMsg={setMsg} />
             </div>
           ))}
-        {testmsg &&
-          testmsg.map((m, i) => (
+        {msg[nickname] &&
+          msg[nickname].map((m, i) => (
             <div key={i} className={`chatApp__msg`}>
               <PMessage message={m} userInfo={userInfo} />
             </div>
@@ -55,10 +83,10 @@ function PrivateMessageModal({ nickname, setMsg, messages, msg, sendHandler }) {
       </div>
       <div className="chatApp__footer">
         <PInput
-          msgInputHandler={msgInputHandler}
-          newMsg={newMsg}
+          // msgInputHandler={msgInputHandler}
+          // newMsg={newMsg}
           sendHandler={sendHandler}
-          setNewMsg={setNewMsg}
+          // setNewMsg={setNewMsg}
         />
       </div>
     </Modal>
