@@ -9,15 +9,17 @@
   .server__room__container {
     height: 100%;
     display: flex;
-    justify-content: center;
+    align-items: flex-start;
+    // justify-content: center;
     width: 66%;
 
     .room__content {
       display: flex;
-      justify-content: center;
       flex-direction: column;
+      justify-content: flex-start;
       width: 73%;
-      margin-right: 2em;
+      margin-right: 5em;
+      height: 100%;
 
       .server__room__header__container {
         height: 75px;
@@ -26,7 +28,7 @@
         text-align: center;
       }
       .roomLists__container {
-        height: 555px;
+        height: 630px;
         width: 100%;
         margin-top: 5px;
         display: flex;

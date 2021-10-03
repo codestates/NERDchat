@@ -64,9 +64,8 @@ const ServerPage = () => {
             // 해당 요소가 마지막 요소라면, ref붙여주기
             if (lists.length === idx + 1) {
               return (
-                <div ref={lastElementRef}>
+                <div ref={lastElementRef} key={list.category}>
                   <ServerPageCard
-                    key={list.category}
                     id={list.id}
                     category={list.category}
                     img={list.image}
@@ -76,7 +75,7 @@ const ServerPage = () => {
               );
             } else {
               return (
-                <div>
+                <div key={list.category}>
                   <ServerPageCard
                     key={list.category}
                     id={list.id}

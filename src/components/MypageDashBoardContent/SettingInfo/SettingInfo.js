@@ -54,6 +54,14 @@ function SettingInfo({ profileImg, setProfileImg }) {
     }
     formData.append("password", pwd);
 
+    //formData의 데이터 읽는 방법
+    for (let key of formData.keys()) {
+      console.log(key);
+    }
+    for (let value of formData.values()) {
+      console.log(value);
+    }
+
     const res = await axios({
       method: "patch",
       url: `${ENDPOINT}/fixprofile`,
@@ -61,6 +69,17 @@ function SettingInfo({ profileImg, setProfileImg }) {
       headers: { "content-type": "multipart/form-data" },
       withCredentials: true,
     });
+
+    // res 형식: "data": {
+    //     "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEyM2M5QG5hdmVyLmNvbSIsIm5pY2tuYW1lIjoibW9tbyIsImlhdCI6MTYzMzE1NTc1MywiZXhwIjoxNjMzMjQyMTUzfQ.LIZYoRnG8sVlKGuLo9MOUN84Iw2RihPT_eJqrO6R3aU",
+    //     "id": 4,
+    //     "avatar": "https://nerd-client.s3.amazonaws.com/avatar/1633155749493_UiHmUcGj0a9OBnxPXq7SifGcp.png",
+    //     "userId": "hohoho",
+    //     "nickname": "momo",
+    //     "email": "123c9@naver.com",
+    //     "status": null
+    // }
+    console.log(777777, res.data.data);
 
     //정보 쿠키에 반영하고, 저장해주는 것 필요.
     cookies.set("userInfo", res.data.data);

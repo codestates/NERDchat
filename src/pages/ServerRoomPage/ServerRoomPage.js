@@ -2,7 +2,6 @@ import "./ServerRoomPage.scss";
 import ServerRoom from "../../components/ServerRoom/ServerRoom";
 import NavBar from "../../components/NavBar/NavBar";
 import SideBar from "../../UI/SideBar/SideBar";
-import ServerRoomHeader from "../../components/ServerRoom/ServerRoomHeader/ServerRoomHeader";
 const ServerRoomPage = () => {
   return (
     <>

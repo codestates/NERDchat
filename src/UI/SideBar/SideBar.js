@@ -39,9 +39,15 @@ const SideBar = () => {
   };
   useEffect(() => {
     setLoading(true);
-    getFriendsListHandler();
-    setLoading(false);
-  }, [loading, toggleState]);
+    const delayReq = setTimeout(() => {
+      getFriendsListHandler();
+      setLoading(false);
+    }, 300);
+
+    return () => clearTimeout(delayReq);
+  }, []);
+
+  useEffect(() => {}, []);
 
   const toggleTab = (index) => {
     setToggleState(index);

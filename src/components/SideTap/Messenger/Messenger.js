@@ -1,24 +1,52 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import MsgListDropDown from "./MsgListDropDown";
-
+import socket from "../../../hooks/socket";
 import "./Messenger.scss";
 
 const Messenger = ({ avatar, nickname, messages, userInfo, online }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [lastMsg, setLastMsg] = useState("");
-  //문제는 각각의 Messenger들은 개별적인 컴포넌트이긴 하지만,
-  //현재 Messenger컴포넌트가 열려있는 상황(메신저 탭이 선택된 상황)에서 상태값이 변경되게 되면,
-  //모든 Messenger컴포넌트에서 모달이 열려버리게 된다.
+  const [msg, setMsg] = useState({ data: {} });
+  const [loading, setLoading] = useState(false);
+  const [showingMsg, setShowMsg] = useState("");
   const modalHandler = () => {
     setModalOpen((prev) => !prev);
   };
-  // useEffect(() => {
-  //   getLast()
-  // }, [])
-  const getLast = (lastM) => {
-    setLastMsg(lastM.content);
-    console.log(111, lastM);
-  };
+  //여기에서 private message이벤트를 들어야 실시간 통신이 될듯.
+  //메시지 듣기
+  useEffect(() => {
+    socket.on(
+      "private message",
+      async ({ content, from, to, invite, friend }) => {
+        const incomingM = { content, from, to, invite, friend };
+
+        setMsg((prev) => {
+          const temp = { ...prev.data };
+          const sender = from;
+          if (!temp[to]) {
+            temp[sender] = [incomingM];
+            if (!temp[to]) {
+              temp[to] = [incomingM];
+            } else {
+              temp[to].push(incomingM);
+            }
+            return { data: temp };
+          } else {
+            if (!temp[to]) {
+              temp[to] = [incomingM];
+            } else {
+              temp[to].push(incomingM);
+            }
+            temp[sender].push(incomingM);
+            return { data: temp };
+          }
+        });
+      }
+    );
+    return () => {
+      socket.off("private message");
+    };
+  }, [nickname]);
+
   return (
     <>
       <div
@@ -43,8 +71,9 @@ const Messenger = ({ avatar, nickname, messages, userInfo, online }) => {
             <p>{nickname}</p>
           </div>
           <div className="latest__message__content">
-            {lastMsg.length <= 0 && messages[messages.length - 1].content}
-            {lastMsg.length > 0 && lastMsg}
+            {!msg.data[nickname] && messages[messages.length - 1].content}
+            {msg.data[nickname] &&
+              msg.data[nickname][msg.data[nickname].length - 1].content}
           </div>
         </div>
       </div>
@@ -53,8 +82,9 @@ const Messenger = ({ avatar, nickname, messages, userInfo, online }) => {
           userInfo={userInfo}
           nickname={nickname}
           messages={messages}
-          setLastMsg={getLast}
-          dropDownHandler={modalHandler}
+          msg={msg}
+          // sendHandler={sendHandler}
+          setMsg={setMsg}
         />
       )}
     </>
