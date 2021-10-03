@@ -32,3 +32,12 @@
   color: $neonNain;
   filter: drop-shadow(1px 1px 2px $neonSer);
 }
+
+@media screen and (max-width: 768px) {
+  .nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(60px * 3);
+  }
+}

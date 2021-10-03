@@ -9,49 +9,47 @@
   width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .logoimage {
-  position: relative;
-  width: 500px;
-  height: 500px;
-  transform-style: preserve-3d;
-  perspective: 1000px;
+  height: 100vh;
+  flex: 0.5;
+  width: 680px;
+  padding: 70px 0 0 0;
+  margin-right: 150px;
 }
 .logoimage svg {
-  margin-left: -700px;
-  margin-top: 70px;
+  width: 680px;
+  height: 680px;
+  margin-right: 120px;
 }
 
-// .logoimage svg {
-//   stroke: rgb(184, 126, 255);
-//   stroke-width: 3;
-//   stroke-dasharray: 200;
-//   stroke-dashoffset: 0;
-//   animation: flicker 2s linear infinite;
-//   filter: drop-shadow(0 0 2px rgb(163, 16, 255));
-//   fill: transparent;
-//   object-fit: cover;
-//   transform: rotate(30deg) skew(-25deg);
-// }
+.noanswer {
+  display: flex;
+  flex-direction: column;
+  flex: 0.5;
+  margin-left: 60px;
+}
 
 .perspective-text {
+  // border: 1px solid aqua;
   color: rgb(172, 172, 172);
   font-family: "Monoton", cursive;
   font-size: 54px;
   font-weight: lighter;
   letter-spacing: -2px;
   text-transform: uppercase;
-  margin-top: 230px;
-  margin-left: 170px;
-  width: 500px;
-  height: 500px;
+  flex: 0.4;
+  margin-right: 0px;
+  padding: 250px 0 0px;
 }
 .perspective-line {
   height: 50px;
   overflow: hidden;
   position: relative;
+  margin: 0;
 }
 .perspective-line-p {
   margin: 0;
@@ -101,20 +99,22 @@ p {
 }
 
 .subtitle {
+  // border: 1px solid aqua;
+  flex: 0.6;
   display: flex;
   justify-content: center;
   text-align: justify;
   align-items: center;
-  width: 600px;
-  height: 200px;
-  margin-top: 620px;
-  margin-left: -800px;
   color: rgb(216, 216, 216);
 
   h1 {
     font-family: "Poppins", sans-serif;
     font-size: 24px;
     font-weight: 100;
+    padding: 10px 10px;
+    margin-left: 200px;
+    margin-bottom: 150px;
+    text-align: right;
   }
 }
 
@@ -136,5 +136,69 @@ p {
   }
   100% {
     transform: translate3d(0, 0, 0);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 768px;
+    // border: 1px solid aqua;
+    display: flex;
+    flex-direction: column-reverse;
+    height: 40vh;
+  }
+
+  .logoimage {
+    // border: 1px solid aqua;
+    width: 300px;
+    display: none;
+    .main_img {
+      width: 300px;
+      height: 300px;
+      display: none;
+    }
+  }
+
+  .perspective-text {
+    // border: 1px solid aqua;
+    color: rgb(172, 172, 172);
+    font-family: "Monoton", cursive;
+    font-weight: lighter;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    font-size: 40px;
+    width: 500px;
+    height: 100px;
+    margin-left: -100px;
+    margin-top: -150px;
+  }
+
+  .perspective-line {
+    height: 42px;
+    width: 300px;
+    overflow: hidden;
+    position: relative;
+    // border: 1px solid aqua;
+  }
+
+  .subtitle {
+    // border: 1px solid aqua;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    text-align: justify;
+    align-items: center;
+    color: rgb(216, 216, 216);
+
+    h1 {
+      font-family: "Poppins", sans-serif;
+      font-size: 17px;
+      font-weight: 100;
+      text-align: center;
+      // border: 1px solid red;
+      width: 300px;
+      margin-top: -110px;
+      margin-left: 300px;
+    }
   }
 }
