@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoChevronBackOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { Context } from "../../../context/ContextProvider";
 import "./ServerRoomHeader.scss";
@@ -24,9 +24,9 @@ const ServerRoomHeader = ({ gameId, headCount }) => {
       {createRoomOpen && <RoomSetting />}
       <div className="server__room__header__container">
         <Link to="/servers" className="back__icons">
-          <IoIosArrowBack size={20} />
+          <IoChevronBackOutline size={25} />
           <h2 className="nerdtitle" data-text="NERDchat">
-            NERDchat
+            HOME
           </h2>
         </Link>
         <div className="headCount__container">

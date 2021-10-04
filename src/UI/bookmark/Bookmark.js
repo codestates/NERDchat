@@ -1,5 +1,7 @@
-import { useState } from 'react';
-import { IoBookmarkOutline } from 'react-icons/io5';
+import { useState } from "react";
+import { IoBookmarkOutline } from "react-icons/io5";
+
+import "./Bookmark.scss";
 const Bookmark = () => {
   const [hover, setHover] = useState(false);
   const onHover = () => {
@@ -10,12 +12,12 @@ const Bookmark = () => {
     setHover(false);
   };
   return (
-    <div
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
-      role='button'
-    >
-      {hover ? <IoBookmarkOutline color='rgb(184, 126, 255)' size={25} /> : <IoBookmarkOutline color='white' size={25} />}
+    <div onMouseEnter={onHover} onMouseLeave={onLeave} role="button">
+      {hover ? (
+        <IoBookmarkOutline size={20} className="hover" />
+      ) : (
+        <IoBookmarkOutline size={20} className="nonhover" />
+      )}
     </div>
   );
 };
