@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
         ]
       }
     });
-    if (isFriend) res.status(400).json({ message: 'exist' });
+    if (isFriend) res.status(208).json({ message: 'friend exist!!!' });
     else {
       const payload = {
         user1id: userData.id,

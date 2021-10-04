@@ -5,6 +5,7 @@ dotenv.config();
 
 module.exports = async (req, res) => {
   try {
+    const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
     const code = await axios({
       url: 'https://accounts.google.com/o/oauth2/token',
       method: 'post',
@@ -29,7 +30,6 @@ module.exports = async (req, res) => {
         }
       });
       const userInfo = await Users.findOne({ where: { userId: userData.data.sub } });
-      // console.log(userInfo)
       if (!userInfo) {
         await Users.create({
           avatar: userData.data.picture,
@@ -43,26 +43,31 @@ module.exports = async (req, res) => {
           created_at: new Date(),
           updated_at: new Date()
         });
+        const payload = {
+          avatar: userData.data.picture,
+          userId: userData.data.sub,
+          nickname: userData.data.sub,
+          email: userData.data.email,
+          valid: false,
+          oauth: 'Google',
+          status: null,
+          currentRoom: null,
+          created_at: new Date(),
+          updated_at: new Date()
+        };
+        res
+          .cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
+          .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
+          .cookie('oauth', 'google', { httpOnly: false, sameSite: 'none', secure: true })
+          .cookie('userInfo', payload, { httpOnly: false, sameSite: 'none', secure: true }).status(200).redirect(
+            process.env.GO_HOME + '/servers'
+          );
       }
-      const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
-      const payload = {
-        avatar: userData.data.picture,
-        userId: userData.data.sub,
-        nickname: userData.data.sub,
-        email: userData.data.email,
-        valid: false,
-        oauth: 'Google',
-        status: null,
-        currentRoom: null,
-        created_at: new Date(),
-        updated_at: new Date()
-      };
-
       res
         .cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
         .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
-        .cookie('oauth', 'google', { httpOnly: true, sameSite: 'none', secure: true })
-        .cookie('userInfo', payload, { httpOnly: false, sameSite: 'none', secure: true }).status(200).redirect(
+        .cookie('oauth', 'google', { httpOnly: false, sameSite: 'none', secure: true })
+        .cookie('userInfo', userInfo, { httpOnly: false, sameSite: 'none', secure: true }).status(200).redirect(
           process.env.GO_HOME + '/servers'
         );
     }
