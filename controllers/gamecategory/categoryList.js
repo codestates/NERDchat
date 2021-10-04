@@ -1,12 +1,13 @@
 const { GameCategory, Favorites } = require('../../models');
 const jwt = require('jsonwebtoken');
+const { verifyAccess } = require('../../middlewares/token');
 require('dotenv').config();
 
 module.exports = async (req, res) => {
   const page = req.params.page || 1;
   const offset = 5 * (page - 1);
   const userData = req.cookies.accessToken
-    ? jwt.verify(req.cookies.accessToken, process.env.ACCESS_SECRET)
+    ? await verifyAccess(req, res)
     : null;
   try {
     let userFavCategoryList;
