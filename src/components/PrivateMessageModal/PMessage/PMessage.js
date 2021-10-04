@@ -24,11 +24,11 @@ const PMessage = ({ message, userInfo, setMsg }) => {
     });
     console.log(res);
     socket.emit("private message", {
-      content: `${from}님의 친구요청을 승낙 하였습니다.`,
+      content: `${from} 님의 친구 요청을 승낙하였습니다.`,
       to: from,
     });
     const incomingM = {
-      content: `${from}님의 친구요청을 승낙 하였습니다.`,
+      content: `${from} 님의 친구 요청을 승낙하였습니다.`,
       from: userInfo.userId,
       to: from,
     };
@@ -65,11 +65,11 @@ const PMessage = ({ message, userInfo, setMsg }) => {
     });
     console.log(res);
     socket.emit("private message", {
-      content: `${from}님의 친구요청을 거절 하였습니다.`,
+      content: `${from}님의 친구 요청을 거절 하였습니다.`,
       to: from,
     });
     const incomingM = {
-      content: `${from}님의 친구요청을 거절 하였습니다.`,
+      content: `${from}님의 친구 요청을 거절하였습니다.`,
       from: userInfo.userId,
       to: from,
     };

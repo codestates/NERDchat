@@ -4,20 +4,19 @@ $dark: rgb(23, 23, 23);
 $neonMain: rgb(184, 126, 255);
 $neonSer: rgb(163, 16, 255);
 $title: rgb(172, 172, 172);
+
 .messagelist {
   display: flex;
-  color: white;
+  height: 55px;
+  justify-content: space-between;
   align-items: center;
-  justify-content: flex-start;
-  padding: 0.3rem;
-  margin-bottom: 1rem;
 
-  &.offline {
-    opacity: 0.6;
-  }
+  // &.offline {
+  //   opacity: 0.6;
+  // }
   &:hover {
-    background: rgb(94, 94, 94);
-    border-radius: 2rem;
+    background: rgba(12, 12, 12, 0.557);
+    border-radius: 0.5rem;
     cursor: pointer;
   }
   .userInfo__container {
@@ -25,10 +24,12 @@ $title: rgb(172, 172, 172);
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 
     .m__avatar__container {
       display: flex;
       align-items: center;
+
       .m__avatar {
         width: 35px;
         height: 35px;
@@ -41,14 +42,13 @@ $title: rgb(172, 172, 172);
     position: absolute;
     display: flex;
     flex-direction: column;
-    // align-items: center;
-    justify-content: center;
-    left: calc(0.3rem + 35px + 3rem);
-    height: calc(35px + 0.6rem);
+    justify-content: left;
+    margin: 45px;
+
     .m__name {
       width: 100%;
       white-space: nowrap;
-      color: white;
+      color: $title;
       p {
         font-family: "Poppins", sans-serif;
         font-weight: 200;
@@ -56,11 +56,13 @@ $title: rgb(172, 172, 172);
     }
     .latest__message__content {
       white-space: nowrap;
-      // font-family: "Poppins", sans-serif;
+      font-family: "Poppins", sans-serif;
       overflow: hidden;
+      font-size: 12px;
       text-overflow: ellipsis;
-      width: 70px;
-      color: gray;
+      color: rgb(108, 108, 108);
+      font-weight: 100;
+      width: 130px;
     }
   }
 }

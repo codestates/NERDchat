@@ -7,7 +7,11 @@ $title: rgb(172, 172, 172);
 
 .setting-container {
   display: flex;
-  position: absolute;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 50px;
 
   .setting-main {
     display: flex;
@@ -40,20 +44,6 @@ $title: rgb(172, 172, 172);
         width: 100%;
         text-align: center;
 
-        #imgInput[type="file"] {
-          display: none;
-        }
-
-        .setting-form {
-          position: relative;
-          margin: 15px 0;
-          margin-top: 20px;
-
-          img {
-            filter: opacity(0.5) drop-shadow(0 0 0 white);
-          }
-        }
-
         .form__input {
           position: absolute;
           left: -999px;
@@ -76,21 +66,6 @@ $title: rgb(172, 172, 172);
             transform: translateY(-2px);
             box-shadow: 0 5px 5px;
           }
-        }
-
-        .form__text {
-          font-weight: 200;
-          font-family: "Poppins", sans-serif;
-          font-size: 6px;
-          color: white;
-          margin-right: 5px;
-        }
-
-        .form__icon {
-          margin-right: 5px;
-          width: 15px;
-          height: 15px;
-          color: white;
         }
 
         h3 {
@@ -170,12 +145,12 @@ $title: rgb(172, 172, 172);
         .setting-infomation {
           margin-bottom: 30px;
           padding: 0 10px;
-          box-shadow: 0px 1px 5px black;
         }
         .setting-infomation h2 {
           font-family: "Monoton", cursive;
           color: rgb(172, 172, 172);
           font-weight: lighter;
+          font-size: 50px;
         }
 
         .setting__form {
@@ -283,44 +258,39 @@ $title: rgb(172, 172, 172);
       }
     }
     .setting-button {
-      outline: none;
-      padding: 10px 15px;
-      margin-top: 20px;
-      border-radius: 20px;
-      border: 1px solid $neonNain;
-      background-color: transparent;
-      color: $neonNain;
-      letter-spacing: 2px;
       font-family: "Poppins", sans-serif;
-      font-size: 10px;
-      font-weight: 400;
-      text-transform: uppercase;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      &:focus {
-        outline: none;
-      }
+      font-weight: 100;
+      padding: 0.5em 1.5em;
+      border: 1px solid $title;
+      background: transparent;
+      border-radius: 50px;
+      color: $title;
+      margin-top: 20px;
 
-      &::before {
-        content: "";
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        background-color: $neonNain;
-        top: 100%;
-        left: 0;
-        transition: all 0.6s;
-        z-index: -1;
-      }
+      // &::before {
+      //   content: "";
+      //   position: absolute;
+      //   height: 100%;
+      //   width: 100%;
+      //   background-color: $neonNain;
+      //   top: 100%;
+      //   left: 0;
+      //   transition: all 0.6s;
+      //   z-index: -1;
+      // }
 
-      &:hover::before {
-        transform: translateY(-100%);
-      }
+      // &:hover::before {
+      //   transform: translateY(-100%);
+      // }
 
-      &:hover {
-        color: white;
-      }
+      // &:hover {
+      //   color: white;
+      // }
+    }
+
+    .setting-button:hover {
+      border: 1px solid $neonNain;
+      filter: drop-shadow(1px 1px 2px $neonSer);
     }
     .setting-sidebar {
       flex: 1;
@@ -329,16 +299,35 @@ $title: rgb(172, 172, 172);
     }
   }
 
-  input[type="file"]::file-selector-button {
-    padding: 15px 40px;
-    border-radius: 50px;
-    border: none;
-    color: $neonSer;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 10px;
+  // input[type="file"]::file-selector-button {
+  //   padding: 10px 10px;
+  //   border-radius: 50px;
+  //   border: none;
+  //   color: $title;
+  //   text-transform: uppercase;
+  //   letter-spacing: 3px;
+  //   font-size: 10px;
+  //   cursor: pointer;
+  //   background-color: transparent;
+  //   border: 1px solid $title;
+  //   transition: all 0.5s ease-in-out;
+  // }
+
+  .form__text {
+    font-weight: 100;
+    font-family: "Poppins", sans-serif;
+    font-size: 17px;
+    color: $title;
+    margin-right: 5px;
     cursor: pointer;
-    background-color: #fff;
-    transition: all 0.5s ease-in-out;
+    pointer-events: none;
+  }
+
+  .form__icon {
+    margin-right: 5px;
+    width: 15px;
+    height: 15px;
+    color: $title;
+    cursor: pointer;
   }
 }

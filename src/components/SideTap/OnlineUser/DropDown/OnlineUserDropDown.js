@@ -79,7 +79,7 @@ function OnlineUserDropDown({
             <div className="onlinelist__icon">
               <IoMailOpenOutline className="icona" />
             </div>
-            Message
+            DM
           </div>
         </li>
         <li className="onlinelist__li">

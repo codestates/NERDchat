@@ -6,12 +6,12 @@ $neonSer: rgb(163, 16, 255);
 $title: rgb(172, 172, 172);
 
 .msgList__wrapper {
-  //   position: absolute;
-  width: 150px;
+  position: absolute;
+  width: 120px;
   background: rgba(77, 77, 77, 0.243);
   backdrop-filter: blur(0.5em);
-  right: -150px;
-  top: 0;
+  margin-left: 230px;
+  margin-top: -50px;
   border-radius: 5px;
   z-index: 1;
 
@@ -32,7 +32,7 @@ $title: rgb(172, 172, 172);
 }
 .msgList__menu {
   list-style: none;
-  width: 150px;
+  width: 120px;
 
   .msgList__li {
     line-height: 55px;
@@ -40,7 +40,7 @@ $title: rgb(172, 172, 172);
   }
 
   .msgList__li:hover {
-    background: rgba(12, 12, 12, 0.277);
+    // background: rgba(12, 12, 12, 0.277);
     border-radius: 5px;
 
     .icona {
@@ -60,4 +60,17 @@ $title: rgb(172, 172, 172);
   text-align: center;
   background: rgba(12, 12, 12, 0.277);
   border-radius: 50%;
+}
+.msgList__wrapper::before {
+  position: absolute;
+  content: "";
+  top: 17px;
+  left: -13px;
+  transform: rotate((0deg));
+  z-index: -1;
+  width: 0px;
+  height: 0px;
+  border-top: 8px solid transparent;
+  border-right: 13px solid rgba(77, 77, 77, 0.243);
+  border-bottom: 8px solid transparent;
 }
