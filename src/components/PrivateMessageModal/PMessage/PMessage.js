@@ -7,6 +7,7 @@ import "./PMessage.scss";
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const PMessage = ({ message, userInfo, setMsg }) => {
+  console.log(message);
   const { content, to, from, invite, friend } = message;
   let mine = from === userInfo.userId;
 
