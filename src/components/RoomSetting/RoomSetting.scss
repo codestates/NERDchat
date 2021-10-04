@@ -3,18 +3,44 @@ $neonMain: rgb(184, 126, 255);
 $neonSer: rgb(163, 16, 255);
 $title: rgb(172, 172, 172);
 .room__setting__container {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 2em;
   margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   .room__title__container {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-size: 25px;
+
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 0.5em;
+
     input {
-      height: 25px;
+      font-family: "Poppins", sans-serif;
+      font-weight: 100;
+      height: 28px;
+      flex: 1 1 auto;
+      outline: none;
+      background: transparent;
+      margin-bottom: 2px;
+      box-shadow: none;
+      border-style: none none solid none;
+
+      color: $title;
+      transition: all 0.5s;
+      width: 100px;
     }
     label {
       margin-top: 1em;
@@ -23,6 +49,9 @@ $title: rgb(172, 172, 172);
   }
   .max__container {
     .headcount__input__container {
+      font-family: "Poppins", sans-serif;
+      font-weight: 100;
+
       display: flex;
       gap: 1em;
       input {

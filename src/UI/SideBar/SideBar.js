@@ -42,7 +42,7 @@ const SideBar = () => {
     const delayReq = setTimeout(() => {
       getFriendsListHandler();
       setLoading(false);
-    }, 300);
+    }, 1);
 
     return () => clearTimeout(delayReq);
   }, []);
@@ -99,7 +99,7 @@ const SideBar = () => {
                   userId={el.userId}
                 />
               ))}
-          {toggleState === 1 && loading && <Loader />}
+          {/* {toggleState === 1 && loading && <Loader />} */}
         </div>
         <div
           className={toggleState === 2 ? "content  active-content" : "content"}

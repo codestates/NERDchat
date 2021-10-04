@@ -12,6 +12,7 @@ import SideBar from "../../UI/SideBar/SideBar";
 import ServerRoomHeader from "../../components/ServerRoom/ServerRoomHeader/ServerRoomHeader";
 import ServerSearch from "../../components/ServerRoom/ServerSerch/ServerSearch";
 import ServerRoomBody from "../../components/ServerRoom/ServerRoomBody/ServerRoomBody";
+import Loader from "../../components/Loader/Loader";
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
@@ -22,6 +23,8 @@ const ServerRoomPage = () => {
   const { userList } = useSocket(gameId, "", userInfo, "", "");
   const [searchedLists, setSearchedLists] = useState([]);
   const [isSearched, setIsSearched] = useState(0);
+  const [loading, setLoading] = useState(false);
+
   //현재 온라인인 users의 길이
   const [headCount, setHeadCount] = useState(0);
   const searchHandler = async (title) => {
@@ -36,6 +39,18 @@ const ServerRoomPage = () => {
   useEffect(() => {
     getOnlineUserNum();
   }, [userList, getOnlineUserNum]);
+
+  useEffect(() => {
+    if (!loading) {
+      setTimeout(() => {
+        setLoading(true);
+      }, 2000);
+    }
+  }, []);
+
+  if (!loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="server__container">

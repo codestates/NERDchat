@@ -25,9 +25,7 @@ const ChatPage = () => {
             <div className="chatpage-chat">
               <Chat />
             </div>
-            <div className="chatpage-vioce">
-              <Voice />
-            </div>
+            <div className="chatpage-vioce">{/* <Voice /> */}</div>
           </div>
         </div>
         <div className="chatpage-sidebar">

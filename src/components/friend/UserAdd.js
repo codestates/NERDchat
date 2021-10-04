@@ -27,7 +27,7 @@ const UserAdd = ({ nickname, userId, setMsg, userInfo }) => {
 
     //본인의 메시지창에서도 보이도록, but without button
     const incomingM = {
-      content: `${userInfo.userId}님의 친구초대를 승락하시겠습니까?`,
+      content: `${userInfo.userId}님의 친구 초대를 승낙하시겠습니까?`,
       to: nickname,
       from: userInfo.userId,
       invite: -1,
@@ -69,7 +69,7 @@ const UserAdd = ({ nickname, userId, setMsg, userInfo }) => {
   return (
     <Modal>
       <div className="adduser_container">
-        <div className="adduser_title">Do you want to add friends?</div>
+        <div className="adduser_title">Add friend?</div>
       </div>
       <div>
         <div className="adduser_container-btn">

@@ -31,9 +31,7 @@ const Invite = ({ nickname, userInfo }) => {
     <Modal>
       {gameId && roomId ? (
         <div className="invite__container">
-          <div className="invite__content">
-            {nickname}님을 초대 하시겠습니까?
-          </div>
+          <div className="invite__content">Invite {nickname}?</div>
 
           <div className="invite__btn__container">
             <button onClick={yesHandler}>YES</button>
@@ -42,10 +40,12 @@ const Invite = ({ nickname, userInfo }) => {
         </div>
       ) : (
         <div className="invite__container">
-          <div className="invite__content">현재 방에 입장하지 않았습니다.</div>
+          <div className="invite__content">
+            User has not entered the room yet!
+          </div>
 
           <div className="invite__btn__container">
-            <button onClick={yesHandler}>Okay</button>
+            <button onClick={yesHandler}>OK</button>
           </div>
         </div>
       )}
