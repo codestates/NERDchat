@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
           }
         }
         break;
-      case 'Kakao':
+      case 'kakao':
         const kakaoAccessToken = await axios({
           url: 'https://kauth.kakao.com/oauth/token',
           method: 'POST',
@@ -76,7 +76,7 @@ module.exports = async (req, res) => {
           }
         }
         break;
-      case 'Google':
+      case 'google':
         const googleAccessToken = await axios({
           url: 'https://googleapis.com/oauth2/v4/token',
           method: 'POST',
