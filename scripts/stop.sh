@@ -4,3 +4,4 @@ cd /home/ubuntu/server
 npm i pm2 -g
 sudo pm2 update
 sudo pm2 delete cluster 2> /dev/null
+sudo pm2 delete index 2> /dev/null
