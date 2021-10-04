@@ -6,7 +6,14 @@ import DropDown from "./DropDown/DropDown";
 import socket from "../../../hooks/socket";
 import "./FriendList.scss";
 
-const FriendList = ({ avatar, nickname, messages, online, userInfo }) => {
+const FriendList = ({
+  avatar,
+  nickname,
+  messages,
+  online,
+  userInfo,
+  userId,
+}) => {
   const [loader, setLoader] = useState(false);
   const [msg, setMsg] = useState({ data: {} });
   const dropRef = useRef();
@@ -92,7 +99,7 @@ const FriendList = ({ avatar, nickname, messages, online, userInfo }) => {
           nickname={nickname}
           messages={messages}
           msg={msg}
-          // sendHandler={sendHandler}
+          userId={userId}
           setMsg={setMsg}
         />
       )}

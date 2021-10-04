@@ -6,7 +6,14 @@ import OnlineUserDropDown from "./DropDown/OnlineUserDropDown";
 import socket from "../../../hooks/socket";
 import "./OnlineUser.scss";
 
-const OnlineUser = ({ avatar, nickname, messages, online, userInfo }) => {
+const OnlineUser = ({
+  avatar,
+  nickname,
+  messages,
+  online,
+  userInfo,
+  userId,
+}) => {
   const [loader, setLoader] = useState(false);
   const [msg, setMsg] = useState({ data: {} });
   const dropRef = useRef();
@@ -91,6 +98,7 @@ const OnlineUser = ({ avatar, nickname, messages, online, userInfo }) => {
           messages={messages}
           msg={msg}
           setMsg={setMsg}
+          userId={userId}
         />
       )}
     </>
