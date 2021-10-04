@@ -14,7 +14,9 @@ $title: rgb(172, 172, 172);
   margin-top: -50px;
   border-radius: 5px;
   z-index: 1;
-
+  :focus {
+    outline: none;
+  }
   ul li a {
     text-decoration: none;
     color: rgb(172, 172, 172);

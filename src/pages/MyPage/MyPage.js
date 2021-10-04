@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import NavBar from "../../components/NavBar/NavBar";
+import BookMarkList from "../../components/MypageDashBoardContent/BookMarkList/BookMarkList";
 import MessagesList from "../../components/MypageDashBoardContent/MessagesList/MessagesList";
 import SettingInfo from "../../components/MypageDashBoardContent/SettingInfo/SettingInfo";
 import { Cookies } from "react-cookie";
@@ -16,15 +17,12 @@ import "./MyPage.scss";
 function MyPage() {
   const cookies = new Cookies();
   let userInfo = cookies.get("userInfo");
-
-  const { avatar, nickname, status, email } = userInfo;
-
+  const { avatar, nickname, status, email, oauth } = userInfo;
   const [profileImg, setProfileImg] = useState(null);
-
-  const [state, setState] = useState(1);
+  const [tab, setTab] = useState(1);
 
   const actionhandle = (index) => {
-    setState(index);
+    setTab(index);
   };
   useEffect(() => {
     setProfileImg(userInfo.avatar);
@@ -62,17 +60,18 @@ function MyPage() {
               <h3 className="mypage__h3">{status}</h3>
             </div>
             <div className="mypage__tabs">
-              <div className="mypage__tab">
+              <div
+                onClick={() => actionhandle(1)}
+                className={tab === 1 ? "mypage__tab active-tab" : "mypage__tab"}
+              >
                 <div className="mypage__tab-icon">
                   <IoHomeOutline size={25} />
                 </div>
                 <span className="mypage__tab-title">SERVERS</span>
               </div>
               <div
-                onClick={() => actionhandle(1)}
-                className={
-                  state === 1 ? "mypage__tab active-tab" : "mypage__tab"
-                }
+                onClick={() => actionhandle(2)}
+                className={tab === 2 ? "mypage__tab active-tab" : "mypage__tab"}
               >
                 <div className="mypage__tab-icon">
                   <IoChatbubblesOutline size={25} />
@@ -80,10 +79,8 @@ function MyPage() {
                 <span className="mypage__tab-title">FRIENDS</span>
               </div>
               <div
-                onClick={() => actionhandle(2)}
-                className={
-                  state === 2 ? "mypage__tab active-tab" : "mypage__tab"
-                }
+                onClick={() => actionhandle(3)}
+                className={tab === 3 ? "mypage__tab active-tab" : "mypage__tab"}
               >
                 <div className="mypage__tab-icon">
                   <IoSettingsOutline size={25} />
@@ -95,26 +92,24 @@ function MyPage() {
           <div className="mypage__dashboard-content">
             <div
               className={
-                state === 1
-                  ? "mypage__content active-content"
-                  : "mypage__content"
+                tab === 1 ? "mypage__content active-content" : "mypage__content"
+              }
+            >
+              <BookMarkList />
+            </div>
+            <div
+              className={
+                tab === 2 ? "mypage__content active-content" : "mypage__content"
               }
             >
               <MessagesList />
             </div>
             <div
               className={
-                state === 2
-                  ? "mypage__content active-content"
-                  : "mypage__content"
+                tab === 3 ? "mypage__content active-content" : "mypage__content"
               }
             >
-              <SettingInfo
-                profileImg={profileImg}
-                setProfileImg={setProfileImg}
-                avatar={avatar}
-                status={status}
-              />
+              <SettingInfo avatar={avatar} status={status} oauth={oauth} />
             </div>
           </div>
         </div>

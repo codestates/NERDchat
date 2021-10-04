@@ -56,8 +56,9 @@ const UserAdd = ({ nickname, userId, setMsg, userInfo }) => {
         return { data: temp };
       }
     });
+    //친구요청 모달 확인 모달창 닫기
     addFriendModalHandler();
-    //확인 할 수 있도록 모달창 열어주기?
+    //확인 할 수 있도록 모달창 열어주기
     privateModalHandler();
   };
 

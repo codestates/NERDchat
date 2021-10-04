@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import {
   IoFingerPrintOutline,
   IoMailOpenOutline,
@@ -19,6 +19,7 @@ const MsgListDropDown = ({
   msg,
   setMsg,
   userId,
+  backgroundCloseHandler,
 }) => {
   const {
     userInfoModalHandler,
@@ -30,6 +31,11 @@ const MsgListDropDown = ({
     inviteModalOpen,
     inviteModalHandler,
   } = useContext(Context);
+  const dropdownRef = useRef();
+
+  useEffect(() => {
+    dropdownRef.current.focus();
+  }, []);
 
   const addUserModalHandler = () => {
     addFriendModalHandler();
@@ -45,7 +51,12 @@ const MsgListDropDown = ({
   };
 
   return (
-    <div className="msgList__wrapper">
+    <div
+      className="msgList__wrapper"
+      tabIndex={0}
+      ref={dropdownRef}
+      onBlur={backgroundCloseHandler}
+    >
       {privateModalOpen && (
         <PrivateMessageModal
           nickname={nickname}
