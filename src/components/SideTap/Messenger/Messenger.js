@@ -15,9 +15,7 @@ const Messenger = ({
   const [msg, setMsg] = useState({ data: {} });
   const [loading, setLoading] = useState(false);
   const [showingMsg, setShowMsg] = useState("");
-  const modalHandler = () => {
-    setModalOpen((prev) => !prev);
-  };
+
   //여기에서 private message이벤트를 들어야 실시간 통신이 될듯.
   //메시지 듣기
   useEffect(() => {
@@ -54,6 +52,12 @@ const Messenger = ({
       socket.off("private message");
     };
   }, [nickname]);
+  const modalHandler = () => {
+    setModalOpen((prev) => !prev);
+  };
+  const backgroundCloseHandler = (e) => {
+    setModalOpen(false);
+  };
 
   return (
     <>
@@ -93,6 +97,7 @@ const Messenger = ({
           msg={msg}
           userId={userId}
           setMsg={setMsg}
+          backgroundCloseHandler={backgroundCloseHandler}
         />
       )}
     </>

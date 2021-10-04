@@ -56,17 +56,11 @@ const OnlineUser = ({
   };
 
   const backgroundCloseHandler = (e) => {
-    if (dropRef.current === e.target) {
-      setLoader(false);
-    }
+    setLoader(false);
   };
   return (
     <>
-      <div
-        className="online__container"
-        ref={dropRef}
-        onClick={backgroundCloseHandler}
-      >
+      <div className="online__container" ref={dropRef}>
         <div className="online__avatar-container">
           <img
             className="online__avatar"
@@ -99,6 +93,7 @@ const OnlineUser = ({
           msg={msg}
           setMsg={setMsg}
           userId={userId}
+          backgroundCloseHandler={backgroundCloseHandler}
         />
       )}
     </>

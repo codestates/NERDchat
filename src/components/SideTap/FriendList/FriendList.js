@@ -57,18 +57,12 @@ const FriendList = ({
   };
 
   const backgroundCloseHandler = (e) => {
-    if (dropRef.current === e.target) {
-      setLoader(false);
-    }
+    setLoader(false);
   };
 
   return (
     <>
-      <div
-        className="friend__container"
-        ref={dropRef}
-        onClick={backgroundCloseHandler}
-      >
+      <div className="friend__container" ref={dropRef}>
         <div className="friend__avatar-container">
           <img
             className={online ? "friend__avatar" : "friendoff__avatar"}
@@ -101,6 +95,7 @@ const FriendList = ({
           msg={msg}
           userId={userId}
           setMsg={setMsg}
+          backgroundCloseHandler={backgroundCloseHandler}
         />
       )}
     </>

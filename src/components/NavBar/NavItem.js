@@ -38,6 +38,11 @@ const NavItem = () => {
   };
 
   const loggedInCookie = localStorage.getItem("nerd-logged-in");
+  const backgroundCloseHandler = (e) => {
+    console.log(123123);
+    setOpen(false);
+  };
+
   useEffect(() => {
     setIsLogin(localStorage.getItem("nerd-logged-in"));
   }, [loggedInCookie]);
@@ -53,7 +58,9 @@ const NavItem = () => {
         <div className="icon-button" onClick={openHandler}>
           <IoBookOutline size={30} />
         </div>
-        {open && <DropdownMenu />}
+        {open && (
+          <DropdownMenu backgroundCloseHandler={backgroundCloseHandler} />
+        )}
         {!isLogin && (
           <div className="icon-button" onClick={loginmodalHandler}>
             <IoFingerPrintOutline size={30} />

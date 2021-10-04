@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   IoFingerPrintOutline,
@@ -13,7 +13,15 @@ import Invite from "../../../invite/Invite";
 import { Context } from "../../../../context/ContextProvider";
 import "./DropDown.scss";
 
-function DropDown({ nickname, messages, userInfo, msg, userId, setMsg }) {
+function DropDown({
+  nickname,
+  messages,
+  userInfo,
+  msg,
+  userId,
+  setMsg,
+  backgroundCloseHandler,
+}) {
   const {
     deleteFriendModalHandler,
     deleteFriendModalOpen,
@@ -24,7 +32,11 @@ function DropDown({ nickname, messages, userInfo, msg, userId, setMsg }) {
     inviteModalOpen,
     inviteModalHandler,
   } = useContext(Context);
+  const dropdownRef = useRef();
 
+  useEffect(() => {
+    dropdownRef.current.focus();
+  }, []);
   const deleteModalHandler = () => {
     deleteFriendModalHandler();
   };
@@ -39,7 +51,12 @@ function DropDown({ nickname, messages, userInfo, msg, userId, setMsg }) {
     inviteModalHandler();
   };
   return (
-    <div className="friendlist__wrapper">
+    <div
+      className="friendlist__wrapper"
+      tabIndex={0}
+      ref={dropdownRef}
+      onBlur={backgroundCloseHandler}
+    >
       {privateModalOpen && (
         <PrivateMessageModal
           nickname={nickname}
