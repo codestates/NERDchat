@@ -7,18 +7,17 @@ import "./UserAdd.scss";
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
-const UserAdd = ({ nickname, userInfo }) => {
+const UserAdd = ({ nickname, userInfo, setMsg }) => {
   const { addFriendModalHandler, privateModalHandler } = useContext(Context);
 
   //친구초대 하기
   const okHandler = async () => {
     addFriendModalHandler();
-    //nickname을 어떻게 받아올지가 문제, 아마 친구리스트에서 클릭할때 props로 내려주면 될듯?
     const res = await axios.get(`${ENDPOINT}/friends/send/${nickname}`, {
       withCredentials: true,
     });
     //요청이 잘 보내짐.
-    //메시지 모달창을 열고, 친구초대 메시지를 보내자. 형제 컴포넌트라 새로운 메시지 상태관리 불가...
+    //메시지 모달창을 열고, 친구초대 메시지를 보내자.
     //모달창 열 필요는 없을듯
     socket.emit("private message", {
       content: `${userInfo.userId}님의 친구초대를 승락하시겠습니까?`,
@@ -26,20 +25,44 @@ const UserAdd = ({ nickname, userInfo }) => {
       invite: -1,
       friend: 1,
     });
-    //새로고침 하고 열면 제대로 메시지 있찌 않을까?
-    // window.location.reload();
-    // privateModalHandler();
+
+    //본인의 메시지창에서도 보이도록, but without button
+    const incomingM = {
+      content: `${userInfo.userId}님의 친구초대를 승락하시겠습니까?`,
+      to: nickname,
+      from: userInfo.userId,
+      invite: -1,
+      friend: -1,
+    };
+    //보내는사람 본인: userInfo.nickname;
+    //받을 사람: nickname
+    setMsg((prev) => {
+      const temp = { ...prev.data };
+      if (!temp[userInfo.nickname]) {
+        temp[userInfo.nickname] = [incomingM];
+        if (!temp[nickname]) {
+          temp[nickname] = [incomingM];
+        } else {
+          temp[nickname].push(incomingM);
+        }
+        return { data: temp };
+      } else {
+        if (!temp[nickname]) {
+          temp[nickname] = [incomingM];
+        } else {
+          temp[nickname].push(incomingM);
+        }
+        temp[userInfo.nickname].push(incomingM);
+
+        return { data: temp };
+      }
+    });
+    //확인 할 수 있도록 모달창 열어주기?
+    privateModalHandler();
   };
 
   //취소
   const noHandler = async () => {
-    // const res = await axios.post(
-    //   `${ENDPOINT}friends/accept/${nickname}`,
-    //   { accept: false },
-    //   {
-    //     withCredentials: true,
-    //   }
-    // );
     addFriendModalHandler();
   };
 

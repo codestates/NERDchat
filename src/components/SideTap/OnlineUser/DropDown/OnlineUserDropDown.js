@@ -54,6 +54,7 @@ function OnlineUserDropDown({
     <div className="onlinelist__wrapper">
       {privateModalOpen && (
         <PrivateMessageModal
+          userInfo={userInfo}
           nickname={nickname}
           messages={messages}
           msg={msg.data}
@@ -63,7 +64,7 @@ function OnlineUserDropDown({
       {userInfoModalOpen && <UserInfo nickname={nickname} />}
       {inviteModalOpen && <Invite nickname={nickname} userInfo={userInfo} />}
       {addFriendModalOpen && (
-        <UserAdd nickname={nickname} userInfo={userInfo} />
+        <UserAdd nickname={nickname} userInfo={userInfo} setMsg={setMsg} />
       )}
       <ul className="onlinelist__menu">
         <li className="onlinelist__li">

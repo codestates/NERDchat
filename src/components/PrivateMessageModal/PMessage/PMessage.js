@@ -8,9 +8,8 @@ const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const PMessage = ({ message, userInfo, setMsg }) => {
   const { content, to, from, invite, friend } = message;
-  console.log(777, message);
-
   let mine = from === userInfo.userId;
+  console.log(111, content, to, from, invite, friend, "mine? :", mine);
 
   let today = new Date();
   let time = today.getHours() + ":" + today.getMinutes();
@@ -22,7 +21,7 @@ const PMessage = ({ message, userInfo, setMsg }) => {
     const res = await axios.post(`${ENDPOINT}/friends/accept/${from}`, true, {
       withCredentials: true,
     });
-    console.log(res);
+    console.log(222, res);
     socket.emit("private message", {
       content: `${from}님의 친구요청을 승낙 하였습니다.`,
       to: from,
@@ -100,6 +99,7 @@ const PMessage = ({ message, userInfo, setMsg }) => {
   };
 
   return mine ? (
+    //내가 보낸 메시지
     <>
       <div className="fromcurrent__container">
         <div className="fromcurrent__time">{currentTime}</div>
@@ -115,6 +115,7 @@ const PMessage = ({ message, userInfo, setMsg }) => {
       </div>
     </>
   ) : (
+    //남이 보낸 메시지
     <>
       <div className="touser__container">
         <div className="touser__name">
@@ -125,12 +126,12 @@ const PMessage = ({ message, userInfo, setMsg }) => {
       </div>
       <div className="touser__body-container">
         <div className="touser__body">
-          {!(invite && friend) && content}
-          {invite && <a href={content}>{content}</a>}
-          {friend && (
+          {!invite && !friend && <p>{content}</p>}
+          {invite === 1 && <a href={content}>{content}</a>}
+          {friend === 1 && (
             <>
               <p>{content}</p>
-              <div>
+              <div className="friend__req__button__container">
                 <button onClick={acceptFriendHandler}>YES</button>
                 <button onClick={denyFriendHandler}>NO</button>
               </div>

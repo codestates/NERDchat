@@ -47,23 +47,12 @@ const OnlineUser = ({ avatar, nickname, messages, online, userInfo }) => {
   const clickHandler = () => {
     setLoader((prev) => !prev);
   };
-  //메시지 보내기
-  // const sendHandler = (e) => {
-  //   e.preventDefault();
-  //   socket.emit("private message", { content: e.target.value, to: nickname });
-  //   const incomingM = {
-  //     content: e.target.value,
-  //     from: userInfo.userId,
-  //     to: nickname,
-  //   };
-  //   setMsg((prev) => [...prev, incomingM]);
-  // };
+
   const backgroundCloseHandler = (e) => {
     if (dropRef.current === e.target) {
       setLoader(false);
     }
   };
-  console.log(2818893128918923, msg);
   return (
     <>
       <div
@@ -101,7 +90,6 @@ const OnlineUser = ({ avatar, nickname, messages, online, userInfo }) => {
           nickname={nickname}
           messages={messages}
           msg={msg}
-          // sendHandler={sendHandler}
           setMsg={setMsg}
         />
       )}

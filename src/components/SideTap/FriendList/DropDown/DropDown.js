@@ -46,6 +46,7 @@ function DropDown({ nickname, messages, userInfo, msg, sendHandler, setMsg }) {
           messages={messages}
           msg={msg.data}
           setMsg={setMsg}
+          userInfo={userInfo}
         />
       )}
       {userInfoModalOpen && <UserInfo nickname={nickname} />}
