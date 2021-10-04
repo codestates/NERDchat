@@ -56,7 +56,7 @@ function Voice() {
   useEffect(() => {
     navigator.mediaDevices
       .getUserMedia({
-        video: false,
+        video: true,
         audio: {
           echoCancellation: true,
         },
