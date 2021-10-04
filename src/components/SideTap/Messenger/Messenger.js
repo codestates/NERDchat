@@ -3,7 +3,14 @@ import MsgListDropDown from "./MsgListDropDown";
 import socket from "../../../hooks/socket";
 import "./Messenger.scss";
 
-const Messenger = ({ avatar, nickname, messages, userInfo, online }) => {
+const Messenger = ({
+  avatar,
+  nickname,
+  messages,
+  userInfo,
+  online,
+  userId,
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [msg, setMsg] = useState({ data: {} });
   const [loading, setLoading] = useState(false);
@@ -84,7 +91,7 @@ const Messenger = ({ avatar, nickname, messages, userInfo, online }) => {
           nickname={nickname}
           messages={messages}
           msg={msg}
-          // sendHandler={sendHandler}
+          userId={userId}
           setMsg={setMsg}
         />
       )}

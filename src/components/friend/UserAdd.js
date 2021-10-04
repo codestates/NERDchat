@@ -7,13 +7,12 @@ import "./UserAdd.scss";
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
-const UserAdd = ({ nickname, userInfo, setMsg }) => {
+const UserAdd = ({ nickname, userId, setMsg, userInfo }) => {
   const { addFriendModalHandler, privateModalHandler } = useContext(Context);
 
   //친구초대 하기
   const okHandler = async () => {
-    addFriendModalHandler();
-    const res = await axios.get(`${ENDPOINT}/friends/send/${nickname}`, {
+    const res = await axios.get(`${ENDPOINT}/friends/send/${userId}`, {
       withCredentials: true,
     });
     //요청이 잘 보내짐.
@@ -57,6 +56,7 @@ const UserAdd = ({ nickname, userInfo, setMsg }) => {
         return { data: temp };
       }
     });
+    addFriendModalHandler();
     //확인 할 수 있도록 모달창 열어주기?
     privateModalHandler();
   };

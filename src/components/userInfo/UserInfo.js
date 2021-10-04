@@ -14,7 +14,6 @@ const UserInfo = ({ nickname }) => {
   };
   const getUserProfileHandler = async () => {
     const res = await axios.get(`${ENDPOINT}/profile/${nickname}`);
-    console.log(res.data);
     setFriendInfo(res.data.data);
   };
   useEffect(() => {

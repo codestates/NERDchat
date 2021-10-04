@@ -14,7 +14,7 @@ const ServerPageCard = ({ category, img, id, like }) => {
   const history = useHistory();
   const { loginModalOpen, loginmodalHandler } = useContext(Context);
   const [clicked, setClicked] = useState(false);
-
+  console.log(7777, category);
   const addBookmarkHandler = async (e) => {
     // e.preventDefault();
     e.stopPropagation();
