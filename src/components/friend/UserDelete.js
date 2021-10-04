@@ -23,7 +23,7 @@ const UserDelete = ({ nickname }) => {
   return (
     <Modal>
       <div className="delete__container">
-        <div className="delete__title">Do you want to unfriend this user?</div>
+        <div className="delete__title">Delete friend?</div>
       </div>
       <div>
         <div className="delete__container-btn">

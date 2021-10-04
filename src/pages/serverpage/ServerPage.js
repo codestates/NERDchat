@@ -58,6 +58,16 @@ const ServerPage = () => {
   // const Lists = [{ id: 1, category: 'diablo', image: 1, fav: 1 }, { id: 2, category: 'lol', image: 2, fav: 0 }, { id: 3, category: 'hothot3', image: 3, fav: 0 }, { id: 4, category: 'coolcool', image: 4, fav: 0 }, { id: 5, category: 'diablo', image: 1, fav: 0 }, { id: 6, category: 'lol', image: 2, fav: 1 }, { id: 7, category: 'hothot3', image: 3, fav: 0 }, { id: 8, category: 'coolcool', image: 4, fav: 1 }, { id: 9, category: 'diablo', image: 1, fav: 0 }, { id: 10, category: 'lol', image: 2, fav: 0 }, { id: 11, category: 'hothot3', image: 3, fav: 0 }, { id: 12, category: 'coolcool', image: 4, fav: 0 }, { id: 13, category: 'diablo', image: 1, fav: 0 }, { id: 14, category: 'lol', image: 2, fav: 1 }, { id: 15, category: 'hothot3', image: 3, fav: 0 }, { id: 16, category: 'coolcool', image: 4, fav: 0 }];
   // const loading = false;
 
+  // useEffect(() => {
+  //   if (!isLoading) {
+  //     setTimeout(() => {
+  //       setIsLoading(true);
+  //     }, 2000);
+  //   }
+  // }, [isLoading]);
+
+  // if (!isLoading) return <Spinner />;
+
   return (
     <div className="server__list__container">
       <NavBar />
