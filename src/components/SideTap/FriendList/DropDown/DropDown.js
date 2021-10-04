@@ -13,7 +13,7 @@ import Invite from "../../../invite/Invite";
 import { Context } from "../../../../context/ContextProvider";
 import "./DropDown.scss";
 
-function DropDown({ nickname, messages, userInfo, msg, sendHandler, setMsg }) {
+function DropDown({ nickname, messages, userInfo, msg, userId, setMsg }) {
   const {
     deleteFriendModalHandler,
     deleteFriendModalOpen,

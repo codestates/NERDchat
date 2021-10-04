@@ -5,14 +5,19 @@ import Loader from "../components/Loader/Loader";
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const useLists = (pageNum, method, api, data) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [lists, setLists] = useState([]);
   const [hasMore, setHasMore] = useState(false);
   useEffect(() => {
     setLoading(true);
-    getLists();
-    setLoading(false);
+    const deleayedReq = setTimeout(() => {
+      getLists();
+      setLoading(false);
+    }, 300);
+
+    return () => clearTimeout(deleayedReq);
   }, [pageNum]);
+
   // 좋아하는 리스트를 받아오고...
   // 그 리스트와 data의 id가 일치한다면, favorites: 1로 체크, if not 0;
   const getLists = async () => {

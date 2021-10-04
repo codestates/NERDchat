@@ -92,9 +92,11 @@ const SideBar = () => {
                   key={el.userId}
                   avatar={el.avatar}
                   nickname={el.nickname}
+                  userId={el.userId}
                   messages={el.messages}
                   online={el.connected}
                   userInfo={userInfo}
+                  userId={el.userId}
                 />
               ))}
           {toggleState === 1 && loading && <Loader />}
@@ -115,6 +117,7 @@ const SideBar = () => {
                   nickname={el.nickname}
                   messages={el.messages}
                   online={el.connected}
+                  userId={el.userId}
                   userInfo={userInfo}
                 />
               ))}
@@ -140,6 +143,7 @@ const SideBar = () => {
                   avatar={el.avatar}
                   nickname={el.nickname}
                   online={el.connected}
+                  userId={el.userId}
                   messages={el.messages}
                 />
               ))}

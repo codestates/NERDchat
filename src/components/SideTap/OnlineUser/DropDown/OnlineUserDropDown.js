@@ -20,7 +20,7 @@ function OnlineUserDropDown({
   messages,
   userInfo,
   msg,
-  sendHandler,
+  userId,
   setMsg,
 }) {
   const {
@@ -64,7 +64,12 @@ function OnlineUserDropDown({
       {userInfoModalOpen && <UserInfo nickname={nickname} />}
       {inviteModalOpen && <Invite nickname={nickname} userInfo={userInfo} />}
       {addFriendModalOpen && (
-        <UserAdd nickname={nickname} userInfo={userInfo} setMsg={setMsg} />
+        <UserAdd
+          nickname={nickname}
+          userInfo={userInfo}
+          setMsg={setMsg}
+          userId={userId}
+        />
       )}
       <ul className="onlinelist__menu">
         <li className="onlinelist__li">

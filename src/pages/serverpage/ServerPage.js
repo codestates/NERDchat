@@ -3,6 +3,7 @@ import useLists from "../../hooks/useLists";
 import ServerPageCard from "../../components/serverPage/ServerPageCard";
 import NavBar from "../../components/NavBar/NavBar";
 import { Cookies } from "react-cookie";
+import Loader from "../../components/Loader/Loader";
 import "./ServerPage.scss";
 
 const ServerPage = () => {
@@ -13,8 +14,9 @@ const ServerPage = () => {
     "get",
     "/category/lists/"
   );
+  const userInfo = cookies.get("userInfo");
 
-  if (!cookies.get("userInfo")) {
+  if (!userInfo) {
     const randomNum = Math.floor(Math.random() * 10000);
     const userInfo = {
       id: randomNum,
@@ -24,6 +26,7 @@ const ServerPage = () => {
     };
     cookies.set("userInfo", userInfo);
   }
+
   // Infinite Scroll
   // 일반적인 useRef는 state가 아니기 때문에 컴포넌트가 변화할때마다 다시 렌더되지 못한다. 하지만, useCallback을 ref로 주게 되면,
   // 해당요소가 생성 될 때 마다 callback함수가 실행되게 된다.
@@ -87,7 +90,7 @@ const ServerPage = () => {
               );
             }
           })}
-          <div>{loading && "loading..."}</div>
+          <div>{loading && <Loader />}</div>
         </div>
       </div>
     </div>

@@ -70,8 +70,6 @@ const ContextProvider = ({ children }) => {
     cookieUserInfo = { id, avatar, userId, nickname, email, oauth, status };
     cookies.set("userInfo", cookieUserInfo);
     dispatchUserInfo({ type: "GET", item: info });
-    // console.log('after dispatch',userInfo)
-    // setUserInfo(info)
   };
 
   const [createRoomOpen, setCreateRoomOpen] = useState(false);
@@ -88,8 +86,13 @@ const ContextProvider = ({ children }) => {
     setFriends(res.data.data);
   };
   useEffect(() => {
-    getFriendsListHandler();
-  }, []);
+    if (localStorage.getItem("nerd-logged-in")) {
+      getFriendsListHandler().catch((e) => {
+        // console.log(e);
+        // console.log(1616, cookies.get("userInfo"));
+      });
+    }
+  }, [userInfo]);
   // server game lists
   // login userInfo
   // online user ->실시간 어떻게 구현하지...?
