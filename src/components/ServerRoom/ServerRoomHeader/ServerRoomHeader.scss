@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap");
 $dark: rgb(23, 23, 23);
 $neonNain: rgb(184, 126, 255);
 $neonSer: rgb(163, 16, 255);
+$title: rgb(172, 172, 172);
 
 .server__room__header__container {
   display: flex;
@@ -8,28 +11,45 @@ $neonSer: rgb(163, 16, 255);
   align-items: center;
   position: relative;
   gap: 1em;
+  .headCount__container {
+    color: $title;
+  }
+  .back__icons {
+    position: absolute;
+    left: 0;
+    cursor: pointer;
+    align-items: center;
+    margin-left: 15px;
+    display: flex;
+    color: $title;
+
+    // &:hover {
+    //   color: $neonSer;
+    // }
+  }
 
   .headCount__container {
-    color: white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    margin-left: 10px;
   }
-}
-
-.back__icons {
-  position: absolute;
-  left: 0;
-  cursor: pointer;
-  display: flex;
-  color: white;
-  &:hover {
-    color: $neonSer;
+  .nerdtitle {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    margin-left: 10px;
   }
-}
+  .create__room {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    padding: 0.5em 1.5em;
+    border: 1px solid $title;
+    background: transparent;
+    border-radius: 50px;
+    color: $title;
+  }
 
-.create__room {
-  border: none;
-  background: $neonSer;
-  cursor: pointer;
-  padding: 0.5em 1em;
-  color: white;
-  border-radius: 0.3em;
+  .create__room:hover {
+    border: 1px solid $neonNain;
+    filter: drop-shadow(1px 1px 2px $neonSer);
+  }
 }

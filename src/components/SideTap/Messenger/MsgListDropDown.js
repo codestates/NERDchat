@@ -69,7 +69,7 @@ const MsgListDropDown = ({ nickname, messages, userInfo, msg, setMsg }) => {
             <div className="msgList__icon">
               <IoMailOpenOutline className="icona" />
             </div>
-            Message
+            DM
           </div>
         </li>
         <li className="msgList__li">

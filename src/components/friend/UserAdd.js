@@ -20,7 +20,7 @@ const UserAdd = ({ nickname, userInfo, setMsg }) => {
     //메시지 모달창을 열고, 친구초대 메시지를 보내자.
     //모달창 열 필요는 없을듯
     socket.emit("private message", {
-      content: `${userInfo.userId}님의 친구초대를 승락하시겠습니까?`,
+      content: `${userInfo.userId} 님의 친구 초대를 승낙하시겠습니까?`,
       to: nickname,
       invite: -1,
       friend: 1,
@@ -69,7 +69,7 @@ const UserAdd = ({ nickname, userInfo, setMsg }) => {
   return (
     <Modal>
       <div className="adduser_container">
-        <div className="adduser_title">친구에 추가 하시겠습니까?</div>
+        <div className="adduser_title">Do you want to add friends?</div>
       </div>
       <div>
         <div className="adduser_container-btn">

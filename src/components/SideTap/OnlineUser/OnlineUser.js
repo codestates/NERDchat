@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import { IoChevronDownOutline, IoEllipseSharp } from "react-icons/io5";
+import { IoChevronForwardOutline } from "react-icons/io5";
 
 import OnlineUserDropDown from "./DropDown/OnlineUserDropDown";
 import socket from "../../../hooks/socket";
@@ -78,7 +78,7 @@ const OnlineUser = ({ avatar, nickname, messages, online, userInfo }) => {
           </div>
         </div>
         <div className="online__dropstart" onClick={clickHandler}>
-          <IoChevronDownOutline
+          <IoChevronForwardOutline
             size={15}
             className={loader ? "online__drop-click" : "online__drop"}
           />

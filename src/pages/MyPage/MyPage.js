@@ -19,10 +19,7 @@ function MyPage() {
 
   const { avatar, nickname, status, email } = userInfo;
 
-  const [profileImg, setProfileImg] = useState(
-    null
-    // "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw8NDQ0NDQ0NDQ0NDQ0NDQ0NDw8NDQ0NFREWFhURFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDQ0NFgoNDisZEx4rKy0rKys3LS0rKysrKystKystKy0rKysrKysrLSsrKzcrKys3KysrKzcrKystNy0rK//AABEIAKgBLAMBIgACEQEDEQH/xAAXAAEBAQEAAAAAAAAAAAAAAAAAAQIH/8QAHRABAQACAgMBAAAAAAAAAAAAAAERYSExAnGRUf/EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwDuIAAAJZ13woAigAkqgAAAAAAAAAAAAAACKAAAz4+OM825tvNzjU00AAAAAAACKAAAAAAAIoAigIKAgoAAAioCiWbxudxQAARQABAUAAAAEwAoAAAigCKAAgCooCKAAACKAgoAAAgoIogKigIoACKAACKAAAIACiVQAQBUUEUAAARQAABFABFAAQFEUAEBQABFAAAAAABFABFAAARUAUAAAAAARQBFBFAARQAQFEAUQBQAAAAAAQFBAURQBFAAAAAEUASzjvG5jMUAAEUABFAAAAAAAAAAAAAEUAABIoAkUARQAAAABFARUUBFAAAAAAAAABFAAAAAABFAAAAABFAAARQAAAAABAVBQBFAABBUBRAFABAAVFAEVAUQBUAFQkUARQRUgCiAKIAoigCAKCAoAIogKAAIoIogKAAIoAICoqAoAIoACAKAAgoAgCiAKgAAACgCKAigACAqKACKCSKAIKAgoAgAoICooCKACKAigAIAqKAigACAoJZ7+0FAAAAABAAJ1+7UAAAAAEUBBQBFAAARQARQAAEUARQAQAUAEUAf/9k="
-  );
+  const [profileImg, setProfileImg] = useState(null);
 
   const [state, setState] = useState(1);
 
@@ -54,7 +51,11 @@ function MyPage() {
             <div className="mypage__user">
               <img
                 className="mypage__img"
-                src={avatar === null ? profileImg : avatar}
+                src={
+                  avatar === null
+                    ? require("../../images/dummy/white.jpeg").default
+                    : avatar
+                }
                 alt=""
               />
               <h2 className="mypage__h2">{nickname}</h2>

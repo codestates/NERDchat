@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import DropdownItem from "./DropdownItem";
-import { IoAttachOutline } from "react-icons/io5";
 
 import "./DropdownMenu.scss";
 
@@ -31,22 +30,14 @@ const DropdownMenu = () => {
   };
   return (
     <div className="dropdown">
-      {gameList.length === 0 && (
-        <DropdownItem
-          leftIcon={<IoAttachOutline />}
-          gameList="북마크를 추가해 주세요!"
-        />
-      )}
+      {gameList.length === 0 && <DropdownItem gameList="Bookmark is empty" />}
       {gameList.map((list) => {
         return (
           <div
             key={list.GameCategory.category}
             onClick={() => clickHandler(list.gameId)}
           >
-            <DropdownItem
-              leftIcon={<IoAttachOutline />}
-              gameList={list.GameCategory.category}
-            />
+            <DropdownItem gameList={list.GameCategory.category} />
           </div>
         );
       })}
