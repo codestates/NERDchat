@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
 $dark: rgb(23, 23, 23);
-$neonNain: rgb(184, 126, 255);
+$neonMain: rgb(184, 126, 255);
 $neonSer: rgb(163, 16, 255);
-$neonPink: rgba(255, 0, 242, 0.618);
+$title: rgb(172, 172, 172);
+
 @mixin glitchCopy {
   content: attr(data-text);
   position: absolute;
@@ -10,38 +13,43 @@ $neonPink: rgba(255, 0, 242, 0.618);
   width: 100%;
   height: 100%;
 }
+.room__card {
+  // border: 1px solid red;
+  width: 800px;
+}
+
 .room__card__container {
+  // border: 1px solid aqua;
   cursor: pointer;
-  width: 100%;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid rgba(121, 121, 121, 0.1);
-  // position: relative;
-  background: rgba(255, 255, 255, 0.1);
-  // border-top: 1px solid rgba(255, 255, 255, 0.5);
-  // border-left: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 20px 20px 50x rgba(0, 0, 0, 0.5);
-  // backdrop-filter: blur(5px);
-  transition: box-shadow 1.2s;
-  color: white;
+  background: rgba(77, 77, 77, 0.243);
+  backdrop-filter: blur(0.5em);
+  // transition: box-shadow 1.2s;
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  color: $title;
+  margin: 10px 0px;
+  box-shadow: 1px 3px 15px black;
+
   &:hover {
-    box-shadow: 0px 120px 0 0 $neonSer inset, 0 -120px 0 0 $neonSer inset;
+    // box-shadow: 0px 120px 0 0 $neonSer inset, 0 -120px 0 0 $neonSer inset;
   }
 
   &:hover .room__title {
     animation: glitch-skew 1s infinite linear alternate-reverse;
   }
   &:hover .room__title::before {
-    @include glitchCopy;
+    // @include glitchCopy;
     left: -2px;
     text-shadow: 1px 0 #6d01fb, 2px 0 #eb06d8;
     clip: rect(0, 0, 0, 0);
     animation: glitch-anim 5s infinite linear alternate-reverse;
   }
   &:hover .room__title::after {
-    @include glitchCopy;
+    // @include glitchCopy;
     left: 2px;
     text-shadow: 1px 0 #63c3ea, 2px 0 #2b30d1;
     clip: rect(0, 0, 0, 0);
@@ -193,7 +201,8 @@ $neonPink: rgba(255, 0, 242, 0.618);
   $steps: 10;
   @for $i from 0 through $steps {
     #{percentage($i*(1/$steps))} {
-      transform: skew((random(10) - 5) + deg);
+      transform: skew((random(20) - 5) + deg);
+      color: $title;
     }
   }
 }
