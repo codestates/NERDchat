@@ -28,9 +28,9 @@ const RoomSetting = () => {
     e.preventDefault();
 
     if (title.trim().length <= 2) {
-      setErr("Room Title should be longer than 2 letters");
+      setErr("Room Title should be longer than 2 letters.");
     } else if (headCount < 2) {
-      setErr("HeadCount should be bigger than 2");
+      setErr("HeadCount should be bigger than 2.");
     }
 
     const chatId = 1;
@@ -69,18 +69,23 @@ const RoomSetting = () => {
             <div>
               <label htmlFor="members">Max HeadCount</label>
             </div>
-            <div className="headcount__input__container">
-              <input
-                value={headCount}
-                step="1"
-                id="members"
-                type="range"
-                min="0"
-                max="6"
-                placeholder="put room title"
-                onChange={handleMembers}
-              />
-              <p>{headCount} 명</p>
+            <div className="middles">
+              <div className="headcount__input__container">
+                <span className="bars">
+                  <span className="fills"></span>
+                </span>
+                <input
+                  id="sliders"
+                  className="sliders"
+                  type="range"
+                  min="0"
+                  max="6"
+                  onChange={handleMembers}
+                  value={headCount}
+                  step="1"
+                />
+                <p>{headCount} 명</p>
+              </div>
             </div>
           </div>
           <div className="room__err__container">
@@ -96,3 +101,19 @@ const RoomSetting = () => {
 };
 
 export default RoomSetting;
+
+{
+  /* <div className="headcount__input__container">
+  <input
+    value={headCount}
+    step="1"
+    id="members"
+    type="range"
+    min="0"
+    max="6"
+    placeholder="put room title"
+    onChange={handleMembers}
+  />
+  <p>{headCount} 명</p>
+</div>; */
+}

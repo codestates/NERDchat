@@ -9,11 +9,9 @@ const useLists = (pageNum, method, api, data) => {
   const [lists, setLists] = useState([]);
   const [hasMore, setHasMore] = useState(false);
   useEffect(() => {
-    setLoading(true);
     const deleayedReq = setTimeout(() => {
       getLists();
-      setLoading(false);
-    }, 300);
+    }, 1);
 
     return () => clearTimeout(deleayedReq);
   }, [pageNum]);
