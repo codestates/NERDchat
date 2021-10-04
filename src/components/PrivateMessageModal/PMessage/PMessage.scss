@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
 $dark: rgb(23, 23, 23);
 $neonMain: rgb(184, 126, 255);
 $neonSer: rgb(163, 16, 255);
@@ -99,7 +101,27 @@ $title: rgb(172, 172, 172);
     padding: 5px 10px;
     margin: 15px 5px 0px;
     box-shadow: -1px 2px 7px black;
-    border-radius: 10px;
+    border-radius: 50px;
+
+    .friend__req__button__container {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: flex-end;
+      button {
+        font-family: "Poppins", sans-serif;
+        font-weight: 100;
+        padding: 0.5em 1em;
+        border: 1px solid $title;
+        background: transparent;
+        border-radius: 50px;
+        color: $title;
+
+        &:hover {
+          border: 1px solid $neonMain;
+          filter: drop-shadow(1px 1px 2px $neonSer);
+        }
+      }
+    }
   }
 }
 

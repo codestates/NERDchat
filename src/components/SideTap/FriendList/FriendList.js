@@ -11,6 +11,7 @@ const FriendList = ({ avatar, nickname, messages, online, userInfo }) => {
   const [msg, setMsg] = useState({ data: {} });
   const dropRef = useRef();
 
+  //메시지 듣기
   useEffect(() => {
     socket.on(
       "private message",

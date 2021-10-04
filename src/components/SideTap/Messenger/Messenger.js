@@ -14,11 +14,12 @@ const Messenger = ({ avatar, nickname, messages, userInfo, online }) => {
   //여기에서 private message이벤트를 들어야 실시간 통신이 될듯.
   //메시지 듣기
   useEffect(() => {
+    //본인이 보낸 메시지는 아래 이벤트가 발생하지 않음
+    //i.e. 보낼때 직접 state에 넣어줘야 바로 반영이 된다.
     socket.on(
       "private message",
       async ({ content, from, to, invite, friend }) => {
         const incomingM = { content, from, to, invite, friend };
-
         setMsg((prev) => {
           const temp = { ...prev.data };
           const sender = from;

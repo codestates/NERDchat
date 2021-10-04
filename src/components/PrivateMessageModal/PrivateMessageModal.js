@@ -5,19 +5,11 @@ import PInput from "./PInput/PInput";
 import socket from "../../hooks/socket";
 import { Cookies } from "react-cookie";
 
-function PrivateMessageModal({ nickname, setMsg, messages, msg }) {
-  const cookies = new Cookies();
-  const userInfo = cookies.get("userInfo");
+function PrivateMessageModal({ userInfo, nickname, setMsg, messages, msg }) {
   const [msgHistory, setMsgHistory] = useState(messages);
-  // const [newMsg, setNewMsg] = useState("");
   const messageEl = useRef(null);
   const newMessageEl = useRef(null);
-  // //메시지입력핸들러
-  // const msgInputHandler = (e) => {
-  //   e.preventDefault();
-  //   setNewMsg(e.target.value);
-  // };
-  console.log(12312312123, msg);
+
   useEffect(() => {
     messageEl.current.scrollTop = messageEl.current.scrollHeight;
   });
@@ -31,9 +23,12 @@ function PrivateMessageModal({ nickname, setMsg, messages, msg }) {
     }
   }, [msg]);
 
+  //메시지 보내기
   const sendHandler = (e) => {
     e.preventDefault();
     e.stopPropagation();
+
+    //보낼 메시지
     const sendingM = {
       content: e.target.value,
       from: userInfo.nickname,
