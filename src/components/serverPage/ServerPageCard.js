@@ -58,7 +58,7 @@ const ServerPageCard = ({ category, img, id, like }) => {
               <p className="game__title">{category}</p>
             </div>
             <div className="game__server__content__container">
-              <p className="game__server__content">Into Server</p>
+              <p className="game__server__content">INTO SERVER</p>
               <div className="server__arrow">
                 <BsChevronDoubleDown size={20} />
               </div>
@@ -66,7 +66,7 @@ const ServerPageCard = ({ category, img, id, like }) => {
           </div>
           <div className="bookmark__container" onClick={addBookmarkHandler}>
             {clicked ? (
-              <IoBookmark size={25} color="rgb(184, 126, 255)" />
+              <IoBookmarkOutline size={20} className="bookclicked" />
             ) : (
               <Bookmark />
             )}

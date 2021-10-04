@@ -11,15 +11,18 @@ $title: rgb(172, 172, 172);
   align-items: center;
   position: relative;
   gap: 1em;
+  margin: 10px 0;
+
   .headCount__container {
     color: $title;
   }
+
   .back__icons {
     position: absolute;
     left: 0;
     cursor: pointer;
     align-items: center;
-    margin-left: 15px;
+    margin: 0 10px;
     display: flex;
     color: $title;
 
@@ -46,6 +49,7 @@ $title: rgb(172, 172, 172);
     background: transparent;
     border-radius: 50px;
     color: $title;
+    margin-right: 10px;
   }
 
   .create__room:hover {
