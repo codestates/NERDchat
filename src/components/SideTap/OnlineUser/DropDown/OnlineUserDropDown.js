@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 
 import {
   IoFingerPrintOutline,
@@ -22,6 +22,7 @@ function OnlineUserDropDown({
   msg,
   userId,
   setMsg,
+  backgroundCloseHandler,
 }) {
   const {
     userInfoModalHandler,
@@ -34,6 +35,11 @@ function OnlineUserDropDown({
     inviteModalHandler,
   } = useContext(Context);
 
+  const dropdownRef = useRef();
+
+  useEffect(() => {
+    dropdownRef.current.focus();
+  }, []);
   const addUserModalHandler = () => {
     addFriendModalHandler();
   };
@@ -51,7 +57,12 @@ function OnlineUserDropDown({
   };
 
   return (
-    <div className="onlinelist__wrapper">
+    <div
+      className="onlinelist__wrapper"
+      tabIndex={0}
+      ref={dropdownRef}
+      onBlur={backgroundCloseHandler}
+    >
       {privateModalOpen && (
         <PrivateMessageModal
           userInfo={userInfo}
