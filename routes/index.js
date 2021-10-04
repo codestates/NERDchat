@@ -20,8 +20,8 @@ router.post('/emailVerify', users.emailVerify);
 */
 router.put('/rooms/create', rooms.create);
 router.post('/rooms/list/:page', rooms.getList);
-router.get('/rooms/join/:uuid', rooms.joinRoom);
-router.post('/rooms/exit/:uuid', rooms.exitRoom);
+router.get('/rooms/join/:gameId/:uuid', rooms.joinRoom);
+router.post('/rooms/exit/gameId/:uuid', rooms.exitRoom);
 router.get('/rooms/search/:title', rooms.searchRoom);
 /*
     Category Router

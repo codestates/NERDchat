@@ -62,7 +62,7 @@ module.exports = async (req, res) => {
         .cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
         .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
         .cookie('oauth', 'google', { httpOnly: true, sameSite: 'none', secure: true })
-        .cookie('data', payload, { httpOnly: true, sameSite: 'none', secure: true }).redirect(
+        .cookie('userInfo', payload, { httpOnly: false, sameSite: 'none', secure: true }).status(200).redirect(
           process.env.GO_HOME + '/servers'
         );
     }
