@@ -14,9 +14,31 @@ const messageStore = new RedisMessageStore(redisClient);
 const { RedisRoomMessageStore } = require('../store/roomMessageStore');
 const roomMessageStore = new RedisRoomMessageStore(redisClient);
 
+const roomUsers = {};
+const roomSockets = {};
+
 module.exports = {
   nspSocket: async (socket) => {
     const ns = socket.nsp;
+
+    socket.on('joinVoice', roomUid => {
+      if (roomUsers[roomUid]) roomUsers[roomUid].push(socket.userId);
+      else roomUsers[roomUid] = [socket.userId];
+      socket.join([roomUid, socket.userId]);
+      roomSockets[socket.userId] = roomUid;
+      console.log(roomUsers, roomSockets);
+      const usersInRoom = roomUsers[roomUid].filter(id => id !== socket.userId);
+      ns.to(roomUid).emit('allUsers', usersInRoom);
+    });
+    socket.on('sending signal', payload => {
+      ns.to(payload.userToSignal).emit('userJoin', { signal: payload.signal, callerId: payload.callerId });
+    });
+    socket.on('return signal', payload => {
+      ns.to(payload.callerId).emit('receive return signal', { signal: payload.signal, id: socket.userId });
+    });
+    socket.onAny((event, ...args) => {
+      console.log(event, args);
+    });
 
     tokenStore.saveToken(socket.token, {
       userId: socket.userId,
@@ -72,16 +94,6 @@ module.exports = {
       }
     });
 
-    socket.on('offer', (offer, roomUid) => {
-      ns.to(roomUid).emit('offer', offer);
-    });
-    socket.on('answer', (answer, roomUid) => {
-      ns.to(roomUid).emit('answer', answer);
-    });
-    socket.on('ice', (ice, roomUid) => {
-      ns.to(roomUid).emit('ice', ice);
-    });
-
     // socket.on('voiceChat', (voiceChatUid, userPeerId) => {
     //   socket.join(voiceChatUid);
     //   ns.to(voiceChatUid).emit('userConnect', userPeerId);
@@ -104,6 +116,12 @@ module.exports = {
 
     socket.on('disconnect', async () => {
       const matchingSockets = await socket.in(socket.userId).allSockets();
+      const uuid = roomSockets[socket.userId];
+      let room = roomUsers[uuid];
+      if (room) {
+        room = room.filter(id => id !== socket.userId);
+        roomUsers[uuid] = room;
+      }
       const isDisconnected = matchingSockets.size === 0;
       if (isDisconnected) {
         // notify other users
