@@ -24,15 +24,17 @@ const ServerRoomHeader = ({ gameId, headCount }) => {
       {createRoomOpen && <RoomSetting />}
       <div className="server__room__header__container">
         <Link to="/servers" className="back__icons">
-          <IoIosArrowBack size={30} />
-          <h2 data-text="NERDchat">NERDchat</h2>
+          <IoIosArrowBack size={20} />
+          <h2 className="nerdtitle" data-text="NERDchat">
+            NERDchat
+          </h2>
         </Link>
         <div className="headCount__container">
-          {`현재 접속자 수: ${headCount}`}
+          {`Concurrent Users: ${headCount}`}
         </div>
         {/* <ServerSearch /> */}
         <button className="create__room" onClick={creatRoomHandler}>
-          Create!
+          Create Room
         </button>
       </div>
     </>

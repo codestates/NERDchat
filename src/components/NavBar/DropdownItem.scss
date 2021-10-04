@@ -1,31 +1,44 @@
-@import "_color";
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+$dark: rgb(23, 23, 23);
+$neonMain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+$title: rgb(172, 172, 172);
 
 .drop-menu-item {
   height: 45px;
   display: flex;
-  border-bottom: 1px solid transparent;
   align-items: center;
   transition: all 0.4s ease-in-out;
   font-family: "Poppins", sans-serif;
   font-weight: 100;
-  font-size: 10px;
+  font-size: 13px;
+  position: relative;
+  &:hover {
+    cursor: pointer;
+    background: rgba(12, 12, 12, 0.277);
+    border-radius: 5px;
+
+    .icona {
+      color: $neonMain;
+      filter: drop-shadow(1px 1px 2px $neonSer);
+    }
+  }
 
   .drop-icon-button {
-    --button-size: calc(50px * 1);
-    width: var(--button-size);
-    height: var(--button-size);
-    border-radius: 50%;
-    padding: 0.5rem;
-    color: rgb(172, 172, 172);
+    height: 40px;
+    width: 40px;
+    margin-left: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease-in-out;
-  }
-
-  &:hover {
-    border-bottom: 1px solid $neonNain;
-    cursor: pointer;
+    text-align: center;
+    background: rgba(12, 12, 12, 0.277);
+    border-radius: 50%;
+    color: rgb(172, 172, 172);
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .drop-game-list {

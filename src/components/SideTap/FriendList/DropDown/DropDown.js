@@ -65,7 +65,7 @@ function DropDown({ nickname, messages, userInfo, msg, sendHandler, setMsg }) {
             <div className="friendlist__icon">
               <IoMailOpenOutline className="icona" />
             </div>
-            Message
+            DM
           </a>
         </li>
         <li className="friendlist__li">
