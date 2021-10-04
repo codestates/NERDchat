@@ -26,9 +26,7 @@ module.exports = async (req, res) => {
         access_token: accessToken
       }
     });
-    // console.log(userData.data);
     const userInfo = await Users.findOne({ where: { userid: userData.data.id } });
-    // console.log(userInfo);
     if (!userInfo) {
       await Users.create({
         avatar: userData.data.picture.data.url,
@@ -56,12 +54,11 @@ module.exports = async (req, res) => {
       created_at: new Date(),
       updated_at: new Date()
     };
-    console.log(payload);
     res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
-      .cookie('oauth', 'facebook', { httpOnly: true, sameSite: 'none', secure: true }).redirect(
+      .cookie('oauth', 'facebook', { httpOnly: true, sameSite: 'none', secure: true })
+      .cookie('data', payload, { httpOnly: true, sameSite: 'none', secure: true }).redirect(
         process.env.GO_HOME + '/servers'
-      )
-      .status(200).json({ data: { payload } });
+      );
   } catch (err) {
     console.log(err);
   }

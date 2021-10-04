@@ -74,13 +74,13 @@ module.exports = {
 
     socket.on('offer', (offer, roomUid) => {
       ns.to(roomUid).emit('offer', offer);
-    })
+    });
     socket.on('answer', (answer, roomUid) => {
       ns.to(roomUid).emit('answer', answer);
-    })
+    });
     socket.on('ice', (ice, roomUid) => {
       ns.to(roomUid).emit('ice', ice);
-    })
+    });
 
     // socket.on('voiceChat', (voiceChatUid, userPeerId) => {
     //   socket.join(voiceChatUid);
