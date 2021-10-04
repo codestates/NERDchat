@@ -62,10 +62,9 @@ module.exports = async (req, res) => {
         .cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
         .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
         .cookie('oauth', 'google', { httpOnly: true, sameSite: 'none', secure: true })
-        .writeHead(200, { Location: process.env.Go_HOME + '/servers' });
-      res.send({ data: { payload } });
-      // res.redirect(200, process.env.GO_HOME + '/servers');
-      // res.render(process.env.GO_HOME + '/servers', { data: payload });
+        .cookie('data', payload, { httpOnly: true, sameSite: 'none', secure: true }).redirect(
+          process.env.GO_HOME + '/servers'
+        );
     }
   } catch (err) {
     console.log(err);

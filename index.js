@@ -40,4 +40,5 @@ app.use('/', routes);
 io.of('/users').use(controller.socket.useToken).on('connection', controller.socket.rootSocket);
 io.of(/^\/\d+$/).use(controller.socket.useToken).on('connection', controller.socket.nspSocket);
 
-setupWorker(io);
+// setupWorker(io);
+httpServer.listen(8080);

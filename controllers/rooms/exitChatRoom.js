@@ -14,6 +14,8 @@ module.exports = async (req, res) => {
         await Users.update({
           currentRoom: null
         }, { where: { id: userData.id } });
+        const roomUsers = await Users.findAll({ where: { currentRoom: uuid } });
+        if (!roomUsers.length) await GameChatRooms.destroy({ where: { uuid } });
         res.status(200).json({ message: 'exit' });
       }
     } catch (err) {

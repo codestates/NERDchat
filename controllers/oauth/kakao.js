@@ -18,15 +18,12 @@ module.exports = async (req, res) => {
     });
     const accessToken = data.data.access_token;
     const refreshToken = data.data.refresh_token;
-    // console.log(data.data.access_token);
     const userData = await axios({
       url: 'https://kapi.kakao.com/v2/user/me',
       method: 'get',
       params: { access_token: accessToken }
     });
-    // console.log(userData.data.id);
     const userInfo = await Users.findOne({ where: { userId: userData.data.id } });
-    // console.log(111111111,userInfo)
     if (!userInfo) {
       await Users.create({
         avatar: userData.data.properties.profile_image,
@@ -56,10 +53,10 @@ module.exports = async (req, res) => {
     };
     res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
       .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
-      .cookie('oauth', 'kakao', { httpOnly: true, sameSite: 'none', secure: true }).redirect(
+      .cookie('oauth', 'kakao', { httpOnly: true, sameSite: 'none', secure: true })
+      .cookie('data', payload, { httpOnly: true, sameSite: 'none', secure: true }).redirect(
         process.env.GO_HOME + '/servers'
-      )
-      .status(200).json({ data: { payload } });
+      );
   } catch (err) {
     console.log(err);
   }
