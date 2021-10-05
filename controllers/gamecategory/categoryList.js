@@ -1,5 +1,4 @@
 const { GameCategory, Favorites } = require('../../models');
-const jwt = require('jsonwebtoken');
 const { verifyAccess } = require('../../middlewares/token');
 require('dotenv').config();
 

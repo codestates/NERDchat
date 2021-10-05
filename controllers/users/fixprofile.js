@@ -6,8 +6,9 @@ module.exports = async (req, res) => {
   try {
     const userData = await verifyAccess(req, res);
     const { nickname, password, status } = req.body;
+    let { oauth, accessToken } = req.cookies;
     let avatar;
-    console.log(req.file);
+    const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
     if (req.file) avatar = req.file.location;
     else avatar = null;
     const origin = await Users.findOne({
@@ -28,12 +29,12 @@ module.exports = async (req, res) => {
         id: origin.id
       }
     });
-    const accessToken = generateAccess({
-      email: origin.email,
-      nickname: nickname || origin.nickname
-    });
-    const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
-
+    if (oauth === 'none') {
+      accessToken = generateAccess({
+        email: origin.email,
+        nickname: nickname || origin.nickname
+      });
+    }
     res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
       .status(202).json({
         data: {

@@ -174,12 +174,15 @@ module.exports = {
     socket.emit('users', users);
     // notify existing users
 
-    socket.on('private message', ({ content, to }) => {
+    socket.on('private message', ({ content, to, invite, friend }) => {
       const message = {
         content,
         from: socket.userId,
-        to
+        to,
+        invite,
+        friend
       };
+
       socket.to(to).to(socket.userId).emit('private message', message);
       messageStore.saveMessage(message);
     });
