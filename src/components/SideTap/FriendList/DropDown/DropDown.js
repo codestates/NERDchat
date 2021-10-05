@@ -21,6 +21,7 @@ function DropDown({
   userId,
   setMsg,
   backgroundCloseHandler,
+  readMsgHandler,
 }) {
   const {
     deleteFriendModalHandler,
@@ -36,7 +37,12 @@ function DropDown({
 
   useEffect(() => {
     dropdownRef.current.focus();
-  }, []);
+  }, [
+    userInfoModalOpen,
+    deleteFriendModalOpen,
+    privateModalOpen,
+    inviteModalOpen,
+  ]);
   const deleteModalHandler = () => {
     deleteFriendModalHandler();
   };
@@ -64,6 +70,7 @@ function DropDown({
           msg={msg.data}
           setMsg={setMsg}
           userInfo={userInfo}
+          readMsgHandler={readMsgHandler}
         />
       )}
       {userInfoModalOpen && <UserInfo nickname={nickname} />}

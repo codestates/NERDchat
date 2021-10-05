@@ -20,6 +20,7 @@ const MsgListDropDown = ({
   setMsg,
   userId,
   backgroundCloseHandler,
+  readMsgHandler,
 }) => {
   const {
     userInfoModalHandler,
@@ -35,13 +36,21 @@ const MsgListDropDown = ({
 
   useEffect(() => {
     dropdownRef.current.focus();
-  }, []);
+  }, [
+    userInfoModalOpen,
+    addFriendModalOpen,
+    privateModalOpen,
+    inviteModalOpen,
+  ]);
 
   const addUserModalHandler = () => {
     addFriendModalHandler();
   };
   const privateModalOpenHandler = () => {
+    //채팅창을 열고
     privateModalHandler();
+    //모두 읽음상태로 만들기
+    readMsgHandler(nickname);
   };
   const userInfoModalOpenHandler = () => {
     userInfoModalHandler();
@@ -61,9 +70,10 @@ const MsgListDropDown = ({
         <PrivateMessageModal
           nickname={nickname}
           messages={messages}
-          msg={msg.data}
+          msg={msg ? msg.data : []}
           setMsg={setMsg}
           userInfo={userInfo}
+          readMsgHandler={readMsgHandler}
         />
       )}
       {userInfoModalOpen && <UserInfo nickname={nickname} />}
