@@ -30,25 +30,21 @@ const Messenger = ({
     socket.on(
       "private message",
       async ({ content, from, to, invite, friend }) => {
+        //from: 보낸사람 // to: 현재 사용유저
         const incomingM = { content, from, to, invite, friend };
         setMsg((prev) => {
-          const temp = { ...prev.data };
-          const sender = from;
+          const temp = { ...prev.data }; //temp= {name1: {message: [], read: t/f}}
+          //보낸사람의 닉네임이 없을때(즉, 새로운유저한테서 새로운 메시지 받았을때)
           if (!temp[to]) {
-            temp[sender] = [incomingM];
-            if (!temp[to]) {
-              temp[to] = [incomingM];
-            } else {
-              temp[to].push(incomingM);
-            }
+            //temp[to] = {message: [], read: f}
+            //새롭게 하나 만들고,
+            temp[to] = { messages: [incomingM], read: false };
             return { data: temp };
+
+            //이미 이전에 대화한 내역이 있다면
           } else {
-            if (!temp[to]) {
-              temp[to] = [incomingM];
-            } else {
-              temp[to].push(incomingM);
-            }
-            temp[sender].push(incomingM);
+            temp[to].messages.push(incomingM);
+            temp[to].read(incomingM);
             return { data: temp };
           }
         });
