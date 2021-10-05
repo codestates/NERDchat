@@ -21,11 +21,9 @@ function SettingInfo() {
   const [cPwd, setCPwd] = useState("");
 
   const { email, oauth } = userInfo;
-
+  console.log(12387128318723, email, oauth);
   useEffect(() => {
     //oauth이용자가 아니라면?
-    console.log(userInfo);
-    console.log(111, oauth, !oauth);
     if (oauth === "none") {
       if (pwd.length > 0 && cPwd.length > 0 && pwd === cPwd) {
         setFormIsValid(true);
@@ -61,7 +59,6 @@ function SettingInfo() {
   //수정된 정보 서버로 보내기
   const fixInfoHandler = async (e) => {
     e.preventDefault();
-    console.log("clicked");
     const formData = new FormData();
     if (pImage) {
       for (let i = 0; i < pImage.length; i++) {

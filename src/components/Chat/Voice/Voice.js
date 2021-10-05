@@ -82,9 +82,9 @@ function Voice() {
   useEffect(() => {
     navigator.mediaDevices
       .getUserMedia({
-        video: false,
+        video: true,
         audio: {
-          echoCancellation: true,
+          echoCancellation: false,
         },
       })
       .then((stream) => {
