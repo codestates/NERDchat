@@ -30,27 +30,7 @@ const PMessage = ({ message, userInfo, setMsg }) => {
       to: from,
     };
 
-    setMsg((prev) => {
-      const temp = { ...prev.data };
-      if (!temp[from]) {
-        temp[from] = [incomingM];
-        if (!temp[to]) {
-          temp[to] = [incomingM];
-        } else {
-          temp[to].push(incomingM);
-        }
-        return { data: temp };
-      } else {
-        if (!temp[to]) {
-          temp[to] = [incomingM];
-        } else {
-          temp[to].push(incomingM);
-        }
-        temp[from].push(incomingM);
-
-        return { data: temp };
-      }
-    });
+    setMsg(incomingM, userInfo.userId, from);
 
     e.preventDefault();
   };
@@ -70,27 +50,7 @@ const PMessage = ({ message, userInfo, setMsg }) => {
       to: from,
     };
     // setMsg((prev) => [...prev, incomingM]);
-    setMsg((prev) => {
-      const temp = { ...prev.data };
-      if (!temp[from]) {
-        temp[from] = [incomingM];
-        if (!temp[to]) {
-          temp[to] = [incomingM];
-        } else {
-          temp[to].push(incomingM);
-        }
-        return { data: temp };
-      } else {
-        if (!temp[to]) {
-          temp[to] = [incomingM];
-        } else {
-          temp[to].push(incomingM);
-        }
-        temp[from].push(incomingM);
-
-        return { data: temp };
-      }
-    });
+    setMsg(incomingM, userInfo.userId, from);
 
     e.preventDefault();
   };

@@ -7,6 +7,7 @@ import { Context } from "../../context/ContextProvider";
 import useDM from "../../hooks/useDM";
 import { Cookies } from "react-cookie";
 import { useParams } from "react-router-dom";
+import socket from "../../hooks/socket";
 import Loader from "../../components/Loader/Loader";
 
 import "./SideBar.scss";
@@ -16,9 +17,11 @@ const SideBar = () => {
   const [toggleState, setToggleState] = useState(1);
   const [filteredFriends, setFilteredFriends] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState({
+    data: { name1: { message: [], read: false } },
+  });
   const cookies = new Cookies();
   const userInfo = cookies.get("userInfo");
-
   const path = useParams();
   const { userListRef } = useDM(userInfo, path);
 
@@ -47,10 +50,68 @@ const SideBar = () => {
     return () => clearTimeout(delayReq);
   }, []);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    //본인이 보낸 메시지는 아래 이벤트가 발생하지 않음
+    //i.e. 보낼때 직접 state에 넣어줘야 바로 반영이 된다.
+    socket.on(
+      "private message",
+      async ({ content, from, to, invite, friend }) => {
+        //from: 보낸사람 // to: 현재 사용유저
+        const incomingM = { content, from, to, invite, friend };
+        console.log(1111, msg);
+        setMsg((prev) => {
+          const temp = { ...prev.data }; //temp= {name1: {message: [], read: t/f}}
+          //보낸사람의 닉네임이 없을때(즉, 새로운유저한테서 새로운 메시지 받았을때)
+          console.log(666, temp);
+          if (!temp[from]) {
+            //새롭게 하나 만들고,
+            temp[from] = { messages: [incomingM], read: false };
+            return { data: temp };
+          } else {
+            //이미 이전에 대화한 내역이 있다면
+            temp[from].messages.push(incomingM);
+            temp[from].read = false;
+            return { data: temp };
+          }
+        });
+      }
+    );
+    return () => {
+      socket.off("private message");
+    };
+  }, [socket]);
 
   const toggleTab = (index) => {
     setToggleState(index);
+  };
+
+  const sendMsgHandler = (msg, from, to) => {
+    setMsg((prev) => {
+      const temp = { ...prev.data }; //temp= {name1: {message: [], read: t/f}}
+      //보낸사람의 닉네임이 없을때(즉, 새로운유저한테서 새로운 메시지 받았을때)
+
+      if (!temp[to]) {
+        //새롭게 하나 만들고,
+        temp[to] = { messages: [msg], read: true };
+        return { data: temp };
+      } else {
+        //이미 이전에 대화한 내역이 있다면
+        if (temp[to].messages) {
+          temp[to].messages.push(msg);
+          temp[to].read = true;
+        } else {
+          temp[to] = { messages: [msg], read: true };
+        }
+        return { data: temp };
+      }
+    });
+  };
+  const readMsgHandler = (from) => {
+    setMsg((prev) => {
+      const temp = { ...prev.data };
+      temp[from] = { ...temp[from], read: true };
+      return { data: temp };
+    });
   };
 
   return (
@@ -97,6 +158,9 @@ const SideBar = () => {
                   online={el.connected}
                   userInfo={userInfo}
                   userId={el.userId}
+                  sendMsgHandler={sendMsgHandler}
+                  readMsgHandler={readMsgHandler}
+                  msg={msg}
                 />
               ))}
           {/* {toggleState === 1 && loading && <Loader />} */}
@@ -119,6 +183,9 @@ const SideBar = () => {
                   online={el.connected}
                   userId={el.userId}
                   userInfo={userInfo}
+                  sendMsgHandler={sendMsgHandler}
+                  readMsgHandler={readMsgHandler}
+                  msg={msg}
                 />
               ))}
         </div>
@@ -145,6 +212,9 @@ const SideBar = () => {
                   online={el.connected}
                   userId={el.userId}
                   messages={el.messages}
+                  sendMsgHandler={sendMsgHandler}
+                  readMsgHandler={readMsgHandler}
+                  msg={msg}
                 />
               ))}
         </div>

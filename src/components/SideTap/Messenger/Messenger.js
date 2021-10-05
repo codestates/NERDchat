@@ -11,6 +11,9 @@ const Messenger = ({
   userInfo,
   online,
   userId,
+  readMsgHandler,
+  sendMsgHandler,
+  msg,
 }) => {
   const {
     userInfoModalOpen,
@@ -18,47 +21,11 @@ const Messenger = ({
     privateModalOpen,
     inviteModalOpen,
   } = useContext(Context);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [msg, setMsg] = useState({ data: {} });
-  const [loading, setLoading] = useState(false);
-  const [showingMsg, setShowMsg] = useState("");
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [lastMsg, setLastMsg] = useState({});
   //여기에서 private message이벤트를 들어야 실시간 통신이 될듯.
   //메시지 듣기
-  useEffect(() => {
-    //본인이 보낸 메시지는 아래 이벤트가 발생하지 않음
-    //i.e. 보낼때 직접 state에 넣어줘야 바로 반영이 된다.
-    socket.on(
-      "private message",
-      async ({ content, from, to, invite, friend }) => {
-        const incomingM = { content, from, to, invite, friend };
-        setMsg((prev) => {
-          const temp = { ...prev.data };
-          const sender = from;
-          if (!temp[to]) {
-            temp[sender] = [incomingM];
-            if (!temp[to]) {
-              temp[to] = [incomingM];
-            } else {
-              temp[to].push(incomingM);
-            }
-            return { data: temp };
-          } else {
-            if (!temp[to]) {
-              temp[to] = [incomingM];
-            } else {
-              temp[to].push(incomingM);
-            }
-            temp[sender].push(incomingM);
-            return { data: temp };
-          }
-        });
-      }
-    );
-    return () => {
-      socket.off("private message");
-    };
-  }, [nickname, socket]);
 
   const modalHandler = () => {
     setModalOpen((prev) => !prev);
@@ -72,13 +39,14 @@ const Messenger = ({
     )
       setModalOpen(false);
   };
+  useEffect(() => {
+    setLastMsg(msg);
+  }, [msg]);
 
   return (
     <div
       className={
-        msg.data[nickname] && msg.data[nickname].length !== messages.length
-          ? "new__msg__alarm"
-          : ""
+        msg.data[nickname] && !msg.data[nickname].read ? "new__msg__alarm" : ""
       }
     >
       <div
@@ -103,9 +71,16 @@ const Messenger = ({
             <p>{nickname}</p>
           </div>
           <div className="latest__message__content">
-            {!msg.data[nickname] && messages[messages.length - 1].content}
-            {msg.data[nickname] &&
-              msg.data[nickname][msg.data[nickname].length - 1].content}
+            <div>
+              {!msg.data[nickname] && messages[messages.length - 1].content}
+            </div>
+            <div>
+              {msg.data[nickname] && msg.data[nickname].messages
+                ? msg.data[nickname].messages[
+                    msg.data[nickname].messages.length - 1
+                  ].content
+                : null}
+            </div>
           </div>
         </div>
       </div>
@@ -116,7 +91,8 @@ const Messenger = ({
           messages={messages}
           msg={msg}
           userId={userId}
-          setMsg={setMsg}
+          setMsg={sendMsgHandler}
+          readMsgHandler={readMsgHandler}
           backgroundCloseHandler={backgroundCloseHandler}
         />
       )}
