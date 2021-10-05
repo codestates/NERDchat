@@ -32,7 +32,7 @@ module.exports = {
               res.status(400).json({ message: 'token expired' });
               return null;
             } else {
-              const userData = await Users.findOne({ where: { userId: kakaoData.data.properties.nickname } });
+              const userData = await Users.findOne({ where: { userId: kakaoData.data.id } });
               const payload = {
                 id: userData.id,
                 avatar: userData.avatar,
@@ -95,7 +95,7 @@ module.exports = {
               res.status(400).json({ message: 'token expired' });
               return null;
             } else {
-              const userData = await Users.findOne({ where: { userId: fbData.data.sub } });
+              const userData = await Users.findOne({ where: { userId: fbData.data.id } });
               const payload = {
                 id: userData.id,
                 avatar: userData.avatar,

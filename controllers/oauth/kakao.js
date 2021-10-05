@@ -6,6 +6,7 @@ dotenv.config();
 module.exports = async (req, res) => {
   try {
     const code = req.query.code;
+    const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
     if (!code) res.status(400).json({ message: 'code not found' });
     const data = await axios({
       url: 'https://kauth.kakao.com/oauth/token',
@@ -37,24 +38,29 @@ module.exports = async (req, res) => {
         created_at: new Date(),
         updated_at: new Date()
       });
+      const payload = {
+        avatar: userData.data.properties.profile_image,
+        userId: userData.data.id,
+        nickname: userData.data.id,
+        email: userData.data.kakao_account.email || null,
+        valid: false,
+        oauth: 'Kakao',
+        status: null,
+        currentRoom: null,
+        created_at: new Date(),
+        updated_at: new Date()
+      };
+      res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
+        .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
+        .cookie('oauth', 'kakao', { httpOnly: true, sameSite: 'none', secure: true })
+        .cookie('userInfo', payload, { httpOnly: false, sameSite: 'none', secure: true }).status(200).redirect(
+          process.env.GO_HOME + '/servers'
+        );
     }
-    const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
-    const payload = {
-      avatar: userData.data.properties.profile_image,
-      userId: userData.data.id,
-      nickname: userData.data.id,
-      email: userData.data.kakao_account.email || null,
-      valid: false,
-      oauth: 'Kakao',
-      status: null,
-      currentRoom: null,
-      created_at: new Date(),
-      updated_at: new Date()
-    };
     res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
       .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
       .cookie('oauth', 'kakao', { httpOnly: true, sameSite: 'none', secure: true })
-      .cookie('data', payload, { httpOnly: true, sameSite: 'none', secure: true }).redirect(
+      .cookie('userInfo', userInfo, { httpOnly: false, sameSite: 'none', secure: true }).status(200).redirect(
         process.env.GO_HOME + '/servers'
       );
   } catch (err) {

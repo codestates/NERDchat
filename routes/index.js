@@ -20,8 +20,8 @@ router.post('/emailVerify', users.emailVerify);
 */
 router.put('/rooms/create', rooms.create);
 router.post('/rooms/list/:page', rooms.getList);
-router.get('/rooms/join/:uuid', rooms.joinRoom);
-router.post('/rooms/exit/:uuid', rooms.exitRoom);
+router.get('/rooms/join/:gameId/:uuid', rooms.joinRoom);
+router.post('/rooms/exit/gameId/:uuid', rooms.exitRoom);
 router.get('/rooms/search/:title', rooms.searchRoom);
 /*
     Category Router
@@ -37,7 +37,7 @@ router.get('/favorites/request/:gameId', favorites.favRequest);
     Friends Router
 */
 router.get('/friends/lists', friends.friendsList);
-router.get('/friends/send/:nickname', friends.friendsRequest);
+router.get('/friends/send/:id', friends.friendsRequest);
 router.post('/friends/accept/:nickname', friends.accept);
 router.get('/friends/requests', friends.requestList);
 router.delete('/friends/delete/:nickname', friends.delete);
