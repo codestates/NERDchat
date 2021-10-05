@@ -45,6 +45,7 @@ function PrivateMessageModal({ userInfo, nickname, setMsg, messages, msg }) {
         } else {
           temp[userInfo.nickname].push(sendingM);
         }
+
         return { data: temp };
       } else {
         if (!temp[userInfo.nickname]) {
