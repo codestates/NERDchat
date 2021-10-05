@@ -1,19 +1,10 @@
-.haha {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-}
-
-.haha1 {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-}
-
-.dlfqjs {
+.voice__chat {
   border: 1px solid aqua;
-}
+  width: 100%;
+  height: 100%;
 
-.dlqjs {
-  border: 1px solid aqua;
+  .voice__video {
+    width: 200px;
+    height: 100px;
+  }
 }
