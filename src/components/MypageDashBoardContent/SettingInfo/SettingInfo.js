@@ -6,7 +6,7 @@ import "./SettingInfo.scss";
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
-function SettingInfo({ oauth }) {
+function SettingInfo() {
   const cookies = new Cookies();
   let userInfo = cookies.get("userInfo");
   const nicknameRef = useRef();
@@ -15,19 +15,41 @@ function SettingInfo({ oauth }) {
 
   const [formIsValid, setFormIsValid] = useState(false);
   const [pImage, setPImage] = useState(null);
+  const [nickname, setNickname] = useState("");
+  const [status, setStatus] = useState("");
   const [pwd, setPwd] = useState("");
   const [cPwd, setCPwd] = useState("");
 
-  const { email } = userInfo;
+  const { email, oauth } = userInfo;
 
   useEffect(() => {
-    if (pwd.length > 0 && cPwd.length > 0 && pwd === cPwd) {
-      setFormIsValid(true);
-    } else setFormIsValid(false);
-  }, [pwd, cPwd]);
+    //oauth이용자가 아니라면?
+    console.log(userInfo);
+    console.log(111, oauth, !oauth);
+    if (oauth === "none") {
+      if (pwd.length > 0 && cPwd.length > 0 && pwd === cPwd) {
+        setFormIsValid(true);
+      } else {
+        setFormIsValid(false);
+      }
+    } else {
+      //oauth이용자라면?
+      if (pImage === null && nickname.length === 0 && status.length === 0) {
+        setFormIsValid(false);
+      } else {
+        setFormIsValid(true);
+      }
+    }
+  }, [pwd, cPwd, status, nickname, pImage]);
 
   const imagehandler = (e) => {
     setPImage(e.target.files);
+  };
+  const nicknameHandler = (e) => {
+    setNickname(e.target.value);
+  };
+  const statusHandler = (e) => {
+    setStatus(e.target.value);
   };
   const pwdHandler = (e) => {
     setPwd(e.target.value);
@@ -39,6 +61,7 @@ function SettingInfo({ oauth }) {
   //수정된 정보 서버로 보내기
   const fixInfoHandler = async (e) => {
     e.preventDefault();
+    console.log("clicked");
     const formData = new FormData();
     if (pImage) {
       for (let i = 0; i < pImage.length; i++) {
@@ -102,6 +125,7 @@ function SettingInfo({ oauth }) {
                       autoComplete="off"
                       placeholder=" "
                       ref={nicknameRef}
+                      onChange={nicknameHandler}
                     />
                     <label htmlFor="nickname" className="form__label">
                       Nickname
@@ -115,6 +139,7 @@ function SettingInfo({ oauth }) {
                       autoComplete="new-password"
                       placeholder=" "
                       ref={statusRef}
+                      onChange={statusHandler}
                     />
                     <label htmlFor="status" className="form__label">
                       Status
