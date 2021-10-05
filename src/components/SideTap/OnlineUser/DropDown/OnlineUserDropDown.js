@@ -23,6 +23,7 @@ function OnlineUserDropDown({
   userId,
   setMsg,
   backgroundCloseHandler,
+  readMsgHandler,
 }) {
   const {
     userInfoModalHandler,
@@ -39,7 +40,12 @@ function OnlineUserDropDown({
 
   useEffect(() => {
     dropdownRef.current.focus();
-  }, []);
+  }, [
+    userInfoModalOpen,
+    addFriendModalOpen,
+    privateModalOpen,
+    inviteModalOpen,
+  ]);
   const addUserModalHandler = () => {
     addFriendModalHandler();
   };
@@ -51,9 +57,6 @@ function OnlineUserDropDown({
   };
   const inviteModalOpenHandler = () => {
     inviteModalHandler();
-  };
-  const sendInviteMsgHandler = (fuc) => {
-    fuc();
   };
 
   return (
@@ -70,6 +73,7 @@ function OnlineUserDropDown({
           messages={messages}
           msg={msg.data}
           setMsg={setMsg}
+          readMsgHandler={readMsgHandler}
         />
       )}
       {userInfoModalOpen && <UserInfo nickname={nickname} />}

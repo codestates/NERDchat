@@ -35,27 +35,8 @@ const UserAdd = ({ nickname, userId, setMsg, userInfo }) => {
     };
     //보내는사람 본인: userInfo.nickname;
     //받을 사람: nickname
-    setMsg((prev) => {
-      const temp = { ...prev.data };
-      if (!temp[userInfo.nickname]) {
-        temp[userInfo.nickname] = [incomingM];
-        if (!temp[nickname]) {
-          temp[nickname] = [incomingM];
-        } else {
-          temp[nickname].push(incomingM);
-        }
-        return { data: temp };
-      } else {
-        if (!temp[nickname]) {
-          temp[nickname] = [incomingM];
-        } else {
-          temp[nickname].push(incomingM);
-        }
-        temp[userInfo.nickname].push(incomingM);
 
-        return { data: temp };
-      }
-    });
+    setMsg(incomingM, userInfo.userId, nickname);
     //친구요청 모달 확인 모달창 닫기
     addFriendModalHandler();
     //확인 할 수 있도록 모달창 열어주기

@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
-
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { IoChevronForwardOutline, IoEllipseSharp } from "react-icons/io5";
-
+import { Context } from "../../../context/ContextProvider";
 import DropDown from "./DropDown/DropDown";
 import socket from "../../../hooks/socket";
 import "./FriendList.scss";
@@ -13,51 +12,32 @@ const FriendList = ({
   online,
   userInfo,
   userId,
+  readMsgHandler,
+  sendMsgHandler,
+  msg,
 }) => {
+  const {
+    userInfoModalOpen,
+    deleteFriendModalOpen,
+    privateModalOpen,
+    inviteModalOpen,
+  } = useContext(Context);
   const [loader, setLoader] = useState(false);
-  const [msg, setMsg] = useState({ data: {} });
-  const dropRef = useRef();
 
-  //메시지 듣기
-  useEffect(() => {
-    socket.on(
-      "private message",
-      async ({ content, from, to, invite, friend }) => {
-        const incomingM = { content, from, to, invite, friend };
-        setMsg((prev) => {
-          const temp = { ...prev.data };
-          const sender = from;
-          if (!temp[to]) {
-            temp[sender] = [incomingM];
-            if (!temp[to]) {
-              temp[to] = [incomingM];
-            } else {
-              temp[to].push(incomingM);
-            }
-            return { data: temp };
-          } else {
-            if (!temp[to]) {
-              temp[to] = [incomingM];
-            } else {
-              temp[to].push(incomingM);
-            }
-            temp[sender].push(incomingM);
-            return { data: temp };
-          }
-        });
-      }
-    );
-    return () => {
-      socket.off("private message");
-    };
-  }, [nickname]);
+  const dropRef = useRef();
 
   const clickHandler = () => {
     setLoader((prev) => !prev);
   };
 
   const backgroundCloseHandler = (e) => {
-    setLoader(false);
+    if (
+      !userInfoModalOpen &&
+      !deleteFriendModalOpen &&
+      !privateModalOpen &&
+      !inviteModalOpen
+    )
+      setLoader(false);
   };
 
   return (
@@ -94,8 +74,9 @@ const FriendList = ({
           messages={messages}
           msg={msg}
           userId={userId}
-          setMsg={setMsg}
+          setMsg={sendMsgHandler}
           backgroundCloseHandler={backgroundCloseHandler}
+          readMsgHandler={readMsgHandler}
         />
       )}
     </>

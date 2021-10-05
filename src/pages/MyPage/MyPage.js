@@ -19,7 +19,7 @@ function MyPage() {
   let userInfo = cookies.get("userInfo");
   const { avatar, nickname, status, email, oauth } = userInfo;
   const [profileImg, setProfileImg] = useState(null);
-  const [tab, setTab] = useState(1);
+  const [tab, setTab] = useState(3);
 
   const actionhandle = (index) => {
     setTab(index);
@@ -60,7 +60,7 @@ function MyPage() {
               <h3 className="mypage__h3">{status}</h3>
             </div>
             <div className="mypage__tabs">
-              <div
+              {/* <div
                 onClick={() => actionhandle(1)}
                 className={tab === 1 ? "mypage__tab active-tab" : "mypage__tab"}
               >
@@ -77,7 +77,7 @@ function MyPage() {
                   <IoChatbubblesOutline size={25} />
                 </div>
                 <span className="mypage__tab-title">FRIENDS</span>
-              </div>
+              </div> */}
               <div
                 onClick={() => actionhandle(3)}
                 className={tab === 3 ? "mypage__tab active-tab" : "mypage__tab"}

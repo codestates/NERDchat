@@ -5,6 +5,11 @@ $neonMain: rgb(184, 126, 255);
 $neonSer: rgb(163, 16, 255);
 $title: rgb(172, 172, 172);
 
+.new__msg__alarm {
+  border: 1px solid $neonSer;
+  border-radius: 50px;
+  padding: 0 1rem;
+}
 .messagelist {
   display: flex;
   height: 55px;
