@@ -112,7 +112,7 @@ function SettingInfo({ oauth }) {
                       type="text"
                       id="status"
                       className="form__input"
-                      autoComplete="off"
+                      autoComplete="new-password"
                       placeholder=" "
                       ref={statusRef}
                     />
@@ -127,7 +127,7 @@ function SettingInfo({ oauth }) {
                           type="password"
                           id="password"
                           className="form__input"
-                          autoComplete="off"
+                          autoComplete="new-password"
                           placeholder=" "
                           ref={passwordRef}
                           onChange={pwdHandler}
@@ -141,7 +141,7 @@ function SettingInfo({ oauth }) {
                           type="password"
                           id="passwordConfrim"
                           className="form__input"
-                          autoComplete="off"
+                          autocomplete="off"
                           placeholder=" "
                           onChange={confirmPwHandler}
                         />
@@ -151,7 +151,7 @@ function SettingInfo({ oauth }) {
                         >
                           Confrim Password
                         </label>
-                      </div>{" "}
+                      </div>
                     </>
                   )}
                   <form action="form__input">

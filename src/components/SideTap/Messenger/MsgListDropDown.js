@@ -35,7 +35,12 @@ const MsgListDropDown = ({
 
   useEffect(() => {
     dropdownRef.current.focus();
-  }, []);
+  }, [
+    userInfoModalOpen,
+    addFriendModalOpen,
+    privateModalOpen,
+    inviteModalOpen,
+  ]);
 
   const addUserModalHandler = () => {
     addFriendModalHandler();

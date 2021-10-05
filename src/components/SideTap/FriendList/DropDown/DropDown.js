@@ -36,7 +36,12 @@ function DropDown({
 
   useEffect(() => {
     dropdownRef.current.focus();
-  }, []);
+  }, [
+    userInfoModalOpen,
+    deleteFriendModalOpen,
+    privateModalOpen,
+    inviteModalOpen,
+  ]);
   const deleteModalHandler = () => {
     deleteFriendModalHandler();
   };

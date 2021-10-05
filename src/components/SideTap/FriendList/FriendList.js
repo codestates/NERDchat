@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
-
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { IoChevronForwardOutline, IoEllipseSharp } from "react-icons/io5";
-
+import { Context } from "../../../context/ContextProvider";
 import DropDown from "./DropDown/DropDown";
 import socket from "../../../hooks/socket";
 import "./FriendList.scss";
@@ -14,6 +13,12 @@ const FriendList = ({
   userInfo,
   userId,
 }) => {
+  const {
+    userInfoModalOpen,
+    deleteFriendModalOpen,
+    privateModalOpen,
+    inviteModalOpen,
+  } = useContext(Context);
   const [loader, setLoader] = useState(false);
   const [msg, setMsg] = useState({ data: {} });
   const dropRef = useRef();
@@ -57,7 +62,13 @@ const FriendList = ({
   };
 
   const backgroundCloseHandler = (e) => {
-    setLoader(false);
+    if (
+      !userInfoModalOpen &&
+      !deleteFriendModalOpen &&
+      !privateModalOpen &&
+      !inviteModalOpen
+    )
+      setLoader(false);
   };
 
   return (

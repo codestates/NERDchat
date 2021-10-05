@@ -1,7 +1,8 @@
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect, useContext } from "react";
 import MsgListDropDown from "./MsgListDropDown";
 import socket from "../../../hooks/socket";
 import "./Messenger.scss";
+import { Context } from "../../../context/ContextProvider";
 
 const Messenger = ({
   avatar,
@@ -11,6 +12,12 @@ const Messenger = ({
   online,
   userId,
 }) => {
+  const {
+    userInfoModalOpen,
+    addFriendModalOpen,
+    privateModalOpen,
+    inviteModalOpen,
+  } = useContext(Context);
   const [modalOpen, setModalOpen] = useState(false);
   const [msg, setMsg] = useState({ data: {} });
   const [loading, setLoading] = useState(false);
@@ -51,16 +58,29 @@ const Messenger = ({
     return () => {
       socket.off("private message");
     };
-  }, [nickname]);
+  }, [nickname, socket]);
+
   const modalHandler = () => {
     setModalOpen((prev) => !prev);
   };
   const backgroundCloseHandler = (e) => {
-    setModalOpen(false);
+    if (
+      !userInfoModalOpen &&
+      !addFriendModalOpen &&
+      !privateModalOpen &&
+      !inviteModalOpen
+    )
+      setModalOpen(false);
   };
 
   return (
-    <>
+    <div
+      className={
+        msg.data[nickname] && msg.data[nickname].length !== messages.length
+          ? "new__msg__alarm"
+          : ""
+      }
+    >
       <div
         className={online ? "messagelist" : "messagelist offline"}
         onClick={modalHandler}
@@ -100,7 +120,7 @@ const Messenger = ({
           backgroundCloseHandler={backgroundCloseHandler}
         />
       )}
-    </>
+    </div>
   );
 };
 

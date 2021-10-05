@@ -44,7 +44,7 @@ const ServerRoomPage = () => {
     if (!loading) {
       setTimeout(() => {
         setLoading(true);
-      }, 2000);
+      }, 1500);
     }
   }, []);
 

@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
-
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { IoChevronForwardOutline } from "react-icons/io5";
-
 import OnlineUserDropDown from "./DropDown/OnlineUserDropDown";
+import { Context } from "../../../context/ContextProvider";
 import socket from "../../../hooks/socket";
 import "./OnlineUser.scss";
 
@@ -14,6 +13,12 @@ const OnlineUser = ({
   userInfo,
   userId,
 }) => {
+  const {
+    userInfoModalOpen,
+    addFriendModalOpen,
+    privateModalOpen,
+    inviteModalOpen,
+  } = useContext(Context);
   const [loader, setLoader] = useState(false);
   const [msg, setMsg] = useState({ data: {} });
   const dropRef = useRef();
@@ -56,7 +61,13 @@ const OnlineUser = ({
   };
 
   const backgroundCloseHandler = (e) => {
-    setLoader(false);
+    if (
+      !userInfoModalOpen &&
+      !addFriendModalOpen &&
+      !privateModalOpen &&
+      !inviteModalOpen
+    )
+      setLoader(false);
   };
   return (
     <>
