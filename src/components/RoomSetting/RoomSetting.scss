@@ -97,6 +97,9 @@ $title: rgb(172, 172, 172);
   .headcount__input__container {
     position: relative;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .headcount__input__container .bars {

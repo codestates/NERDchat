@@ -10,7 +10,7 @@ const useSocket = (serverName, roomId, userInfo) => {
   const [nsHeadCount, setNsHeadCount] = useState(0);
   const [roomHeadCount, setRoomHeadCount] = useState(0);
   const [userList, setUserList] = useState([]);
-
+  const userListRef = useRef([]);
   const socket = useRef();
   const myPeer = new Peer();
 
@@ -49,13 +49,21 @@ const useSocket = (serverName, roomId, userInfo) => {
       });
 
       socket.current.on("users", (data) => {
-        data.forEach((el) => {
-          users.push(el);
+        data.forEach((serverUser) => {
+          for (let i = 0; i < userListRef.current.length; i++) {
+            const existingUser = userListRef.current[i];
+            // if (serverUser.userId === to) {
+            //   setMsg(serverUser.messages);
+            //   console.log(msg);
+            // }
+            if (existingUser.userId === serverUser.userId) {
+              existingUser.connected = serverUser.connected;
+              existingUser.messages = serverUser.messages;
+              return;
+            }
+          }
+          userListRef.current.push(serverUser);
         });
-        users.sort((a, b) => {
-          return a - b;
-        });
-        setUserList(users);
       });
 
       socket.current.on("user connected", (data) => {
@@ -131,7 +139,7 @@ const useSocket = (serverName, roomId, userInfo) => {
     joinRoom,
     messages,
     nsHeadCount,
-    userList,
+    userListRef,
     // getUserHead,
   };
 };
