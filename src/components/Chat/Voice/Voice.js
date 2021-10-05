@@ -7,24 +7,17 @@ import { useParams } from "react-router-dom";
 
 import "./Voice.scss";
 
-const Container = styled.div`
-  padding: 20px;
-  display: flex;
-  margin: auto;
-  flex-wrap: wrap;
-`;
-
 const StyledVideo = styled.video`
-  height: 100px;
-  width: 100px;
+  display: none;
 `;
 
 const Video = (props) => {
   const ref = useRef();
 
   useEffect(() => {
+    // console.log(props);
     props.peer.on("stream", (stream) => {
-      console.log("stream generated", stream);
+      // console.log("stream generated", stream);
       ref.current.srcObject = stream;
     });
   }, []);
@@ -41,19 +34,7 @@ function Voice() {
   const [peers, setPeers] = useState([]);
   const userAudio = useRef();
   const peersRef = useRef([]);
-
-  // const Audio = (props) => {
-  //   const userRef = useRef();
-  //   console.log("!!!!!!!!", props.peer);
-  //   useEffect(() => {
-  //     props.peer.on("stream", (stream) => {
-  //       console.log("stream generated", stream);
-  //       if (userRef.current !== null) userRef.current.srcObject = stream;
-  //     });
-  //   }, []);
-
-  //   return <video playsInline autoPlay ref={userRef} />;
-  // };
+  const [mute, setMute] = useState(false);
 
   const createPeer = (userToSignal, callerId, stream) => {
     const peer = new Peer({
@@ -135,23 +116,36 @@ function Voice() {
       peersRef.current = peers;
       setPeers(peer);
     });
-    socket.current.onAny((event, ...args) => {
-      console.log(event, args);
-    });
     return () => {
+      socket.current.off("allUsers");
+      socket.current.off("userJoin");
+      socket.current.off("receive return signal");
+      socket.current.off("user disconnected");
       socket.current.disconnect();
     };
   }, []);
 
+  const handleMute = () => {
+    userAudio.current.srcObject
+      .getAudioTracks()
+      .forEach((track) => (track.enabled = !track.enabled));
+    setMute(!mute);
+  };
+
   return (
-    <Container>
-      <StyledVideo muted ref={userAudio} autoPlay playsInline />
-      {peers.map((peer) => {
-        return <Video key={peer.peerId} peer={peer.peer} />;
-      })}
-    </Container>
+    <div>
+      <div className="ok">일단 내용 넣기 전이용</div>
+      <div>
+        <StyledVideo muted ref={userAudio} autoPlay playsInline />
+        <button onClick={handleMute}>{mute ? "unmute" : "mute"}</button>
+        {peers
+          .filter((peer) => peer.peerId !== userInfo.userId)
+          .map((peer) => {
+            return <Video key={peer.peerId} peer={peer.peer} />;
+          })}
+      </div>
+    </div>
   );
 }
 
 export default Voice;
-//
