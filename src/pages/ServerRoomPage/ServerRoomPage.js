@@ -20,7 +20,7 @@ const ServerRoomPage = () => {
   const cookies = new Cookies();
   let userInfo = cookies.get("userInfo");
   const { gameId } = useParams();
-  const { userList } = useSocket(gameId, "", userInfo, "", "");
+  const { userListRef } = useSocket(gameId, "", userInfo, "", "");
   const [searchedLists, setSearchedLists] = useState([]);
   const [isSearched, setIsSearched] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -33,18 +33,20 @@ const ServerRoomPage = () => {
     setIsSearched(1);
   };
   const getOnlineUserNum = () => {
-    const length = userList.filter((user) => user.connected === true).length;
+    const length = userListRef.current.filter(
+      (user) => user.connected === true
+    ).length;
     setHeadCount(length);
   };
   useEffect(() => {
     getOnlineUserNum();
-  }, [userList, getOnlineUserNum]);
+  }, [userListRef, getOnlineUserNum]);
 
   useEffect(() => {
     if (!loading) {
       setTimeout(() => {
         setLoading(true);
-      }, 2000);
+      }, 1500);
     }
   }, []);
 

@@ -1,11 +1,37 @@
 import React, { useState, useEffect, useRef } from "react";
 import useSocket from "../../../hooks/useSocket";
-
+import styled from "styled-components";
 import Peer from "simple-peer";
 import { Cookies } from "react-cookie";
 import { useParams } from "react-router-dom";
 
 import "./Voice.scss";
+
+const Container = styled.div`
+  padding: 20px;
+  display: flex;
+  margin: auto;
+  flex-wrap: wrap;
+`;
+
+const StyledVideo = styled.video`
+  height: 100px;
+  width: 100px;
+`;
+
+const Video = (props) => {
+  const ref = useRef();
+
+  useEffect(() => {
+    props.peer.on("stream", (stream) => {
+      console.log("stream generated", stream);
+      ref.current.srcObject = stream;
+    });
+  }, []);
+
+  return <StyledVideo playsInline autoPlay ref={ref} />;
+};
+
 function Voice() {
   const { gameId, roomId } = useParams();
   const cookies = new Cookies();
@@ -16,18 +42,18 @@ function Voice() {
   const userAudio = useRef();
   const peersRef = useRef([]);
 
-  const Audio = (props) => {
-    const ref = useRef();
+  // const Audio = (props) => {
+  //   const userRef = useRef();
+  //   console.log("!!!!!!!!", props.peer);
+  //   useEffect(() => {
+  //     props.peer.on("stream", (stream) => {
+  //       console.log("stream generated", stream);
+  //       if (userRef.current !== null) userRef.current.srcObject = stream;
+  //     });
+  //   }, []);
 
-    useEffect(() => {
-      props.peer.on("stream", (stream) => {
-        console.log("stream generated");
-        ref.current.srcObject = stream;
-      });
-    }, []);
-
-    return <video playsInline autoPlay ref={ref} />;
-  };
+  //   return <video playsInline autoPlay ref={userRef} />;
+  // };
 
   const createPeer = (userToSignal, callerId, stream) => {
     const peer = new Peer({
@@ -72,7 +98,10 @@ function Voice() {
               peerId: userId,
               peer,
             });
-            peers.push(peer);
+            peers.push({
+              peerId: userId,
+              peer,
+            });
           });
           setPeers(peers);
         });
@@ -83,7 +112,12 @@ function Voice() {
             peerId: payload.callerId,
             peer,
           });
-          setPeers((users) => [...users, peer]);
+
+          const peerJoin = {
+            peer,
+            peerId: payload.callerId,
+          };
+          setPeers((users) => [...users, peerJoin]);
         });
 
         socket.current.on("receive return signal", (payload) => {
@@ -91,6 +125,16 @@ function Voice() {
           i.peer.signal(payload.signal);
         });
       });
+
+    socket.current.on("user disconnected", (id) => {
+      const peerDone = peersRef.current.find((peer) => peer.peerId !== id);
+      if (peerDone) {
+        peerDone.peer.destroy();
+      }
+      const peer = peersRef.current.filter((el) => el.peerId !== id);
+      peersRef.current = peers;
+      setPeers(peer);
+    });
     socket.current.onAny((event, ...args) => {
       console.log(event, args);
     });
@@ -100,13 +144,14 @@ function Voice() {
   }, []);
 
   return (
-    <div>
-      <video muted ref={userAudio} autoPlay playsInline />
-      {peers.map((peer, idx) => {
-        return <Audio key={idx} peer={peer} />;
+    <Container>
+      <StyledVideo muted ref={userAudio} autoPlay playsInline />
+      {peers.map((peer) => {
+        return <Video key={peer.peerId} peer={peer.peer} />;
       })}
-    </div>
+    </Container>
   );
 }
 
 export default Voice;
+//
