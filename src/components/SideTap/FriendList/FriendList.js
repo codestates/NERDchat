@@ -12,6 +12,9 @@ const FriendList = ({
   online,
   userInfo,
   userId,
+  readMsgHandler,
+  sendMsgHandler,
+  msg,
 }) => {
   const {
     userInfoModalOpen,
@@ -20,42 +23,8 @@ const FriendList = ({
     inviteModalOpen,
   } = useContext(Context);
   const [loader, setLoader] = useState(false);
-  const [msg, setMsg] = useState({ data: {} });
-  const dropRef = useRef();
 
-  //메시지 듣기
-  useEffect(() => {
-    socket.on(
-      "private message",
-      async ({ content, from, to, invite, friend }) => {
-        const incomingM = { content, from, to, invite, friend };
-        setMsg((prev) => {
-          const temp = { ...prev.data };
-          const sender = from;
-          if (!temp[to]) {
-            temp[sender] = [incomingM];
-            if (!temp[to]) {
-              temp[to] = [incomingM];
-            } else {
-              temp[to].push(incomingM);
-            }
-            return { data: temp };
-          } else {
-            if (!temp[to]) {
-              temp[to] = [incomingM];
-            } else {
-              temp[to].push(incomingM);
-            }
-            temp[sender].push(incomingM);
-            return { data: temp };
-          }
-        });
-      }
-    );
-    return () => {
-      socket.off("private message");
-    };
-  }, [nickname]);
+  const dropRef = useRef();
 
   const clickHandler = () => {
     setLoader((prev) => !prev);
@@ -105,8 +74,9 @@ const FriendList = ({
           messages={messages}
           msg={msg}
           userId={userId}
-          setMsg={setMsg}
+          setMsg={sendMsgHandler}
           backgroundCloseHandler={backgroundCloseHandler}
+          readMsgHandler={readMsgHandler}
         />
       )}
     </>

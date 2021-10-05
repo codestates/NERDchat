@@ -5,7 +5,14 @@ import PInput from "./PInput/PInput";
 import socket from "../../hooks/socket";
 import { Cookies } from "react-cookie";
 
-function PrivateMessageModal({ userInfo, nickname, setMsg, messages, msg }) {
+function PrivateMessageModal({
+  userInfo,
+  nickname,
+  setMsg,
+  messages,
+  msg,
+  readMsgHandler,
+}) {
   const [msgHistory, setMsgHistory] = useState(messages);
   const messageEl = useRef(null);
   const newMessageEl = useRef(null);
@@ -35,29 +42,7 @@ function PrivateMessageModal({ userInfo, nickname, setMsg, messages, msg }) {
       to: nickname,
     };
     socket.emit("private message", { content: e.target.value, to: nickname });
-    setMsg((prev) => {
-      const temp = { ...prev.data };
-      const sender = nickname;
-      if (!temp[nickname]) {
-        temp[sender] = [sendingM];
-        if (!temp[userInfo.nickname]) {
-          temp[userInfo.nickname] = [sendingM];
-        } else {
-          temp[userInfo.nickname].push(sendingM);
-        }
-
-        return { data: temp };
-      } else {
-        if (!temp[userInfo.nickname]) {
-          temp[userInfo.nickname] = [sendingM];
-        } else {
-          temp[userInfo.nickname].push(sendingM);
-        }
-        temp[sender].push(sendingM);
-
-        return { data: temp };
-      }
-    });
+    setMsg(sendingM, userInfo.nickname, nickname);
   };
 
   return (
@@ -70,9 +55,10 @@ function PrivateMessageModal({ userInfo, nickname, setMsg, messages, msg }) {
             </div>
           ))}
         {msg[nickname] &&
-          msg[nickname].map((m, i) => (
+          msg[nickname].messages &&
+          msg[nickname].messages.map((m, i) => (
             <div key={i} className={`chatApp__msg`}>
-              <PMessage message={m} userInfo={userInfo} />
+              <PMessage message={m} userInfo={userInfo} setMsg={setMsg} />
             </div>
           ))}
         <div ref={newMessageEl} />

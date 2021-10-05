@@ -21,6 +21,7 @@ function DropDown({
   userId,
   setMsg,
   backgroundCloseHandler,
+  readMsgHandler,
 }) {
   const {
     deleteFriendModalHandler,
@@ -69,6 +70,7 @@ function DropDown({
           msg={msg.data}
           setMsg={setMsg}
           userInfo={userInfo}
+          readMsgHandler={readMsgHandler}
         />
       )}
       {userInfoModalOpen && <UserInfo nickname={nickname} />}

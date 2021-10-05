@@ -23,6 +23,7 @@ function OnlineUserDropDown({
   userId,
   setMsg,
   backgroundCloseHandler,
+  readMsgHandler,
 }) {
   const {
     userInfoModalHandler,
@@ -72,6 +73,7 @@ function OnlineUserDropDown({
           messages={messages}
           msg={msg.data}
           setMsg={setMsg}
+          readMsgHandler={readMsgHandler}
         />
       )}
       {userInfoModalOpen && <UserInfo nickname={nickname} />}

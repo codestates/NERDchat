@@ -12,6 +12,9 @@ const OnlineUser = ({
   online,
   userInfo,
   userId,
+  readMsgHandler,
+  sendMsgHandler,
+  msg,
 }) => {
   const {
     userInfoModalOpen,
@@ -20,41 +23,8 @@ const OnlineUser = ({
     inviteModalOpen,
   } = useContext(Context);
   const [loader, setLoader] = useState(false);
-  const [msg, setMsg] = useState({ data: {} });
-  const dropRef = useRef();
 
-  useEffect(() => {
-    socket.on(
-      "private message",
-      async ({ content, from, to, invite, friend }) => {
-        const incomingM = { content, from, to, invite, friend };
-        setMsg((prev) => {
-          const temp = { ...prev.data };
-          const sender = from;
-          if (!temp[to]) {
-            temp[sender] = [incomingM];
-            if (!temp[to]) {
-              temp[to] = [incomingM];
-            } else {
-              temp[to].push(incomingM);
-            }
-            return { data: temp };
-          } else {
-            if (!temp[to]) {
-              temp[to] = [incomingM];
-            } else {
-              temp[to].push(incomingM);
-            }
-            temp[sender].push(incomingM);
-            return { data: temp };
-          }
-        });
-      }
-    );
-    return () => {
-      socket.off("private message");
-    };
-  }, [nickname]);
+  const dropRef = useRef();
 
   const clickHandler = () => {
     setLoader((prev) => !prev);
@@ -69,6 +39,7 @@ const OnlineUser = ({
     )
       setLoader(false);
   };
+
   return (
     <>
       <div className="online__container" ref={dropRef}>
@@ -102,9 +73,10 @@ const OnlineUser = ({
           nickname={nickname}
           messages={messages}
           msg={msg}
-          setMsg={setMsg}
+          setMsg={sendMsgHandler}
           userId={userId}
           backgroundCloseHandler={backgroundCloseHandler}
+          readMsgHandler={readMsgHandler}
         />
       )}
     </>
