@@ -30,6 +30,10 @@ function PrivateMessageModal({
     }
   }, [msg]);
 
+  useEffect(() => {
+    // readMsgHandler(nickname);
+  }, [msg]);
+
   //메시지 보내기
   const sendHandler = (e) => {
     e.preventDefault();
