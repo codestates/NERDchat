@@ -6,6 +6,7 @@ dotenv.config();
 module.exports = async (req, res) => {
   try {
     const code = req.query.code;
+    const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
     if (!code) res.status(400).json({ message: 'code not found' });
     const data = await axios({
       url: 'https://graph.facebook.com/v12.0/oauth/access_token',
@@ -40,23 +41,27 @@ module.exports = async (req, res) => {
         created_at: new Date(),
         updated_at: new Date()
       });
+      const payload = {
+        avatar: userData.data.picture.data.url,
+        userId: userData.data.id,
+        nickname: userData.data.id,
+        email: userData.data.email,
+        valid: false,
+        oauth: 'Facebook',
+        status: null,
+        currentRoom: null,
+        created_at: new Date(),
+        updated_at: new Date()
+      };
+      res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
+        .cookie('oauth', 'facebook', { httpOnly: true, sameSite: 'none', secure: true })
+        .cookie('userInfo', payload, { httpOnly: false, sameSite: 'none', secure: true }).status(200).redirect(
+          process.env.GO_HOME + '/servers'
+        );
     }
-    const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
-    const payload = {
-      avatar: userData.data.picture.data.url,
-      userId: userData.data.id,
-      nickname: userData.data.id,
-      email: userData.data.email,
-      valid: false,
-      oauth: 'Facebook',
-      status: null,
-      currentRoom: null,
-      created_at: new Date(),
-      updated_at: new Date()
-    };
     res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
       .cookie('oauth', 'facebook', { httpOnly: true, sameSite: 'none', secure: true })
-      .cookie('data', payload, { httpOnly: true, sameSite: 'none', secure: true }).redirect(
+      .cookie('userInfo', userInfo, { httpOnly: false, sameSite: 'none', secure: true }).status(200).redirect(
         process.env.GO_HOME + '/servers'
       );
   } catch (err) {
