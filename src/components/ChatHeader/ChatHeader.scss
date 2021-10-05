@@ -8,17 +8,20 @@
 
   .chatheader__container-start {
     display: flex;
-    border: 1px solid aqua;
     flex: 1;
+    align-items: center;
+    font-size: 20px;
   }
 
   .iconback {
     color: rgb(172, 172, 172);
+    align-items: center;
   }
 
   .chatheader__icon {
     margin: 0 10px;
     color: rgb(172, 172, 172);
+    margin-top: 7px;
   }
   .chatheader__title {
     margin: 0 30px;
@@ -42,8 +45,6 @@
   .chatheader__nember {
     margin-right: 30px;
     color: rgb(172, 172, 172);
-
-    border: 1px solid aqua;
   }
   .chatheader__nember span {
     font-size: 15px;

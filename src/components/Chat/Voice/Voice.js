@@ -1,9 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
+
 import useSocket from "../../../hooks/useSocket";
 import styled from "styled-components";
 import Peer from "simple-peer";
+
 import { Cookies } from "react-cookie";
 import { useParams } from "react-router-dom";
+
+import { ReactComponent as Glasses } from "../../../images/glasses.svg";
+import {
+  IoHeartCircleOutline,
+  IoChevronDownOutline,
+  IoMicOffOutline,
+  IoMicOutline,
+  IoOptionsOutline,
+  IoRepeatOutline,
+  IoArrowUndoOutline,
+  IoShareSocialOutline,
+} from "react-icons/io5";
 
 import "./Voice.scss";
 
@@ -133,16 +147,64 @@ function Voice() {
   };
 
   return (
-    <div>
-      <div className="ok">일단 내용 넣기 전이용</div>
+    <div className="mute__card-container">
+      <div className="mute__card">
+        <div className="mute__head">
+          <div className="mute__arrow">
+            <IoChevronDownOutline size={25} />
+          </div>
+          <div className="mute__text">NERD PLAYER</div>
+          <div className="mute__like">
+            <IoHeartCircleOutline size={25} />
+          </div>
+        </div>
+        <div className="mute__cover">
+          <div className="mute__app">
+            <Glasses width="230" height="230" className="mute__glasses" />
+          </div>
+        </div>
+        <div className="mute__des">
+          <p className="mute__album-title">WithCall</p>
+          <p className="mute__album-subtitle">YOUR FRIEND</p>
+        </div>
+        <div className="mute__progress">
+          <div className="mute__bg"></div>
+          <div className="mute__time"></div>
+          <div className="mute__times">
+            <div className="mute__time-current">2:02</div>
+            <div className="mute__time-end">4:05</div>
+          </div>
+        </div>
+        <div className="mute__menu">
+          <div className="mute__options">
+            <IoOptionsOutline size={20} />
+          </div>
+          <div className="mute__repeat">
+            <IoRepeatOutline size={20} />
+          </div>
+          <div onClick={handleMute} className="mute__play-pause">
+            {mute ? (
+              <IoMicOffOutline size={30} className="mute__play" />
+            ) : (
+              <IoMicOutline size={30} className="mute__pause" />
+            )}
+          </div>
+          <div className="mute__back">
+            <IoArrowUndoOutline size={20} />
+          </div>
+          <div className="mute__share">
+            <IoShareSocialOutline size={20} />
+          </div>
+        </div>
+      </div>
       <div>
         <StyledVideo muted ref={userAudio} autoPlay playsInline />
-        <button onClick={handleMute}>{mute ? "unmute" : "mute"}</button>
         {peers
           .filter((peer) => peer.peerId !== userInfo.userId)
           .map((peer) => {
             return <Video key={peer.peerId} peer={peer.peer} />;
           })}
+        {/* <button onClick={handleMute}>{mute ? "unmute" : "mute"}</button> */}
       </div>
     </div>
   );

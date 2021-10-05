@@ -1,10 +1,174 @@
-.voice__chat {
-  border: 1px solid aqua;
+$dark: rgb(23, 23, 23);
+$neonMain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+$title: rgb(172, 172, 172);
+$demo: rgba(77, 77, 77, 0.243);
+
+.mute__arrow,
+.mute__like {
+  color: $neonMain;
+  filter: drop-shadow(1px 1px 2px $neonSer);
+}
+
+.mute__card-container {
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  .voice__video {
-    width: 200px;
-    height: 100px;
+  .mute__card {
+    width: 280px;
+    height: 600px;
+    // border: 1px solid ;
+    box-shadow: 0 3px 10px black;
+    padding: 10%;
+    border-radius: 30px;
+  }
+
+  .mute__head {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .mute__text {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    letter-spacing: 1px;
+    color: $title;
+  }
+
+  .mute__cover {
+    width: 100%;
+    height: 40%;
+    margin: 15% 0;
+  }
+  .mute__app {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(36, 36, 36, 0.462);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .mute__glasses {
+      cursor: pointer;
+      stroke: $neonMain;
+      stroke-width: 2;
+      stroke-dasharray: 200;
+      stroke-dashoffset: 0;
+      animation: flicker 2s linear infinite;
+      filter: drop-shadow(2px 2px 2px $neonSer);
+      fill: transparent;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+
+  .mute__des {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+
+    text-align: center;
+    color: $title;
+
+    .mute__album-title {
+      font-family: "Poppins", sans-serif;
+      font-weight: 100;
+      font-size: 12px;
+      color: $title;
+    }
+    .mute__album-subtitle {
+      padding-top: 8px;
+      font-size: 20px;
+      color: $title;
+    }
+  }
+
+  .mute__progress {
+    width: 100%;
+    height: 10%;
+    margin-top: 15%;
+    position: relative;
+    padding-top: 4%;
+  }
+
+  .mute__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: rgba(111, 111, 111, 0.153);
+    border-radius: 8px;
+  }
+
+  .mute__time {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 57%;
+    height: 5px;
+    background-color: $neonMain;
+    filter: drop-shadow(1px 1px 2px $neonSer);
+    border-radius: 8px;
+  }
+
+  .mute__times {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .mute__time-current,
+  .mute__time-end {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+
+    color: $title;
+    font-size: 11px;
+  }
+
+  .mute__menu {
+    width: 100%;
+    height: 12%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5%;
+    align-items: center;
+  }
+
+  .mute__play-pause {
+    text-align: center;
+    line-height: 70px;
+    background-color: rgba(12, 12, 12, 0.277);
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+  }
+
+  .mute__options,
+  .mute__repeat,
+  .mute__play-pause,
+  .mute__back,
+  .mute__share {
+    transition: all 0.2s ease-in-out;
+    color: $title;
+  }
+
+  .mute__options:hover,
+  .mute__repeat:hover,
+  .mute__back:hover,
+  .mute__share:hover {
+    transform: scale(1.2);
+  }
+
+  .mute__play-pause:hover {
+    transform: scale(1.3);
+    .mute__play:hover,
+    .mute__pause:hover {
+      color: $neonMain;
+      filter: drop-shadow(1px 1px 2px $neonSer);
+    }
   }
 }
