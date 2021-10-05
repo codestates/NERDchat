@@ -17,21 +17,20 @@ function ChatHeader({ path }) {
 
   return (
     <div className="chatheader__container">
-      <div className="chatheader__icon">
-        <Link to="/servers">
-          <IoChevronBackOutline size={25} className="iconback" />
-        </Link>
-      </div>
-      <div className="chatheader__title">
-        {lists.map((el, i) => (
-          <span key={i}>{el.uuid === path.roomId ? el.roomTitle : null}</span>
-        ))}
-      </div>
-      <div className="chatheader__mic">
-        <IoMicOutline size={25} />
+      <div className="chatheader__container-start">
+        <div className="chatheader__icon">
+          <Link to="/servers">
+            <IoChevronBackOutline size={25} className="iconback" />
+          </Link>
+        </div>
+        <div className="chatheader__title">
+          {lists.map((el, i) => (
+            <div key={i}>{el.uuid === path.roomId ? el.roomTitle : null}</div>
+          ))}
+        </div>
       </div>
       <div className="chatheader__nember">
-        <span> Now {currentNum} nerd gamers are connected </span>
+        <span> Concurrent Users: {currentNum} </span>
       </div>
     </div>
   );
