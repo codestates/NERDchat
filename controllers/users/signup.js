@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
       }
     });
     if (userInfo.email === email) res.status(208).json({ isSignup: false, message: 'duplicate email' });
-    if (userInfo.userId === id) res.status(208).json({ isSignup: false, message: 'duplicate userId' })
+    if (userInfo.userId === id) res.status(208).json({ isSignup: false, message: 'duplicate userId' });
     if (userInfo.nickname === nickname) res.status(208).json({ isSignup: false, message: 'duplicate nickname' });
     const newPassword = generatePassword(password);
     await Users.create({

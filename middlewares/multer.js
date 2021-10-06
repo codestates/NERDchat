@@ -20,7 +20,7 @@ module.exports = {
         key: (req, file, cb) => {
           const fileName = randomstring.generate(25);
           let mimeType;
-          switch (file.mimetype) { 
+          switch (file.mimetype) {
             case 'image/jpeg':
               mimeType = 'jpg';
               break;
