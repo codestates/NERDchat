@@ -1,6 +1,6 @@
-const { GameCategory, Favorites } = require('../../models');
-const { verifyAccess } = require('../../middlewares/token');
-require('dotenv').config();
+const { GameCategory, Favorites } = require("../../models");
+const { verifyAccess } = require("../../middlewares/token");
+require("dotenv").config();
 
 module.exports = async (req, res) => {
   const page = req.params.page || 1;
@@ -8,6 +8,7 @@ module.exports = async (req, res) => {
   const userData = req.cookies.accessToken
     ? await verifyAccess(req, res)
     : null;
+
   try {
     let userFavCategoryList;
     const usersFavList = [];
@@ -15,7 +16,7 @@ module.exports = async (req, res) => {
     if (userData) {
       userFavCategoryList = await Favorites.findAll({
         where: { userId: userData.id },
-        attributes: ['gameId']
+        attributes: ["gameId"],
       });
       userFavCategoryList.forEach((el) => usersFavList.push(el.gameId));
     }
@@ -25,7 +26,7 @@ module.exports = async (req, res) => {
         const append = {
           id: list.id,
           image: list.image,
-          category: list.category
+          category: list.category,
         };
         if (usersFavList.includes(list.id)) {
           append.fav = true;
@@ -33,7 +34,7 @@ module.exports = async (req, res) => {
         payload.push(append);
       });
       res.status(200).json({ data: payload });
-    } else res.status(404).json({ message: 'no data' });
+    } else res.status(404).json({ message: "no data" });
   } catch (err) {
     console.log(err);
   }

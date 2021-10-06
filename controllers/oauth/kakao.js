@@ -1,68 +1,75 @@
-const { Users } = require('../../models');
-const axios = require('axios');
-const dotenv = require('dotenv');
+const { Users } = require("../../models");
+const axios = require("axios");
+const dotenv = require("dotenv");
 dotenv.config();
 
 module.exports = async (req, res) => {
   try {
-    const code = req.query.code;
+    const code = req.body.code;
     const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
-    if (!code) res.status(400).json({ message: 'code not found' });
     const data = await axios({
-      url: 'https://kauth.kakao.com/oauth/token',
+      url: "https://kauth.kakao.com/oauth/token",
       params: {
-        grant_type: 'authorization_code',
+        grant_type: "authorization_code",
         client_id: process.env.KAKAO_REST_API_KEY,
-        redirect_uri: `${process.env.ENDPOINT}/oauth/kakao`,
-        code
-      }
+        redirect_uri: `http://localhost:3000/callback`,
+        code,
+      },
     });
     const accessToken = data.data.access_token;
     const refreshToken = data.data.refresh_token;
-    const userData = await axios({
-      url: 'https://kapi.kakao.com/v2/user/me',
-      method: 'get',
-      params: { access_token: accessToken }
-    });
-    const userInfo = await Users.findOne({ where: { userId: userData.data.id } });
-    if (!userInfo) {
-      await Users.create({
-        avatar: userData.data.properties.profile_image,
-        userId: userData.data.id,
-        nickname: userData.data.id,
-        email: userData.data.kakao_account.email || null,
-        valid: false,
-        oauth: 'Kakao',
-        status: null,
-        currentRoom: null,
-        created_at: new Date(),
-        updated_at: new Date()
-      });
-      const payload = {
-        avatar: userData.data.properties.profile_image,
-        userId: userData.data.id,
-        nickname: userData.data.id,
-        email: userData.data.kakao_account.email || null,
-        valid: false,
-        oauth: 'Kakao',
-        status: null,
-        currentRoom: null,
-        created_at: new Date(),
-        updated_at: new Date()
-      };
-      res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
-        .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
-        .cookie('oauth', 'kakao', { httpOnly: true, sameSite: 'none', secure: true })
-        .cookie('userInfo', payload, { httpOnly: false, sameSite: 'none', secure: true }).status(200).redirect(
-          process.env.GO_HOME + '/servers'
-        );
-    }
-    res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
-      .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'none', secure: true })
-      .cookie('oauth', 'kakao', { httpOnly: true, sameSite: 'none', secure: true })
-      .cookie('userInfo', userInfo, { httpOnly: false, sameSite: 'none', secure: true }).status(200).redirect(
-        process.env.GO_HOME + '/servers'
-      );
+    // const userData = await axios({
+    //   url: "https://kapi.kakao.com/v2/user/me",
+    //   method: "get",
+    //   params: { access_token: accessToken },
+    // });
+    // console.log(44, "This is userData ", userData);
+    // let payload;
+    // const userInfo = await Users.findOne({
+    //   where: { userId: userData.data.id },
+    // });
+    // console.log(55, "This is userInfo", userInfo);
+    // if (!userInfo) {
+    //   await Users.create({
+    //     avatar: userData.data.properties.profile_image,
+    //     userId: userData.data.id,
+    //     nickname: userData.data.id,
+    //     email: userData.data.kakao_account.email || null,
+    //     valid: false,
+    //     oauth: "Kakao",
+    //     status: null,
+    //     currentRoom: null,
+    //     created_at: new Date(),
+    //     updated_at: new Date(),
+    //   });
+    //   payload = {
+    //     avatar: userData.data.properties.profile_image,
+    //     userId: userData.data.id,
+    //     nickname: userData.data.id,
+    //     email: userData.data.kakao_account.email || null,
+    //     valid: false,
+    //     oauth: "Kakao",
+    //     status: null,
+    //     currentRoom: null,
+    //     created_at: new Date(),
+    //     updated_at: new Date(),
+    //   };
+    // }
+    // const send = payload || userInfo;
+    // console.log(77, "This is payload", payload, userInfo);
+    res
+      .cookie("accessToken", accessToken, {
+        expires: expireDate,
+        sameSite: "none",
+        secure: true,
+      })
+      .cookie("refreshToken", refreshToken, { sameSite: "none", secure: true })
+      .cookie("oauth", "kakao", { sameSite: "none", secure: true })
+      // .cookie("userInfo", send, { sameSite: "none", secure: true })
+      .header("Access-Control-Allow-Origin", "*")
+      .status(200)
+      .redirect(`http://localhost:3000/servers`);
+    // .redirect(`http://localhost:8080`);
   } catch (err) {
     console.log(err);
   }
