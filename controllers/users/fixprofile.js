@@ -9,7 +9,6 @@ module.exports = async (req, res) => {
     const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
     const avatar = req.file ? req.file.location : null;
     let { oauth, accessToken } = req.cookies;
-    
     const origin = await Users.findOne({
       where: { email: userData.email, nickname: userData.nickname }
     })
