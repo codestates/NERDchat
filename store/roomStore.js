@@ -18,9 +18,8 @@ class InMemoryRoomStore extends RoomStore {
   }
 
   deleteRoomUser (room) {
-      const idx = this.rooms[room.uuid].indexOf(room.user)
-      if(idx > -1)
-        return this.rooms[room.uuid].splice(idx, 1)
+    const idx = this.rooms[room.uuid].indexOf(room.user);
+    if (idx > -1) { return this.rooms[room.uuid].splice(idx, 1); }
   }
 }
 const ROOM_TTL = 24 * 60 * 60;
@@ -32,7 +31,7 @@ class RedisRoomStore extends RoomStore {
 
   findRoom (room) {
     return this.redisClient.lrange(`roomUser:${room.uuid}`, 0, -1)
-        .then((res) => res.map(result => JSON.parse(result)))
+      .then((res) => res.map(result => JSON.parse(result)));
   }
 
   saveRoom (room) {
@@ -44,8 +43,8 @@ class RedisRoomStore extends RoomStore {
 
   deleteRoomUser (room) {
     const userData = JSON.stringify(room.user);
-      this.redisClient.multi()
-        .lrem(`roomUser:${room.uuid}`, 1, userData).exec();
+    this.redisClient.multi()
+      .lrem(`roomUser:${room.uuid}`, 1, userData).exec();
   }
 }
 module.exports = {
