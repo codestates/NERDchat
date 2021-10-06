@@ -4,147 +4,211 @@ $neonSer: rgb(163, 16, 255);
 $title: rgb(172, 172, 172);
 
 .mypage__container {
-  font-family: "Poppins", sans-serif;
-  color: white;
-  height: 97.3%;
+  // font-family: "Poppins", sans-serif;
+  color: $title;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   position: absolute;
   align-items: center;
-  border: 1px solid aqua;
+  // border: 1px solid aqua;
 
   .mypage__nav {
     width: 100%;
     height: 150px;
+    margin-bottom: 70px;
   }
 
-  .mypage__main {
+  .mypage__show {
     display: flex;
     flex-direction: row;
-    height: 100%;
-    width: 85%;
-    padding: 20px 10rem 40px;
-
-    .mypage__dashboard {
-      flex: 1;
-      box-shadow: 3px 3px 15px black;
-      display: flex;
-      flex-direction: row;
-    }
-  }
-
-  .mypage__dashboard-tabs {
-    flex: 0.3;
-    display: flex;
-    flex-direction: column;
-    background: rgba(0, 0, 0, 0.16);
-  }
-
-  .mypage__dashboard-content {
-    flex: 0.7;
-    position: relative;
-  }
-
-  .mypage__user {
-    // border: 1px solid yellow;
-    margin-top: 30px;
-    flex: 0.4;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .mypage__img {
-      width: 100px;
-      height: 100px;
-      border-radius: 100px;
-    }
-
-    .mypage__h2 {
-      font-family: "Monoton", cursive;
-      font-weight: lighter;
-      font-size: 25px;
-      margin-top: 10px;
-      color: $neonMain;
-      filter: drop-shadow(0 0 2px $neonSer);
-    }
-
-    .mypage__h3 {
-      font-family: "Poppins", sans-serif;
-      font-weight: 100;
-      font-size: 20px;
-      color: $title;
-    }
-  }
-
-  .mypage__tabs {
-    flex: 0.5;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    margin-top: 20px;
-    // border: 1px solid rgb(255, 0, 162);
-  }
-
-  .mypage__tab {
-    flex: 1;
     padding: 10px;
-    text-align: center;
-    // border: 1px solid tomato;
-    border-top: none;
-    cursor: pointer;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    color: $title;
-    transition: all 0.3s ease-in-out;
-
-    .mypage__tab-icon {
-      display: flex;
-      justify-content: center;
-      height: 45px;
-      padding: 10px 10px;
-      border-radius: 50px;
-      background: rgba(0, 0, 0, 0.482);
-    }
-
-    .mypage__tab-title {
-      font-family: "Poppins", sans-serif;
-      font-weight: 200;
-      margin-left: 5px;
-      margin-top: 10px;
-    }
+    // border: 1px solid aqua;
   }
-  .mypage__tab:hover {
+
+  .mypage__profile {
+    font-weight: 100;
+    text-align: center;
+    max-width: 600px;
+    box-shadow: 0 0 10px black;
+    padding: 30px;
+    margin-right: 80px;
+    color: $title;
+  }
+
+  .mypage__img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    object-fit: cover;
+    margin: 0 auto 20px auto;
+  }
+
+  .mypage__name {
+    font-size: 3em;
+    font-family: "Monoton", cursive;
+    font-weight: lighter;
     color: $neonMain;
     text-shadow: 0 0 3px $neonSer;
-  }
-  .active-tab {
-    border: none;
-    color: $neonMain;
-    text-shadow: 0 0 2px $neonSer;
-    // border: 1px solid springgreen;
+    margin-top: 10px;
   }
 
-  .active-tab::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  .mypage__status {
+    margin-bottom: 50px;
+    margin-top: 20px;
+    font-size: 19px;
+    font-family: "GmarketSansLight";
+    unicode-range: U+0020-007E;
   }
 
-  .mypage__content {
-    display: none;
-    position: relative;
+  .mypage__email {
+    font-family: "Poppins", sans-serif;
+    font-size: 19px;
+    margin-top: 100px;
+    font-weight: 200;
   }
 
-  .active-content {
-    display: block;
-    transition: all 1s ease-in-out;
+  .mypage__fri {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    font-family: "Poppins", sans-serif;
+    font-size: 19px;
+
+    .margin__10px {
+      margin-right: 10px;
+    }
   }
+
+  // .mypage__main {
+  //   display: flex;
+  //   flex-direction: row;
+  //   height: 100%;
+  //   width: 85%;
+  //   padding: 20px 10rem 40px;
+  // }
+
+  //   .mypage__dashboard {
+  //     flex: 1;
+  //     box-shadow: 3px 3px 15px black;
+  //     display: flex;
+  //     flex-direction: row;
+  //   }
+  // }
+
+  // .mypage__dashboard-tabs {
+  //   flex: 0.3;
+  //   display: flex;
+  //   flex-direction: column;
+  //   background: rgba(0, 0, 0, 0.16);
+  // }
+
+  // .mypage__dashboard-content {
+  //   flex: 0.7;
+  //   position: relative;
+  // }
+
+  // .mypage__user {
+  //   // border: 1px solid yellow;
+  //   margin-top: 30px;
+  //   flex: 0.4;
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: center;
+  //   align-items: center;
+  //   .mypage__img {
+  //     width: 100px;
+  //     height: 100px;
+  //     border-radius: 100px;
+  //   }
+
+  //   .mypage__h2 {
+  //     font-family: "Monoton", cursive;
+  //     font-weight: lighter;
+  //     font-size: 25px;
+  //     margin-top: 10px;
+  //     color: $neonMain;
+  //     filter: drop-shadow(0 0 2px $neonSer);
+  //   }
+
+  //   .mypage__h3 {
+  //     font-family: "Poppins", sans-serif;
+  //     font-weight: 100;
+  //     font-size: 20px;
+  //     color: $title;
+  //   }
+  // }
+
+  // .mypage__tabs {
+  //   flex: 0.5;
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: space-around;
+  //   margin-top: 20px;
+  //   // border: 1px solid rgb(255, 0, 162);
+  // }
+
+  // .mypage__tab {
+  //   flex: 1;
+  //   padding: 10px;
+  //   text-align: center;
+  //   // border: 1px solid tomato;
+  //   border-top: none;
+  //   cursor: pointer;
+  //   position: relative;
+  //   display: flex;
+  //   justify-content: center;
+  //   text-align: center;
+  //   color: $title;
+  //   transition: all 0.3s ease-in-out;
+
+  //   .mypage__tab-icon {
+  //     display: flex;
+  //     justify-content: center;
+  //     height: 45px;
+  //     padding: 10px 10px;
+  //     border-radius: 50px;
+  //     background: rgba(0, 0, 0, 0.482);
+  //   }
+
+  //   .mypage__tab-title {
+  //     font-family: "Poppins", sans-serif;
+  //     font-weight: 200;
+  //     margin-left: 5px;
+  //     margin-top: 10px;
+  //   }
+  // }
+  // .mypage__tab:hover {
+  //   color: $neonMain;
+  //   text-shadow: 0 0 3px $neonSer;
+  // }
+  // .active-tab {
+  //   border: none;
+  //   color: $neonMain;
+  //   text-shadow: 0 0 2px $neonSer;
+  //   // border: 1px solid springgreen;
+  // }
+
+  // .active-tab::after {
+  //   content: "";
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  //   bottom: 0;
+  // }
+
+  // .mypage__content {
+  //   display: none;
+  //   position: relative;
+  // }
+
+  // .active-content {
+  //   display: block;
+  //   transition: all 1s ease-in-out;
+  // }
 }
 
 // @import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");

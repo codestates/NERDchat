@@ -19,6 +19,7 @@ function SettingInfo() {
   const [status, setStatus] = useState("");
   const [pwd, setPwd] = useState("");
   const [cPwd, setCPwd] = useState("");
+  const [err, setErr] = useState();
 
   const { email, oauth } = userInfo;
   console.log(12387128318723, email, oauth);
@@ -111,7 +112,7 @@ function SettingInfo() {
                       disabled
                     />
                     <label htmlFor="email" className="form__label">
-                      {email ? email : "OAuth 가입자 입니다"}
+                      {email ? email : "OAuth 가입자입니다"}
                     </label>
                   </div>
                   <div className="form">
@@ -148,7 +149,7 @@ function SettingInfo() {
                         <input
                           type="password"
                           id="password"
-                          className="form__input"
+                          className="form__input form__input_err"
                           autoComplete="new-password"
                           placeholder=" "
                           ref={passwordRef}
@@ -191,13 +192,31 @@ function SettingInfo() {
                       <span className="form__text">Choose a Photo</span>
                     </label>
                   </form>
-                  <button
-                    type="submit"
-                    className="setting-button"
-                    disabled={formIsValid ? false : true}
-                  >
-                    Edit
-                  </button>
+                  {formIsValid ? (
+                    <div>
+                      <button
+                        type="submit"
+                        className="setting-button"
+                        disabled={formIsValid ? false : true}
+                      >
+                        Edit
+                      </button>
+                      <p className="passwordok">비번 오키~</p>
+                    </div>
+                  ) : (
+                    <div className="test-conponent">
+                      <button
+                        type="submit"
+                        className="setting-button-err"
+                        disabled={formIsValid ? false : true}
+                      >
+                        Edit
+                      </button>
+                      <p className="passwordnotok">
+                        Please enter your password.
+                      </p>
+                    </div>
+                  )}
                 </div>
               </form>
             </div>
