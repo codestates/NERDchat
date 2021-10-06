@@ -5,9 +5,9 @@
 
 .navbar {
   margin-top: 50px;
-  height: 100px;
+  // height: 100px;
   background: $dark;
-  padding: 0 15rem;
+  // padding: 0 30rem;
 
   &-nav {
     max-width: 100%;
@@ -51,15 +51,29 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+//769이상 태블릿
+@media screen and (min-width: 769px) {
   .navbar {
-    max-width: 768px;
-    padding: 0 0rem;
+    // min-width: 769px;
 
     &-nav {
       max-width: 100%;
       display: flex;
       justify-content: space-around;
+    }
+  }
+}
+
+//768px 이하 모바일
+@media screen and (max-width: 768px) {
+  .navbar {
+    // min-width: 769px;
+
+    &-nav {
+      max-width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
     }
   }
 }

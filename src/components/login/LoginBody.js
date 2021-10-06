@@ -7,6 +7,7 @@ import {
   RiFacebookBoxFill,
 } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
+import { Cookies } from "react-cookie";
 import { Context } from "../../context/ContextProvider";
 import "./LoginBody.scss";
 
@@ -20,6 +21,7 @@ const Login = () => {
   const history = useHistory();
   const { getUserInfo, isLoginHandler, loginmodalHandler } =
     useContext(Context);
+  const cookies = new Cookies();
   const idInputRef = useRef();
   const pwInputRef = useRef();
   const [err, setErr] = useState();
@@ -60,16 +62,36 @@ const Login = () => {
 
   // 구글 로그인
   const googleHandler = () => {
-    window.location.assign(
-      `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&response_type=code&scope=openid email&redirect_uri=${ENDPOINT}/oauth/google`
+    // window.location.assign(
+    //   `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&response_type=code&scope=openid email&redirect_uri=${ENDPOINT}/oauth/google`
+    // );
+    // isLoginHandler();
+    console.log(1982391823);
+    window.open(
+      `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&response_type=code&scope=openid email&redirect_uri=${ENDPOINT}/oauth/google`,
+      "_blank"
     );
-    isLoginHandler();
+
+    setTimeout(() => {
+      if (cookies.get("userInfo").oauth) {
+        console.log(7777, cookies.get("userInfo"));
+        isLoginHandler();
+      } else {
+        alert("login failed");
+        isLoginHandler();
+      }
+    }, 1000);
   };
   // 카카오 로그인
   const kakaoHandler = () => {
     window.location.assign(
       `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${ENDPOINT}/oauth/kakao&response_type=code`
     );
+    setTimeout(() => {
+      if (cookies.get("userInfo")) {
+        console.log(7777, cookies.get("userInfo"));
+      }
+    }, 500);
     isLoginHandler();
   };
   // 페이스북 로그인
