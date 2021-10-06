@@ -14,7 +14,6 @@ const ServerPageCard = ({ category, img, id, like }) => {
   const history = useHistory();
   const { loginModalOpen, loginmodalHandler } = useContext(Context);
   const [clicked, setClicked] = useState(false);
-  console.log(7777, category);
   const addBookmarkHandler = async (e) => {
     // e.preventDefault();
     e.stopPropagation();
@@ -43,34 +42,24 @@ const ServerPageCard = ({ category, img, id, like }) => {
         style={{ textDecoration: "none" }}
         onClick={getIntoServer}
       >
-        <div
-          className="game__list__card"
-          style={{
-            backgroundImage: `url(${img})`,
-
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-          }}
-        >
-          <div className="game__title__container">
-            <div className="title__container">
-              <p className="game__title">{category}</p>
-            </div>
-            <div className="game__server__content__container">
-              <p className="game__server__content">INTO SERVER</p>
-              <div className="server__arrow">
-                <BsChevronDoubleDown size={20} />
-              </div>
+        <img className="game__image" src={`${img}`} />
+        <div className="game__title__container">
+          <div className="title__container">
+            <p className="game__title">{category}</p>
+          </div>
+          <div className="game__server__content__container">
+            <p className="game__server__content">INTO SERVER</p>
+            <div className="server__arrow">
+              <BsChevronDoubleDown size={20} />
             </div>
           </div>
-          <div className="bookmark__container" onClick={addBookmarkHandler}>
-            {clicked ? (
-              <IoBookmarkOutline size={20} className="bookclicked" />
-            ) : (
-              <Bookmark />
-            )}
-          </div>
+        </div>
+        <div className="bookmark__container" onClick={addBookmarkHandler}>
+          {clicked ? (
+            <IoBookmarkOutline size={20} className="bookclicked" />
+          ) : (
+            <Bookmark />
+          )}
         </div>
       </div>
     </>
