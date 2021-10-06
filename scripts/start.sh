@@ -25,5 +25,6 @@ export AccessKeyId=$(aws ssm get-parameters --region us-east-1 --names AccessKey
 export SecretKey=$(aws ssm get-parameters --region us-east-1 --names SecretKey --query Parameters[0].Value | sed 's/"//g')
 export Region=$(aws ssm get-parameters --region us-east-1 --names Region --query Parameters[0].Value | sed 's/"//g')
 export BUCKET_NAME=$(aws ssm get-parameters --region us-east-1 --names BUCKET_NAME --query Parameters[0].Value | sed 's/"//g')
+export GO_HOME=$(aws ssm get-parameters --region us-east-1 --names GO_HOME --query Parameters[0].Value | sed 's/"//g')
 
 authbind --deep pm2 start index.js --watch
