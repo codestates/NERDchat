@@ -1,5 +1,6 @@
 const { Users } = require('../../models');
 const { generatePassword } = require('../../middlewares/crypto');
+const { Op } = require('sequelize');
 
 module.exports = async (req, res) => {
   const { id, password, email, nickname } = req.body;
