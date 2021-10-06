@@ -1,5 +1,4 @@
 const multer = require('multer');
-const path = require('path');
 const multerS3 = require('multer-s3');
 const aws = require('aws-sdk');
 const randomstring = require('randomstring');
@@ -21,7 +20,7 @@ module.exports = {
         key: (req, file, cb) => {
           const fileName = randomstring.generate(25);
           let mimeType;
-          switch (file.mimetype) { // 파일 타입을 거릅니다.
+          switch (file.mimetype) { 
             case 'image/jpeg':
               mimeType = 'jpg';
               break;
