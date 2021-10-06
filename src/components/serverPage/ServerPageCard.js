@@ -14,7 +14,6 @@ const ServerPageCard = ({ category, img, id, like }) => {
   const history = useHistory();
   const { loginModalOpen, loginmodalHandler } = useContext(Context);
   const [clicked, setClicked] = useState(false);
-  console.log(7777, category);
   const addBookmarkHandler = async (e) => {
     // e.preventDefault();
     e.stopPropagation();
@@ -40,18 +39,16 @@ const ServerPageCard = ({ category, img, id, like }) => {
     <>
       <div
         className="grid__items"
-        style={{ textDecoration: "none" }}
+        style={{ textDecoration: "none", backgroundImage: `url(${img})` }}
         onClick={getIntoServer}
       >
         <div
           className="game__list__card"
-          style={{
-            backgroundImage: `url(${img})`,
-
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-          }}
+          style={
+            {
+              // backgroundImage: `url(${img})`,
+            }
+          }
         >
           <div className="game__title__container">
             <div className="title__container">

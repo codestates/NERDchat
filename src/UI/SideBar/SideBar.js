@@ -173,7 +173,9 @@ const SideBar = () => {
               .sort((a, b) =>
                 a.connected === b.connected ? 0 : -a.connected ? -1 : 1
               )
-              .filter((el) => el.userId !== userInfo.userId)
+              .filter(
+                (el) => el.userId !== userInfo.userId && el.nickname !== ""
+              )
               .map((el) => (
                 <OnlineUser
                   key={el.userId}

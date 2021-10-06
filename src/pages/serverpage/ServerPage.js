@@ -71,37 +71,35 @@ const ServerPage = () => {
   return (
     <div className="server__list__container">
       <NavBar />
-      <div className="big__container">
-        <div className="game__list__card__container">
-          {lists.map((list, idx) => {
-            // 해당 요소가 마지막 요소라면, ref붙여주기
-            if (lists.length === idx + 1) {
-              return (
-                <div ref={lastElementRef} key={list.category}>
-                  <ServerPageCard
-                    id={list.id}
-                    category={list.category}
-                    img={list.image}
-                    like={list.fav}
-                  />
-                </div>
-              );
-            } else {
-              return (
-                <div key={list.category}>
-                  <ServerPageCard
-                    key={list.category}
-                    id={list.id}
-                    category={list.category}
-                    img={list.image}
-                    like={list.fav}
-                  />
-                </div>
-              );
-            }
-          })}
-          <div>{loading && <Loader />}</div>
-        </div>
+      <div className="game__list__card__container">
+        {lists.map((list, idx) => {
+          // 해당 요소가 마지막 요소라면, ref붙여주기
+          if (lists.length === idx + 1) {
+            return (
+              <div ref={lastElementRef} key={list.category}>
+                <ServerPageCard
+                  id={list.id}
+                  category={list.category}
+                  img={list.image}
+                  like={list.fav}
+                />
+              </div>
+            );
+          } else {
+            return (
+              <div key={list.category}>
+                <ServerPageCard
+                  key={list.category}
+                  id={list.id}
+                  category={list.category}
+                  img={list.image}
+                  like={list.fav}
+                />
+              </div>
+            );
+          }
+        })}
+        <div>{loading && <Loader />}</div>
       </div>
     </div>
   );

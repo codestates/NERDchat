@@ -6,21 +6,27 @@ $neonSer: rgb(163, 16, 255);
 $title: rgb(172, 172, 172);
 
 .grid__items {
-  // border: 1px solid black;
   font-family: "Poppins", sans-serif;
   font-weight: 100;
-
   display: flex;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
   border-radius: 0.3em;
+  // overflow-y: auto;
   cursor: default;
-  height: 100%;
   box-shadow: -1px 1px 15px black;
+  margin: 0 auto;
+  background-size: 100% 100%;
+  // background-repeat: no-repeat;
+  // overflow: scroll;
 
   .game__list__card {
     width: 100%;
     height: 100%;
+    // background-size: cover;
+    // background-repeat: no-repeat;
     display: flex;
     position: relative;
     border-radius: 0.3em;
@@ -32,18 +38,21 @@ $title: rgb(172, 172, 172);
 
     .game__title__container {
       color: white;
+      // background-color: red;
       background: linear-gradient(
         hsl(0 0% 0% /0),
         hsl(20 0% 0% /0.2) 10%,
         hsl(0 0% 0% /1)
       );
+
       width: 100%;
       position: absolute;
-      bottom: 0%;
+      bottom: 0;
       left: 0;
       $padding: 1.5rem;
       padding: $padding;
-      transform: transLateY(55%);
+      // height: 100%;
+      transform: transLateY(45%);
       transition: transform 500ms ease;
       cursor: pointer;
       .title__container {
@@ -80,8 +89,8 @@ $title: rgb(172, 172, 172);
       // z-index: 3;
       cursor: pointer;
       position: absolute;
-      bottom: 5px;
-      right: 5px;
+      bottom: 1rem;
+      right: 1.3rem;
     }
 
     .bookclicked {

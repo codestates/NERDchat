@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Modal from "../../UI/modal/Modal";
 import axios from "axios";
 import socket from "../../hooks/socket";
@@ -8,6 +8,7 @@ import "./UserAdd.scss";
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const UserAdd = ({ nickname, userId, setMsg, userInfo }) => {
+  const [err, setErr] = useState("");
   const { addFriendModalHandler, privateModalHandler } = useContext(Context);
 
   //친구초대 하기
@@ -15,6 +16,11 @@ const UserAdd = ({ nickname, userId, setMsg, userInfo }) => {
     const res = await axios.get(`${ENDPOINT}/friends/send/${userId}`, {
       withCredentials: true,
     });
+    const exist = res.data.message;
+    if (exist) {
+      setErr(`${nickname}님은 이미 친구입니다.`);
+      return;
+    }
     //요청이 잘 보내짐.
     //메시지 모달창을 열고, 친구초대 메시지를 보내자.
     //모달창 열 필요는 없을듯
@@ -51,7 +57,11 @@ const UserAdd = ({ nickname, userId, setMsg, userInfo }) => {
   return (
     <Modal>
       <div className="adduser_container">
-        <div className="adduser_title">Add friend?</div>
+        {err.length === 0 ? (
+          <div className="adduser_title">Add friend?</div>
+        ) : (
+          <div className="adduser_title err">{err}</div>
+        )}
       </div>
       <div>
         <div className="adduser_container-btn">
