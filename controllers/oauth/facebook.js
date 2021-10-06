@@ -28,6 +28,7 @@ module.exports = async (req, res) => {
       }
     });
     const userInfo = await Users.findOne({ where: { userid: userData.data.id } });
+    let payload;
     if (!userInfo) {
       await Users.create({
         avatar: userData.data.picture.data.url,
@@ -41,7 +42,7 @@ module.exports = async (req, res) => {
         created_at: new Date(),
         updated_at: new Date()
       });
-      const payload = {
+      payload = {
         avatar: userData.data.picture.data.url,
         userId: userData.data.id,
         nickname: userData.data.id,
@@ -59,9 +60,10 @@ module.exports = async (req, res) => {
           process.env.GO_HOME + '/servers'
         );
     }
+    const send = payload ? payload : userInfo;
     res.cookie('accessToken', accessToken, { domain: process.env.ORIGIN, expires: expireDate, sameSite: 'none', secure: true })
       .cookie('oauth', 'facebook', { domain: process.env.ORIGIN, sameSite: 'none', secure: true })
-      .cookie('userInfo', userInfo, { domain: process.env.ORIGIN, sameSite: 'none', secure: true }).status(200).redirect(
+      .cookie('userInfo', send, { domain: process.env.ORIGIN, sameSite: 'none', secure: true }).status(200).redirect(
         process.env.GO_HOME + '/servers'
       );
   } catch (err) {
