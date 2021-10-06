@@ -78,22 +78,21 @@ module.exports = {
           roomStore.findRoom({ uuid: roomUid })
         ]);
         socket.join(socket.userId);
-        const maxLen = await GameChatRooms.findOne({ where : { uuid: roomUid }});
-        if(maxLen.max === roomStatus.length) {
+        const maxLen = await GameChatRooms.findOne({ where: { uuid: roomUid } });
+        if (maxLen.max === roomStatus.length) {
           ns.to(socket.userId).emit('fullRoom');
           socket.leave(socket.userId);
-          return ;
-        }
-        else {
+          return;
+        } else {
           const data = {
             userId: userData.userId,
             avatar: userData.avatar,
             nickname: userData.nickname
-          }
-          roomStore.saveRoom({ uuid: roomUid, user: data })
+          };
+          roomStore.saveRoom({ uuid: roomUid, user: data });
           const [roomInfo] = await Promise.all([
             roomStore.findRoom({ uuid: roomUid })
-          ])
+          ]);
           socket.join(roomUid);
           ns.to(roomUid).emit('welcomeRoom', roomInfo);
         }
@@ -129,7 +128,7 @@ module.exports = {
           userId: socket.userId,
           avatar: socket.avatar ? socket.avatar : null,
           nickname: socket.nickname
-        }
+        };
         // notify other users
         socket.broadcast.emit('user disconnected', socket.userId);
         // update connection status
@@ -139,7 +138,7 @@ module.exports = {
           nickname: socket.nickname,
           connected: false
         });
-        roomStore.deleteRoomUser({ uuid, user: userData })
+        roomStore.deleteRoomUser({ uuid, user: userData });
       }
     });
   },

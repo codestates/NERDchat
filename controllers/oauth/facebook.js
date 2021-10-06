@@ -53,15 +53,15 @@ module.exports = async (req, res) => {
         created_at: new Date(),
         updated_at: new Date()
       };
-      res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
-        .cookie('oauth', 'facebook', { httpOnly: true, sameSite: 'none', secure: true })
-        .cookie('userInfo', payload, { httpOnly: false, sameSite: 'none', secure: true }).status(200).redirect(
+      res.cookie('accessToken', accessToken, { Domain: process.env.ORIGIN, httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
+        .cookie('oauth', 'facebook', { Domain: process.env.ORIGIN, httpOnly: true, sameSite: 'none', secure: true })
+        .cookie('userInfo', payload, { Domain: process.env.ORIGIN, httpOnly: false, sameSite: 'none', secure: true }).status(200).redirect(
           process.env.GO_HOME + '/servers'
         );
     }
-    res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
-      .cookie('oauth', 'facebook', { httpOnly: true, sameSite: 'none', secure: true })
-      .cookie('userInfo', userInfo, { httpOnly: false, sameSite: 'none', secure: true }).status(200).redirect(
+    res.cookie('accessToken', accessToken, { Domain: process.env.ORIGIN, httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
+      .cookie('oauth', 'facebook', { Domain: process.env.ORIGIN, httpOnly: true, sameSite: 'none', secure: true })
+      .cookie('userInfo', userInfo, { Domain: process.env.ORIGIN, httpOnly: false, sameSite: 'none', secure: true }).status(200).redirect(
         process.env.GO_HOME + '/servers'
       );
   } catch (err) {
