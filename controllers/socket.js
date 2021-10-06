@@ -14,6 +14,9 @@ const messageStore = new RedisMessageStore(redisClient);
 const { RedisRoomMessageStore } = require('../store/roomMessageStore');
 const roomMessageStore = new RedisRoomMessageStore(redisClient);
 
+const { RedisRoomStore } = require('../store/roomStore');
+const roomStore = new RedisRoomStore(redisClient);
+
 const roomUsers = {};
 const roomSockets = {};
 
@@ -26,7 +29,6 @@ module.exports = {
       else roomUsers[roomUid] = [socket.userId];
       socket.join([roomUid, socket.userId]);
       roomSockets[socket.userId] = roomUid;
-      console.log(roomUsers, roomSockets);
       const usersInRoom = roomUsers[roomUid].filter(id => id !== socket.userId);
       ns.to(roomUid).emit('allUsers', usersInRoom);
     });
@@ -35,9 +37,6 @@ module.exports = {
     });
     socket.on('return signal', payload => {
       ns.to(payload.callerId).emit('receive return signal', { signal: payload.signal, id: socket.userId });
-    });
-    socket.onAny((event, ...args) => {
-      console.log(event, args);
     });
 
     tokenStore.saveToken(socket.token, {
@@ -72,35 +71,37 @@ module.exports = {
       connected: true
     });
 
-    socket.on('joinRoom', async (roomUid, userData, peerId) => {
+    socket.on('joinRoom', async (roomUid, userData) => {
     // search User and Update User ` currentRoom ` Column
       try {
-        const { id, userId, avatar, nickname } = userData;
-        await Users.update({
-          currentRoom: roomUid
-        }, {
-          where: { id, userId }
-        });
-        socket.join(roomUid);
-        socket.broadcast.to(roomUid).emit('userConnect', peerId);
-        ns.to(roomUid).emit('welcomeRoom', userData);
-
-        socket.on('disconnect', () => {
-          socket.broadcast.to(roomUid).emit('userDisconnect', peerId);
-        });
+        const [roomStatus] = await Promise.all([
+          roomStore.findRoom({ uuid: roomUid })
+        ]);
+        socket.join(socket.userId);
+        const maxLen = await GameChatRooms.findOne({ where : { uuid: roomUid }});
+        if(maxLen.max === roomStatus.length) {
+          ns.to(socket.userId).emit('fullRoom');
+          socket.leave(socket.userId);
+          return ;
+        }
+        else {
+          const data = {
+            userId: userData.userId,
+            avatar: userData.avatar,
+            nickname: userData.nickname
+          }
+          roomStore.saveRoom({ uuid: roomUid, user: data })
+          const [roomInfo] = await Promise.all([
+            roomStore.findRoom({ uuid: roomUid })
+          ])
+          socket.join(roomUid);
+          ns.to(roomUid).emit('welcomeRoom', roomInfo);
+        }
       } catch (err) {
         console.log(err);
         return null;
       }
     });
-
-    // socket.on('voiceChat', (voiceChatUid, userPeerId) => {
-    //   socket.join(voiceChatUid);
-    //   ns.to(voiceChatUid).emit('userConnect', userPeerId);
-    //   socket.on('disconnect', () => {
-    //     ns.to(voiceChatUid).emit('userDisconnect', userPeerId);
-    //   });
-    // });
 
     socket.on('roomMessage', (roomUid, roomId, userData, msgData) => {
       ns.to(roomUid).emit('roomMessage', userData, msgData);
@@ -124,6 +125,11 @@ module.exports = {
       }
       const isDisconnected = matchingSockets.size === 0;
       if (isDisconnected) {
+        const userData = {
+          userId: socket.userId,
+          avatar: socket.avatar ? socket.avatar : null,
+          nickname: socket.nickname
+        }
         // notify other users
         socket.broadcast.emit('user disconnected', socket.userId);
         // update connection status
@@ -133,6 +139,7 @@ module.exports = {
           nickname: socket.nickname,
           connected: false
         });
+        roomStore.deleteRoomUser({ uuid, user: userData })
       }
     });
   },
