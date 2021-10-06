@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
       }
     });
     if (oauth === 'none') accessToken = generateAccess(payload);
-    res.cookie('accessToken', accessToken, { Domain: process.env.ORIGIN, expires: expireDate, sameSite: 'none', secure: true })
+    res.cookie('accessToken', accessToken, { domain: process.env.ORIGIN, expires: expireDate, sameSite: 'none', secure: true })
       .status(202).json({
         data: {
           accessToken,

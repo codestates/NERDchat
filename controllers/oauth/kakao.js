@@ -50,17 +50,17 @@ module.exports = async (req, res) => {
         created_at: new Date(),
         updated_at: new Date()
       };
-      res.cookie('accessToken', accessToken, { Domain: process.env.ORIGIN, expires: expireDate, sameSite: 'none', secure: true })
-        .cookie('refreshToken', refreshToken, { Domain: process.env.ORIGIN, sameSite: 'none', secure: true })
-        .cookie('oauth', 'kakao', { Domain: process.env.ORIGIN, sameSite: 'none', secure: true })
-        .cookie('userInfo', payload, { Domain: process.env.ORIGIN, sameSite: 'none', secure: true }).status(200).redirect(
+      res.cookie('accessToken', accessToken, { domain: process.env.ORIGIN, expires: expireDate, sameSite: 'none', secure: true })
+        .cookie('refreshToken', refreshToken, { domain: process.env.ORIGIN, sameSite: 'none', secure: true })
+        .cookie('oauth', 'kakao', { domain: process.env.ORIGIN, sameSite: 'none', secure: true })
+        .cookie('userInfo', payload, { domain: process.env.ORIGIN, sameSite: 'none', secure: true }).status(200).redirect(
           process.env.GO_HOME + '/servers'
         );
     }
-    res.cookie('accessToken', accessToken, { Domain: process.env.ORIGIN, expires: expireDate, sameSite: 'none', secure: true })
-      .cookie('refreshToken', refreshToken, { Domain: process.env.ORIGIN, sameSite: 'none', secure: true })
-      .cookie('oauth', 'kakao', { Domain: process.env.ORIGIN, sameSite: 'none', secure: true })
-      .cookie('userInfo', userInfo, { Domain: process.env.ORIGIN, sameSite: 'none', secure: true }).status(200).redirect(
+    res.cookie('accessToken', accessToken, { domain: process.env.ORIGIN, expires: expireDate, sameSite: 'none', secure: true })
+      .cookie('refreshToken', refreshToken, { domain: process.env.ORIGIN, sameSite: 'none', secure: true })
+      .cookie('oauth', 'kakao', { domain: process.env.ORIGIN, sameSite: 'none', secure: true })
+      .cookie('userInfo', userInfo, { domain: process.env.ORIGIN, sameSite: 'none', secure: true }).status(200).redirect(
         process.env.GO_HOME + '/servers'
       );
   } catch (err) {
