@@ -39,35 +39,27 @@ const ServerPageCard = ({ category, img, id, like }) => {
     <>
       <div
         className="grid__items"
-        style={{ textDecoration: "none", backgroundImage: `url(${img})` }}
+        style={{ textDecoration: "none" }}
         onClick={getIntoServer}
       >
-        <div
-          className="game__list__card"
-          style={
-            {
-              // backgroundImage: `url(${img})`,
-            }
-          }
-        >
-          <div className="game__title__container">
-            <div className="title__container">
-              <p className="game__title">{category}</p>
-            </div>
-            <div className="game__server__content__container">
-              <p className="game__server__content">INTO SERVER</p>
-              <div className="server__arrow">
-                <BsChevronDoubleDown size={20} />
-              </div>
+        <img className="game__image" src={`${img}`} />
+        <div className="game__title__container">
+          <div className="title__container">
+            <p className="game__title">{category}</p>
+          </div>
+          <div className="game__server__content__container">
+            <p className="game__server__content">INTO SERVER</p>
+            <div className="server__arrow">
+              <BsChevronDoubleDown size={20} />
             </div>
           </div>
-          <div className="bookmark__container" onClick={addBookmarkHandler}>
-            {clicked ? (
-              <IoBookmarkOutline size={20} className="bookclicked" />
-            ) : (
-              <Bookmark />
-            )}
-          </div>
+        </div>
+        <div className="bookmark__container" onClick={addBookmarkHandler}>
+          {clicked ? (
+            <IoBookmarkOutline size={20} className="bookclicked" />
+          ) : (
+            <Bookmark />
+          )}
         </div>
       </div>
     </>
