@@ -45,7 +45,7 @@ $demo: rgba(77, 77, 77, 0.243);
   .mute__app {
     width: 100%;
     height: 100%;
-    background-color: rgba(36, 36, 36, 0.462);
+    background-color: rgba(12, 12, 12, 0.277);
     border-radius: 20px;
     box-shadow: 1px 3px 10px black;
 
@@ -174,7 +174,7 @@ $demo: rgba(77, 77, 77, 0.243);
 
   .mute__play-pause:hover {
     transform: scale(1.2);
-    box-shadow: 1px 2px8px black;
+    box-shadow: 1px 2px 8px black;
 
     .mute__play:hover,
     .mute__pause:hover {
@@ -186,7 +186,7 @@ $demo: rgba(77, 77, 77, 0.243);
 
 @keyframes identifier {
   0% {
-    width: 10%;
+    width: 30%;
   }
 
   20% {
@@ -198,10 +198,10 @@ $demo: rgba(77, 77, 77, 0.243);
   }
 
   60% {
-    width: 80%;
+    width: 0%;
   }
 
   100% {
-    width: 20%;
+    width: 50%;
   }
 }

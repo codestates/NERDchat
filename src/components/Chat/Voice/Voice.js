@@ -151,11 +151,11 @@ function Voice() {
       <div className="mute__card">
         <div className="mute__head">
           <div className="mute__arrow">
-            <IoChevronDownOutline size={25} />
+            <IoChevronDownOutline size={20} />
           </div>
           <div className="mute__text">NERD PLAYER</div>
           <div className="mute__like">
-            <IoHeartCircleOutline size={25} />
+            <IoHeartCircleOutline size={20} />
           </div>
         </div>
         <div className="mute__cover">
