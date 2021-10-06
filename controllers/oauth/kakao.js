@@ -24,6 +24,7 @@ module.exports = async (req, res) => {
       method: 'get',
       params: { access_token: accessToken }
     });
+    let payload;
     const userInfo = await Users.findOne({ where: { userId: userData.data.id } });
     if (!userInfo) {
       await Users.create({
@@ -38,7 +39,7 @@ module.exports = async (req, res) => {
         created_at: new Date(),
         updated_at: new Date()
       });
-      const payload = {
+      payload = {
         avatar: userData.data.properties.profile_image,
         userId: userData.data.id,
         nickname: userData.data.id,
@@ -50,17 +51,12 @@ module.exports = async (req, res) => {
         created_at: new Date(),
         updated_at: new Date()
       };
-      res.cookie('accessToken', accessToken, { domain: process.env.ORIGIN, expires: expireDate, sameSite: 'none', secure: true })
-        .cookie('refreshToken', refreshToken, { domain: process.env.ORIGIN, sameSite: 'none', secure: true })
-        .cookie('oauth', 'kakao', { domain: process.env.ORIGIN, sameSite: 'none', secure: true })
-        .cookie('userInfo', payload, { domain: process.env.ORIGIN, sameSite: 'none', secure: true }).status(200).redirect(
-          process.env.GO_HOME + '/servers'
-        );
     }
-    res.cookie('accessToken', accessToken, { domain: process.env.ORIGIN, expires: expireDate, sameSite: 'none', secure: true })
-      .cookie('refreshToken', refreshToken, { domain: process.env.ORIGIN, sameSite: 'none', secure: true })
-      .cookie('oauth', 'kakao', { domain: process.env.ORIGIN, sameSite: 'none', secure: true })
-      .cookie('userInfo', userInfo, { domain: process.env.ORIGIN, sameSite: 'none', secure: true }).status(200).redirect(
+    const send = payload ? payload : userInfo;
+    res.cookie('accessToken', accessToken, { expires: expireDate, sameSite: 'none', secure: true })
+      .cookie('refreshToken', refreshToken, { sameSite: 'none', secure: true })
+      .cookie('oauth', 'kakao', { sameSite: 'none', secure: true })
+      .cookie('userInfo', send, { sameSite: 'none', secure: true }).status(200).redirect(
         process.env.GO_HOME + '/servers'
       );
   } catch (err) {
