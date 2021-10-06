@@ -45,7 +45,10 @@ const Login = () => {
       { data: null },
       { headers: headers, withCredentials: true }
     );
-
+    if (res.data.messages) {
+      setErr(`중복된 ${res.data.messages} 입니다.`);
+      return;
+    }
     // 받은 유저 정보 저장하기.
     // 쿠키에 userInfo저장하게 되는 함수
     getUserInfo(res.data.data);

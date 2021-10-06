@@ -22,7 +22,7 @@ function SettingInfo() {
   const [err, setErr] = useState();
 
   const { email, oauth } = userInfo;
-
+  console.log(12387128318723, email, oauth);
   useEffect(() => {
     //oauth이용자가 아니라면?
     if (oauth === "none") {
@@ -60,7 +60,6 @@ function SettingInfo() {
   //수정된 정보 서버로 보내기
   const fixInfoHandler = async (e) => {
     e.preventDefault();
-    console.log("clicked");
     const formData = new FormData();
     if (pImage) {
       for (let i = 0; i < pImage.length; i++) {
