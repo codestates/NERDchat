@@ -1,6 +1,8 @@
 const { Users } = require('../../models');
 const { generateAccess, verifyAccess } = require('../../middlewares/token');
 const { generatePassword } = require('../../middlewares/crypto');
+const dotenv = require('dotenv');
+dotenv.config();
 
 module.exports = async (req, res) => {
   try {
@@ -38,7 +40,7 @@ module.exports = async (req, res) => {
       }
     });
     if (oauth === 'none') accessToken = generateAccess(payload);
-    res.cookie('accessToken', accessToken, { httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
+    res.cookie('accessToken', accessToken, { Domain: process.env.ORIGIN, httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
       .status(202).json({
         data: {
           accessToken,
