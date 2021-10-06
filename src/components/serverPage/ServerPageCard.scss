@@ -15,7 +15,7 @@ $title: rgb(172, 172, 172);
   align-items: center;
   border-radius: 0.3em;
   cursor: default;
-  box-shadow: -1px 1px 15px black;
+  box-shadow: -1px 1px 7px black;
   margin: 0 auto;
   overflow: visible;
   transition: transform 500ms ease;
@@ -27,6 +27,7 @@ $title: rgb(172, 172, 172);
   &:hover .game__title__container {
     transform: transLateY(65%);
   }
+
   .game__image {
     width: 100%;
     height: 100%;
@@ -45,8 +46,9 @@ $title: rgb(172, 172, 172);
     );
     overflow: hidden;
     $padding: 1.5rem;
-    padding: $padding;
-    transform: transLateY(75%);
+    // margin-left: 1.5rem;
+    // padding: $padding;
+    transform: transLateY(85%);
     transition: transform 500ms ease;
     cursor: pointer;
 
@@ -54,6 +56,7 @@ $title: rgb(172, 172, 172);
       position: relative;
       width: max-content;
       height: 30px;
+      margin-left: 1.5rem;
     }
 
     .game__title::after {
@@ -76,20 +79,6 @@ $title: rgb(172, 172, 172);
       opacity: 0;
       transition: opacity 800ms linear;
       text-align: center;
-      // color: rgb(255 255 255 / 1);
-    }
-
-    &:hover .game__title::after {
-      transform: scaleX(1);
-    }
-    &:hover .game__server__content__container {
-      opacity: 1;
-    }
-    &:hover .game__server__content__container > .server__arrow {
-      color: $neonMain;
-      filter: drop-shadow(1px 1px 2px $neonSer);
-      // transform: scale(1.1);
-      animation: heartbeat 400ms infinite ease;
     }
   }
   .bookmark__container {
@@ -105,6 +94,18 @@ $title: rgb(172, 172, 172);
     filter: drop-shadow(1px 1px 2px $neonSer);
     transition: all 0.2s ease-in-out;
   }
+  &:hover .game__title::after {
+    transform: scaleX(1);
+  }
+  &:hover .game__server__content__container {
+    opacity: 1;
+  }
+  &:hover .game__server__content__container > .server__arrow {
+    color: $neonMain;
+    filter: drop-shadow(1px 1px 2px $neonSer);
+    // transform: scale(1.1);
+    animation: heartbeat 400ms infinite ease;
+  }
 }
 
 @keyframes heartbeat {
@@ -116,5 +117,26 @@ $title: rgb(172, 172, 172);
   }
   100% {
     transform: scale(0.95);
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .grid__items {
+    &:hover .game__title__container {
+      transform: transLateY(70%);
+    }
+    .game__title__container {
+      transform: transLateY(85%);
+    }
+  }
+}
+@media screen and (min-width: 1024px) {
+  .grid__items {
+    &:hover .game__title__container {
+      transform: transLateY(70%);
+    }
+    .game__title__container {
+      transform: transLateY(85%);
+    }
   }
 }

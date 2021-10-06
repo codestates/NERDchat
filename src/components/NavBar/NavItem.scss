@@ -1,7 +1,7 @@
 @import "_color";
 
 .nav-item {
-  width: calc(100px * 3);
+  // width: calc(100px * 3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,11 +33,65 @@
   filter: drop-shadow(1px 1px 2px $neonSer);
 }
 
+.toggle-btn {
+  color: rgb(172, 172, 172);
+  display: none;
+}
+//모바일
 @media screen and (max-width: 768px) {
-  .nav-item {
+  .menu__container {
+    position: relative;
+  }
+  .toggle-btn {
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: calc(60px * 3);
+    cursor: pointer;
+    &:hover {
+      color: $neonNain;
+    }
   }
+  .nav-item {
+    display: none;
+    width: 100%;
+    &.open {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 2rem;
+      right: 0;
+      z-index: 999;
+      .icon-button {
+        display: none;
+        width: 100%;
+        &.open {
+          display: inline-flex;
+          padding: 0;
+          list-style: none;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+  // .nav-item {
+  //   display: flex;
+  //   align-items: center;
+  //   flex-direction: column;
+  //   justify-content: center;
+  //   gap: 3rem;
+
+  //   .toggle-btn {
+  //     display: block;
+  //     cursor: pointer;
+  //   }
+  //   .icon-button {
+  //     display: none;
+  //     &.open {
+  //       display: block;
+  //     }
+  //   }
+  // }
 }
