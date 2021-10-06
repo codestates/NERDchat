@@ -201,7 +201,7 @@ function SettingInfo() {
                       >
                         Edit
                       </button>
-                      <p className="passwordok">비번 오키~</p>
+                      <p className="passwordok">Please enter your password.</p>
                     </div>
                   ) : (
                     <div className="test-conponent">
