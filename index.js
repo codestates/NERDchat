@@ -8,7 +8,7 @@ const app = express();
 const httpServer = require('http').createServer(app);
 const io = require('socket.io')(httpServer, {
   cors: {
-    origin: true,
+    origin: process.env.ORIGIN,
     credentials: true,
     methods: ['GET', 'POST', 'OPTIONS', 'HEAD']
   },
@@ -24,7 +24,7 @@ const controller = require('./controllers/index');
 
 app.use(
   cors({
-    origin: true,
+    origin: process.env.ORIGIN,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
   })

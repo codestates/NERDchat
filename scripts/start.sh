@@ -21,10 +21,11 @@ export KAKAO_REST_API_KEY=$(aws ssm get-parameters --region us-east-1 --names KA
 export ENDPOINT=$(aws ssm get-parameters --region us-east-1 --names ENDPOINT --query Parameters[0].Value | sed 's/"//g')
 export GMAIL=$(aws ssm get-parameters --region us-east-1 --names GMAIL --query Parameters[0].Value | sed 's/"//g')
 export GMAIL_PASSWORD=$(aws ssm get-parameters --region us-east-1 --names GMAIL_PASSWORD --query Parameters[0].Value | sed 's/"//g')
-export AccessKeyId=$(aws ssm get-parameters --region us-east-1 --names AccessKeyId --query Parameters[0].Value | sed 's/"//g')
-export SecretKey=$(aws ssm get-parameters --region us-east-1 --names SecretKey --query Parameters[0].Value | sed 's/"//g')
-export Region=$(aws ssm get-parameters --region us-east-1 --names Region --query Parameters[0].Value | sed 's/"//g')
+export accessKeyId=$(aws ssm get-parameters --region us-east-1 --names AccessKeyId --query Parameters[0].Value | sed 's/"//g')
+export secretKey=$(aws ssm get-parameters --region us-east-1 --names SecretKey --query Parameters[0].Value | sed 's/"//g')
+export region=$(aws ssm get-parameters --region us-east-1 --names Region --query Parameters[0].Value | sed 's/"//g')
 export BUCKET_NAME=$(aws ssm get-parameters --region us-east-1 --names BUCKET_NAME --query Parameters[0].Value | sed 's/"//g')
 export GO_HOME=$(aws ssm get-parameters --region us-east-1 --names GO_HOME --query Parameters[0].Value | sed 's/"//g')
+export ORIGIN=$(aws ssm get-parameters --region us-east-1 --names ORIGIN --query Parameters[0].Value | sed 's/"//g')
 
 authbind --deep pm2 start index.js --watch
