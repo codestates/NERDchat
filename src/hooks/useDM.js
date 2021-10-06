@@ -54,6 +54,7 @@ function useDM(userInfo, to) {
     });
 
     socket.on("users", (data) => {
+      console.log(data);
       data.forEach((serverUser) => {
         for (let i = 0; i < userListRef.current.length; i++) {
           const existingUser = userListRef.current[i];
