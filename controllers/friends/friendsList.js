@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
     });
     const findUsers = await Users.findAll({
       where: { id: { [Op.in]: listSort } },
-      attributes: ['id', 'avatar', 'useId', 'nickname']
+      attributes: ['id', 'avatar', 'userId', 'nickname']
     });
     res.status(200).json({ data: findUsers });
   }
