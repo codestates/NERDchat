@@ -7,7 +7,7 @@ $title: rgb(172, 172, 172);
 
 .grid__items {
   font-family: "Poppins", sans-serif;
-  font-weight: 100;
+  font-weight: 200;
   display: flex;
   width: 100%;
   height: 100%;
@@ -16,11 +16,12 @@ $title: rgb(172, 172, 172);
   border-radius: 0.3em;
   cursor: default;
   box-shadow: -1px 1px 7px black;
-  margin: 0 auto;
+  margin: 20px auto;
   overflow: visible;
   transition: transform 500ms ease;
   position: relative;
   overflow: hidden;
+
   &:hover {
     transform: scale(1.05);
   }
@@ -31,6 +32,10 @@ $title: rgb(172, 172, 172);
   .game__image {
     width: 100%;
     height: 100%;
+  }
+
+  .game__title {
+    font-size: 20px;
   }
 
   .game__title__container {
@@ -64,7 +69,7 @@ $title: rgb(172, 172, 172);
       position: absolute;
       height: 2px;
       left: $padding * -1;
-      bottom: 5px;
+      bottom: -3px;
       background: $neonMain;
       filter: drop-shadow(1px 1px 2px $neonSer);
 
@@ -79,6 +84,7 @@ $title: rgb(172, 172, 172);
       opacity: 0;
       transition: opacity 800ms linear;
       text-align: center;
+      margin-top: 20px;
     }
   }
   .bookmark__container {

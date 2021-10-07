@@ -5,10 +5,12 @@ $title: rgb(172, 172, 172);
 
 .input_form {
   display: flex;
-  border: 1px solid rgba(165, 165, 165, 0.503);
-  border-radius: 10px;
-  margin: 0 20px;
-  padding: 6px 5px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  // border: 1px solid rgba(165, 165, 165, 0.503);
+  // padding: 10px 20px;
+  // background-color: rgba(12, 12, 12, 0.407);
 }
 
 .input_input {
@@ -16,11 +18,13 @@ $title: rgb(172, 172, 172);
   font-family: "Poppins", sans-serif;
   background-color: transparent;
   width: 100%;
-  color: white;
+  color: rgba(255, 255, 255, 0.797);
   font-size: 1em;
   font-weight: 100;
-  margin-left: 20px;
-  // margin-top: 1px;
+  padding: 10px 30px;
+
+  border: 1px solid $title;
+  border-radius: 50px;
 }
 
 input:focus,
@@ -32,18 +36,16 @@ select:focus {
 .input_sendButton {
   font-family: "Monoton", cursive;
   color: $title;
-  // text-shadow: 0 0 1px rgb(163, 16, 255);
   text-decoration: none;
   background: transparent;
   display: inline-block;
   border: none;
-  // border: 1px solid white;
   transition: all 0.2s ease;
-  padding: 0 20px;
+  padding: 10px 10px;
+  margin-left: 20px;
 }
 
 .input_sendButton:hover {
-  /* text-shadow: 0 0 3px rgb(163, 16, 255); */
   color: $neonMain;
 
   filter: drop-shadow(0 0 5px rgb(163, 16, 255));

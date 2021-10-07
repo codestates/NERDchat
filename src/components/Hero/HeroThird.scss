@@ -77,6 +77,33 @@
   }
 }
 
+@media screen and (max-width: 1400px) {
+  .third-container {
+    width: 1400px;
+    height: 100vh;
+    margin-top: 1px;
+    // border: 1px solid aqua;
+  }
+
+  .thirdtitle {
+    margin-left: -50px;
+    margin-top: 220px;
+  }
+
+  .thirdtitle h2 {
+    font-size: 2rem;
+  }
+  .thirdtitle h1 {
+    font-size: 6rem;
+  }
+
+  .third-image {
+    margin-top: 50px;
+    width: 660px;
+    height: 660px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .third-container {
     width: 768px;

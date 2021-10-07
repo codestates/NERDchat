@@ -1,18 +1,27 @@
+$dark: rgb(23, 23, 23);
+$neonMain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+$title: rgb(172, 172, 172);
+
 .pinput_form {
   display: flex;
-  border-top: 1px solid rgba(169, 169, 169, 0.358);
-  margin: 0 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
 }
 
 .pinput_input {
   border: none;
   font-family: "Poppins", sans-serif;
   background-color: transparent;
-  padding: 5%;
   width: 100%;
-  color: white;
+  color: rgba(255, 255, 255, 0.797);
   font-size: 1em;
   font-weight: 100;
+  padding: 10px 30px;
+
+  border: 1px solid $title;
+  border-radius: 50px;
 }
 
 input:focus,
@@ -23,17 +32,18 @@ select:focus {
 
 .pinput_sendButton {
   font-family: "Monoton", cursive;
-  color: rgb(184, 126, 255);
-  text-shadow: 0 0 1px rgb(163, 16, 255);
+  color: $title;
   text-decoration: none;
   background: transparent;
   display: inline-block;
   border: none;
-  width: 20%;
   transition: all 0.2s ease;
+  padding: 10px 10px;
+  margin-left: 20px;
 }
 
 .pinput_sendButton:hover {
-  /* text-shadow: 0 0 3px rgb(163, 16, 255); */
-  filter: drop-shadow(0 0 1px rgb(163, 16, 255));
+  color: $neonMain;
+
+  filter: drop-shadow(0 0 5px rgb(163, 16, 255));
 }
