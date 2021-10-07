@@ -13,6 +13,7 @@ import "./LoginBody.scss";
 
 //엔드포인트 real로 변경 필요
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
+const KKENDPOINT = process.env.REACT_APP_KKENDPOINT;
 const FACEBOOK_ID = process.env.REACT_APP_FACEBOOK_ID;
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 const KAKAO_REST_API_KEY = process.env.REACT_APP_KAKAO_CLIENT_KEY;
@@ -62,36 +63,16 @@ const Login = () => {
 
   // 구글 로그인
   const googleHandler = () => {
-    // window.location.assign(
-    //   `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&response_type=code&scope=openid email&redirect_uri=${ENDPOINT}/oauth/google`
-    // );
-    // isLoginHandler();
-    console.log(1982391823);
-    window.open(
-      `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&response_type=code&scope=openid email&redirect_uri=${ENDPOINT}/oauth/google`,
-      "_blank"
+    window.location.assign(
+      `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&response_type=code&scope=openid email&redirect_uri=${ENDPOINT}/oauth/google`
     );
-
-    setTimeout(() => {
-      if (cookies.get("userInfo").oauth) {
-        console.log(7777, cookies.get("userInfo"));
-        isLoginHandler();
-      } else {
-        alert("login failed");
-        isLoginHandler();
-      }
-    }, 1000);
+    isLoginHandler();
   };
   // 카카오 로그인
   const kakaoHandler = () => {
     window.location.assign(
-      `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${ENDPOINT}/oauth/kakao&response_type=code`
+      `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KKENDPOINT}/callback&response_type=code`
     );
-    setTimeout(() => {
-      if (cookies.get("userInfo")) {
-        console.log(7777, cookies.get("userInfo"));
-      }
-    }, 500);
     isLoginHandler();
   };
   // 페이스북 로그인

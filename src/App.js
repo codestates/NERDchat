@@ -5,6 +5,7 @@ import ChatPage from "./pages/ChatPage/ChatPage";
 import ServerPage from "./pages/serverpage/ServerPage";
 import ServerRoomPage from "./pages/ServerRoomPage/ServerRoomPage";
 import Mypage from "./pages/MyPage/MyPage";
+import Callback from "./components/callback/Callback";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           component={ChatPage}
         />
         <Route exact path="/mypage" component={Mypage} />
+        <Route path="/callback" component={Callback} />
       </Switch>
     </BrowserRouter>
   );

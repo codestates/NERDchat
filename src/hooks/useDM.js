@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import socket from "./socket";
 
 function useDM(userInfo, to) {
+  console.log(777, "This is info", userInfo);
   const [msg, setMsg] = useState({});
   const [test, setTest] = useState({});
   const userListRef = useRef([]);

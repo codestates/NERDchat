@@ -65,10 +65,15 @@ const ContextProvider = ({ children }) => {
   };
   const getUserInfo = (info) => {
     let cookieUserInfo = info;
+    console.log("This is cookieUserInfo", cookieUserInfo);
     const { id, avatar, userId, nickname, email, oauth, status } =
       cookieUserInfo;
     cookieUserInfo = { id, avatar, userId, nickname, email, oauth, status };
-    cookies.set("userInfo", cookieUserInfo);
+    cookies.set("userInfo", cookieUserInfo, {
+      domain: ".nerdchat.link",
+      sameSite: "none",
+      secure: true,
+    });
     dispatchUserInfo({ type: "GET", item: info });
   };
 
@@ -87,10 +92,7 @@ const ContextProvider = ({ children }) => {
   };
   useEffect(() => {
     if (localStorage.getItem("nerd-logged-in")) {
-      getFriendsListHandler().catch((e) => {
-        // console.log(e);
-        // console.log(1616, cookies.get("userInfo"));
-      });
+      getFriendsListHandler();
     }
   }, [userInfo]);
   // server game lists
