@@ -3,7 +3,6 @@ import Modal from "../../UI/modal/Modal";
 import PMessage from "./PMessage/PMessage";
 import PInput from "./PInput/PInput";
 import socket from "../../hooks/socket";
-import { Cookies } from "react-cookie";
 
 function PrivateMessageModal({
   userInfo,

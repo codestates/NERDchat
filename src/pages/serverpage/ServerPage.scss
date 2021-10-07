@@ -39,8 +39,8 @@
   .game__list__card__container {
     width: 65%;
     grid-template-columns: 1fr 1fr;
-    grid-auto-rows: height;
-    // grid-auto-rows: 300px;
+    // grid-auto-rows: height;
+    grid-auto-rows: 350px;
     gap: 4%;
   }
 } ;

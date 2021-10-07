@@ -21,7 +21,7 @@ function SettingInfo() {
   const [pwd, setPwd] = useState("");
   const [cPwd, setCPwd] = useState("");
   const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState();
+  const [err, setErr] = useState("");
 
   const { email, oauth } = userInfo;
 
@@ -41,9 +41,10 @@ function SettingInfo() {
         setFormIsValid(true);
       }
     }
-  }, [pwd, cPwd, status, nickname, pImage]);
+  }, [pwd, cPwd, status, nickname, pImage, oauth]);
 
   const imagehandler = (e) => {
+    setErr(`${e.target.files[0].name}이 선택되었습니다.`);
     setPImage(e.target.files);
   };
   const nicknameHandler = (e) => {
@@ -95,7 +96,6 @@ function SettingInfo() {
 
   return (
     <>
-      {loading && <Loader />}
       <div className="setting-container">
         <div className="setting-main">
           <div className="setting-main-container">
@@ -106,122 +106,129 @@ function SettingInfo() {
                     <div className="setting-infomation">
                       <h2>INFORMATION</h2>
                     </div>
-                    <div className="form">
-                      <input
-                        type="text"
-                        id="email"
-                        className="form__input"
-                        autoComplete="off"
-                        placeholder=" "
-                        disabled
-                      />
-                      <label htmlFor="email" className="form__label">
-                        {email ? email : "OAuth 가입자입니다"}
-                      </label>
-                    </div>
-                    <div className="form">
-                      <input
-                        type="text"
-                        id="nickname"
-                        className="form__input"
-                        autoComplete="off"
-                        placeholder=" "
-                        ref={nicknameRef}
-                        onChange={nicknameHandler}
-                      />
-                      <label htmlFor="nickname" className="form__label">
-                        Nickname
-                      </label>
-                    </div>
-                    <div className="form">
-                      <input
-                        type="text"
-                        id="status"
-                        className="form__input"
-                        autoComplete="new-password"
-                        placeholder=" "
-                        ref={statusRef}
-                        onChange={statusHandler}
-                      />
-                      <label htmlFor="status" className="form__label">
-                        Status
-                      </label>
-                    </div>
-                    {oauth === "none" && (
+
+                    {loading ? (
+                      <Loader />
+                    ) : (
                       <>
                         <div className="form">
                           <input
-                            type="password"
-                            id="password"
+                            type="text"
+                            id="email"
                             className="form__input"
-                            autoComplete="new-password"
+                            autoComplete="off"
                             placeholder=" "
-                            ref={passwordRef}
-                            onChange={pwdHandler}
+                            disabled
                           />
-                          <label htmlFor="password" className="form__label">
-                            Password
+                          <label htmlFor="email" className="form__label">
+                            {email ? email : "OAuth 가입자입니다"}
                           </label>
                         </div>
                         <div className="form">
                           <input
-                            type="password"
-                            id="passwordConfrim"
+                            type="text"
+                            id="nickname"
                             className="form__input"
-                            autocomplete="off"
+                            autoComplete="off"
                             placeholder=" "
-                            onChange={confirmPwHandler}
+                            ref={nicknameRef}
+                            onChange={nicknameHandler}
                           />
-                          <label
-                            htmlFor="passwordConfrim"
-                            className="form__label"
-                          >
-                            Confrim Password
+                          <label htmlFor="nickname" className="form__label">
+                            Nickname
                           </label>
                         </div>
+                        <div className="form">
+                          <input
+                            type="text"
+                            id="status"
+                            className="form__input"
+                            autoComplete="new-password"
+                            placeholder=" "
+                            ref={statusRef}
+                            onChange={statusHandler}
+                          />
+                          <label htmlFor="status" className="form__label">
+                            Status
+                          </label>
+                        </div>
+                        {oauth === "none" && (
+                          <>
+                            <div className="form">
+                              <input
+                                type="password"
+                                id="password"
+                                className="form__input"
+                                autoComplete="new-password"
+                                placeholder=" "
+                                ref={passwordRef}
+                                onChange={pwdHandler}
+                              />
+                              <label htmlFor="password" className="form__label">
+                                Password
+                              </label>
+                            </div>
+                            <div className="form">
+                              <input
+                                type="password"
+                                id="passwordConfrim"
+                                className="form__input"
+                                autoComplete="off"
+                                placeholder=" "
+                                onChange={confirmPwHandler}
+                              />
+                              <label
+                                htmlFor="passwordConfrim"
+                                className="form__label"
+                              >
+                                Confrim Password
+                              </label>
+                            </div>
+                          </>
+                        )}
+
+                        <label htmlFor="form__input">
+                          <input
+                            type="file"
+                            id="form__input"
+                            className="form__input-img"
+                            accept="image/*"
+                            name="pImage"
+                            onChange={imagehandler}
+                            style={{ display: "none" }}
+                          />
+                          <IoAttachOutline className="form__icon" />
+                          <span className="form__text">Choose a Photo</span>
+                          {err.length > 0 && <p>{err}</p>}
+                        </label>
+                        {oauth === "none" && formIsValid ? (
+                          <div>
+                            <button
+                              type="submit"
+                              className="setting-button"
+                              disabled={formIsValid ? false : true}
+                            >
+                              Edit
+                            </button>
+                            <p className="passwordok">
+                              Please enter your password.
+                            </p>
+                          </div>
+                        ) : (
+                          <div className="test-conponent">
+                            <button
+                              type="submit"
+                              className="setting-button-err"
+                              disabled={formIsValid ? false : true}
+                            >
+                              Edit
+                            </button>
+                            <p className="passwordnotok">
+                              Please enter your password.
+                            </p>
+                          </div>
+                        )}
                       </>
-                    )}
-                    <form action="form__input">
-                      <label htmlFor="form__input">
-                        <input
-                          type="file"
-                          id="form__input"
-                          className="form__input-img"
-                          accept="image/*"
-                          name="pImage"
-                          onChange={imagehandler}
-                          style={{ display: "none" }}
-                        />
-                        <IoAttachOutline className="form__icon" />
-                        <span className="form__text">Choose a Photo</span>
-                      </label>
-                    </form>
-                    {oauth === "none" && formIsValid ? (
-                      <div>
-                        <button
-                          type="submit"
-                          className="setting-button"
-                          disabled={formIsValid ? false : true}
-                        >
-                          Edit
-                        </button>
-                        <p className="passwordok">
-                          Please enter your password.
-                        </p>
-                      </div>
-                    ) : (
-                      <div className="test-conponent">
-                        <button
-                          type="submit"
-                          className="setting-button-err"
-                          disabled={formIsValid ? false : true}
-                        >
-                          Edit
-                        </button>
-                        <p className="passwordnotok">
-                          Please enter your password.
-                        </p>
-                      </div>
                     )}
                   </div>
                 </form>

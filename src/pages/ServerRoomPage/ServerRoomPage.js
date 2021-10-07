@@ -40,7 +40,7 @@ const ServerRoomPage = () => {
   };
   useEffect(() => {
     getOnlineUserNum();
-  }, [userListRef, getOnlineUserNum]);
+  }, [userListRef]);
 
   useEffect(() => {
     if (!loading) {
@@ -51,7 +51,11 @@ const ServerRoomPage = () => {
   }, []);
 
   if (!loading) {
-    return <Loader />;
+    return (
+      <div className="server__loader__container">
+        <Loader />
+      </div>
+    );
   }
 
   return (

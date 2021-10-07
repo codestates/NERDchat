@@ -1,19 +1,13 @@
 import React, { useState, useRef, useContext } from "react";
 import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
-import {
-  RiGoogleFill,
-  RiKakaoTalkFill,
-  RiFacebookBoxFill,
-} from "react-icons/ri";
+import { RiKakaoTalkFill, RiFacebookBoxFill } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
-import { Cookies } from "react-cookie";
 import { Context } from "../../context/ContextProvider";
 import "./LoginBody.scss";
 
 //엔드포인트 real로 변경 필요
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
-const KKENDPOINT = process.env.REACT_APP_KKENDPOINT;
 const FACEBOOK_ID = process.env.REACT_APP_FACEBOOK_ID;
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 const KAKAO_REST_API_KEY = process.env.REACT_APP_KAKAO_CLIENT_KEY;
@@ -22,7 +16,6 @@ const Login = () => {
   const history = useHistory();
   const { getUserInfo, isLoginHandler, loginmodalHandler } =
     useContext(Context);
-  const cookies = new Cookies();
   const idInputRef = useRef();
   const pwInputRef = useRef();
   const [err, setErr] = useState();

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { Link, useParams } from "react-router-dom";
 import {
   IoFingerPrintOutline,
   IoMailOpenOutline,
@@ -18,7 +17,7 @@ function DropDown({
   messages,
   userInfo,
   msg,
-  userId,
+
   setMsg,
   backgroundCloseHandler,
   readMsgHandler,
@@ -78,36 +77,36 @@ function DropDown({
       {deleteFriendModalOpen && <UserDelete nickname={nickname} />}
       <ul className="friendlist__menu">
         <li className="friendlist__li">
-          <a className="friendlist__a" onClick={userInfoModalOpenHandler}>
+          <div className="friendList__a" onClick={userInfoModalOpenHandler}>
             <div className="friendlist__icon">
               <IoFingerPrintOutline className="icona" />
             </div>
             Info
-          </a>
+          </div>
         </li>
         <li className="friendlist__li">
-          <a onClick={privateModalOpenHandler}>
+          <div className="friendList__a" onClick={privateModalOpenHandler}>
             <div className="friendlist__icon">
               <IoMailOpenOutline className="icona" />
             </div>
             DM
-          </a>
+          </div>
         </li>
         <li className="friendlist__li">
-          <a onClick={inviteModalOpenHandler}>
+          <div className="friendList__a" onClick={inviteModalOpenHandler}>
             <div className="friendlist__icon">
               <IoNotificationsOutline className="icona" />
             </div>
             Invite
-          </a>
+          </div>
         </li>
         <li className="friendlist__li">
-          <a onClick={deleteModalHandler}>
+          <div className="friendList__a" onClick={deleteModalHandler}>
             <div className="friendlist__icon">
               <IoCutOutline className="icona" />
             </div>
             Delete
-          </a>
+          </div>
         </li>
       </ul>
     </div>

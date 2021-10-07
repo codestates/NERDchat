@@ -28,7 +28,6 @@ const ContextProvider = ({ children }) => {
   const [friends, setFriends] = useState([]);
   const [userInfo, dispatchUserInfo] = useReducer(userReducer, userInfoDefault);
   // loginmodal state
-  const [isLogin, setIsLogin] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [logoutModalOpen, setLogoutModalOpen] = useState(false);
   const [deleteFriendModalOpen, setDeleteFriendModalOpen] = useState(false);
@@ -69,7 +68,7 @@ const ContextProvider = ({ children }) => {
       cookieUserInfo;
     cookieUserInfo = { id, avatar, userId, nickname, email, oauth, status };
     cookies.set("userInfo", cookieUserInfo, {
-      // domain: ".nerdchat.link",
+      domain: ".nerdchat.link",
       sameSite: "none",
       secure: true,
     });
@@ -100,7 +99,6 @@ const ContextProvider = ({ children }) => {
   return (
     <Context.Provider
       value={{
-        // isLogin,
         loginModalOpen,
         loginmodalHandler,
         getUserInfo,
