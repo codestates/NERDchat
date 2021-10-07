@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import { IoChevronBackOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import "./ChatHeader.scss";
 
-function ChatHeader({ path, roomTitle }) {
+function ChatHeader({ roomTitle, currentUser }) {
   const { gameId } = useParams();
 
-  const [currentNum] = useState(2);
+  useEffect(() => {});
+
   return (
     <div className="chatheader__container">
       <div className="chatheader__container-start">
@@ -20,7 +21,7 @@ function ChatHeader({ path, roomTitle }) {
         <div className="chatheader__title">{roomTitle}</div>
       </div>
       <div className="chatheader__nember">
-        <span> Concurrent Users: {currentNum} </span>
+        <span> Concurrent Users: {currentUser}</span>
       </div>
     </div>
   );
