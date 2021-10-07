@@ -1,7 +1,14 @@
+$dark: rgb(23, 23, 23);
+$neonMain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+$title: rgb(172, 172, 172);
+
 .input_form {
   display: flex;
-  border-top: 1px solid rgba(169, 169, 169, 0.358);
+  border: 1px solid rgba(165, 165, 165, 0.503);
+  border-radius: 10px;
   margin: 0 20px;
+  padding: 6px 5px;
 }
 
 .input_input {
@@ -13,7 +20,7 @@
   font-size: 1em;
   font-weight: 100;
   margin-left: 20px;
-  margin-top: 10px;
+  // margin-top: 1px;
 }
 
 input:focus,
@@ -24,18 +31,20 @@ select:focus {
 
 .input_sendButton {
   font-family: "Monoton", cursive;
-  color: rgb(184, 126, 255);
-  text-shadow: 0 0 1px rgb(163, 16, 255);
+  color: $title;
+  // text-shadow: 0 0 1px rgb(163, 16, 255);
   text-decoration: none;
   background: transparent;
   display: inline-block;
   border: none;
-  width: 20%;
+  // border: 1px solid white;
   transition: all 0.2s ease;
-  margin-top: 14px;
+  padding: 0 20px;
 }
 
 .input_sendButton:hover {
   /* text-shadow: 0 0 3px rgb(163, 16, 255); */
-  filter: drop-shadow(0 0 1px rgb(163, 16, 255));
+  color: $neonMain;
+
+  filter: drop-shadow(0 0 5px rgb(163, 16, 255));
 }

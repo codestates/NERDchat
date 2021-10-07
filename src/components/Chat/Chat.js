@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import Message from "./Message/Message";
 import Input from "../Chat/Input/Input";
 
@@ -49,11 +49,15 @@ function Chat() {
       setMessages((prevM) => [...prevM, incomingMsg]);
     });
 
-    socket.current.on("serverSize", (data) => console.log(data));
+    socket.current.on("fullRoom", () => {
+      // history.push();
+    });
 
     return () => {
       socket.current.off("welcomeRoom");
       socket.current.off("roomMessage");
+      socket.current.off("serverSize");
+      socket.current.off("disconnect");
     };
   }, [gameId, roomId]);
 
