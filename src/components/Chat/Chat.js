@@ -49,6 +49,8 @@ function Chat() {
       setMessages((prevM) => [...prevM, incomingMsg]);
     });
 
+    socket.current.on("serverSize", (data) => console.log(data));
+
     return () => {
       socket.current.off("welcomeRoom");
       socket.current.off("roomMessage");

@@ -29,9 +29,7 @@ const Video = (props) => {
   const ref = useRef();
 
   useEffect(() => {
-    // console.log(props);
     props.peer.on("stream", (stream) => {
-      // console.log("stream generated", stream);
       ref.current.srcObject = stream;
     });
   }, []);
@@ -77,9 +75,9 @@ function Voice() {
   useEffect(() => {
     navigator.mediaDevices
       .getUserMedia({
-        video: true,
+        video: false,
         audio: {
-          echoCancellation: false,
+          echoCancellation: true,
         },
       })
       .then((stream) => {
@@ -204,7 +202,6 @@ function Voice() {
           .map((peer) => {
             return <Video key={peer.peerId} peer={peer.peer} />;
           })}
-        {/* <button onClick={handleMute}>{mute ? "unmute" : "mute"}</button> */}
       </div>
     </div>
   );

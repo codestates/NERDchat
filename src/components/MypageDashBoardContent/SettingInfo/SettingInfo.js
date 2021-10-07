@@ -149,7 +149,7 @@ function SettingInfo() {
                         <input
                           type="password"
                           id="password"
-                          className="form__input form__input_err"
+                          className="form__input"
                           autoComplete="new-password"
                           placeholder=" "
                           ref={passwordRef}
@@ -192,7 +192,7 @@ function SettingInfo() {
                       <span className="form__text">Choose a Photo</span>
                     </label>
                   </form>
-                  {formIsValid ? (
+                  {oauth === "none" && formIsValid ? (
                     <div>
                       <button
                         type="submit"
