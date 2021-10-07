@@ -1,14 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+
 import FriendList from "../../components/SideTap/FriendList/FriendList";
 import OnlineUser from "../../components/SideTap/OnlineUser/OnlineUser";
 import Messenger from "../../components/SideTap/Messenger/Messenger";
-import { Context } from "../../context/ContextProvider";
+import SnackBar from "../../components/SnackBar/SnackBar";
+
 import useDM from "../../hooks/useDM";
+
 import { Cookies } from "react-cookie";
 import { useParams } from "react-router-dom";
+
 import socket from "../../hooks/socket";
-import Loader from "../../components/Loader/Loader";
 
 import "./SideBar.scss";
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;

@@ -41,7 +41,7 @@ const PMessage = ({ message, userInfo, setMsg }) => {
       withCredentials: true,
     });
     socket.emit("private message", {
-      content: `${from}님의 친구 요청을 거절 하였습니다.`,
+      content: `${from}님의 친구 요청을 거절하였습니다.`,
       to: from,
     });
     const incomingM = {

@@ -19,7 +19,7 @@ function ChatHeader({ path }) {
     <div className="chatheader__container">
       <div className="chatheader__container-start">
         <div className="chatheader__icon">
-          <Link to="/servers">
+          <Link to={`/gameId=${gameId}`}>
             <IoChevronBackOutline size={25} className="iconback" />
           </Link>
         </div>
