@@ -4,7 +4,6 @@ const { Op } = require("sequelize");
 
 module.exports = async (req, res) => {
   const userData = await verifyAccess(req, res);
-  console.log(777, userData);
   if (userData) {
     const friendsList = await Friends.findAll({
       where: {
