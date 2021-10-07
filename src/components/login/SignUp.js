@@ -168,6 +168,7 @@ const SignUp = () => {
   const sendEmailHandler = async () => {
     const res = await axios.post(`${ENDPOINT}/emailVerify`, { email });
     // const res.data.verifyToken
+    // console.log(res.data.data.verifyToken);
     setAVerifyCode(res.data.data.verifyToken);
   };
 
