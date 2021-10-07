@@ -52,7 +52,7 @@ module.exports = async (req, res) => {
         updated_at: new Date()
       };
     }
-    const send = payload ? payload : userInfo;
+    const send = payload || userInfo;
     res.cookie('accessToken', accessToken, { domain: process.env.ORIGIN, httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
       .cookie('refreshToken', refreshToken, { domain: process.env.ORIGIN, httpOnly: true, sameSite: 'none', secure: true })
       .cookie('oauth', 'kakao', { domain: process.env.ORIGIN, httpOnly: true, sameSite: 'none', secure: true })

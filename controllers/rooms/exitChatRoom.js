@@ -1,7 +1,6 @@
 const { GameChatRooms } = require('../../models');
 const { Users } = require('../../models');
 const { verifyAccess } = require('../../middlewares/token');
-const io = require('socket.io')();
 
 module.exports = async (req, res) => {
   const { uuid } = req.params;

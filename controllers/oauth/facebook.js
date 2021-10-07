@@ -55,7 +55,7 @@ module.exports = async (req, res) => {
         updated_at: new Date()
       };
     }
-    const send = payload ? payload : userInfo;
+    const send = payload || userInfo;
     res.cookie('accessToken', accessToken, { domain: process.env.ORIGIN, httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
       .cookie('oauth', 'facebook', { domain: process.env.ORIGIN, httpOnly: true, sameSite: 'none', secure: true })
       .cookie('userInfo', send, { domain: process.env.ORIGIN, sameSite: 'none', secure: true }).status(200).redirect(
