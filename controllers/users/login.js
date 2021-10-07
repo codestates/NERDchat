@@ -17,9 +17,9 @@ module.exports = async (req, res) => {
     const refreshToken = generateRefresh({ id, avatar, userId, nickname, email, oauth, status });
     const expireDate = new Date(Date.now() + 60 * 60 * 1000 * 24);
 
-    res.cookie('accessToken', accessToken, { domain: process.env.ORIGIN, expires: expireDate, sameSite: 'none', secure: true })
-      .cookie('refreshToken', refreshToken, { domain: process.env.ORIGIN, sameSite: 'none', secure: true })
-      .cookie('oauth', oauth, { domain: process.env.ORIGIN, sameSite: 'none', secure: true })
+    res.cookie('accessToken', accessToken, { domain: process.env.ORIGIN, httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
+      .cookie('refreshToken', refreshToken, { domain: process.env.ORIGIN, httpOnly: true, sameSite: 'none', secure: true })
+      .cookie('oauth', oauth, { domain: process.env.ORIGIN, httpOnly: true, sameSite: 'none', secure: true })
       .status(200).json({
         data: { accessToken, id, avatar, userId, nickname, email, oauth, status },
         isLogin: true

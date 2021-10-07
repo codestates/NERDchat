@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
               });
               const { id, avatar, userId, nickname, email, oauth, status } = findUser;
               const newAccessToken = generateAccess({ id, avatar, userId, nickname, email, oauth, status });
-              res.cookie('accessToken', newAccessToken, { domain: process.env.ORIGIN, expires: expireDate, sameSite: 'none', secure: true })
+              res.cookie('accessToken', newAccessToken, { domain: process.env.ORIGIN, httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
                 .status(200).json({
                   data: { accessToken: newAccessToken, id, avatar, userId, nickname, email, oauth, status }
                 });
@@ -58,7 +58,7 @@ module.exports = async (req, res) => {
               params: { access_token: kakaoAccessToken.access_token }
             });
             const userInfo = Users.findOne({ where: { userId: userData.data.properties.nickname } });
-            res.cookie('accessToken', kakaoAccessToken.access_token, { domain: process.env.ORIGIN, expires: expireDate, sameSite: 'none', secure: true })
+            res.cookie('accessToken', kakaoAccessToken.access_token, { domain: process.env.ORIGIN, httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
               .status(200).json({
                 data: {
                   accessToken: kakaoAccessToken.access_token,
@@ -101,7 +101,7 @@ module.exports = async (req, res) => {
               }
             });
             const userInfo = await Users.findOne({ where: { userId: userData.data.sub } });
-            res.cookie('accessToken', googleAccessToken.access_token, { domain: process.env.ORIGIN, expires: expireDate, sameSite: 'none', secure: true })
+            res.cookie('accessToken', googleAccessToken.access_token, { domain: process.env.ORIGIN, httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
               .status(200).json({
                 data: {
                   accessToken: googleAccessToken.access_token,
