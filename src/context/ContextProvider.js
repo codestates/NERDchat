@@ -65,7 +65,6 @@ const ContextProvider = ({ children }) => {
   };
   const getUserInfo = (info) => {
     let cookieUserInfo = info;
-    console.log("This is cookieUserInfo", cookieUserInfo);
     const { id, avatar, userId, nickname, email, oauth, status } =
       cookieUserInfo;
     cookieUserInfo = { id, avatar, userId, nickname, email, oauth, status };
