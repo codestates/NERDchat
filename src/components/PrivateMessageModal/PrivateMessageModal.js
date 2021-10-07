@@ -66,13 +66,8 @@ function PrivateMessageModal({
           ))}
         <div ref={newMessageEl} />
       </div>
-      <div className="chatApp__footer">
-        <PInput
-          // msgInputHandler={msgInputHandler}
-          // newMsg={newMsg}
-          sendHandler={sendHandler}
-          // setNewMsg={setNewMsg}
-        />
+      <div>
+        <PInput sendHandler={sendHandler} />
       </div>
     </Modal>
   );

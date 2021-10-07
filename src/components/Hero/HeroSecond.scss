@@ -132,6 +132,26 @@
   }
 }
 
+@media screen and (max-width: 1400px) {
+  .herosec-container {
+    // border: 1px solid aqua;
+    width: 1400px;
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    margin-left: 0;
+  }
+
+  .herosec-logoimage {
+    margin-left: 280px;
+    margin-top: 80px;
+  }
+
+  .text-container {
+    margin-top: 80px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .herosec-container {
     // border: 1px solid aqua;

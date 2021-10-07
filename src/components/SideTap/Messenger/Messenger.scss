@@ -6,15 +6,17 @@ $neonSer: rgb(163, 16, 255);
 $title: rgb(172, 172, 172);
 
 .new__msg__alarm {
-  border: 1px solid $neonMain;
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 0, 0, 0.695);
   border-radius: 50px;
-  // padding: 0 1rem;
 }
 .messagelist {
   display: flex;
   height: 55px;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 
   .userInfo__container {
     display: flex;
