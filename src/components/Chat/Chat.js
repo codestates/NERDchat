@@ -37,7 +37,7 @@ function Chat() {
     joinRoom();
 
     socket.current.on("welcomeRoom", (userData, msgData) =>
-      console.log(userData, msgData)
+      console.log(77777777, userData, msgData)
     );
     socket.current.on("roomMessage", (userData, msgData) => {
       console.log(userData, msgData);

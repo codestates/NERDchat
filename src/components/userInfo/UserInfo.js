@@ -1,17 +1,12 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Modal from "../../UI/modal/Modal";
-import { Context } from "../../context/ContextProvider";
 import "./UserInfo.scss";
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const UserInfo = ({ nickname }) => {
-  const { userInfoModalHandler } = useContext(Context);
   const [friendInfo, setFriendInfo] = useState({});
-  const closeHandler = () => {
-    userInfoModalHandler();
-  };
   const getUserProfileHandler = async () => {
     const res = await axios.get(`${ENDPOINT}/profile/${nickname}`);
     setFriendInfo(res.data.data);

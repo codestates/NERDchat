@@ -17,7 +17,12 @@ $title: rgb(172, 172, 172);
   :focus {
     outline: none;
   }
-  ul li a {
+  .friendlist__menu {
+    :focus {
+      outline: none;
+    }
+  }
+  ul li .friendList__a {
     text-decoration: none;
     color: rgb(172, 172, 172);
     list-style: none;

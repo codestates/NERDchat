@@ -1,3 +1,13 @@
+html,
+body {
+  height: 100%;
+  #root {
+    height: 100%;
+  }
+}
+.server__loader__container {
+  height: 100%;
+}
 .server__container {
   height: 90%;
   width: 100%;

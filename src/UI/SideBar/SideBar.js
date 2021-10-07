@@ -1,18 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 import FriendList from "../../components/SideTap/FriendList/FriendList";
 import OnlineUser from "../../components/SideTap/OnlineUser/OnlineUser";
 import Messenger from "../../components/SideTap/Messenger/Messenger";
-import SnackBar from "../../components/SnackBar/SnackBar";
-
 import useDM from "../../hooks/useDM";
-
 import { Cookies } from "react-cookie";
 import { useParams } from "react-router-dom";
-
 import socket from "../../hooks/socket";
-
 import "./SideBar.scss";
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 const SideBar = () => {
@@ -57,12 +51,10 @@ const SideBar = () => {
   }, []);
 
   useEffect(() => {
-    console.log("started");
     socket.emit("users");
   }, [toggleState]);
 
   useEffect(() => {
-    console.log("listend");
     socket.on("users", (data) => {
       setMsgLists(data);
     });
@@ -97,13 +89,15 @@ const SideBar = () => {
       socket.off("private message");
       // socket.off("users");
     };
-  }, [socket]);
+  }, []);
 
   const toggleTab = (index) => {
     setToggleState(index);
   };
 
   const sendMsgHandler = (msg, from, to) => {
+    // socket.emit('private message'){
+    // }
     setMsg((prev) => {
       const temp = { ...prev.data }; //temp= {name1: {message: [], read: t/f}}
       //보낸사람의 닉네임이 없을때(즉, 새로운유저한테서 새로운 메시지 받았을때)

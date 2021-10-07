@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { IoChevronForwardOutline } from "react-icons/io5";
 import OnlineUserDropDown from "./DropDown/OnlineUserDropDown";
 import { Context } from "../../../context/ContextProvider";
-import socket from "../../../hooks/socket";
 import "./OnlineUser.scss";
 
 const OnlineUser = ({

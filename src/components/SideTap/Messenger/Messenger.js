@@ -1,6 +1,5 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import MsgListDropDown from "./MsgListDropDown";
-import socket from "../../../hooks/socket";
 import "./Messenger.scss";
 import { Context } from "../../../context/ContextProvider";
 
@@ -23,9 +22,6 @@ const Messenger = ({
   } = useContext(Context);
 
   const [modalOpen, setModalOpen] = useState(false);
-  const [lastMsg, setLastMsg] = useState({});
-  //여기에서 private message이벤트를 들어야 실시간 통신이 될듯.
-  //메시지 듣기
 
   const modalHandler = () => {
     setModalOpen((prev) => !prev);
@@ -39,9 +35,6 @@ const Messenger = ({
     )
       setModalOpen(false);
   };
-  useEffect(() => {
-    setLastMsg(msg);
-  }, [msg]);
 
   return (
     <div

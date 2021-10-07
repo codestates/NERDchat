@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { IoChevronBackOutline, IoMicOutline } from "react-icons/io5";
+import { IoChevronBackOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import "./ChatHeader.scss";
-import useLists from "../../hooks/useLists";
 
 function ChatHeader({ path, roomTitle }) {
   const { gameId } = useParams();
 
   const [currentNum] = useState(2);
-
-  console.log("Thisis Title", roomTitle);
   return (
     <div className="chatheader__container">
       <div className="chatheader__container-start">

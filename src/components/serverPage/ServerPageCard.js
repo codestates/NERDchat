@@ -1,9 +1,8 @@
 import { useState, useEffect, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { IoBookmarkOutline, IoBookmark } from "react-icons/io5";
+import { IoBookmarkOutline } from "react-icons/io5";
 import { BsChevronDoubleDown } from "react-icons/bs";
-import Login from "../login/Login";
 import Bookmark from "../../UI/bookmark/Bookmark";
 import { Context } from "../../context/ContextProvider";
 import "./ServerPageCard.scss";
@@ -12,10 +11,9 @@ const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const ServerPageCard = ({ category, img, id, like }) => {
   const history = useHistory();
-  const { loginModalOpen, loginmodalHandler } = useContext(Context);
+  const { loginmodalHandler } = useContext(Context);
   const [clicked, setClicked] = useState(false);
   const addBookmarkHandler = async (e) => {
-    // e.preventDefault();
     e.stopPropagation();
     if (!localStorage.getItem("nerd-logged-in")) {
       loginmodalHandler();
@@ -34,7 +32,7 @@ const ServerPageCard = ({ category, img, id, like }) => {
   useEffect(() => {
     if (like) setClicked(true);
     else setClicked(false);
-  }, []);
+  }, [like]);
   return (
     <>
       <div
@@ -42,7 +40,7 @@ const ServerPageCard = ({ category, img, id, like }) => {
         style={{ textDecoration: "none" }}
         onClick={getIntoServer}
       >
-        <img className="game__image" src={`${img}`} />
+        <img className="game__image" src={`${img}`} alt="gameImages" />
         <div className="game__title__container">
           <div className="title__container">
             <p className="game__title">{category}</p>

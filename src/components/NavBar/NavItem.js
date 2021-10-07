@@ -6,7 +6,6 @@ import {
   IoConstructOutline,
   IoMenu,
 } from "react-icons/io5";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, useHistory } from "react-router-dom";
 import "./NavItem.scss";
 import Login from "../../components/login/Login";
@@ -45,7 +44,6 @@ const NavItem = () => {
     setOpen(false);
   };
   const toggleHandler = () => {
-    console.log("clicked!");
     setToggleOpen((prev) => !prev);
   };
 

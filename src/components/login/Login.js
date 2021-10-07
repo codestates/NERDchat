@@ -7,7 +7,7 @@ import SignUp from "./SignUp";
 import { Context } from "../../context/ContextProvider";
 
 const Login = () => {
-  const { isLogin, loginModalOpen, loginmodalHandler } = useContext(Context);
+  const { loginModalOpen } = useContext(Context);
   // tab state
   const [isLoginClicked, setisLoginClicked] = useState(true);
   const loginTablHandler = (num) => {

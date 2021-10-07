@@ -16,7 +16,7 @@ const RoomSetting = () => {
   const [headCount, setHeadCount] = useState(0);
   const [title, setTitle] = useState("");
   const [err, setErr] = useState("");
-  const [loading, setLoading] = useState("false");
+  const [loading, setLoading] = useState(false);
 
   const titleHandler = (e) => {
     setTitle(e.target.value);
@@ -26,7 +26,7 @@ const RoomSetting = () => {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-
+    setLoading(false);
     if (title.trim().length <= 2) {
       setErr("Room Title should be longer than 2 letters.");
     } else if (headCount < 2) {
@@ -41,17 +41,21 @@ const RoomSetting = () => {
         { withCredentials: true }
       );
       const { uuid, gameId } = res.data.data;
-
+      setLoading(true);
       createRoomModalHandler();
       // chatroom안으로 리 다이렉트 시키기.
       // chatId 달라고 하기.
-      history.push(`/gameId=${gameId}/roomId=${uuid}/chatId=${chatId}`);
+      const path = `/gameId=${gameId}/roomId=${uuid}/chatId=${chatId}`;
+      history.push({
+        pathname: path,
+        state: { roomTitle: title },
+      });
     }
   };
 
   return (
     <>
-      {/* {loading && <Loader />} */}
+      {loading && <Loader />}
       <Modal>
         <form className="room__setting__container" onSubmit={submitHandler}>
           {/* <div>Room</div> */}
@@ -101,19 +105,3 @@ const RoomSetting = () => {
 };
 
 export default RoomSetting;
-
-{
-  /* <div className="headcount__input__container">
-  <input
-    value={headCount}
-    step="1"
-    id="members"
-    type="range"
-    min="0"
-    max="6"
-    placeholder="put room title"
-    onChange={handleMembers}
-  />
-  <p>{headCount} 명</p>
-</div>; */
-}
