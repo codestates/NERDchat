@@ -13,7 +13,10 @@ const ServerRoomCard = ({ gameId, id, roomTitle, uuid, max, loading, len }) => {
       return;
     }
     const path = `/gameId=${gameId}/roomId=${uuid}/chatId=${id}`;
-    history.push(path);
+    history.push({
+      pathname: path,
+      state: { roomTitle },
+    });
   };
   return (
     <div onClick={getIntoServer} className="room__card">

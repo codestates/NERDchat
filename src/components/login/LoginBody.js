@@ -71,7 +71,7 @@ const Login = () => {
   // 카카오 로그인
   const kakaoHandler = () => {
     window.location.assign(
-      `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KKENDPOINT}/callback&response_type=code`
+      `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${ENDPOINT}/oauth/kakao&response_type=code`
     );
     isLoginHandler();
   };

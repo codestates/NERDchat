@@ -3,7 +3,6 @@ import { useEffect, useState, useRef } from "react";
 import socket from "./socket";
 
 function useDM(userInfo, to) {
-  console.log(777, "This is info", userInfo);
   const [msg, setMsg] = useState({});
   const [test, setTest] = useState({});
   const userListRef = useRef([]);
@@ -55,7 +54,7 @@ function useDM(userInfo, to) {
     });
 
     socket.on("users", (data) => {
-      console.log(data);
+      console.log("from useDM", data);
       data.forEach((serverUser) => {
         for (let i = 0; i < userListRef.current.length; i++) {
           const existingUser = userListRef.current[i];
