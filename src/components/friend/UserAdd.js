@@ -18,7 +18,7 @@ const UserAdd = ({ nickname, userId, setMsg, userInfo }) => {
     });
     const exist = res.data.message;
     if (exist) {
-      setErr(`${nickname}님은 이미 친구입니다.`);
+      setErr(`${nickname} is already a friend.`);
       return;
     }
     //요청이 잘 보내짐.

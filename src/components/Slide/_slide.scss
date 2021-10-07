@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@200&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap");
-@import "_color";
+$dark: rgb(23, 23, 23);
+$neonMain: rgb(184, 126, 255);
+$neonSer: rgb(163, 16, 255);
+$title: rgb(172, 172, 172);
 
 // --main-bg-color: #000;
 // --main-txt-color: #f4e9e1;
@@ -123,9 +126,8 @@
   width: 600px;
   color: rgb(201, 201, 201);
   overflow: hidden;
-  border: 1px solid rgb(230, 230, 230);
-  padding: 0 10px;
-  // background-color: rgb(0, 0, 0);
+  // border: 1px solid $title;
+  padding: 10px 10px;
 
   .glitch {
     font-family: "Poppins", sans-serif;
@@ -212,7 +214,6 @@
 
 @media screen and (max-width: 768px) {
   .slider-container {
-    // border: 1px solid aqua;
     max-width: 768px;
     height: 200px;
   }
