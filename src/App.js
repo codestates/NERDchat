@@ -19,7 +19,6 @@ function App() {
           component={ChatPage}
         />
         <Route exact path="/mypage" component={Mypage} />
-        <Route path="/callback" component={Callback} />
       </Switch>
     </BrowserRouter>
   );
