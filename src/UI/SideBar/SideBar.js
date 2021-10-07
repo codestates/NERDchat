@@ -26,7 +26,9 @@ const SideBar = () => {
   const cookies = new Cookies();
   const userInfo = cookies.get("userInfo");
   const path = useParams();
+
   const { userListRef } = useDM(userInfo, path);
+  const [msgLists, setMsgLists] = useState(userListRef.current);
 
   const getFriendsListHandler = async () => {
     const res = await axios.get(`${ENDPOINT}/friends/lists`, {
@@ -43,15 +45,28 @@ const SideBar = () => {
     }
     setFilteredFriends(temp);
   };
+
   useEffect(() => {
     setLoading(true);
     const delayReq = setTimeout(() => {
       getFriendsListHandler();
       setLoading(false);
-    }, 1);
+    }, 200);
 
     return () => clearTimeout(delayReq);
   }, []);
+
+  useEffect(() => {
+    console.log("started");
+    socket.emit("users");
+  }, [toggleState]);
+
+  useEffect(() => {
+    console.log("listend");
+    socket.on("users", (data) => {
+      setMsgLists(data);
+    });
+  }, [toggleState]);
 
   useEffect(() => {
     //본인이 보낸 메시지는 아래 이벤트가 발생하지 않음
@@ -61,11 +76,9 @@ const SideBar = () => {
       async ({ content, from, to, invite, friend }) => {
         //from: 보낸사람 // to: 현재 사용유저
         const incomingM = { content, from, to, invite, friend };
-        console.log(1111, msg);
         setMsg((prev) => {
-          const temp = { ...prev.data }; //temp= {name1: {message: [], read: t/f}}
+          const temp = { ...prev.data };
           //보낸사람의 닉네임이 없을때(즉, 새로운유저한테서 새로운 메시지 받았을때)
-          console.log(666, temp);
           if (!temp[from]) {
             //새롭게 하나 만들고,
             temp[from] = { messages: [incomingM], read: false };
@@ -79,8 +92,10 @@ const SideBar = () => {
         });
       }
     );
+
     return () => {
       socket.off("private message");
+      // socket.off("users");
     };
   }, [socket]);
 
@@ -202,7 +217,7 @@ const SideBar = () => {
             <MsgLists userList={userListRef.current} userInfo={userInfo} />
           )} */}
           {toggleState === 3 &&
-            userListRef.current
+            msgLists
               .sort((a, b) =>
                 a.connected === b.connected ? 0 : -a.connected ? -1 : 1
               )

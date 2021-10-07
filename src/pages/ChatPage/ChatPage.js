@@ -8,9 +8,9 @@ import ChatHeader from "../../components/ChatHeader/ChatHeader";
 import Voice from "../../components/Chat/Voice/Voice";
 import "./ChatPage.scss";
 
-const ChatPage = () => {
+const ChatPage = (props) => {
   const path = useParams();
-
+  const { roomTitle } = props.location.state;
   return (
     <div className="chatpage-container">
       <div className="chatpage-nav">
@@ -19,7 +19,7 @@ const ChatPage = () => {
       <div className="chatpage-main">
         <div className="chatpage-main-container">
           <div className="chatpage-main-header">
-            <ChatHeader path={path} />
+            <ChatHeader path={path} roomTitle={roomTitle} />
           </div>
           <div className="chatpage-main-content">
             <div className="chatpage-chat">
