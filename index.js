@@ -17,7 +17,6 @@ const io = require('socket.io')(httpServer, {
     subClient: redisClient.duplicate()
   })
 });
-const { setupWorker } = require('@socket.io/sticky');
 
 const routes = require('./routes/index');
 const controller = require('./controllers/index');

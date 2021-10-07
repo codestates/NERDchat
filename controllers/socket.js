@@ -1,4 +1,4 @@
-const { Users, GameChatRooms, Messages } = require('../models');
+const { GameChatRooms } = require('../models');
 const crypto = require('crypto');
 const randomId = () => crypto.randomBytes(10).toString('hex');
 const Redis = require('ioredis');
@@ -111,8 +111,8 @@ module.exports = {
         userData
       });
     });
-
-    socket.on('serverSize', () => socket.emit('serverSize', users.length));
+    socket.emit('serverSize', users.filter((el) => el.connected).length);
+    // socket.on('serverSize', () => socket.emit('serverSize', users.filter((el) => el.connected).length));
 
     socket.on('disconnect', async () => {
       const matchingSockets = await socket.in(socket.userId).allSockets();
@@ -130,6 +130,7 @@ module.exports = {
           nickname: socket.nickname
         };
         // notify other users
+        socket.broadcast.emit('serverSize', users.filter((el) => el.connected).length);
         socket.broadcast.emit('user disconnected', socket.userId);
         // update connection status
         tokenStore.saveToken(socket.token, {
@@ -179,6 +180,29 @@ module.exports = {
     });
     socket.emit('users', users);
     // notify existing users
+    socket.on('users', async () => {
+      const users = [];
+      const [messages, tokens] = await Promise.all([
+        messageStore.findMessagesForUser(socket.userId),
+        tokenStore.findAllToken()
+      ]);
+      const messagesPerUser = new Map();
+      messages.forEach((message) => {
+        const { from, to } = message;
+        const otherUser = socket.userId === from ? to : from;
+        if (messagesPerUser.has(otherUser)) { messagesPerUser.get(otherUser).push(message); } else messagesPerUser.set(otherUser, [message]);
+      });
+      tokens.forEach((token) => {
+        users.push({
+          userId: token.userId,
+          nickname: token.nickname,
+          avatar: token.avatar,
+          connected: token.connected,
+          messages: messagesPerUser.get(token.userId) || []
+        });
+      });
+      socket.emit('users', users);
+    });
 
     socket.on('private message', ({ content, to, invite, friend }) => {
       const message = {
