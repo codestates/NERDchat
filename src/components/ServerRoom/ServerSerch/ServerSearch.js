@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./ServerSearch.scss";
 import { IoSearchOutline } from "react-icons/io5";
 
@@ -31,7 +31,3 @@ const ServerSearch = ({ searchHandler }) => {
 };
 
 export default ServerSearch;
-
-{
-  /* <input placeholder="search a room" onChange={searchInputHandler} /> */
-}

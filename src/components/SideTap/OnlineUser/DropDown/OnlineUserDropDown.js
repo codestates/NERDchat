@@ -1,14 +1,11 @@
 import React, { useContext, useRef, useEffect } from "react";
-
 import {
   IoFingerPrintOutline,
   IoMailOpenOutline,
   IoNotificationsOutline,
   IoAddOutline,
 } from "react-icons/io5";
-
 import PrivateMessageModal from "../../../PrivateMessageModal/PrivateMessageModal";
-import { useParams } from "react-router-dom";
 import UserAdd from "../../../friend/UserAdd";
 import UserInfo from "../../../userInfo/UserInfo";
 import Invite from "../../../invite/Invite";

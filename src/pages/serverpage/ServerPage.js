@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import useLists from "../../hooks/useLists";
 import ServerPageCard from "../../components/serverPage/ServerPageCard";
 import NavBar from "../../components/NavBar/NavBar";

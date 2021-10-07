@@ -11,9 +11,9 @@ const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 const Logout = () => {
   const cookies = new Cookies();
   const history = useHistory();
-  const { logoutModalOpen, logoutModalHandler } = useContext(Context);
+  const { logoutModalHandler } = useContext(Context);
   const yesHandler = async () => {
-    const res = await axios.get(`${ENDPOINT}/logout`, {
+    await axios.get(`${ENDPOINT}/logout`, {
       withCredentials: true,
     });
     cookies.remove("userInfo");

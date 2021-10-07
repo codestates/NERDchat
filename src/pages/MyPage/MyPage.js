@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 
 import NavBar from "../../components/NavBar/NavBar";
 import SettingInfo from "../../components/MypageDashBoardContent/SettingInfo/SettingInfo";
@@ -13,13 +13,7 @@ function MyPage() {
   const cookies = new Cookies();
   let userInfo = cookies.get("userInfo");
   const { avatar, nickname, status, email, oauth } = userInfo;
-  const [profileImg, setProfileImg] = useState(null);
   const { friends } = useContext(Context);
-  console.log(friends.length);
-
-  useEffect(() => {
-    setProfileImg(userInfo.avatar);
-  }, [userInfo]);
 
   return (
     <div className="mypage__container">

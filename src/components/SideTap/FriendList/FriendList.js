@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
-import { IoChevronForwardOutline, IoEllipseSharp } from "react-icons/io5";
+import React, { useState, useRef, useContext } from "react";
+import { IoChevronForwardOutline } from "react-icons/io5";
 import { Context } from "../../../context/ContextProvider";
 import DropDown from "./DropDown/DropDown";
-import socket from "../../../hooks/socket";
 import "./FriendList.scss";
 
 const FriendList = ({
