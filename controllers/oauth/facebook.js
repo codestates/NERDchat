@@ -54,15 +54,10 @@ module.exports = async (req, res) => {
         created_at: new Date(),
         updated_at: new Date()
       };
-      res.cookie('accessToken', accessToken, { domain: process.env.ORIGIN, expires: expireDate, sameSite: 'none', secure: true })
-        .cookie('oauth', 'facebook', { domain: process.env.ORIGIN, sameSite: 'none', secure: true })
-        .cookie('userInfo', payload, { domain: process.env.ORIGIN, sameSite: 'none', secure: true }).status(200).redirect(
-          process.env.GO_HOME + '/servers'
-        );
     }
     const send = payload ? payload : userInfo;
-    res.cookie('accessToken', accessToken, { domain: process.env.ORIGIN, expires: expireDate, sameSite: 'none', secure: true })
-      .cookie('oauth', 'facebook', { domain: process.env.ORIGIN, sameSite: 'none', secure: true })
+    res.cookie('accessToken', accessToken, { domain: process.env.ORIGIN, httpOnly: true, expires: expireDate, sameSite: 'none', secure: true })
+      .cookie('oauth', 'facebook', { domain: process.env.ORIGIN, httpOnly: true, sameSite: 'none', secure: true })
       .cookie('userInfo', send, { domain: process.env.ORIGIN, sameSite: 'none', secure: true }).status(200).redirect(
         process.env.GO_HOME + '/servers'
       );
