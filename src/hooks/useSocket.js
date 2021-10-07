@@ -1,8 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
 
-import Peer from "peerjs";
-
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
 const useSocket = (serverName, roomId, userInfo) => {
@@ -12,7 +10,6 @@ const useSocket = (serverName, roomId, userInfo) => {
   const [userList, setUserList] = useState([]);
   const userListRef = useRef([]);
   const socket = useRef();
-  const myPeer = new Peer();
 
   const { nickname, userId } = userInfo;
   const users = [];
@@ -52,10 +49,6 @@ const useSocket = (serverName, roomId, userInfo) => {
         data.forEach((serverUser) => {
           for (let i = 0; i < userListRef.current.length; i++) {
             const existingUser = userListRef.current[i];
-            // if (serverUser.userId === to) {
-            //   setMsg(serverUser.messages);
-            //   console.log(msg);
-            // }
             if (existingUser.userId === serverUser.userId) {
               existingUser.connected = serverUser.connected;
               existingUser.messages = serverUser.messages;
@@ -121,18 +114,8 @@ const useSocket = (serverName, roomId, userInfo) => {
   }, [serverName, roomId]);
 
   const joinRoom = () => {
-    myPeer.on("open", (peerId) => {
-      socket.current.emit("joinRoom", roomId, userInfo, peerId);
-    });
+    socket.current.emit("joinRoom", roomId, userInfo);
   };
-
-  // const getUserHead = () => {
-  //   socket.current.emit("serverSize", () => {
-  //     socket.current.on("serverSize", (data) => {
-  //       console.log(data);
-  //     });
-  //   });
-  // };
 
   return {
     socket,
@@ -140,7 +123,6 @@ const useSocket = (serverName, roomId, userInfo) => {
     messages,
     nsHeadCount,
     userListRef,
-    // getUserHead,
   };
 };
 
