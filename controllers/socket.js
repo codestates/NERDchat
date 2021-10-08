@@ -45,7 +45,6 @@ module.exports = {
       nickname: socket.nickname,
       connected: true
     });
-    console.log(socket.token, socket.userId, socket.avatar, socket.nickname)
     socket.emit('token', {
       token: socket.token,
       userId: socket.userId
@@ -130,7 +129,6 @@ module.exports = {
           avatar: socket.avatar ? socket.avatar : null,
           nickname: socket.nickname
         };
-        console.log(userData)
         // notify other users
         socket.broadcast.emit('serverSize', users.filter((el) => el.connected).length);
         socket.broadcast.emit('user disconnected', socket.userId);
@@ -223,7 +221,6 @@ module.exports = {
   },
 
   useToken: async (socket, next) => {
-    console.log(socket.handshake.auth.avatar)
     const token = socket.handshake.auth.token ? socket.handshake.auth.token : null;
     if (token) {
       const findToken = await tokenStore.findToken(token);
