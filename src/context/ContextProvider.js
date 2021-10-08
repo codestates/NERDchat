@@ -68,7 +68,7 @@ const ContextProvider = ({ children }) => {
       cookieUserInfo;
     cookieUserInfo = { id, avatar, userId, nickname, email, oauth, status };
     cookies.set("userInfo", cookieUserInfo, {
-      // domain: ".nerdchat.link",
+      domain: ".nerdchat.link",
       sameSite: "none",
       secure: true,
     });
@@ -93,9 +93,6 @@ const ContextProvider = ({ children }) => {
       getFriendsListHandler();
     }
   }, [userInfo]);
-  // server game lists
-  // login userInfo
-  // online user ->실시간 어떻게 구현하지...?
   return (
     <Context.Provider
       value={{
