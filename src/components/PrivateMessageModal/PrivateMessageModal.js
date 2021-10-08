@@ -48,10 +48,16 @@ function PrivateMessageModal({
     setMsg(sendingM, userInfo.nickname, nickname);
   };
 
+  const IsNewMessage = msg[nickname]
+    ? msg[nickname].messages
+      ? true
+      : false
+    : false;
   return (
     <Modal>
       <div className="chatApp__messages" ref={messageEl}>
         {msgHistory &&
+          !IsNewMessage &&
           msgHistory.map((m, i) => (
             <div key={i} className={`chatApp__msg`}>
               <PMessage message={m} userInfo={userInfo} setMsg={setMsg} />
