@@ -13,8 +13,8 @@ const userInfoDefault = {
   userId: "",
   nickname: "",
   email: "",
-  oauth: "", // OAuth종류
-  status: "", // 상태메시지
+  oauth: "",
+  status: "",
 };
 
 const userReducer = (state, action) => {
@@ -37,7 +37,6 @@ const ContextProvider = ({ children }) => {
   const [inviteModalOpen, setInviteModalOpen] = useState(false);
 
   const isLoginHandler = () => {
-    // logout은 false값 받아오기
     localStorage.setItem("nerd-logged-in", true);
   };
   const loginmodalHandler = () => {
