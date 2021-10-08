@@ -7,11 +7,10 @@ const useSocket = (serverName, roomId, userInfo) => {
   const [messages, setMessages] = useState([]);
   const [nsHeadCount, setNsHeadCount] = useState(0);
   const [roomHeadCount, setRoomHeadCount] = useState(0);
-  const [userList, setUserList] = useState([]);
   const userListRef = useRef([]);
   const socket = useRef();
 
-  const { nickname, userId } = userInfo;
+  const { nickname, userId, avatar } = userInfo;
   const users = [];
 
   useEffect(() => {
@@ -32,10 +31,10 @@ const useSocket = (serverName, roomId, userInfo) => {
       });
 
       if (token) {
-        socket.current.auth = { token, nickname, userId };
+        socket.current.auth = { token, nickname, userId, avatar };
         socket.current.connect();
       } else {
-        socket.current.auth = { nickname, userId };
+        socket.current.auth = { nickname, userId, avatar };
         socket.current.connect();
       }
 
