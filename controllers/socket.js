@@ -228,6 +228,7 @@ module.exports = {
         socket.token = token;
         socket.userId = findToken.userId;
         socket.nickname = findToken.nickname;
+        socket.avatar = findToken.avatar;
         return next();
       }
     }
