@@ -104,6 +104,7 @@ $title: rgb(172, 172, 172);
 
     .friend__req__button__container {
       margin-top: 1rem;
+
       display: flex;
       justify-content: flex-end;
       button {
@@ -114,6 +115,7 @@ $title: rgb(172, 172, 172);
         background: transparent;
         border-radius: 50px;
         color: $title;
+        margin: 0 5px;
 
         &:hover {
           border: 1px solid $neonMain;

@@ -182,7 +182,7 @@ const SignUp = () => {
   const emailCodeHandler = (e) => {
     setConfirmClicked(true);
     if (+verifyCode === AVerifyCode) {
-      console.log("working");
+      // console.log("working");
       setEmailIsVerified(true);
     } else setEmailIsVerified(false);
     // console.log(emailIsVerified);
@@ -196,7 +196,7 @@ const SignUp = () => {
       { id, password: pw, email, nickname },
       { headers: headers, withCredentials: true }
     );
-    console.log(res.data);
+    // console.log(res.data);
     loginmodalHandler();
   };
 
