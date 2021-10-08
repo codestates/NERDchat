@@ -71,6 +71,7 @@ const ContextProvider = ({ children }) => {
       sameSite: "none",
       secure: true,
     });
+
     dispatchUserInfo({ type: "GET", item: info });
   };
 
