@@ -48,3 +48,16 @@
 ![Back_Redis](https://img.shields.io/badge/BACK-REDIS-DC382D?style=for-the-badge&logo=redis)
 
 ![Back_JWT](https://img.shields.io/badge/BACK-JWT-000000?style=for-the-badge&logo=JSON%20Web%20Tokens)
+
+***
+
+# 🙌🏻 Team Members
+
+| Name     | Position | Roles     |
+| :---        |    :----:   |          :---: |
+| 전병희   | Full-Stack       | Team Leader🎖   |
+| 박상엽   | Back-End       | Team Member🏅   |
+| 이형태   | Front-End      | Team Member🏅   |
+| 양희진   | Front-End      | Team Member🏅   |
+
+***
