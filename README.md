@@ -21,6 +21,8 @@
 
 ## Stack
 
+![Web_App_Reference_Architecture_3](https://user-images.githubusercontent.com/79839230/136819504-ca5d0090-c314-40be-82e8-3ea12cc35529.png)
+
 ### Front
 
 ![Front_React](https://img.shields.io/badge/FRONT-REACT-61DAFB?style=for-the-badge&logo=react)
@@ -54,8 +56,8 @@
 | :---        |    :----:   |          :---: |
 | 전병희   | Full-Stack       | Team Leader🎖   |
 | 박상엽   | Back-End       | Team Member🏅   |
-| 이형태   | Front-End      | Team Member🏅   |
 | 양희진   | Front-End      | Team Member🏅   |
+|    | Front-End      | Team Member🏅   |
 
 
 # 🛠 Flow Chart
