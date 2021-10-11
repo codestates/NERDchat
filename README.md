@@ -19,7 +19,7 @@
 ### NERDchat은 다른 게이머들과 음성, 채팅 모두 가능합니다.
 ##  쓸쓸히 혼자 게임했던 너드 게이머님들, NERDchat으로 오세요! 🎮
 
-## Stack
+# Stack
 
 ![Web_App_Reference_Architecture_3](https://user-images.githubusercontent.com/79839230/136819504-ca5d0090-c314-40be-82e8-3ea12cc35529.png)
 
