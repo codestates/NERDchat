@@ -19,8 +19,6 @@
 ### NERDchat은 다른 게이머들과 음성, 채팅 모두 가능합니다.
 ##  쓸쓸히 혼자 게임했던 너드 게이머님들, NERDchat으로 오세요! 🎮
 
-***
-
 ## Stack
 
 ### Front
@@ -61,3 +59,37 @@
 | 양희진   | Front-End      | Team Member🏅   |
 
 ***
+
+# 🛠 Flow Chart
+
+[Flow Chart](https://github.com/codestates/NERDchat/wiki/Flow-Chart)
+
+## Front
+
+![NerdFlowchart12](https://user-images.githubusercontent.com/78544031/135282633-7b0f1dc7-abb2-48c9-a6c6-981cf0566458.jpeg)
+
+![NerdFlowchart2](https://user-images.githubusercontent.com/78544031/135282482-5fdff8c6-0a43-4fa5-b575-92a234e0a29b.jpeg)
+
+![NerdFlowchart](https://user-images.githubusercontent.com/78544031/135282456-1c7fbb40-a62b-4755-b655-bd92b1701742.jpeg)
+
+## Back
+
+![NerdFlowchart33](https://user-images.githubusercontent.com/78544031/135283421-52fec292-11fa-4e83-a421-0a73fc5a5e20.jpeg)
+
+***
+
+# 📬 API
+
+[API Document](https://github.com/codestates/NERDchat/wiki/API-Document)
+
+***
+
+# 💜 If you're more curious about NERDchat?
+
+[Moment WIKI](https://github.com/codestates/NERDchat/wiki)
+
+***
+
+# JOIN NERDchat!
+
+[NERDchat](https://nerdchat.link/)
