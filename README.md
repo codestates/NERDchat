@@ -56,8 +56,8 @@
 | :---        |    :----:   |          :---: |
 | 전병희   | Full-Stack       | Team Leader🎖   |
 | 박상엽   | Back-End       | Team Member🏅   |
+| 이형태   | Front-End      | Team Member🏅   |
 | 양희진   | Front-End      | Team Member🏅   |
-|    | Front-End      | Team Member🏅   |
 
 
 # 🛠 Flow Chart
