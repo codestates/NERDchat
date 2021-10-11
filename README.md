@@ -47,7 +47,6 @@
 
 ![Back_JWT](https://img.shields.io/badge/BACK-JWT-000000?style=for-the-badge&logo=JSON%20Web%20Tokens)
 
-***
 
 # 🙌🏻 Team Members
 
@@ -58,7 +57,6 @@
 | 이형태   | Front-End      | Team Member🏅   |
 | 양희진   | Front-End      | Team Member🏅   |
 
-***
 
 # 🛠 Flow Chart
 
@@ -76,20 +74,17 @@
 
 ![NerdFlowchart33](https://user-images.githubusercontent.com/78544031/135283421-52fec292-11fa-4e83-a421-0a73fc5a5e20.jpeg)
 
-***
 
 # 📬 API
 
 [API Document](https://github.com/codestates/NERDchat/wiki/API-Document)
 
-***
 
 # 💜 If you're more curious about NERDchat?
 
 [Moment WIKI](https://github.com/codestates/NERDchat/wiki)
 
-***
 
-# JOIN NERDchat!
+# JOIN US!
 
 [NERDchat](https://nerdchat.link/)
