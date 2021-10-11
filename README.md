@@ -89,5 +89,5 @@
 
 # 💜 If you're more curious about NERDchat?
 
-[Moment WIKI](https://github.com/codestates/NERDchat/wiki)
+[NERDchat WIKI](https://github.com/codestates/NERDchat/wiki)
 
