@@ -49,10 +49,10 @@ const Slide = () => {
         <label htmlFor="s3" id="slide3">
           <div className="col-md-4 col-sm-6">
             <div className="card">
-              <img src={gameList[3]?.image} />
+              <img src={gameList[2]?.image} />
               <div className="card-text">
                 <div className="glitch" data-text={gameList[3]?.category}>
-                  {gameList[3]?.category}
+                  {gameList[2]?.category}
                 </div>
               </div>
             </div>
@@ -61,10 +61,10 @@ const Slide = () => {
         <label htmlFor="s4" id="slide4">
           <div className="col-md-4 col-sm-6">
             <div className="card">
-              <img src={gameList[4]?.image} />
+              <img src={gameList[3]?.image} />
               <div className="card-text">
                 <div className="glitch" data-text={gameList[4]?.category}>
-                  {gameList[4]?.category}
+                  {gameList[3]?.category}
                 </div>
               </div>
             </div>
@@ -73,10 +73,10 @@ const Slide = () => {
         <label htmlFor="s5" id="slide5">
           <div className="col-md-4 col-sm-6">
             <div className="card">
-              <img src={gameList[5]?.image} />
+              <img src={gameList[4]?.image} />
               <div className="card-text">
                 <div className="glitch" data-text={gameList[5]?.category}>
-                  {gameList[5]?.category}
+                  {gameList[4]?.category}
                 </div>
               </div>
             </div>
