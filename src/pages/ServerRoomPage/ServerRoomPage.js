@@ -40,7 +40,7 @@ const ServerRoomPage = () => {
   };
   useEffect(() => {
     getOnlineUserNum();
-  }, [userListRef]);
+  });
 
   useEffect(() => {
     if (!loading) {
