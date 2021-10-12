@@ -51,7 +51,7 @@ const Slide = () => {
             <div className="card">
               <img src={gameList[2]?.image} />
               <div className="card-text">
-                <div className="glitch" data-text={gameList[3]?.category}>
+                <div className="glitch" data-text={gameList[2]?.category}>
                   {gameList[2]?.category}
                 </div>
               </div>
@@ -63,7 +63,7 @@ const Slide = () => {
             <div className="card">
               <img src={gameList[3]?.image} />
               <div className="card-text">
-                <div className="glitch" data-text={gameList[4]?.category}>
+                <div className="glitch" data-text={gameList[3]?.category}>
                   {gameList[3]?.category}
                 </div>
               </div>
@@ -75,7 +75,7 @@ const Slide = () => {
             <div className="card">
               <img src={gameList[4]?.image} />
               <div className="card-text">
-                <div className="glitch" data-text={gameList[5]?.category}>
+                <div className="glitch" data-text={gameList[4]?.category}>
                   {gameList[4]?.category}
                 </div>
               </div>
