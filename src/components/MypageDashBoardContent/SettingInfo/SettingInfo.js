@@ -88,7 +88,11 @@ function SettingInfo() {
     });
     setLoading(false);
     //정보 쿠키에 반영하고, 저장해주는 것 필요.
-    cookies.set("userInfo", res.data.data);
+    cookies.set("userInfo", res.data.data, {
+      domain: ".nerdchat.link",
+      sameSite: "none",
+      secure: true,
+    });
 
     //바로 반영하기 위해, 새로고침하기
     window.location.reload();
