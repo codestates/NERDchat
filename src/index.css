@@ -38,3 +38,15 @@ ul {
 a {
   text-decoration: none;
 }
+
+input:focus,
+a:focus,
+select:focus,
+option:focus,
+div:focus,
+textarea:focus,
+button:focus {
+  outline: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}

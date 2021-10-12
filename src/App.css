@@ -15,3 +15,14 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
+
+input:focus,
+select:focus,
+option:focus,
+div:focus,
+textarea:focus,
+button:focus {
+  outline: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
