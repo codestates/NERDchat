@@ -24,7 +24,7 @@
 
 # **NERDchat이 궁금하다면 지금 바로 [Join Us!](https://nerdchat.link)**
 
-# Stack
+# 👾 Stack
 
 ![Web_App_Reference_Architecture_3](https://user-images.githubusercontent.com/79839230/136819504-ca5d0090-c314-40be-82e8-3ea12cc35529.png)
 
