@@ -20,7 +20,6 @@ const SideBar = () => {
   const cookies = new Cookies();
   const userInfo = cookies.get("userInfo");
   const path = useParams();
-
   const { userListRef } = useDM(userInfo, path);
   const [msgLists, setMsgLists] = useState(userListRef.current);
 
@@ -77,6 +76,9 @@ const SideBar = () => {
             return { data: temp };
           } else {
             //이미 이전에 대화한 내역이 있다면
+            if (!temp[from].messages) {
+              temp[from].messages = [];
+            }
             temp[from].messages.push(incomingM);
             temp[from].read = false;
             return { data: temp };
