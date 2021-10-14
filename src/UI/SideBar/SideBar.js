@@ -186,11 +186,11 @@ const SideBar = () => {
         >
           {toggleState === 2 &&
             userListRef.current
-              .sort((a, b) =>
-                a.connected === b.connected ? 0 : -a.connected ? -1 : 1
-              )
               .filter(
-                (el) => el.userId !== userInfo.userId && el.nickname !== ""
+                (el) =>
+                  el.userId !== userInfo.userId &&
+                  el.nickname !== "" &&
+                  el.connected
               )
               .map((el) => (
                 <OnlineUser
