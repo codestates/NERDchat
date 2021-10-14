@@ -8,6 +8,7 @@ import { Cookies } from "react-cookie";
 import { useParams } from "react-router-dom";
 import socket from "../../hooks/socket";
 import "./SideBar.scss";
+
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 const SideBar = () => {
   // const { friends } = useContext(Context);

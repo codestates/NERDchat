@@ -67,7 +67,7 @@ const ContextProvider = ({ children }) => {
       cookieUserInfo;
     cookieUserInfo = { id, avatar, userId, nickname, email, oauth, status };
     cookies.set("userInfo", cookieUserInfo, {
-      domain: ".nerdchat.link",
+      // domain: ".nerdchat.link",
       sameSite: "none",
       secure: true,
     });
