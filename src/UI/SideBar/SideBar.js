@@ -20,11 +20,12 @@ const SideBar = () => {
   });
   const cookies = new Cookies();
   const userInfo = cookies.get("userInfo");
-  const path = useParams();
+  const path = useParams(); //{gameId: num}
   const { userListRef } = useDM(userInfo, path);
   const [msgLists, setMsgLists] = useState(userListRef.current);
 
   const getFriendsListHandler = async () => {
+    if (!localStorage.getItem("nerd-logged-in")) return;
     const res = await axios.get(`${ENDPOINT}/friends/lists`, {
       withCredentials: true,
     });
