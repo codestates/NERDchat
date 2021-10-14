@@ -16,11 +16,9 @@ function DropDown({
   nickname,
   messages,
   userInfo,
-  msg,
-
   setMsg,
   backgroundCloseHandler,
-  readMsgHandler,
+  readHandler,
 }) {
   const {
     deleteFriendModalHandler,
@@ -66,10 +64,9 @@ function DropDown({
         <PrivateMessageModal
           nickname={nickname}
           messages={messages}
-          msg={msg.data}
           setMsg={setMsg}
           userInfo={userInfo}
-          readMsgHandler={readMsgHandler}
+          readHandler={readHandler}
         />
       )}
       {userInfoModalOpen && <UserInfo nickname={nickname} />}

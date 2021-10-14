@@ -13,7 +13,7 @@ const FriendList = ({
   userId,
   readMsgHandler,
   sendMsgHandler,
-  msg,
+  readHandler,
 }) => {
   const {
     userInfoModalOpen,
@@ -52,9 +52,6 @@ const FriendList = ({
             }
             alt=""
           />
-          {/* <div className="friend__onliness">
-            <IoEllipseSharp size={15} className="friend__online" />
-          </div> */}
           <div className={online ? "friend__name" : "friendoff__name"}>
             {nickname}
           </div>
@@ -71,11 +68,10 @@ const FriendList = ({
           userInfo={userInfo}
           nickname={nickname}
           messages={messages}
-          msg={msg}
           userId={userId}
           setMsg={sendMsgHandler}
           backgroundCloseHandler={backgroundCloseHandler}
-          readMsgHandler={readMsgHandler}
+          readHandler={readHandler}
         />
       )}
     </>

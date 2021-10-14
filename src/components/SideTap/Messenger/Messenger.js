@@ -10,9 +10,9 @@ const Messenger = ({
   userInfo,
   online,
   userId,
-  readMsgHandler,
   sendMsgHandler,
-  msg,
+  lastMsg,
+  readHandler,
 }) => {
   const {
     userInfoModalOpen,
@@ -20,7 +20,6 @@ const Messenger = ({
     privateModalOpen,
     inviteModalOpen,
   } = useContext(Context);
-
   const [modalOpen, setModalOpen] = useState(false);
 
   const modalHandler = () => {
@@ -35,17 +34,26 @@ const Messenger = ({
     )
       setModalOpen(false);
   };
-
+  const hasLastMsg = {};
+  lastMsg.forEach((m, idx) => {
+    if (m.nickname === nickname) {
+      hasLastMsg.value = true;
+      hasLastMsg.index = idx;
+    }
+  });
   return (
-    <div
-      className={
-        msg.data[nickname] && !msg.data[nickname].read ? "new__msg__alarm" : ""
-      }
-    >
+    <>
       <div
         className={online ? "messagelist" : "messagelist offline"}
         onClick={modalHandler}
       >
+        <div
+          className={
+            hasLastMsg.value && !lastMsg[hasLastMsg.index].read
+              ? "new__msg__alarm"
+              : "no__alarm"
+          }
+        ></div>
         <div className="userInfo__container">
           <div className="m__avatar__container">
             <img
@@ -64,16 +72,7 @@ const Messenger = ({
             <p>{nickname}</p>
           </div>
           <div className="latest__message__content">
-            <div>
-              {!msg.data[nickname] && messages[messages.length - 1].content}
-            </div>
-            <div>
-              {msg.data[nickname] && msg.data[nickname].messages
-                ? msg.data[nickname].messages[
-                    msg.data[nickname].messages.length - 1
-                  ].content
-                : null}
-            </div>
+            <div>{messages[messages.length - 1].content}</div>
           </div>
         </div>
       </div>
@@ -82,14 +81,13 @@ const Messenger = ({
           userInfo={userInfo}
           nickname={nickname}
           messages={messages}
-          msg={msg}
           userId={userId}
           setMsg={sendMsgHandler}
-          readMsgHandler={readMsgHandler}
           backgroundCloseHandler={backgroundCloseHandler}
+          readHandler={readHandler}
         />
       )}
-    </div>
+    </>
   );
 };
 

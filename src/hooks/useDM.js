@@ -1,10 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import socket from "./socket";
 
 function useDM(userInfo, to) {
   const userListRef = useRef([]);
   const { userId, nickname, avatar } = userInfo;
+  const [msgDatas, setMsgDatas] = useState({
+    data: { name1: { message: [], read: false } },
+  });
 
   useEffect(() => {
     const token = localStorage.getItem(`socketToken${userId}`);
@@ -85,7 +88,7 @@ function useDM(userInfo, to) {
       socket.off("disconenct");
       socket.disconnect();
     };
-  });
+  }, [to]);
 
   return { userListRef };
 }

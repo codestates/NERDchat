@@ -45,7 +45,7 @@ const RoomSetting = () => {
       createRoomModalHandler();
       // chatroom안으로 리 다이렉트 시키기.
       // chatId 달라고 하기.
-      const path = `/gameId=${gameId}/roomId=${uuid}/chatId=${chatId}`;
+      const path = `/gameId=${gameId}/roomId=${uuid}/chatId=${title}`;
       history.push({
         pathname: path,
         state: { roomTitle: title },

@@ -4,7 +4,7 @@ import { IoMicOutline } from "react-icons/io5";
 import { useHistory } from "react-router-dom";
 import { Context } from "../../../context/ContextProvider";
 
-const ServerRoomCard = ({ gameId, id, roomTitle, uuid, max, loading, len }) => {
+const ServerRoomCard = ({ gameId, id, roomTitle, uuid, max, len }) => {
   const { loginmodalHandler } = useContext(Context);
   const history = useHistory();
   const getIntoServer = () => {
@@ -12,7 +12,7 @@ const ServerRoomCard = ({ gameId, id, roomTitle, uuid, max, loading, len }) => {
       loginmodalHandler();
       return;
     }
-    const path = `/gameId=${gameId}/roomId=${uuid}/chatId=${id}`;
+    const path = `/gameId=${gameId}/roomId=${uuid}/chatId=${roomTitle}`;
     history.push({
       pathname: path,
       state: { roomTitle },

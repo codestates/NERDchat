@@ -9,10 +9,9 @@ const Invite = ({ nickname }) => {
   const { inviteModalHandler } = useContext(Context);
   const { gameId, roomId } = useParams();
   const address = window.location.href;
-
+  console.log(address);
   const yesHandler = () => {
     inviteModalHandler();
-    // const inviteMessage = `${address}로 이동 하시겠습니까?`;
     if (gameId && roomId) {
       socket.emit("private message", {
         content: address,
