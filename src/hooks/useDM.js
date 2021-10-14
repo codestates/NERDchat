@@ -85,7 +85,7 @@ function useDM(userInfo, to) {
       socket.off("disconenct");
       socket.disconnect();
     };
-  }, [to]);
+  });
 
   return { userListRef };
 }

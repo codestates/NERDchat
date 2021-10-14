@@ -49,7 +49,7 @@ const SideBar = () => {
     }, 200);
 
     return () => clearTimeout(delayReq);
-  }, []);
+  }, [toggleState]);
 
   useEffect(() => {
     socket.emit("users");
