@@ -38,14 +38,14 @@ $title: rgb(172, 172, 172);
     animation: glitch-skew 1s infinite linear alternate-reverse;
   }
   &:hover .room__title::before {
-    // @include glitchCopy;
+    @include glitchCopy;
     left: -2px;
     text-shadow: 1px 0 #6d01fb, 2px 0 #eb06d8;
     clip: rect(0, 0, 0, 0);
     animation: glitch-anim 5s infinite linear alternate-reverse;
   }
   &:hover .room__title::after {
-    // @include glitchCopy;
+    @include glitchCopy;
     left: 2px;
     text-shadow: 1px 0 #63c3ea, 2px 0 #2b30d1;
     clip: rect(0, 0, 0, 0);
