@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoEllipseSharp } from "react-icons/io5";
 import axios from "axios";
 import socket from "../../../hooks/socket";
@@ -6,31 +6,30 @@ import "./PMessage.scss";
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
-const PMessage = ({ message, userInfo, setMsg }) => {
-  const { content, to, from, invite, friend } = message;
-  let mine = from === userInfo.userId;
+const PMessage = ({ message, userInfo, setMsg, nickname, readHandler }) => {
+  const { content, from, invite, friend } = message;
 
+  let mine = from === userInfo.userId;
   let today = new Date();
   let time = today.getHours() + ":" + today.getMinutes();
-
   const [currentTime] = useState(time);
 
+  useEffect(() => {
+    readHandler(nickname);
+  }, [message]);
   //승낙버튼
   const acceptFriendHandler = async (e) => {
     const res = await axios.post(`${ENDPOINT}/friends/accept/${from}`, true, {
       withCredentials: true,
     });
-    socket.emit("private message", {
-      content: `${from} 님의 친구 요청을 승낙하였습니다.`,
-      to: from,
-    });
+
     const incomingM = {
       content: `${from} 님의 친구 요청을 승낙하였습니다.`,
       from: userInfo.userId,
       to: from,
     };
 
-    setMsg(incomingM, userInfo.userId, from);
+    setMsg(incomingM, from);
 
     e.preventDefault();
   };
@@ -40,17 +39,14 @@ const PMessage = ({ message, userInfo, setMsg }) => {
     const res = await axios.post(`${ENDPOINT}/friends/accept/${from}`, false, {
       withCredentials: true,
     });
-    socket.emit("private message", {
-      content: `${from}님의 친구 요청을 거절하였습니다.`,
-      to: from,
-    });
+
     const incomingM = {
       content: `${from}님의 친구 요청을 거절하였습니다.`,
       from: userInfo.userId,
       to: from,
     };
-    // setMsg((prev) => [...prev, incomingM]);
-    setMsg(incomingM, userInfo.userId, from);
+
+    setMsg(incomingM, from);
 
     e.preventDefault();
   };
@@ -67,7 +63,9 @@ const PMessage = ({ message, userInfo, setMsg }) => {
       </div>
       <div className="fromcurrent__body-container">
         <div className="fromcurrent__body">
-          {invite && !friend ? <a href={content}>{content}</a> : content}
+          {!invite && !friend && <p>{content}</p>}
+          {friend && <p>{content}</p>}
+          {!friend && invite && <a href={content}>{content}</a>}
         </div>
       </div>
     </>

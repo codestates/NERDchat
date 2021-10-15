@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Modal from "../../UI/modal/Modal";
 import PMessage from "./PMessage/PMessage";
 import PInput from "./PInput/PInput";
@@ -9,10 +9,8 @@ function PrivateMessageModal({
   nickname,
   setMsg,
   messages,
-  msg,
-  readMsgHandler,
+  readHandler,
 }) {
-  const [msgHistory, setMsgHistory] = useState(messages);
   const messageEl = useRef(null);
   const newMessageEl = useRef(null);
 
@@ -27,11 +25,7 @@ function PrivateMessageModal({
         target.scroll({ top: target.scrollHeight, behavior: "smooth" });
       });
     }
-  }, [msg]);
-
-  useEffect(() => {
-    // readMsgHandler(nickname);
-  }, [msg]);
+  }, [messages]);
 
   //메시지 보내기
   const sendHandler = (e) => {
@@ -44,32 +38,26 @@ function PrivateMessageModal({
       from: userInfo.nickname,
       to: nickname,
     };
-    socket.emit("private message", { content: e.target.value, to: nickname });
-    setMsg(sendingM, userInfo.nickname, nickname);
+    if (e.target.value.length === 0) return;
+    else {
+      setMsg(sendingM, nickname);
+    }
   };
 
-  const IsNewMessage = msg[nickname]
-    ? msg[nickname].messages
-      ? true
-      : false
-    : false;
   return (
     <Modal>
       <div className="chatApp__messages" ref={messageEl}>
-        {msgHistory &&
-          !IsNewMessage &&
-          msgHistory.map((m, i) => (
-            <div key={i} className={`chatApp__msg`}>
-              <PMessage message={m} userInfo={userInfo} setMsg={setMsg} />
-            </div>
-          ))}
-        {msg[nickname] &&
-          msg[nickname].messages &&
-          msg[nickname].messages.map((m, i) => (
-            <div key={i} className={`chatApp__msg`}>
-              <PMessage message={m} userInfo={userInfo} setMsg={setMsg} />
-            </div>
-          ))}
+        {messages.map((m, i) => (
+          <div key={i} className={`chatApp__msg`}>
+            <PMessage
+              message={m}
+              nickname={nickname}
+              userInfo={userInfo}
+              setMsg={setMsg}
+              readHandler={readHandler}
+            />
+          </div>
+        ))}
         <div ref={newMessageEl} />
       </div>
       <div>

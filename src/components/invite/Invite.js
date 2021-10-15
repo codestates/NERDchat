@@ -9,10 +9,8 @@ const Invite = ({ nickname }) => {
   const { inviteModalHandler } = useContext(Context);
   const { gameId, roomId } = useParams();
   const address = window.location.href;
-
   const yesHandler = () => {
     inviteModalHandler();
-    // const inviteMessage = `${address}로 이동 하시겠습니까?`;
     if (gameId && roomId) {
       socket.emit("private message", {
         content: address,
@@ -37,9 +35,7 @@ const Invite = ({ nickname }) => {
         </div>
       ) : (
         <div className="invite__container">
-          <div className="invite__content">
-            User has not entered the room yet!
-          </div>
+          <div className="invite__content">You are not in a room yet!</div>
 
           <div className="invite__btn__container">
             <button onClick={yesHandler}>OK</button>

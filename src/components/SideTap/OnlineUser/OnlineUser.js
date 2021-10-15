@@ -11,9 +11,8 @@ const OnlineUser = ({
   online,
   userInfo,
   userId,
-  readMsgHandler,
   sendMsgHandler,
-  msg,
+  readHandler,
 }) => {
   const {
     userInfoModalOpen,
@@ -71,11 +70,10 @@ const OnlineUser = ({
           userInfo={userInfo}
           nickname={nickname}
           messages={messages}
-          msg={msg}
           setMsg={sendMsgHandler}
           userId={userId}
           backgroundCloseHandler={backgroundCloseHandler}
-          readMsgHandler={readMsgHandler}
+          readHandler={readHandler}
         />
       )}
     </>

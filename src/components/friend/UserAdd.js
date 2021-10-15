@@ -18,26 +18,20 @@ const UserAdd = ({ nickname, userId, setMsg, userInfo }) => {
     });
     const exist = res.data.message;
     if (exist) {
-      setErr(`${nickname} is already a friend.`);
+      setErr(`${nickname} is already your friend.`);
       return;
     }
     //요청이 잘 보내짐.
     //메시지 모달창을 열고, 친구초대 메시지를 보내자.
     //모달창 열 필요는 없을듯
-    socket.emit("private message", {
-      content: `${userInfo.userId} 님의 친구 초대를 승낙하시겠습니까?`,
-      to: nickname,
-      invite: -1,
-      friend: 1,
-    });
 
     //본인의 메시지창에서도 보이도록, but without button
     const incomingM = {
       content: `${userInfo.userId}님의 친구 초대를 승낙하시겠습니까?`,
       to: nickname,
       from: userInfo.userId,
-      invite: -1,
-      friend: -1,
+      invite: 0,
+      friend: 1,
     };
     //보내는사람 본인: userInfo.nickname;
     //받을 사람: nickname
@@ -46,7 +40,7 @@ const UserAdd = ({ nickname, userId, setMsg, userInfo }) => {
     //친구요청 모달 확인 모달창 닫기
     addFriendModalHandler();
     //확인 할 수 있도록 모달창 열어주기
-    privateModalHandler();
+    // privateModalHandler();
   };
 
   //취소

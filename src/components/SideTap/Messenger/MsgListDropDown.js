@@ -16,11 +16,10 @@ const MsgListDropDown = ({
   nickname,
   messages,
   userInfo,
-  msg,
   setMsg,
   userId,
   backgroundCloseHandler,
-  readMsgHandler,
+  readHandler,
 }) => {
   const {
     userInfoModalHandler,
@@ -50,7 +49,7 @@ const MsgListDropDown = ({
     //채팅창을 열고
     privateModalHandler();
     //모두 읽음상태로 만들기
-    readMsgHandler(nickname);
+    readHandler(nickname);
   };
   const userInfoModalOpenHandler = () => {
     userInfoModalHandler();
@@ -70,10 +69,9 @@ const MsgListDropDown = ({
         <PrivateMessageModal
           nickname={nickname}
           messages={messages}
-          msg={msg ? msg.data : []}
           setMsg={setMsg}
           userInfo={userInfo}
-          readMsgHandler={readMsgHandler}
+          readHandler={readHandler}
         />
       )}
       {userInfoModalOpen && <UserInfo nickname={nickname} />}
