@@ -106,7 +106,6 @@ const SideBar = () => {
       invite: msg.invite,
       friend: msg.friend,
     });
-
     //내가 보내는 것이니 무조건 to에 저장 하면 된다.
     //읽음표시 상태 true만들기
     const lastUpdated = [...lastMsg];

@@ -38,7 +38,10 @@ function PrivateMessageModal({
       from: userInfo.nickname,
       to: nickname,
     };
-    setMsg(sendingM, nickname);
+    if (e.target.value.length === 0) return;
+    else {
+      setMsg(sendingM, nickname);
+    }
   };
 
   return (

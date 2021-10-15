@@ -15,13 +15,6 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
-a:link,
-a:visited,
-a:hover,
-a:active {
-  text-decoration: none;
-  color: rgb(184, 126, 255);
-}
 
 input:focus,
 select:focus,

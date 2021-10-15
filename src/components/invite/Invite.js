@@ -9,7 +9,6 @@ const Invite = ({ nickname }) => {
   const { inviteModalHandler } = useContext(Context);
   const { gameId, roomId } = useParams();
   const address = window.location.href;
-  console.log(address);
   const yesHandler = () => {
     inviteModalHandler();
     if (gameId && roomId) {
@@ -36,9 +35,7 @@ const Invite = ({ nickname }) => {
         </div>
       ) : (
         <div className="invite__container">
-          <div className="invite__content">
-            User has not entered the room yet!
-          </div>
+          <div className="invite__content">You are not in a room yet!</div>
 
           <div className="invite__btn__container">
             <button onClick={yesHandler}>OK</button>
