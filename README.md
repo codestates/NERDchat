@@ -1,9 +1,8 @@
 # NERDchat
 
-## Logo
 <img src="https://user-images.githubusercontent.com/79839230/132945747-d75e1792-a210-4a14-92c6-5c4f67e27eea.gif" width="550" height="400" />
 
-## 🎮 About
+# 🎮 About
 👦🏻 : 나랑 같이 포아너(For honor) 안 할래?
 
 👩🏻: 포아너? 그게 뭔데?
@@ -28,7 +27,7 @@
 
 ![Web_App_Reference_Architecture_3](https://user-images.githubusercontent.com/79839230/136819504-ca5d0090-c314-40be-82e8-3ea12cc35529.png)
 
-### Front
+## Front
 
 ![Front_React](https://img.shields.io/badge/FRONT-REACT-61DAFB?style=for-the-badge&logo=react)
 
@@ -40,7 +39,7 @@
 
 ![Front_WebRTC](https://img.shields.io/badge/FRONT-WebRTC-333333?style=for-the-badge&logo=WebRTC)
 
-### Back
+## Back
 
 ![Back_NodeJS](https://img.shields.io/badge/BACK-NODE.JS-339933?style=for-the-badge&logo=node.js)
 
