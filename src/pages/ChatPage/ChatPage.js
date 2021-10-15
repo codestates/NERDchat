@@ -59,12 +59,13 @@ const ChatPage = (props) => {
     e.preventDefault();
   };
   const sendHandler = (e) => {
-    socket.current.emit("roomMessage", roomId, userInfo, newMsg);
+    socket.current.emit("roomMessage", roomId, chatId, userInfo, newMsg);
     e.preventDefault();
     setNewMsg("");
   };
 
-  const roomTitle = chatId || props.location.state;
+  const { roomTitle } = props.location.state;
+
   return (
     <div className="chatpage-container">
       <div className="chatpage-nav">
