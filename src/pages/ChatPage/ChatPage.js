@@ -65,7 +65,6 @@ const ChatPage = (props) => {
   };
 
   const roomTitle = chatId || props.location.state;
-  console.log(chatId);
   return (
     <div className="chatpage-container">
       <div className="chatpage-nav">
